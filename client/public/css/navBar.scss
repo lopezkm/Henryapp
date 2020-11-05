@@ -1,0 +1,41 @@
+$yellow: rgb(255, 255, 1);
+$black: black;
+$white: white;
+$font: Averin Heavy;
+
+//EJEMPLOS
+
+@mixin margenes($top, $bottom) {
+  margin-top: $top;
+  margin-bottom: $bottom;
+}
+@mixin alturas($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+#first {
+  @include alturas(100%, 300px);
+}
+
+.btn {
+}
+
+footer {
+  background-color: $yellow;
+  @include margenes(10px, 10px);
+}
+
+.card-hotel {
+  flex: 1 200px;
+  @include margenes(10px, 10px);
+}
+
+.btn-reserva {
+  @include alturas(100%, 200px);
+  border-radius: 10px;
+}
+
+.footer-address {
+  padding-right: 10px;
+}
