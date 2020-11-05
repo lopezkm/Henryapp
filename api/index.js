@@ -18,12 +18,13 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
-//const { conn } = require("./src/db.js");
+const { connectDb } = require("./src/db.js");
+require("dotenv").config();
 
+const { PORT } = process.env;
 // Syncing all the models at once.
-//no limpien la dbue
-//conn.sync({ force: true }).then(() => {
-server.listen(5490, () => {
-  console.log(" escuchando\n PUERTO:5490"); // eslint-disable-line no-console
+connectDb().then(() => {
+  server.listen(PORT, () => {
+    console.log(`escuchando\n PUERTO:${PORT}`); // eslint-disable-line no-console
+  });
 });
-//});
