@@ -22,7 +22,7 @@ const { connectDb } = require("./src/db.js");
 require("dotenv").config();
 
 const { PORT } = process.env;
-// Syncing all the models at once.
+// connect to db
 connectDb().then(() => {
   server.listen(PORT, () => {
     console.log(`escuchando\n PUERTO:${PORT}`); // eslint-disable-line no-console
