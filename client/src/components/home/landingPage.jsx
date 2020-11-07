@@ -1,5 +1,6 @@
 import React from 'react'
-import Image from './holaa.png'
+import Image from './images/holaa.png'
+import { Link } from 'react-router-dom'
 
 export default function Landing() {
     return (
@@ -15,7 +16,9 @@ export default function Landing() {
                     </div>
                 </div>
                 <div className='button-container-landingPage'>
+                    <Link to='/home'>
                     <button className='button-landingPage'> Ingresar</button>
+                    </Link>
                 </div>
             </div>
         </div>
