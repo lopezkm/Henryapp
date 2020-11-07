@@ -14,15 +14,36 @@ const UserSchema = Schema({
         type: String,
         requerid: true
     },
-    picture: String,
-    description: String,
-    gitHubLink: String,
-    link: String,
+    picture: {
+        type: String,
+        requerid: false,
+        default: ''
+    },
+    description: {
+        type: String,
+        requerid: false,
+        default: ''
+    },
+    gitHubLink: {
+        type: String,
+        requerid: false,
+        default: ''
+    },
+    link: {
+        type: String,
+        requerid: false,
+        default: ''
+    },
     fechaInscripcion: {
         type: Date,
         default: Date.now()
     },
-    lastConnection: Date
+    lastConnection: Date,
+    resetLink: {
+        type: String,
+        requerid: false,
+        default: ''
+    }
 });
 
 module.exports = model('User', UserSchema);
