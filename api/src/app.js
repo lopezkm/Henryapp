@@ -3,12 +3,21 @@ const morgan = require("morgan");
 const cors = require("cors");
 const { graphqlHTTP } = require("express-graphql");
 const schema = require("./schema/schema");
+const routes = require('./routes');
 const server = express();
 
 server.name = "HENRYAPP";
 
-server.use(morgan("tiny"));
+// middlewares
+server.use(morgan('dev'));
+server.use(express.json());
+// TODO: configurar cors
 server.use(cors());
+
+// Config rutas REST
+server.use('/api/v1', routes);
+
+// Ruta GraphQl
 server.use(
   "/graphql",
   graphqlHTTP({
@@ -16,4 +25,6 @@ server.use(
     graphiql: true,
   })
 );
+
+
 module.exports = server;
