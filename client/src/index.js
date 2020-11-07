@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './css/landingPage.css'
 import './css/home.css'
+import './css/dashBoard.css'
 
 ReactDOM.render(
   <React.StrictMode>
