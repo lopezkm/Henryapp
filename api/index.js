@@ -21,7 +21,7 @@ const server = require("./src/app.js");
 const { connectDB } = require("./src/db.js");
 require("dotenv").config();
 const { PORT } = process.env;
-
+// connect to db
 connectDB().then(() => {
   server.listen(PORT, () => {
     console.log(`Server on port: ${PORT}`); // eslint-disable-line no-console
