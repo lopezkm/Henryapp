@@ -3,28 +3,44 @@ const { DATABASE_URL } = process.env;
 const mongoose = require('mongoose');
 
 const connectDB = () => {// Conectar a la base de datos
-  const db = mongoose.connect(DATABASE_URL, {
+  const connection = mongoose.connect(DATABASE_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
   });
 
+  const mongooseConn = mongoose.connection;
+
+  // Borrar datos de las colecciones.
+  const cleanCollections = () => {
+    mongooseConn.db.listCollections().toArray((error, collections) => {
+      collections.forEach(collection => {
+        mongooseConn.db.dropCollection(collection.name)
+          .then(response => console.log('Drop data from collections:', response))
+          .catch(error => console.log('Drop data from collections:', error))
+      })
+    });
+  }
+
   // Error de conexion
-  mongoose.connection.on('error', (error, response) => {
+  mongooseConn.on('error', (error, response) => {
     console.log('Failed to connect MongoDB: ', error);
   });
 
   // Conexion de mongoose
-  mongoose.connection.on('connected', (error, response) => {
-    console.log('Connected to MongoDB...')
+  mongooseConn.once('open', (error, response) => {
+    console.log('MongoDB on port:', mongooseConn.port, '\nConnected to database:', mongooseConn.name)
+
+    // Borrar datos de las colecciones.
+    cleanCollections();
   });
 
   // Escuchar desconexion mongoose
-  mongoose.connection.on('disconnected', () => {
-    console.log('MongoDB Disconnected');
+  mongooseConn.on('disconnected', (error, response) => {
+    console.log('MongoDB Disconnected: ', error);
   });
 
-  return db;
+  return connection;
 }
 
 module.exports = { connectDB };
