@@ -2,6 +2,7 @@ import React from 'react'
 import image from './images/juan.png'
 import pedro from './images/prueba2.png'
 import huevo from './images/huevo.png'
+import {Link} from 'react-router-dom'
 
 
 export default function Home() {
@@ -13,6 +14,9 @@ export default function Home() {
                     <p>Henry</p>
                     <p>egg</p>
                     <p>[Aqui va el nav]</p>
+                    <Link to ='/dashboard'>
+                        <button>Dash-Board</button>
+                    </Link>
                     <p>mesas</p>
                 </div>
                 <div className='div-cohorte-black'>
