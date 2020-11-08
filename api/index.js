@@ -18,13 +18,12 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require("./src/app.js");
-const { connectDb } = require("./src/db.js");
+const { connectDB } = require("./src/db.js");
 require("dotenv").config();
-
 const { PORT } = process.env;
 // connect to db
-connectDb().then(() => {
+connectDB().then(() => {
   server.listen(PORT, () => {
-    console.log(`escuchando\n PUERTO:${PORT}`); // eslint-disable-line no-console
+    console.log(`Server on port: ${PORT}`); // eslint-disable-line no-console
   });
 });

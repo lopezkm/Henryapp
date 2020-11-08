@@ -1,0 +1,212 @@
+$yellow: rgb(255, 255, 1);
+$black: black;
+$white: white;
+$font: 'Averin Heavy';
+
+@mixin botones {
+    font-size: 1.3em;
+    width: 6em;
+    background-color: $yellow;
+    border: $yellow 2px solid;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+.div-black {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 28em;
+    background-color: $black;
+    font-family: $font;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    color: $white;
+}
+
+.div-cohorte-black {
+    position: relative;
+    top: 140px;
+    max-width: 100%;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+}
+
+.tittle-cohorte-black {
+    position: relative;
+    bottom: 40px;
+    font-size: 3.5em;
+    height: 70px;
+    padding-left: 10%;
+}
+
+.div-text-black {
+    font-size: 1.2em;
+    padding-left: 10%;
+    width: 45%;
+}
+
+.image-black {
+    position: absolute;
+    left: 60%;
+}
+
+.image-black img {
+   width: 22em;
+   height: 16em;
+}
+
+.div-button-black {
+    padding-left: 10%;
+}
+
+.div-button-black button {
+    @include botones;
+}
+
+.div-white {
+    @extend .div-black;
+    top: 30rem;
+    color: $black;
+    height: 30em;
+    background-color: white;
+}
+
+.image-white {
+    position: absolute;
+     left: 10%;
+}
+
+.image-white img {
+    width: 22em;
+    height: 16em;
+}
+
+.div-messages-white {
+    color: $black;
+    @extend .div-cohorte-black;
+    top: 15%;
+    width: 90%;
+    align-items: flex-end;
+} 
+
+.tittle-messages-white {
+    @extend .tittle-cohorte-black;
+    height: 65px;
+    padding-left: 0px;
+}
+
+.tittle-text-button {
+    display: flex;
+    flex-direction: column;
+}
+
+.div-text-white {
+    font-size: 1.2em;
+    height: 65px;
+}
+
+.div-button-white button {
+    @include botones;
+    position: relative;
+    top: 10px;
+}
+
+.div-black-2 {
+   @extend .div-black;
+   top: 900px;
+}
+
+@media (max-width:1200px) {
+    .tittle-text-button {
+        font-size: 0.7em;
+    }
+    
+    .tittle-cohorte-black {
+        font-size: 2.3em;
+        height: 40px;
+    }
+    .div-text-black {
+        font-size: 0.9em;
+    }
+    
+    @media (max-width:1000px){
+        @mixin text($size) {
+            font-size: $size;
+            width: 90%;
+            margin: auto;
+        }
+        @mixin images($top) {
+            top: $top; //6.3
+            left: 0px;
+            width: 100%;
+            text-align: center;
+        }
+        .div-cohorte-black {
+            text-align: center;
+        }
+        .tittle-cohorte-black {
+            font-size: 1.6em;
+            padding-left: 0px;
+            height: 20px;
+        }
+        .div-text-black {
+            padding-left: 0px;
+          @include text(0.9em);
+        }
+        .image-black {
+            @include images(8em);
+        }
+        
+        .image-black img {
+            width: 16em;
+            height: 10em;
+        }
+        .div-button-black {
+            padding-left: 0px;
+        }
+        .div-button-black button {
+            width: 80%;
+        }
+        .div-messages-white{
+            text-align: center;
+            width: 100%;
+        }
+
+        .tittle-text-button {
+            left: 0px;
+            width: 100%;
+
+        }
+        .div-text-white {
+            @include text(1.2em);
+            height: 30px;
+        }
+        
+        .image-white {
+            @include images(6.3em);
+        }
+        .image-white img {
+            width: 16em;
+            height: 10em;
+        }
+        .tittle-messages-white {
+            font-size: 1.6rem;
+            height: 15px;
+        }
+        .div-button-white button {
+            width: 80%;
+            font-size: 1.8em;
+            height: 30px;
+        }
+    }
+}

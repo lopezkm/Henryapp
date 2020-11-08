@@ -1,7 +1,12 @@
 import React from 'react'
+<<<<<<< HEAD
 import Image from './holaa.png'
 import { Link } from 'react-router-dom'
 
+=======
+import Image from './images/holaa.png'
+import { Link } from 'react-router-dom'
+>>>>>>> main
 
 export default function Landing() {
     
@@ -19,7 +24,9 @@ export default function Landing() {
                     </div>
                 </div>
                 <div className='button-container-landingPage'>
+                    <Link to='/home'>
                     <button className='button-landingPage'> Ingresar</button>
+                    </Link>
                 </div>
             </div>
                 <div className='button-container-landingPage'>
