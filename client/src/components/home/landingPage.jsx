@@ -1,12 +1,6 @@
 import React from 'react'
-<<<<<<< HEAD
-import Image from './holaa.png'
-import { Link } from 'react-router-dom'
-
-=======
 import Image from './images/holaa.png'
 import { Link } from 'react-router-dom'
->>>>>>> main
 
 export default function Landing() {
     
