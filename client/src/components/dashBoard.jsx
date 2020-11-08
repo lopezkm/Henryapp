@@ -10,7 +10,7 @@ export default function DashBoard() {
     return(
         <Container maxWidth={false} className='dashBoard-container'>
             <div className='div-title-logo'>
-                <Link to= '/home'>
+                <Link to= '/user/home'>
                     <img src={Logo} alt='Logo-Henry'/>
                 </Link>
                 <h1>ADMINISTRACION DE OPCIONES</h1>
