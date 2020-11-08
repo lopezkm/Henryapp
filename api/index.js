@@ -17,13 +17,18 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const server = require("./src/app.js");
-const { connectDB } = require("./src/db.js");
-require("dotenv").config();
+import app from './src/app.js';
+import consola from 'consola';
+import { connectDB } from './src/db.js';
+import { config } from 'dotenv';
+config();
 const { PORT } = process.env;
 // connect to db
 connectDB().then(() => {
-  server.listen(PORT, () => {
-    console.log(`Server on port: ${PORT}`); // eslint-disable-line no-console
+  app.listen(PORT, () => {
+    consola.success({
+      message: `Apollo-Server on port: ${PORT}`,
+      badge: true
+    });
   });
 });

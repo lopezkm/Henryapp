@@ -1,6 +1,8 @@
-require("dotenv").config();
+import { config } from "dotenv";
+config();
 const { DATABASE_URL } = process.env;
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+import consola from 'consola';
 
 const connectDB = () => {// Conectar a la base de datos
   const connection = mongoose.connect(DATABASE_URL, {
@@ -16,7 +18,12 @@ const connectDB = () => {// Conectar a la base de datos
     mongooseConn.db.listCollections().toArray((error, collections) => {
       collections.forEach(collection => {
         mongooseConn.db.dropCollection(collection.name)
-          .then(response => console.log('Drop data from collections:', response))
+          .then(response => {
+            consola.info({
+              message: 'Drop data from collections:' + response,
+              badge: true
+            })
+          })
           .catch(error => console.log('Drop data from collections:', error))
       })
     });
@@ -24,23 +31,37 @@ const connectDB = () => {// Conectar a la base de datos
 
   // Error de conexion
   mongooseConn.on('error', (error, response) => {
-    console.log('Failed to connect MongoDB: ', error);
+    consola.error({
+      message: `MongoDB failed to connect: ${error}`,
+      badge: true
+    });
   });
 
   // Conexion de mongoose
   mongooseConn.once('open', (error, response) => {
-    console.log('MongoDB on port:', mongooseConn.port, '\nConnected to database:', mongooseConn.name)
+    consola.info({
+      message: `MongoDB on port: ${mongooseConn.port}`,
+      badge: true
+    });
+
+    consola.info({
+      message: `Connected to DB: ${mongooseConn.name}`,
+      badge: true,
+    });
 
     // Borrar datos de las colecciones.
-    cleanCollections();
+    // cleanCollections();
   });
 
   // Escuchar desconexion mongoose
   mongooseConn.on('disconnected', (error, response) => {
-    console.log('MongoDB Disconnected: ', error);
+    consola.error({
+      message: `MongoDB Disconnected: ${error}`,
+      badge: true
+    });
   });
 
   return connection;
 }
 
-module.exports = { connectDB };
+export { connectDB };

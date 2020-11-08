@@ -1,30 +1,21 @@
-const express = require("express");
-const morgan = require("morgan");
-const cors = require("cors");
-const { graphqlHTTP } = require("express-graphql");
-const schema = require("./schema/schema");
-const routes = require('./routes');
-const server = express();
+import express from 'express';
+// import morgan from "morgan";
+import typeDefs from './graphql/typeDefs';
+import resolvers from './graphql/resolvers';
+import { ApolloServer } from 'apollo-server-express';
 
-server.name = "HENRYAPP";
+// Iniciar App
+const app = express();
+
+// Servido de ApolloServer
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  introspection: true
+});
+
 
 // middlewares
-server.use(morgan('dev'));
-server.use(express.json());
-// TODO: configurar cors
-server.use(cors());
+server.applyMiddleware({ app, cors: false });
 
-// Config rutas REST
-server.use('/api/v1', routes);
-
-// Ruta GraphQl
-server.use(
-  "/graphql",
-  graphqlHTTP({
-    schema,
-    graphiql: true,
-  })
-);
-
-
-module.exports = server;
+export default app;
