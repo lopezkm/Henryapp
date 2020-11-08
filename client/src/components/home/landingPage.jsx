@@ -1,11 +1,15 @@
 import React from 'react'
 import Image from './holaa.png'
+import { Link } from 'react-router-dom'
+
 
 export default function Landing() {
+    
     return (
         <div className='div-container-landingPage'>
             <div className='titulo-landingPage'>
                 <p>Henry App</p>
+                
             </div>
             <div className='container-img-text'>
                 <div style={{display:"flex"}}>
@@ -18,6 +22,9 @@ export default function Landing() {
                     <button className='button-landingPage'> Ingresar</button>
                 </div>
             </div>
+                <div className='button-container-landingPage'>
+                    <Link to="/userprofile" className='button-landingPage'>Perfil del alumno</Link>
+                </div>
         </div>
     )
 }
