@@ -23,9 +23,6 @@ export default function Landing() {
                     </Link>
                 </div>
             </div>
-                <div className='button-container-landingPage'>
-                    <Link to="/userprofile" className='button-landingPage'>Perfil del alumno</Link>
-                </div>
         </div>
     )
 }

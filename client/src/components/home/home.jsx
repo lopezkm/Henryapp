@@ -17,6 +17,11 @@ export default function Home() {
                     <Link to ='/dashboard'>
                         <button>Dash-Board</button>
                     </Link>
+                    
+                    <Link to="/userprofile" >
+                    <button className='button-landingPage' >Perfil alumno</button>
+                    </Link>
+                
                     <p>mesas</p>
                 </div>
                 <div className='div-cohorte-black'>
