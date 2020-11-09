@@ -27,7 +27,9 @@ const NavBar = (theme)=>{
         <div>
         <AppBar className='navbar'> 
         <Toolbar>
-            <IconButton><MenuIcon/></IconButton>
+            <IconButton>
+              <MenuIcon/>
+              </IconButton>
             <Link to= '/user/home'  className={classes.tittle1}>
                     <img src={Logo} alt='Logo-Henry'style={{ width: "60px", height: "60px", paddingTop:'5px'}}/>
                 </Link>
@@ -36,9 +38,12 @@ const NavBar = (theme)=>{
                         Dash-Board
                     </Button>                    
                     </Link>
+
+                    <Link to= '/user/login' >
                     <Button variant='text' color='secondary' >
                         Login
                     </Button>
+                    </Link>
                     <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
