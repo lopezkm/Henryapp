@@ -8,6 +8,7 @@ import {
   createMuiTheme,
   darken,
   ThemeProvider,
+  makeStyles,
 } from "@material-ui/core/styles";
 import { yellow, grey } from "@material-ui/core/colors";
 import { dark } from "@material-ui/core/styles/createPalette";
@@ -24,7 +25,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Router>
         <Route exact path="/" render={() => <LandingPage />} />
-        <Route path="/user" render={(theme) => <NavBar />} />
+        <Route path="/user" render={() => <NavBar />} />
 
         <Route exact path="/user/home" render={() => <Home />} />
 
