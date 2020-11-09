@@ -7,7 +7,6 @@ const FeedbackSchema = Schema({
     },
     softSkill: {
         type: Number,
-        unique: true,
         requerid: true
     },
     tecnicalSkill: {
