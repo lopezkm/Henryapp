@@ -13,6 +13,7 @@ import {
 import { yellow, grey } from "@material-ui/core/colors";
 import { dark } from "@material-ui/core/styles/createPalette";
 import Footer from "./components/footer/footer";
+import UserProfile from "./components/userProfile/index.jsx";
 
 const theme = createMuiTheme({
   palette: {
@@ -29,6 +30,7 @@ function App() {
         <Route path="/user" render={() => <NavBar />} />
         <Route path="/user" render={() => <Footer />} />
 
+        <Route exact path= "/user/userprofile" render={()=> <UserProfile />} />
         <Route exact path="/user/home" render={() => <Home />} />
 
         <Route exact path="/user/dashboard" render={() => <DashBoard />} />
