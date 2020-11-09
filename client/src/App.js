@@ -1,33 +1,38 @@
-import {BrowserRouter as Router, Route} from 'react-router-dom'
-import LandingPage from './components/home/landingPage'
-import UserProfile from './components/userProfile'
-import React from 'react';
-import Home from './components/home/home.jsx';
-import DashBoard from './components/dashBoard.jsx';
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import LandingPage from "./components/home/landingPage.jsx";
+import Home from "./components/home/home.jsx";
+import DashBoard from "./components/dashBoard.jsx";
+import NavBar from "./components/navbar/navbar.jsx";
+import {
+  createMuiTheme,
+  darken,
+  ThemeProvider,
+  makeStyles,
+} from "@material-ui/core/styles";
+import { yellow, grey } from "@material-ui/core/colors";
+import { dark } from "@material-ui/core/styles/createPalette";
+import UserProfile from "./components/userProfile/index.jsx";
 
+const theme = createMuiTheme({
+  palette: {
+    primary: yellow,
+    secondary: grey,
+  },
+});
 
 function App() {
   return (
-    <div>
-      <>
-    <Router>
-      
-      <Route
-      exact path='/'
-      component={LandingPage}
-      />
-      <Route 
-      exact path='/userprofile'
-      component={UserProfile}
-      />
-      
-      <Route exact path='/home' render={()=> <Home/> }/>
+    <ThemeProvider theme={theme}>
+      <Router>
+        <Route exact path="/" render={() => <LandingPage />} />
+        <Route path="/user" render={() => <NavBar />} />
+        <Route exact path= "/user/userprofile" render={()=> <UserProfile />} />
+        <Route exact path="/user/home" render={() => <Home />} />
 
-      <Route exact path='/dashboard' render={()=> <DashBoard/> }/>
-
-    </Router>
-    </>
-      </div>
+        <Route exact path="/user/dashboard" render={() => <DashBoard />} />
+      </Router>
+    </ThemeProvider>
   );
 }
 

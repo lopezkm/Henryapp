@@ -10,21 +10,7 @@ export default function Home() {
     return (
         <div className='div-container-home'>
             <div className='div-black'>
-                <div className='navbar'>
-                    <p>Henry</p>
-                    <p>egg</p>
-                    <p>[Aqui va el nav]</p>
-                    <Link to ='/dashboard'>
-                        <button>Dash-Board</button>
-                    </Link>
-                    
-                    <Link to="/userprofile" >
-                    <button className='button-landingPage' >Perfil alumno</button>
-                    </Link>
-                
-                    <p>mesas</p>
-                </div>
-                <div className='div-cohorte-black'>
+                    <div className='div-cohorte-black'>
                     <div className='image-black'>
                         <img src={image} alt="juan" />
                     </div>

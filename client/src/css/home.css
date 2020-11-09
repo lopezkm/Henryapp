@@ -7,15 +7,6 @@
   background-color: black;
   font-family: "Averin Heavy"; }
 
-.navbar {
-  display: flex;
-  justify-content: space-around;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  right: 0px;
-  color: white; }
-
 .div-cohorte-black, .div-messages-white {
   position: relative;
   top: 140px;
