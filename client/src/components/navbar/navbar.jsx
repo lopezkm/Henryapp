@@ -1,12 +1,43 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import { Button, Icon, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core'
-import {AppBar} from '@material-ui/core'
+import { Button, IconButton, makeStyles, Toolbar, Menu, MenuItem } from '@material-ui/core'
+import {AppBar, ListItemIcon, ListItemText } from '@material-ui/core'
 import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
+import AccountBoxSharpIcon from '@material-ui/icons/AccountBoxSharp';
+import FilterNoneSharpIcon from '@material-ui/icons/FilterNoneSharp';
+import HelpOutlineSharpIcon from '@material-ui/icons/HelpOutlineSharp';
 import Logo from '../home/images/logoHenry.jpeg';
+import { withStyles } from '@material-ui/core/styles';
+
+
+
+const StyledMenu = withStyles()((props) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'center',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'center',
+    }}
+    {...props}
+  />
+));
+
+const StyledMenuItem = withStyles((theme) => ({
+  root: {
+    '&:focus': {
+      backgroundColor: theme.palette.primary.main,
+      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+        color: theme.palette.common.black,
+      },
+    },
+  },
+}))(MenuItem);
 
 
 const useStyles = makeStyles((theme) => ({
@@ -23,33 +54,83 @@ const NavBar = (theme)=>{
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
       };
+
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+  
+    const handleClose = () => {
+      setAnchorEl(null);
+    };  
+
     return(
         <div>
-        <AppBar className='navbar'> 
-        <Toolbar>
-            <IconButton><MenuIcon/></IconButton>
-            <Link to= '/user/home'  className={classes.tittle1}>
-                    <img src={Logo} alt='Logo-Henry'style={{ width: "60px", height: "60px", paddingTop:'5px'}}/>
-                </Link>
-                     <Link to ='/user/dashboard' >
-                    <Button variant='text'  color='secondary' >
-                        Dash-Board
-                    </Button>                    
-                    </Link>
-                    <Button variant='text' color='secondary' >
-                        Login
-                    </Button>
-                    <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
+          <AppBar className='navbar'> 
+            <Toolbar>
+              <IconButton><MenuIcon/></IconButton>
+              <Link to= '/user/home'  className={classes.tittle1}>
+                      <img src={Logo} alt='Logo-Henry'style={{ width: "60px", height: "60px", paddingTop:'5px'}}/>
+              </Link>
+              <Button
+                aria-controls="customized-menu"
                 aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
+                variant="contained"
+                color="secondary"
+                onClick={handleClick}
               >
+                Panel Admin
+              </Button>
+              <StyledMenu
+                id="customized-menu"
+                anchorEl={anchorEl}
+                keepMounted
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <Link to='/user/cohorte'>
+                  <StyledMenuItem>
+                    <ListItemIcon>
+                      <FilterNoneSharpIcon fontSize="medium" />
+                    </ListItemIcon>
+                    <ListItemText primary="Cohortes" />
+                  </StyledMenuItem>
+                </Link>
+                <Link to='/user/userprofile'>
+                  <StyledMenuItem>
+                    <ListItemIcon>
+                      <AccountBoxSharpIcon fontSize="medium" />
+                    </ListItemIcon>
+                    <ListItemText primary="Alumnos" />
+                  </StyledMenuItem>
+                </Link>
+                <Link to='/user/algomas'>
+                  <StyledMenuItem>
+                    <ListItemIcon>
+                      <HelpOutlineSharpIcon fontSize="medium" />
+                    </ListItemIcon>
+                    <ListItemText primary="Algo Más a futuro" />
+                  </StyledMenuItem>
+                </Link>
+              </StyledMenu>
+                      {/*  <Link to ='/user/dashboard' >
+                      <Button variant='text'  color='secondary' >
+                          Dash-Board
+                      </Button>                    
+                      </Link> */}
+              <Button variant='text' color='secondary' >
+                  Login
+              </Button>
+              <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
                 <AccountCircle />
               </IconButton>
-                    </Toolbar>
-                    </AppBar>
+            </Toolbar>
+          </AppBar>
         </div>
     )
 }
