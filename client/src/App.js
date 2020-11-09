@@ -13,6 +13,8 @@ import {
 import { yellow, grey } from "@material-ui/core/colors";
 import { dark } from "@material-ui/core/styles/createPalette";
 import Footer from "./components/footer/footer";
+import Register from "./components/forms/register.jsx";
+import Login from "./components/forms/login.jsx";
 
 const theme = createMuiTheme({
   palette: {
@@ -27,7 +29,9 @@ function App() {
       <Router>
         <Route exact path="/" render={() => <LandingPage />} />
         <Route path="/user" render={() => <NavBar />} />
-        <Route path="/user" render={() => <Footer />} />
+        {/* <Route path="/user" render={() => <Footer />} /> */}
+        <Route exact path="/user/register" render={() => <Register />} />
+        <Route exact path="/user/login" render={() => <Login />} />
 
         <Route exact path="/user/home" render={() => <Home />} />
 
