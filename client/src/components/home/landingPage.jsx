@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom'
 import {AppBar} from '@material-ui/core'
 
 export default function Landing() {
+    
     return (
         <div className='div-container-landingPage'>
             <div className='titulo-landingPage'>
                 <p>Henry App</p>
+                
             </div>
             <div className='container-img-text'>
                 <div style={{display:"flex"}}>
