@@ -1,6 +1,11 @@
 import { Schema, model } from "mongoose";
 
 const LectureSchema = Schema({
+  name: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   embededLink: {
     type: String,
     requerid: true,
@@ -12,13 +17,7 @@ const LectureSchema = Schema({
   teoriaLink: {
     type: String,
   },
-  comentaryLecture: {
-    type: String,
-  },
-  sprint: {
-    type: String,
-    required: true,
-  },
+  //sprint: [{ type: Schema.Types.ObjectId, ref: "Sprint" }],
 });
 
 const Lecture = model("Lecture", LectureSchema);
