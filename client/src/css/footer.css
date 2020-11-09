@@ -1,0 +1,32 @@
+.footer-container {
+  background-color: black;
+  width: 100%;
+  color: white;
+  margin-top: 100px;
+  display: block;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: "20px";
+  position: absolute;
+  left: 0;
+  bottom: 10;
+  height: 60px;
+}
+.image-brand {
+  margin-top: 30px;
+  width: 50%;
+}
+ul {
+  list-style-type: none;
+}
+.footer-content {
+  padding-bottom: 4rem;
+  border-bottom: 2px gray solid;
+  width: 70%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.a {
+  color: white;
+}
