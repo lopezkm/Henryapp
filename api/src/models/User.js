@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+import { Schema, model } from 'mongoose';
 
 const UserSchema = Schema({
     name: {
@@ -34,7 +34,7 @@ const UserSchema = Schema({
         requerid: false,
         default: ''
     },
-    fechaInscripcion: {
+    inscriptionDate: {
         type: Date,
         default: Date.now()
     },
@@ -46,4 +46,6 @@ const UserSchema = Schema({
     }
 });
 
-module.exports = model('User', UserSchema);
+const User = model('User', UserSchema);
+
+export default User; 

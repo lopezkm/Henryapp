@@ -39,14 +39,12 @@ const connectDB = () => {// Conectar a la base de datos
 
   // Conexion de mongoose
   mongooseConn.once('open', (error, response) => {
-    consola.info({
-      message: `MongoDB on port: ${mongooseConn.port}`,
-      badge: true
+    consola.success({
+      message: `MongoDB on port: ${mongooseConn.port}`
     });
 
-    consola.info({
-      message: `Connected to DB: ${mongooseConn.name}`,
-      badge: true,
+    consola.success({
+      message: `Connected to DB: ${mongooseConn.name}`
     });
 
     // Borrar datos de las colecciones.

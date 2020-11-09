@@ -1,8 +1,3 @@
-// Importar modelos
-const User = require('./User');
-hkb
+// Exportar modelos
+export { default as User } from './User';
 
-// Aca se deben importar todos los modelos
-module.exports = {
-  User
-};
