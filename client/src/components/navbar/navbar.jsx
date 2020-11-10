@@ -12,7 +12,11 @@ import { withStyles } from '@material-ui/core/styles';
 
 
 
-const StyledMenu = withStyles()((props) => (
+const StyledMenu = withStyles({
+  paper: {
+    border: '1px solid #d3d4d5',
+  },
+})((props) => (
   <Menu
     elevation={0}
     getContentAnchorEl={null}
@@ -50,18 +54,19 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = (theme)=>{
     const classes= useStyles()
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const [anchorElP, setAnchorElP] = React.useState(null);
     const open = Boolean(anchorEl);
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
       };
 
     const handleClick = (event) => {
-      setAnchorEl(event.currentTarget);
+      setAnchorElP(event.currentTarget);
     };
   
     const handleClose = () => {
-      setAnchorEl(null);
-    };  
+      setAnchorElP(null);
+    };
 
     return(
       <div>              
@@ -73,56 +78,52 @@ const NavBar = (theme)=>{
             <Link to= '/root/home'  className={classes.tittle1}>
               <img src={Logo} alt='Logo-Henry'style={{ width: "60px", height: "60px", paddingTop:'5px'}}/>
             </Link>
+            <Button
+              aria-controls="customized-menu"
+              aria-haspopup="true"
+              variant="contained"
+              color="secondary"
+              onClick={handleClick}
+            >
+              Panel Admin
+            </Button>
+            <StyledMenu
+              id="customized-menu"
+              anchorEl={anchorElP}
+              keepMounted
+              open={Boolean(anchorElP)}
+              onClose={handleClose}
+            >
+              <Link to='/root/cohorte'>
+                <StyledMenuItem>
+                  <ListItemIcon>
+                    <FilterNoneSharpIcon fontSize="medium" />
+                  </ListItemIcon>
+                  <ListItemText primary="Cohortes" />
+                </StyledMenuItem>
+              </Link>
+              <Link to='/root/student'>
+                <StyledMenuItem>
+                  <ListItemIcon>
+                    <AccountBoxSharpIcon fontSize="medium" />
+                  </ListItemIcon>
+                  <ListItemText primary="Alumnos" />
+                </StyledMenuItem>
+              </Link>
+              <Link to='/root/algomas'>
+                <StyledMenuItem>
+                  <ListItemIcon>
+                    <HelpOutlineSharpIcon fontSize="medium" />
+                  </ListItemIcon>
+                  <ListItemText primary="Algo Más a futuro" />
+                </StyledMenuItem>
+              </Link>
+            </StyledMenu>
             <Link to= '/root/login' >
               <Button variant='text' color='secondary' >
                 Login
               </Button>
             </Link>
-            <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                variant="contained"
-                color="secondary"
-                onClick={handleClick}
-              >
-              <Button>
-                aria-controls="customized-menu"
-                Panel Admin
-              </Button>
-              <StyledMenu
-                id="customized-menu"
-                anchorEl={anchorEl}
-                keepMounted
-                open={Boolean(anchorEl)}
-                onClose={handleClose}
-              >
-                <Link to='/root/cohorte'>
-                  <StyledMenuItem>
-                    <ListItemIcon>
-                      <FilterNoneSharpIcon fontSize="medium" />
-                    </ListItemIcon>
-                    <ListItemText primary="Cohortes" />
-                  </StyledMenuItem>
-                </Link>
-                <Link to='/root/student'>
-                  <StyledMenuItem>
-                    <ListItemIcon>
-                      <AccountBoxSharpIcon fontSize="medium" />
-                    </ListItemIcon>
-                    <ListItemText primary="Alumnos" />
-                  </StyledMenuItem>
-                </Link>
-                <Link to='/root/algomas'>
-                  <StyledMenuItem>
-                    <ListItemIcon>
-                      <HelpOutlineSharpIcon fontSize="medium" />
-                    </ListItemIcon>
-                    <ListItemText primary="Algo Más a futuro" />
-                  </StyledMenuItem>
-                </Link>
-              </StyledMenu>
-            </IconButton>  
             <IconButton
                   aria-label="account of current user"
                   aria-controls="menu-appbar"
