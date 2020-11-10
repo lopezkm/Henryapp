@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     },
       button: {
         marginTop: theme.spacing(8),
-        marginLeft: theme.spacing(15),
+        marginLeft: theme.spacing(7),
       },
       image: {
         backgroundImage: 'url(https://source.unsplash.com/random)',
@@ -112,7 +112,7 @@ function submit(){
 
          <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2"className={classes.form}>
+                <Link href="#" variant="body2"className={classes.button}>
                   Forgot password?
                 </Link>
               </Grid>
