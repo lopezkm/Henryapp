@@ -2,7 +2,6 @@ import React from 'react'
 import {useQuery, gql} from "@apollo/client";
 import Image from './images/holaa.png'
 import { Link } from 'react-router-dom'
-import {AppBar} from '@material-ui/core'
 
 const Users= gql`
 {
@@ -39,7 +38,7 @@ export default function Landing() {
                     </div>
                 </div>
                 <div className='button-container-landingPage'>
-                    <Link to='/user/home'>
+                    <Link to='/root/home'>
                     <button className='button-landingPage'> Ingresar</button>
                     </Link>
                 </div>

@@ -6,6 +6,12 @@ import reportWebVitals from "./reportWebVitals";
 import "./css/landingPage.css";
 import "./css/home.css";
 import "./css/dashBoard.css";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import './css/landingPage.css'
+import './css/home.css'
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),

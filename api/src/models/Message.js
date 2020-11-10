@@ -3,23 +3,23 @@ import { Schema, model } from 'mongoose';
 const MessageSchema = Schema({
     fromId: {
         type: String,
-        requerid: true
+        required: true
     },
     toId: {
         type: String,
-        requerid: true
+        required: true
     },
     title: {
         type: String,
-        requerid: true
+        required: true
     },
     subject: {
         type: String,
-        requerid: true
+        required: true
     },
     bodyMessage: {
         type: String,
-        requerid: true
+        required: true
     }
 });
 
