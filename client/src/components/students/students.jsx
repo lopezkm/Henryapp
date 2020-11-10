@@ -8,16 +8,19 @@ export default function Student() {
     const useStyles = makeStyles((theme) => ({
         root: {
           flexGrow: 1,
+          marginTop:90,
         },
         paper: {
           padding: theme.spacing(2),
           textAlign: 'center',
           color: theme.palette.common.white,
           backgroundColor: theme.palette.secondary.main,
+          fontSize: 30,
+            '&:hover': {
+              color: theme.palette.common.black,
+              backgroundColor: theme.palette.primary.main,
+            }
         },
-        /* main: {
-            marginTop: 15
-        } */
       }));    
 
     const classes = useStyles();
@@ -26,31 +29,31 @@ export default function Student() {
         <div className={classes.root}>
             <Grid container spacing={3}>
                 <Grid item xs={12}>
-                <Paper className={classes.paper}>Cantidad de alumnos activos: 1150</Paper>
+                <Paper className={classes.paper}>Alumnos Activos: 1150</Paper>
                 </Grid>
                 <Grid item xs={6}>
-                <Paper className={classes.paper}>Cohorte 1 - 150 alumnos</Paper>
+                <Paper className={classes.paper}>COHORTE 1 - 150 alumnos</Paper>
                 </Grid>
                 <Grid item xs={6}>
-                <Paper className={classes.paper}>Cohorte 2 - 120 alumnos</Paper>
+                <Paper className={classes.paper}>COHORTE 2 - 120 alumnos</Paper>
                 </Grid>
                 <Grid item xs={6}>
-                <Paper className={classes.paper}>Cohorte 3 - 170 alumnos</Paper>
+                <Paper className={classes.paper}>COHORTE 3 - 170 alumnos</Paper>
                 </Grid>
                 <Grid item xs={6}>
-                <Paper className={classes.paper}>Cohorte 4 - 150 alumnos</Paper>
+                <Paper className={classes.paper}>COHORTE 4 - 150 alumnos</Paper>
                 </Grid>
                 <Grid item xs={6}>
-                <Paper className={classes.paper}>Cohorte 5 - 125 alumnos</Paper>
+                <Paper className={classes.paper}>COHORTE 5 - 125 alumnos</Paper>
                 </Grid>
                 <Grid item xs={6}>
-                <Paper className={classes.paper}>Cohorte 6 - 110 alumnos</Paper>
+                <Paper className={classes.paper}>COHORTE 6 - 110 alumnos</Paper>
                 </Grid>
                 <Grid item xs={6}>
-                <Paper className={classes.paper}>Cohorte 7 - 150 alumnos</Paper>
+                <Paper className={classes.paper}>COHORTE 7 - 150 alumnos</Paper>
                 </Grid>
                 <Grid item xs={6}>
-                <Paper className={classes.paper}>Cohorte 8 - 175 alumnos</Paper>
+                <Paper className={classes.paper}>COHORTE 8 - 175 alumnos</Paper>
                 </Grid>
             </Grid>
         </div>
