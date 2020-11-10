@@ -3,35 +3,35 @@ import { Schema, model } from "mongoose";
 const UserSchema = Schema({
   name: {
     type: String,
-    requerid: true,
+    required: true,
   },
   email: {
     type: String,
     unique: true,
-    requerid: true,
+    required: true,
   },
   password: {
     type: String,
-    requerid: true,
+    required: true,
   },
   picture: {
     type: String,
-    requerid: false,
+    required: false,
     default: "",
   },
   description: {
     type: String,
-    requerid: false,
+    required: false,
     default: "",
   },
   gitHubLink: {
     type: String,
-    requerid: false,
+    required: false,
     default: "",
   },
   link: {
     type: String,
-    requerid: false,
+    required: false,
     default: "",
   },
   inscriptionDate: {
@@ -43,7 +43,7 @@ const UserSchema = Schema({
 
   resetLink: {
     type: String,
-    requerid: false,
+    required: false,
     default: "",
   },
 });

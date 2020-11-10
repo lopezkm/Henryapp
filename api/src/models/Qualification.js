@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 const QualificationSchema = Schema({
   grade: {
     type: Number,
-    requerid: true,
+    required: true,
   },
   comentary: {
     type: String,
