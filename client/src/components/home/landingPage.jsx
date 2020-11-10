@@ -1,10 +1,30 @@
 import React from 'react'
+import {useQuery, gql} from "@apollo/client";
 import Image from './images/holaa.png'
 import { Link } from 'react-router-dom'
 import {AppBar} from '@material-ui/core'
 
+const Users= gql`
+{
+  users{
+    name
+    _id
+    email
+  }
+}
+`
+
 export default function Landing() {
-    
+   const {loading, error, data} = useQuery(Users);
+   if(loading){
+       console.log("loading")
+   } 
+   if(error){
+       console.log("ups un error")
+   }
+   if(data){
+       console.log(data)
+   }
     return (
         <div className='div-container-landingPage'>
             <div className='titulo-landingPage'>
