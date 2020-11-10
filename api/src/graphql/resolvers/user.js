@@ -6,12 +6,12 @@ import { User } from "../../models";
 export default {
   Query: {
     users: async () => {
-      return await User.find();
+      return await User.find({});
     },
     profile: async (_, args) => {
       return await User.findById(args.id);
     },
-    refreshToken: () => {},
+    refreshToken: () => { },
   },
   Mutation: {
     // Crear nuevo usuario
@@ -30,6 +30,20 @@ export default {
       const newUser = await User.create(args);
 
       return newUser;
+    },
+
+    updateUser: async (root, args, { req }, info) => {
+      // verificar que el user no exista en la DB
+      const userUpdated = await User.findByIdAndUpdate(args.id, {
+        // ...args.user
+        // TODO: terminar funcion
+      });
+
+      if (!user) {
+        throw new Error("Error al actualizar el usuario.");
+      }
+
+      return userUpdated;
     },
   },
 };

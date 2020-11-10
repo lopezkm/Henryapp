@@ -8,7 +8,8 @@ export default gql`
 
   extend type Mutation {
     createCohort(name: String!, startingDate: String!): Cohort!
-    addUserToCohort(cohortId: String!, userId: String!): Boolean!
+    addUserToCohort(cohortId: String!, userId: String!): Cohort!
+    removeUserFromCohort(cohortId: String! , userId: String!): Cohort!
   }
 
   type Cohort {

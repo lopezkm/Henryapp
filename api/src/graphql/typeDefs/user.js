@@ -9,12 +9,25 @@ export default gql`
   }
 
   extend type Mutation {
-    register(name: String!, email: String!, password: String!): User!
+
+    register(
+      name: String!,
+      lastname: String!,
+      email: String!,
+      password: String!
+      ): User!
+
+    updateUser(
+      id: String!,
+      user: String!
+    ): Cohort!
+
   }
 
   type User {
     _id: ID!
     name: String!
+    lastname: String!
     email: String!
     inscriptionDate: String!
   }

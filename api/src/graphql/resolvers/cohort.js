@@ -3,7 +3,7 @@ import { Cohort, User } from "../../models";
 export default {
   Query: {
     cohorts: async () => {
-      return await Cohort.find();
+      return await Cohort.find({});
     },
     cohort: async (_, args) => {
       return await Cohort.findById(args.id);
@@ -24,16 +24,35 @@ export default {
       const newCohort = await Cohort.create(args);
       return newCohort;
     },
+
     addUserToCohort: async (root, { userId, cohortId }, { req }, info) => {
-      const cohort = await Cohort.findById(cohortId);
-      const user = await User.findById(userId);
-      if (!cohort || !user) {
-        //        throw new Error("Ups algo salió mal.");
+      const newCohort = await Cohort.findByIdAndUpdate(cohortId, {
+        $push: { users: userId }
+      }, {
+        new: true, useFindAndModify: true
+      });
+      if (!newCohort) {
+        // throw new Error("Ups algo salió mal.");
         return false;
       }
 
-      cohort.users.push(user);
-      return true;
+      return newCohort;
     },
+
+    removeUserFromCohort: async (root, { userId, cohortId }, { req }, info) => {
+      const updatedCohort = await Cohort.findByIdAndUpdate(cohortId, {
+        $pull: { users: userId }
+      }, {
+        new: true, useFindAndModify: true
+      });
+
+      if (!updatedCohort) {
+        return false;
+      }
+
+      return updatedCohort;
+    },
+
+
   },
 };
