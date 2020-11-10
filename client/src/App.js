@@ -5,6 +5,9 @@ import Home from "./components/home/home.jsx";
 import NavBar from "./components/navbar/navbar.jsx";
 import { createMuiTheme, ThemeProvider} from "@material-ui/core/styles";
 import { yellow, grey } from "@material-ui/core/colors";
+import Footer from "./components/footer/footer";
+import Register2 from "./components/forms/register2.jsx";
+import Login from "./components/forms/login.jsx";
 import UserProfile from "./components/userProfile/index.jsx";
 import Student from "./components/students/students.jsx";
 
@@ -24,6 +27,9 @@ function App() {
         <Route exact path= "/root/userprofile" render={()=> <UserProfile />} />
         <Route exact path="/root/home" render={() => <Home />} />
         <Route exact path="/root/student" render={() => <Student />} />
+        {/* <Route path="/root" render={() => <Footer />} /> */}
+        <Route exact path="/root/register" render={() => <Register2 />} />
+        <Route exact path="/root/login" render={() => <Login />} />
       </Router>
     </ThemeProvider>
   );

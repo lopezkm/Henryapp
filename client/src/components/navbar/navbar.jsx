@@ -64,20 +64,30 @@ const NavBar = (theme)=>{
     };  
 
     return(
-        <div>
-          <AppBar className='navbar'> 
-            <Toolbar>
-              <IconButton><MenuIcon/></IconButton>
-              <Link to= '/root/home'  className={classes.tittle1}>
-                      <img src={Logo} alt='Logo-Henry'style={{ width: "60px", height: "60px", paddingTop:'5px'}}/>
-              </Link>
-              <Button
-                aria-controls="customized-menu"
+      <div>              
+        <AppBar className='navbar'> 
+          <Toolbar>
+            <IconButton>
+              <MenuIcon/>
+            </IconButton>
+            <Link to= '/root/home'  className={classes.tittle1}>
+              <img src={Logo} alt='Logo-Henry'style={{ width: "60px", height: "60px", paddingTop:'5px'}}/>
+            </Link>
+            <Link to= '/root/login' >
+              <Button variant='text' color='secondary' >
+                Login
+              </Button>
+            </Link>
+            <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
                 aria-haspopup="true"
                 variant="contained"
                 color="secondary"
                 onClick={handleClick}
               >
+              <Button>
+                aria-controls="customized-menu"
                 Panel Admin
               </Button>
               <StyledMenu
@@ -112,10 +122,8 @@ const NavBar = (theme)=>{
                   </StyledMenuItem>
                 </Link>
               </StyledMenu>
-              <Button variant='text' color='secondary' >
-                  Login
-              </Button>
-              <IconButton
+            </IconButton>  
+            <IconButton
                   aria-label="account of current user"
                   aria-controls="menu-appbar"
                   aria-haspopup="true"
@@ -123,10 +131,10 @@ const NavBar = (theme)=>{
                   color="inherit"
                 >
                 <AccountCircle />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-        </div>
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+      </div>
     )
 }
 
