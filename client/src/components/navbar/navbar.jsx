@@ -68,7 +68,7 @@ const NavBar = (theme)=>{
           <AppBar className='navbar'> 
             <Toolbar>
               <IconButton><MenuIcon/></IconButton>
-              <Link to= '/user/home'  className={classes.tittle1}>
+              <Link to= '/root/home'  className={classes.tittle1}>
                       <img src={Logo} alt='Logo-Henry'style={{ width: "60px", height: "60px", paddingTop:'5px'}}/>
               </Link>
               <Button
@@ -87,7 +87,7 @@ const NavBar = (theme)=>{
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <Link to='/user/cohorte'>
+                <Link to='/root/cohorte'>
                   <StyledMenuItem>
                     <ListItemIcon>
                       <FilterNoneSharpIcon fontSize="medium" />
@@ -95,7 +95,7 @@ const NavBar = (theme)=>{
                     <ListItemText primary="Cohortes" />
                   </StyledMenuItem>
                 </Link>
-                <Link to='/user/userprofile'>
+                <Link to='/root/student'>
                   <StyledMenuItem>
                     <ListItemIcon>
                       <AccountBoxSharpIcon fontSize="medium" />
@@ -103,7 +103,7 @@ const NavBar = (theme)=>{
                     <ListItemText primary="Alumnos" />
                   </StyledMenuItem>
                 </Link>
-                <Link to='/user/algomas'>
+                <Link to='/root/algomas'>
                   <StyledMenuItem>
                     <ListItemIcon>
                       <HelpOutlineSharpIcon fontSize="medium" />
@@ -112,11 +112,6 @@ const NavBar = (theme)=>{
                   </StyledMenuItem>
                 </Link>
               </StyledMenu>
-                      {/*  <Link to ='/user/dashboard' >
-                      <Button variant='text'  color='secondary' >
-                          Dash-Board
-                      </Button>                    
-                      </Link> */}
               <Button variant='text' color='secondary' >
                   Login
               </Button>
