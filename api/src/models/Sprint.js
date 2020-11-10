@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 
 const SprintSchema = Schema({
-    nameSprint: {
+    name: {
         type: String,
         required: true
     },
