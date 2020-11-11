@@ -1,22 +1,19 @@
-import { gql } from 'apollo-server-express'
-import { Query } from 'mongoose'
-import Sprint from '../../models/Sprint'
+import { gql } from "apollo-server-express"
 
 export default gql`
-    extend default Query{
+    extend type Query{
         sprint(id: String!): Sprint!
-        sprint: [Sprint!]
+        sprints: [Sprint!]
     }
 
     extend type Mutation {
-        createSprint(name: String!, duration: Number!, description: String! ): Sprint!
-        removeSprint(sprintId: String!): Sprint!
+        createSprint(name: String!, duration: Float!, description: String! ): Sprint!
     }
 
     type Sprint{
         _id: ID!
         name: String!
-        duration: Number!
+        duration: Float!
         description: String!
     }
-    `;
+`;
