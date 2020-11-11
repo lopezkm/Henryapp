@@ -9,6 +9,8 @@ import '../../css/forms.css'
 import  useForm from './useForm' //standard hooks for forms
 import validate from './validateLogin' //validations
 import useStyles from './stylesRegister' //import styles
+import gql from 'graphql-tag'
+
 
 // const ADD_USER= gql `
 //       mutation createUser($name: string!, $lastname:string!, $email: !string, $password: !string){

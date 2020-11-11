@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
+//import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
@@ -15,10 +15,25 @@ import PeopleIcon from '@material-ui/icons/People';
 import PersonIcon from '@material-ui/icons/Person';
 import Divider from '@material-ui/core/Divider';
 import {Button, Container} from '@material-ui/core';
+/* import { graphql } from 'react-apollo'; */
+import {gql, useQuery} from '@apollo/client'
+
+const User = gql`
+    {users {
+            name
+            lastname
+        }
+    }`
+    
+
 
 
 export default function Cohorte() {
+    
+    const {loadind, error, data} = useQuery(User)
 
+    console.log(data);
+    
     const useStyles = makeStyles((theme) => ({
         containerRoot: {
             marginTop:100,
@@ -47,13 +62,13 @@ export default function Cohorte() {
             marginTop:-20,
         },
         action: {
-            marginTop:-30,
+            marginTop:-20,
             marginLeft: 10,
             marginRight:10
         },
         button: {
-            fontSize: 15,
-            marginLeft: 15,
+            fontSize: 10,
+            marginLeft: 2,
             color: theme.palette.common.black,
         },
         footer: {
@@ -130,13 +145,19 @@ export default function Cohorte() {
                         Boot-Camp:
                     </Typography>
                     <IconButton aria-label="share" className={classes.button}>
-                    1- <LibraryBooksIcon />
+                        1- <LibraryBooksIcon />
+                    </IconButton>
                     <Divider className={classes.divider} orientation="vertical" />
-                    2- <LibraryBooksIcon />
+                    <IconButton aria-label="share" className={classes.button}>
+                        2- <LibraryBooksIcon />
+                    </IconButton>
                     <Divider className={classes.divider} orientation="vertical" />
-                    3- <LibraryBooksIcon />
+                    <IconButton aria-label="share" className={classes.button}>
+                        3- <LibraryBooksIcon />
+                    </IconButton>
                     <Divider className={classes.divider} orientation="vertical" />
-                    4- <LibraryBooksIcon />
+                    <IconButton aria-label="share" className={classes.button}> 
+                        4- <LibraryBooksIcon />
                     </IconButton>
                 </CardActions>
                 <CardActions disableSpacing className={classes.action}>
@@ -160,5 +181,4 @@ export default function Cohorte() {
             </Card>
         </Container>
     );
-
 }
