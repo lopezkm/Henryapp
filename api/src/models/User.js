@@ -5,10 +5,13 @@ const UserSchema = Schema({
     type: String,
     required: true,
   },
+<<<<<<< HEAD
   lastname: {
     type: String,
     required: true,
   },
+=======
+>>>>>>> main
   email: {
     type: String,
     unique: true,

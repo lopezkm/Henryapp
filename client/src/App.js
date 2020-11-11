@@ -3,7 +3,11 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import LandingPage from "./components/home/landingPage.jsx";
 import Home from "./components/home/home.jsx";
 import NavBar from "./components/navbar/navbar.jsx";
+<<<<<<< HEAD
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+=======
+import { createMuiTheme, ThemeProvider} from "@material-ui/core/styles";
+>>>>>>> main
 import { yellow, grey } from "@material-ui/core/colors";
 import Footer from "./components/footer/footer";
 import Register2 from "./components/forms/register2.jsx";
@@ -27,7 +31,11 @@ function App() {
       <Router>
         <Route exact path="/" render={() => <LandingPage />} />
         <Route path="/root" render={() => <NavBar />} />
+<<<<<<< HEAD
         <Route exact path="/root/userprofile" render={() => <UserProfile />} />
+=======
+        <Route exact path= "/root/userprofile" render={()=> <UserProfile />} />
+>>>>>>> main
         <Route exact path="/root/home" render={() => <Home />} />
         <Route exact path="/root/student" render={() => <Student />} />
         {/* <Route path="/root" render={() => <Footer />} /> */}

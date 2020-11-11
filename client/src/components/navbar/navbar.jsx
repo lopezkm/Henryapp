@@ -9,8 +9,11 @@ import FilterNoneSharpIcon from '@material-ui/icons/FilterNoneSharp';
 import HelpOutlineSharpIcon from '@material-ui/icons/HelpOutlineSharp';
 import Logo from '../home/images/logoHenry.jpeg';
 import { withStyles } from '@material-ui/core/styles';
+<<<<<<< HEAD
 import clsx from 'clsx';
 
+=======
+>>>>>>> main
 
 
 
@@ -84,6 +87,7 @@ const NavBar = (theme)=>{
       <div>              
         <AppBar className='navbar'> 
           <Toolbar>
+<<<<<<< HEAD
             <IconButton aria-label="open drawer"
             onClick={console.log('click')}
             edge="start"
@@ -95,6 +99,13 @@ const NavBar = (theme)=>{
             </IconButton>
             <Link to= '/root/home'  className={classes.tittle1}>
             <img src={Logo} alt='Logo-Henry'style={{ width: "70px", height: "70px", paddingTop:'1px'}}/>
+=======
+            <IconButton>
+              <MenuIcon/>
+            </IconButton>
+            <Link to= '/root/home'  className={classes.tittle1}>
+              <img src={Logo} alt='Logo-Henry'style={{ width: "60px", height: "60px", paddingTop:'5px'}}/>
+>>>>>>> main
             </Link>
             <Button
               aria-controls="customized-menu"
