@@ -3,23 +3,22 @@ import {useQuery, gql} from "@apollo/client";
 import Image from './images/holaa.png'
 import { Link } from 'react-router-dom'
 
-const Users= gql`
+const Cohorts= gql`
 {
-  users{
-    name
-    _id
-    email
-  }
+cohorts{
+  name
+  startingDate
+}
 }
 `
 
 export default function Landing() {
-   const {loading, error, data} = useQuery(Users);
+   const {loading, error, data} = useQuery(Cohorts);
    if(loading){
        console.log("loading")
    } 
    if(error){
-       console.log("ups un error")
+      return <div>uhh la cagamos</div>
    }
    if(data){
        console.log(data)
