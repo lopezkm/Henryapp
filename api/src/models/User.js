@@ -47,8 +47,11 @@ const UserSchema = Schema({
 
   resetLink: {
     type: String,
-    required: false,
     default: "",
+  },
+  lastName: {
+    type: String,
+    required: true,
   },
 });
 
