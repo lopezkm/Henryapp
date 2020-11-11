@@ -47,13 +47,13 @@ export default function Cohorte() {
             marginTop:-20,
         },
         action: {
-            marginTop:-30,
+            marginTop:-20,
             marginLeft: 10,
             marginRight:10
         },
         button: {
-            fontSize: 15,
-            marginLeft: 15,
+            fontSize: 10,
+            marginLeft: 2,
             color: theme.palette.common.black,
         },
         footer: {
@@ -130,13 +130,19 @@ export default function Cohorte() {
                         Boot-Camp:
                     </Typography>
                     <IconButton aria-label="share" className={classes.button}>
-                    1- <LibraryBooksIcon />
+                        1- <LibraryBooksIcon />
+                    </IconButton>
                     <Divider className={classes.divider} orientation="vertical" />
-                    2- <LibraryBooksIcon />
+                    <IconButton aria-label="share" className={classes.button}>
+                        2- <LibraryBooksIcon />
+                    </IconButton>
                     <Divider className={classes.divider} orientation="vertical" />
-                    3- <LibraryBooksIcon />
+                    <IconButton aria-label="share" className={classes.button}>
+                        3- <LibraryBooksIcon />
+                    </IconButton>
                     <Divider className={classes.divider} orientation="vertical" />
-                    4- <LibraryBooksIcon />
+                    <IconButton aria-label="share" className={classes.button}> 
+                        4- <LibraryBooksIcon />
                     </IconButton>
                 </CardActions>
                 <CardActions disableSpacing className={classes.action}>
