@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect }from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -14,25 +14,39 @@ import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
 import PeopleIcon from '@material-ui/icons/People';
 import PersonIcon from '@material-ui/icons/Person';
 import Divider from '@material-ui/core/Divider';
-import {Button, Container} from '@material-ui/core';
+import {Button, Container, Box, Grid} from '@material-ui/core';
 /* import { graphql } from 'react-apollo'; */
-import {gql, useQuery} from '@apollo/client'
+import {gql, useQuery} from '@apollo/client';
 
-const User = gql`
-    {users {
+
+
+const Cohortes = gql`
+    {cohorts {
             name
-            lastname
+            startingDate
         }
     }`
-    
+
 
 
 
 export default function Cohorte() {
     
-    const {loadind, error, data} = useQuery(User)
+    const {loading, error, data} = useQuery(Cohortes);
+    const [cohortes, setCohortes] = useState([]);
 
-    console.log(data);
+    if(loading) {
+        console.log('cargando');
+    } else if(error) {
+        console.log('ocurrió un error');
+    } else {
+        console.log('ok');
+        var response = data.cohorts;
+    }
+
+    const getCohortes = () => {
+        setCohortes(response);
+    }
     
     const useStyles = makeStyles((theme) => ({
         containerRoot: {
@@ -42,6 +56,9 @@ export default function Cohorte() {
             maxWidth: 345,
             marginTop:40,
             borderRadius:15,
+            marginBottom: 30,
+            marginRight:10,
+            marginLeft:10
         },
        /*  media: {
             height: 0,
@@ -50,7 +67,7 @@ export default function Cohorte() {
         avatar: {
             backgroundColor: theme.palette.secondary.main,
             marginRight:10,
-            marginLeft:60
+            marginLeft:30
         },
         divider: {
             height: 28,
@@ -87,6 +104,11 @@ export default function Cohorte() {
             marginLeft:100,
             marginTop:-10,
             marginBottom:10
+        },
+        box: {
+            display:'flex',
+            wrap: 'no-wrap',
+            justifyContent: 'space-beteewn'
         }
     }));
 
@@ -97,88 +119,93 @@ export default function Cohorte() {
             <Button variant="contained" color="secondary" className={classes.ButtonMod}>
                 Nuevo Cohorte
             </Button>
-            <Button variant="contained" color="secondary" className={classes.ButtonMod}>
+            <Button onClick={getCohortes} variant="contained" color="secondary" className={classes.ButtonMod}>
                 Ver Cohortes 
             </Button>
-            
-            <Card className={classes.root}>
-                <CardHeader
-                    title="COHORTE"
-                    subheader="Iniciado: 06/11/2020"
-                    avatar={
-                        <Avatar aria-label="recipe" className={classes.avatar}>
-                        8
-                        </Avatar>
-                    }
-                />
-                {/* <CardMedia
-                    className={classes.media}
-                    image= {Logo}
-                    title="Imagen"
-                /> */}
-                <CardContent>
-                    <Divider className={classes.dividerH} orientation="horizontal" />
-                    <Typography variant="body2" color="textSecondary" component="p" className={classes.info}>
-                        <IconButton aria-label="settings" className={classes.buttonI}>
-                            <PersonIcon />  
-                        </IconButton> Instructor: Agustin Amani
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p" className={classes.info}>
-                        <IconButton aria-label="settings" className={classes.buttonI}>
-                            <PeopleIcon />  
-                        </IconButton> PMs: Ricardo Freire y Marcelo Quiroga
-                    </Typography>
-                    <Typography variant="body2" color="textSecondary" component="p" className={classes.info}>
-                        <IconButton aria-label="settings" className={classes.buttonI}>
-                            <LocalLibraryIcon /> 
-                        </IconButton> Alumnos: 175
-                    </Typography>
-                </CardContent>
-                <CardContent>
-                <Divider className={classes.dividerH} orientation="horizontal" />
-                    <Typography component="p" className={classes.footer}>
-                        SPRINTS 
-                    </Typography>
-                </CardContent>
-                <CardActions disableSpacing className={classes.action}>
-                    <Typography  component="p" className={classes.info}>
-                        Boot-Camp:
-                    </Typography>
-                    <IconButton aria-label="share" className={classes.button}>
-                        1- <LibraryBooksIcon />
-                    </IconButton>
-                    <Divider className={classes.divider} orientation="vertical" />
-                    <IconButton aria-label="share" className={classes.button}>
-                        2- <LibraryBooksIcon />
-                    </IconButton>
-                    <Divider className={classes.divider} orientation="vertical" />
-                    <IconButton aria-label="share" className={classes.button}>
-                        3- <LibraryBooksIcon />
-                    </IconButton>
-                    <Divider className={classes.divider} orientation="vertical" />
-                    <IconButton aria-label="share" className={classes.button}> 
-                        4- <LibraryBooksIcon />
-                    </IconButton>
-                </CardActions>
-                <CardActions disableSpacing className={classes.action}>
-                    <Typography component="p" className={classes.info}>
-                        Henry-Labs:
-                    </Typography>
-                    <IconButton aria-label="share" className={classes.button}>
-                        EC - <LibraryBooksIcon />
-                    </IconButton>
-                    <Divider className={classes.divider} orientation="vertical" />
-                    <IconButton aria-label="share" className={classes.button}>
-                        PF - <LibraryBooksIcon />
-                    </IconButton>
-                    <Divider className={classes.dividerH} orientation="horizontal" />
-                </CardActions>
-                <CardActions>
-                    <Button variant="contained" color="secondary" className={classes.ButtonMod}>
-                        Modificar
-                    </Button>
-                </CardActions>
-            </Card>
+            <Box className={classes.box}>
+                {cohortes && cohortes.map( cohorte => (
+                    <Grid item xs={3.5}>
+                        <Card className={classes.root}>
+                            <CardHeader
+                                title={`Cohorte: ${cohorte.name}`}
+                                subheader={`Inicio: ${cohorte.startingDate}`}
+                                avatar={
+                                    <Avatar aria-label="recipe" className={classes.avatar}>
+                                    C
+                                    </Avatar>
+                                }
+                            />
+                            {/* <CardMedia
+                                className={classes.media}
+                                image= {Logo}
+                                title="Imagen"
+                            /> */}
+                            <CardContent>
+                                <Divider className={classes.dividerH} orientation="horizontal" />
+                                <Typography variant="body2" color="textSecondary" component="p" className={classes.info}>
+                                    <IconButton aria-label="settings" className={classes.buttonI}>
+                                        <PersonIcon />  
+                                    </IconButton> Instructor: Agustin Amani
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary" component="p" className={classes.info}>
+                                    <IconButton aria-label="settings" className={classes.buttonI}>
+                                        <PeopleIcon />  
+                                    </IconButton> PMs: Ricardo Freire y Marcelo Quiroga
+                                </Typography>
+                                <Typography variant="body2" color="textSecondary" component="p" className={classes.info}>
+                                    <IconButton aria-label="settings" className={classes.buttonI}>
+                                        <LocalLibraryIcon /> 
+                                    </IconButton> Alumnos: 175
+                                </Typography>
+                            </CardContent>
+                            <CardContent>
+                            <Divider className={classes.dividerH} orientation="horizontal" />
+                                <Typography component="p" className={classes.footer}>
+                                    SPRINTS 
+                                </Typography>
+                            </CardContent>
+                            <CardActions disableSpacing className={classes.action}>
+                                <Typography  component="p" className={classes.info}>
+                                    Boot-Camp:
+                                </Typography>
+                                <IconButton aria-label="share" className={classes.button}>
+                                    1- <LibraryBooksIcon />
+                                </IconButton>
+                                <Divider className={classes.divider} orientation="vertical" />
+                                <IconButton aria-label="share" className={classes.button}>
+                                    2- <LibraryBooksIcon />
+                                </IconButton>
+                                <Divider className={classes.divider} orientation="vertical" />
+                                <IconButton aria-label="share" className={classes.button}>
+                                    3- <LibraryBooksIcon />
+                                </IconButton>
+                                <Divider className={classes.divider} orientation="vertical" />
+                                <IconButton aria-label="share" className={classes.button}> 
+                                    4- <LibraryBooksIcon />
+                                </IconButton>
+                            </CardActions>
+                            <CardActions disableSpacing className={classes.action}>
+                                <Typography component="p" className={classes.info}>
+                                    Henry-Labs:
+                                </Typography>
+                                <IconButton aria-label="share" className={classes.button}>
+                                    EC - <LibraryBooksIcon />
+                                </IconButton>
+                                <Divider className={classes.divider} orientation="vertical" />
+                                <IconButton aria-label="share" className={classes.button}>
+                                    PF - <LibraryBooksIcon />
+                                </IconButton>
+                                <Divider className={classes.dividerH} orientation="horizontal" />
+                            </CardActions>
+                            <CardActions>
+                                <Button variant="contained" color="secondary" className={classes.ButtonMod}>
+                                    Modificar
+                                </Button>
+                            </CardActions>
+                        </Card>
+                    </Grid>
+                ))}
+            </Box>
         </Container>
     );
 }
