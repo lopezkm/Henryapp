@@ -25,14 +25,20 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <Route exact path="/" render={() => <LandingPage />} />
-        <Route path="/root" render={() => <NavBar />} />
-        <Route exact path="/root/userprofile" render={() => <UserProfile />} />
-        <Route exact path="/root/home" render={() => <Home />} />
-        <Route exact path="/root/student" render={() => <Student />} />
-        {/* <Route path="/root" render={() => <Footer />} /> */}
-        <Route exact path="/root/register" render={() => <Register2 />} />
-        <Route exact path="/root/login" render={() => <Login />} />
+        <div className="ppal" style={{ minHeight: "calc(100vh - 130px)" }}>
+          <Route exact path="/" render={() => <LandingPage />} />
+          <Route path="/root" render={() => <NavBar />} />
+          <Route
+            exact
+            path="/root/userprofile"
+            render={() => <UserProfile />}
+          />
+          <Route exact path="/root/home" render={() => <Home />} />
+          <Route exact path="/root/student" render={() => <Student />} />
+          <Route exact path="/root/register" render={() => <Register2 />} />
+          <Route exact path="/root/login" render={() => <Login />} />
+        </div>
+        <Route path="/root" render={() => <Footer />} />
       </Router>
     </ThemeProvider>
   );
