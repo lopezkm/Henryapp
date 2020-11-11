@@ -12,7 +12,23 @@ export default {
     profile: async (_, args) => {
       return await User.findById(args.id);
     },
-    login: () => {},
+    login: async (root, args, { req }, info) => {
+      const user = await User.findOne({
+        email: args.email,
+      });
+      if (!user) {
+        throw new Error("Error el usuario no se encuentra registrado.");
+      }
+      let isMatch = await bcrypt.compare(args.password, user.password);
+      if (!isMatch) {
+        throw new Error("la contraseña es incorrecta");
+      }
+      let tokens = await issueTokens(user);
+      return {
+        user: user,
+        ...tokens,
+      };
+    },
     refreshToken: () => {},
   },
   Mutation: {
