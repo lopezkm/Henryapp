@@ -19,7 +19,7 @@ const FeedbackSchema = Schema({
     },
     comentary: {
         type: String,
-    }
+    },
 });
 
 const Feedback = model('Feedback', FeedbackSchema);
