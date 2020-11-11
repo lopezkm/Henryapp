@@ -2,32 +2,18 @@ import { Sprint } from '../../models';
 
 export default {
     Query: {
-        // sprints: async () =>{
-        //     return await Sprint.find()
-        // },
+        //Get con todos los sprints y sus relacion con lecture
         sprints: async () =>{
             const response =  await Sprint.find()
             .populate("lecture")
             return response
-        }, 
+        },
+        //Get con un sprint y su relacion con una o muchas lecture 
         sprint: async (_, args) =>{
             const response =  await Sprint.findById(args.id)
             .populate("lecture")
-            console.log('Mi response',response)
             return response
         }
-        // sprint: async (_, args) => {
-        //      const response = await Sprint.findOne({ _id: args.id})
-        //     .populate("lecture")
-        //     .exec((err, data) =>{
-        //         if(err){
-        //             console.log(err.message)
-        //         }
-        //         console.log('Mi data...',data)
-        //         return  data
-        //     })
-        //     return response
-        // }
     },
     Mutation: {
         // Creamos una sprint
@@ -56,5 +42,17 @@ export default {
             }
             return newLecture
         },  
+        // Borramos una Lecture de una Sprint
+        removeLectureToSprint: async(root, { sprintId, lectureId }, { req }, info)=>{
+            const updateSprint = await Sprint.findByIdAndUpdate(sprintId, {
+                $pull: { lecture: lectureId }
+            },{
+                new: true, useFindAndModify: true
+            })
+            if(!updateSprint){
+                return false
+            }
+            return updateSprint
+        }
     }
 }

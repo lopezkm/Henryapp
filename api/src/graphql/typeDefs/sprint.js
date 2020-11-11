@@ -11,7 +11,11 @@ export default gql`
         addLectureToSprint(
             sprintId: String!,
             lectureId: String!
-            ): Sprint!
+        ): Sprint!
+        removeLectureToSprint(
+            sprintId: String!,
+            lectureId: String!
+        ): Sprint!
     }
 
     type Sprint{
