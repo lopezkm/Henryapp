@@ -21,7 +21,11 @@ import gql from 'graphql-tag';
 
 export default function Cohorte() {
 
-    const Cohorte
+    const Cohorte = () => {
+        query={gql`{
+            
+        }`}
+    }
 
     const useStyles = makeStyles((theme) => ({
         containerRoot: {
