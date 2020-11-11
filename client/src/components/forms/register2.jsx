@@ -9,10 +9,21 @@ import '../../css/forms.css'
 import  useForm from './useForm' //standard hooks for forms
 import validate from './validateLogin' //validations
 import useStyles from './stylesRegister' //import styles
+import gql from 'graphql-tag'
+import { useMutation } from '@apollo/client';
+import { useSuscription } from '@apollo/react-hooks';
+
+const ADD_USER= gql `
+      mutation createUser($name: string!, $lastname:string!, $email: !string, $password: !string){
+        createUser(input:{name: $name, lastname: $lastname, email: $email, password: $ password}){
+
+        }
+` ;
 
 
 export default function Register2() {
  const classes = useStyles();
+ const [createUser] = useMutation(ADD_USER)
  const {  values, handleChange, handleSubmit,  errors 
 }= useForm(submit, validate);
 
