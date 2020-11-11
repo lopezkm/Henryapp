@@ -6,7 +6,8 @@ export default {
       return await Cohort.find({});
     },
     cohort: async (_, args) => {
-      return await Cohort.findById(args.id);
+      const response = await Cohort.findById(args.id).populate("users");
+      return response;
     },
   },
   Mutation: {
@@ -26,11 +27,16 @@ export default {
     },
 
     addUserToCohort: async (root, { userId, cohortId }, { req }, info) => {
-      const newCohort = await Cohort.findByIdAndUpdate(cohortId, {
-        $push: { users: userId }
-      }, {
-        new: true, useFindAndModify: true
-      });
+      const newCohort = await Cohort.findByIdAndUpdate(
+        cohortId,
+        {
+          $push: { users: userId },
+        },
+        {
+          new: true,
+          useFindAndModify: true,
+        }
+      );
       if (!newCohort) {
         // throw new Error("Ups algo salió mal.");
         return false;
@@ -40,11 +46,16 @@ export default {
     },
 
     removeUserFromCohort: async (root, { userId, cohortId }, { req }, info) => {
-      const updatedCohort = await Cohort.findByIdAndUpdate(cohortId, {
-        $pull: { users: userId }
-      }, {
-        new: true, useFindAndModify: true
-      });
+      const updatedCohort = await Cohort.findByIdAndUpdate(
+        cohortId,
+        {
+          $pull: { users: userId },
+        },
+        {
+          new: true,
+          useFindAndModify: true,
+        }
+      );
 
       if (!updatedCohort) {
         return false;
@@ -52,7 +63,5 @@ export default {
 
       return updatedCohort;
     },
-
-
   },
 };
