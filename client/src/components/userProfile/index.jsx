@@ -8,7 +8,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import alumno from './alumno.jpg';
-//import { yellow } from '@material-ui/core/colors';
+
 
 const useStyles = makeStyles((theme)=>({
     root: {
@@ -17,15 +17,6 @@ const useStyles = makeStyles((theme)=>({
     media: {
       height: 140,
     },
-    // button1: {
-    //     background: theme.palette.black
-    // },
-    // button2: {    
-    //  color: theme.palette.yellow,      
-    // },
-    //  button3: {
-    //     background: theme.overrides
-    // }
   }));
 
 const theme = createMuiTheme({
@@ -60,23 +51,23 @@ const theme = createMuiTheme({
           <CardMedia
             className={classes.media}
             image={alumno}
-            title="Contemplative Reptile"
+            title="Alumno"
             />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               Lio Messi
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Edad: 31 años
+              Fecha de inscripcion:
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Nacionalidad: Argentino
+              Cohorte:
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Profesion: arquitecto
+              Rol: 
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Rol: Alumno
+              Github: 
             </Typography>
           </CardContent>
         </CardActionArea>
