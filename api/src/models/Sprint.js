@@ -1,5 +1,6 @@
 import { Schema, model } from 'mongoose';
 
+
 const SprintSchema = Schema({
     name: {
         type: String,
@@ -13,7 +14,11 @@ const SprintSchema = Schema({
         type: String,
         required: true,
         default: ''
-    }
+    },
+    lecture: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Lecture'
+    }]
 });
 
 const Sprint = model('Sprint', SprintSchema);
