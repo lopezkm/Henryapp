@@ -4,4 +4,6 @@ import lecture from "./lecture";
 import cohort from "./cohort";
 import sprint from  "./sprint"
 
-export default [root, user, lecture, cohort, sprint];
+import feedback from "./feedback"
+
+export default [root, user, lecture, cohort, feedback, sprint];
