@@ -6,15 +6,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./css/landingPage.css";
 import "./css/home.css";
-import "./css/dashBoard.css";
-import {ApolloClient,  InMemoryCache } from '@apollo/client';
-import { ApolloProvider } from '@apollo/client';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import './css/landingPage.css'
-import './css/home.css'
+
 
 
 const client = new ApolloClient({
@@ -24,16 +16,9 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client= {client}>
-  <React.StrictMode>
-
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
-
-    <App />
-  </React.StrictMode>
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>,
   </ApolloProvider>,
   document.getElementById('root')
 
