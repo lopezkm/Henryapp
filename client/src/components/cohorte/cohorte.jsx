@@ -1,4 +1,4 @@
-import React, { useState }from 'react';
+import React, { useState, useEffect }from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -18,16 +18,13 @@ import {Button, Container, Box, Grid} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import {gql, useQuery} from '@apollo/client';
+import {gql, selectHttpOptionsAndBody, useQuery} from '@apollo/client';
 
 const Cohortes = gql`
     {cohorts {
             name
             startingDate
-            users {
-                name
-                lastname
-            }
+            
         }
     }`
 
@@ -35,8 +32,12 @@ export default function Cohorte() {
     
     const {loading, error, data} = useQuery(Cohortes);
     const [cohortes, setCohortes] = useState([]);
+    const [load, setLoad] = useState(true);
+    const [created, setCreated] = useState({
+        name:"",
+        startingDate:"",
+    });
     const [anchorEl, setAnchorEl] = useState(null);
-    console.log(data);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -55,9 +56,18 @@ export default function Cohorte() {
         var response = data.cohorts;
     }
 
-    const getCohortes = () => {
+    /* const getCohortes = () => {
         setCohortes(response);
+    } */
+
+    const newCohorte = (e) => {
+        e.preventDefault();
     }
+
+    useEffect( () => {
+        setCohortes(response)
+        setLoad(false)
+    }, [cohortes])
     
     const useStyles = makeStyles((theme) => ({
         containerRoot: {
@@ -148,27 +158,27 @@ export default function Cohorte() {
                     onClose={handleClose}
                     >
                     <MenuItem >
-                        <form className={classes.root} noValidate autoComplete="off">
+                        <form className={classes.cohortButton} onSubmit={(e) => {newCohorte(e)}} noValidate autoComplete="off">
                             <TextField id="standard-basic" label="Nombre Cohorte" />
                             <TextField id="standard-basic2" label="Inicio (dd/mm/aaaa)" />
-                            <Button onClick={handleClose}>Crear Cohorte</Button>
+                            <Button type="submit" onClick={handleClose}>Crear Cohorte</Button>
                         </form>
                     </MenuItem>
                 </Menu>
-                <Button onClick={getCohortes} variant="contained" color="secondary" className={classes.ButtonMod}>
+                {/* <Button onClick={getCohortes} variant="contained" color="secondary" className={classes.ButtonMod}>
                     Ver Cohortes 
-                </Button>
+                </Button> */}
             </div>  
             <Box className={classes.box}>
-                {cohortes && cohortes.map( cohorte => (
-                    <Grid item xs={3.5}>
+                {cohortes && cohortes.map( (cohorte, i) => (
+                    <Grid key={i} item xs={3.5}>
                         <Card className={classes.root}>
                             <CardHeader
                                 title={`Cohorte: ${cohorte.name}`}
                                 subheader={`Inicio: ${cohorte.startingDate}`}
                                 avatar={
                                     <Avatar aria-label="recipe" className={classes.avatar}>
-                                    C
+                                    C-{i}
                                     </Avatar>
                                 }
                             />
