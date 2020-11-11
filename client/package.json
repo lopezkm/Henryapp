@@ -12,6 +12,7 @@
     "bootstrap": "^4.5.3",
     "email-validator": "^2.0.4",
     "fontsource-roboto": "^3.0.3",
+    "graphql": "^15.4.0",
     "formik": "^2.2.3",
     "graphql": "^15.4.0",
     "node": "^15.0.1",
