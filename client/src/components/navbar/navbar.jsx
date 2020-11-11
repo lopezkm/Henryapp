@@ -10,8 +10,6 @@ import HelpOutlineSharpIcon from '@material-ui/icons/HelpOutlineSharp';
 import Logo from '../home/images/logoHenry.jpeg';
 import { withStyles } from '@material-ui/core/styles';
 
-
-
 const StyledMenu = withStyles({
   paper: {
     border: '1px solid #d3d4d5',
@@ -56,6 +54,16 @@ const NavBar = (theme)=>{
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [anchorElP, setAnchorElP] = React.useState(null);
     const open = Boolean(anchorEl);
+
+    const [abrir, setAbrir] = React.useState(false);
+
+    const handleDrawerOpen = () => {
+      setAbrir(true);
+    };
+  
+    const handleDrawerClose = () => {
+      setAbrir(false);
+    };
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
       };

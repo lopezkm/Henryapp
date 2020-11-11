@@ -5,22 +5,26 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import '../../css/footer.css'
+import Logo from '../home/images/logoHen.png'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: '100vh',
-  },
-  main: {
-    marginTop: theme.spacing(8),
-    marginBottom: theme.spacing(2),
-  },
+  // root: {
+  //   display: 'flex',
+  //   flexDirection: 'column',
+  //   minHeight: '100vh',
+  // },
+  // main: {
+  //   marginTop: theme.spacing(0),
+  //   marginBottom: theme.spacing(2),
+  // },
   footer: {
-    padding: theme.spacing(3, 2),
-    marginTop: 'auto',
+    //  bottom: 0,
+    // padding: theme.spacing(3, 2),
+    // marginTop: 'auto',
     backgroundColor:
    theme.palette.grey[900],
+  //  position: 'sticky',
+   height:'130px'
   },
   typography:{
     allVariants: {
@@ -36,13 +40,14 @@ export default function Footer() {
     <div className={classes.root}>
       <CssBaseline />
       <footer className={classes.footer}>
-        <Container maxWidth="sm">
-          <ul style={{color:'white'}}>
+        {/* <Container maxWidth="sm"> */}
+          <img src={Logo} style={{height:'50px'}}/>
+          {/* <ul style={{color:'white'}}>
           <li>Info sobre Henry AQUI</li>
           <li>Contacto a redes</li>
           <li >Contacto a redes</li>
-          </ul>
-        </Container>
+          </ul> */}
+        {/* </Container> */}
       </footer>
     </div>
   );
