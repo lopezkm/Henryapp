@@ -10,6 +10,7 @@ import Register2 from "./components/forms/register2.jsx";
 import Login from "./components/forms/login.jsx";
 import UserProfile from "./components/userProfile/index.jsx";
 import Student from "./components/students/students.jsx";
+import Cohorte from "./components/cohorte/cohorte.jsx";
 
 const theme = createMuiTheme({
   palette: {
@@ -33,12 +34,14 @@ function App() {
             path="/root/userprofile"
             render={() => <UserProfile />}
           />
+          <Route exact path="/root/cohorte" render={() => <Cohorte />} />
           <Route exact path="/root/home" render={() => <Home />} />
           <Route exact path="/root/student" render={() => <Student />} />
           <Route exact path="/root/register" render={() => <Register2 />} />
           <Route exact path="/root/login" render={() => <Login />} />
         </div>
         <Route path="/root" render={() => <Footer />} />
+
       </Router>
     </ThemeProvider>
   );
