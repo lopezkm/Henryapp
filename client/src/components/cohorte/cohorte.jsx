@@ -1,4 +1,4 @@
-import React, { useState, useEffect }from 'react';
+import React, { useState }from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -15,8 +15,8 @@ import PeopleIcon from '@material-ui/icons/People';
 import PersonIcon from '@material-ui/icons/Person';
 import Divider from '@material-ui/core/Divider';
 import {Button, Container, Box, Grid} from '@material-ui/core';
-/* import { graphql } from 'react-apollo'; */
 import {gql, useQuery} from '@apollo/client';
+import {Link} from 'react-router-dom';
 
 
 
@@ -116,9 +116,11 @@ export default function Cohorte() {
 
     return (
         <Container className={classes.containerRoot}>
-            <Button variant="contained" color="secondary" className={classes.ButtonMod}>
-                Nuevo Cohorte
-            </Button>
+            <Link to="/root/create-cohorte">
+                <Button variant="contained" color="secondary" className={classes.ButtonMod}>
+                    Nuevo Cohorte
+                </Button>
+            </Link>
             <Button onClick={getCohortes} variant="contained" color="secondary" className={classes.ButtonMod}>
                 Ver Cohortes 
             </Button>
