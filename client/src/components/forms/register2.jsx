@@ -9,10 +9,21 @@ import '../../css/forms.css'
 import  useForm from './useForm' //standard hooks for forms
 import validate from './validateLogin' //validations
 import useStyles from './stylesRegister' //import styles
+import gql from 'graphql-tag'
+import { useMutation } from '@apollo/client';
+import { useSuscription } from '@apollo/react-hooks';
+
+// const ADD_USER= gql `
+//       mutation createUser($name: string!, $lastname:string!, $email: !string, $password: !string){
+//         createUser(input:{name: $name, lastname: $lastname, email: $email, password: $ password}){
+
+//         }
+// ` ;
 
 
 export default function Register2() {
  const classes = useStyles();
+//  const [createUser] = useMutation(ADD_USER)
  const {  values, handleChange, handleSubmit,  errors 
 }= useForm(submit, validate);
 
@@ -22,7 +33,7 @@ function submit(){
 
   return (
     <React.Fragment>
-        <Grid container spacing={5} className={classes.main}>
+        <Grid container spacing={5} className={classes.main} style={{margin:'0px' }}>
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Grid item xs={12} sm={8} className={classes.form}>
