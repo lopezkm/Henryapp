@@ -15,32 +15,43 @@ import PeopleIcon from '@material-ui/icons/People';
 import PersonIcon from '@material-ui/icons/Person';
 import Divider from '@material-ui/core/Divider';
 import {Button, Container, Box, Grid} from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
 import {gql, useQuery} from '@apollo/client';
-import {Link} from 'react-router-dom';
-
-
 
 const Cohortes = gql`
     {cohorts {
             name
             startingDate
+            users {
+                name
+                lastname
+            }
         }
     }`
-
-
-
 
 export default function Cohorte() {
     
     const {loading, error, data} = useQuery(Cohortes);
     const [cohortes, setCohortes] = useState([]);
+    const [anchorEl, setAnchorEl] = useState(null);
+    console.log(data);
+
+    const handleClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
 
     if(loading) {
         console.log('cargando');
     } else if(error) {
         console.log('ocurrió un error');
     } else {
-        console.log('ok');
+        console.log('ok', data);
         var response = data.cohorts;
     }
 
@@ -89,7 +100,7 @@ export default function Cohorte() {
             color: theme.palette.common.black,
         },
         footer: {
-            textAlign: 'center',
+            textAlign:'center',
             color: theme.palette.common.black,
         },
         info: {
@@ -109,21 +120,45 @@ export default function Cohorte() {
             display:'flex',
             wrap: 'no-wrap',
             justifyContent: 'space-beteewn'
-        }
+        },
+        cohortButton: {
+            marginTop:80, 
+            color: theme.palette.common.white,
+           '& > *': {
+             margin: theme.spacing(1),
+             width: '25ch',
+             backgroundColor: theme.palette.secondary.main,
+           },
+         },
     }));
 
     const classes = useStyles();
 
     return (
         <Container className={classes.containerRoot}>
-            <Link to="/root/create-cohorte">
-                <Button variant="contained" color="secondary" className={classes.ButtonMod}>
+            <div className={classes.cohortButton}>
+                <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} variant="contained" color="secondary" className={classes.ButtonMod}>
                     Nuevo Cohorte
                 </Button>
-            </Link>
-            <Button onClick={getCohortes} variant="contained" color="secondary" className={classes.ButtonMod}>
-                Ver Cohortes 
-            </Button>
+                <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                    >
+                    <MenuItem >
+                        <form className={classes.root} noValidate autoComplete="off">
+                            <TextField id="standard-basic" label="Nombre Cohorte" />
+                            <TextField id="standard-basic2" label="Inicio (dd/mm/aaaa)" />
+                            <Button onClick={handleClose}>Crear Cohorte</Button>
+                        </form>
+                    </MenuItem>
+                </Menu>
+                <Button onClick={getCohortes} variant="contained" color="secondary" className={classes.ButtonMod}>
+                    Ver Cohortes 
+                </Button>
+            </div>  
             <Box className={classes.box}>
                 {cohortes && cohortes.map( cohorte => (
                     <Grid item xs={3.5}>
