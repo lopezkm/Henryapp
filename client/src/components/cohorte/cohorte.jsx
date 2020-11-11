@@ -15,18 +15,25 @@ import PeopleIcon from '@material-ui/icons/People';
 import PersonIcon from '@material-ui/icons/Person';
 import Divider from '@material-ui/core/Divider';
 import {Button, Container} from '@material-ui/core';
-import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
+/* import { graphql } from 'react-apollo'; */
+import {gql, useQuery} from '@apollo/client'
+
+const User = gql`
+    {users {
+            name
+            lastname
+        }
+    }`
+    
+
 
 
 export default function Cohorte() {
+    
+    const {loadind, error, data} = useQuery(User)
 
-    const Cohorte = () => {
-        query={gql`{
-            
-        }`}
-    }
-
+    console.log(data);
+    
     const useStyles = makeStyles((theme) => ({
         containerRoot: {
             marginTop:100,
@@ -174,5 +181,4 @@ export default function Cohorte() {
             </Card>
         </Container>
     );
-
 }

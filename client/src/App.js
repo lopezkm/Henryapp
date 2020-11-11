@@ -34,7 +34,6 @@ function App() {
             path="/root/userprofile"
             render={() => <UserProfile />}
           />
-          <Route exact path="/root/cohorte" render={() => <Cohorte />} />
           <Route exact path="/root/home" render={() => <Home />} />
           <Route exact path="/root/student" render={() => <Student />} />
           <Route exact path="/root/register" render={() => <Register2 />} />
