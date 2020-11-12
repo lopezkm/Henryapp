@@ -22,7 +22,7 @@ const connectDB = () => {
           .dropCollection(collection.name)
           .then((response) => {
             consola.info({
-              message: `Drop data from collection ${collection.name}: ${response}`
+              message: `Drop data from collection ${collection.name}: ${response}`,
             });
           })
           .catch((error) => console.log("Drop data from collections:", error));
@@ -49,7 +49,7 @@ const connectDB = () => {
     });
 
     // Borrar datos de las colecciones.
-    // cleanCollections();
+    //cleanCollections();
   });
 
   // Escuchar desconexion mongoose
