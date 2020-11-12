@@ -18,26 +18,33 @@ import {Button, Container, Box, Grid} from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import {gql, selectHttpOptionsAndBody, useQuery} from '@apollo/client';
+import {gql, useQuery, useMutation} from '@apollo/client';
 
-const Cohortes = gql`
+const COHORTES = gql`
     {cohorts {
             name
             startingDate
-            
         }
-    }`
+    }`;
+
+const CREATE_COHORTE = gql`
+    mutation creatCohorte ($name: String!, $startingDate: String!) {
+        creatCohorte(name: $name, startingDate: $startingDate) {
+            name
+            startingDate
+        }
+    }`;
 
 export default function Cohorte() {
     
-    const {loading, error, data} = useQuery(Cohortes);
+    const {loading, error, data} = useQuery(COHORTES);
     const [cohortes, setCohortes] = useState([]);
     const [load, setLoad] = useState(true);
-    const [created, setCreated] = useState({
-        name:"",
-        startingDate:"",
-    });
     const [anchorEl, setAnchorEl] = useState(null);
+
+    let name, startingDate;
+
+    const[creatCohorte] = useMutation(CREATE_COHORTE);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -56,13 +63,6 @@ export default function Cohorte() {
         var response = data.cohorts;
     }
 
-    /* const getCohortes = () => {
-        setCohortes(response);
-    } */
-
-    const newCohorte = (e) => {
-        e.preventDefault();
-    }
 
     useEffect( () => {
         setCohortes(response)
@@ -158,9 +158,10 @@ export default function Cohorte() {
                     onClose={handleClose}
                     >
                     <MenuItem >
-                        <form className={classes.cohortButton} onSubmit={(e) => {newCohorte(e)}} noValidate autoComplete="off">
-                            <TextField id="standard-basic" label="Nombre Cohorte" />
-                            <TextField id="standard-basic2" label="Inicio (dd/mm/aaaa)" />
+                        <form className={classes.cohortButton} onSubmit={(e) => { e.preventDefault();
+                        creatCohorte({variables: {name: name.value, startingDate: startingDate.value}})}} noValidate autoComplete="off">
+                            <TextField ref={ value => name = value} id="name" label="Nombre Cohorte" />
+                            <TextField ref={ value => startingDate = value}  id="startingDate" label="Inicio (dd/mm/aaaa)" />
                             <Button type="submit" onClick={handleClose}>Crear Cohorte</Button>
                         </form>
                     </MenuItem>
