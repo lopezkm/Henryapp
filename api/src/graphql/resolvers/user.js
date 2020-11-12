@@ -7,7 +7,7 @@ import { getAuthUser, issueTokens } from "../../functions/auth";
 export default {
   Query: {
     users: async () => {
-      return await User.find({});
+      return await User.find();
     },
     profile: async (root, args, { req }, info) => {
       let authUser = await User.findById(args.id);
@@ -31,6 +31,14 @@ export default {
       };
     },
     refreshToken: () => {},
+    search: async (root, args, { req }, info) => {
+      const response = await User.find({
+        name: {
+          $regex: new RegExp(args.query),
+        },
+      });
+      return response;
+    },
   },
   Mutation: {
     // Crear nuevo usuario
