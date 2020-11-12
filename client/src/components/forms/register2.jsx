@@ -9,25 +9,35 @@ import '../../css/forms.css'
 import  useForm from './useForm' //standard hooks for forms
 import validate from './validateLogin' //validations
 import useStyles from './stylesRegister' //import styles
-import gql from 'graphql-tag'
+import { gql, useMutation } from '@apollo/client';
 
 
-// const ADD_USER= gql `
-//       mutation createUser($name: string!, $lastname:string!, $email: !string, $password: !string){
-//         createUser(input:{name: $name, lastname: $lastname, email: $email, password: $ password}){
-
-//         }
-// ` ;
+ const CREATE_USER= gql ` mutation register(
+                                          $name: String,
+                                          $lastname: String,
+                                          $email: String,
+                                          $password: String
+                                          ){
+                                          register ( name: $name, lastname: $lastname, email: $email, password: $password){
+                                          _id
+                                          email
+                                         }
+                                         }
+                                         ` ;
 
 
 export default function Register2() {
  const classes = useStyles();
-//  const [createUser] = useMutation(ADD_USER)
  const {  values, handleChange, handleSubmit,  errors 
 }= useForm(submit, validate);
 
+const [createUser] = useMutation(CREATE_USER)
+
+
 function submit(){
-  console.log('submitted')
+const {name, lastname, email, password} = values
+// console.log(typeof(data.name), data.lastname,data.email, data.password)
+createUser(name, lastname, email, password )
 }
 
   return (

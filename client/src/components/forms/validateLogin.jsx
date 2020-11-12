@@ -21,5 +21,5 @@ if (!values.lastname) { errors.lastname = "Lastname is required";
       errors.password = "Passwords don't match"
       errors.password2 = "Passwords don't match"
     }
-    return errors;
+    return errors
   }
