@@ -1,4 +1,5 @@
 import React, { useState, useEffect }from 'react';
+import { Link } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -122,14 +123,15 @@ export default function Cohorte() {
             marginTop: -10,
         },
         ButtonMod: {
-            marginLeft:100,
+            marginLeft:70,
             marginTop:-10,
-            marginBottom:10
+            marginBottom:10,
+            backgroundColor: theme.palette.primary.main,
+            color: theme.palette.common.black,
+            textDecoration:"none"
         },
         box: {
             display:'flex',
-            wrap: 'no-wrap',
-            justifyContent: 'space-beteewn'
         },
         cohortButton: {
             marginTop:80, 
@@ -146,7 +148,7 @@ export default function Cohorte() {
 
     return (
         <Container className={classes.containerRoot}>
-            <div className={classes.cohortButton}>
+            <div>
                 <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick} variant="contained" color="secondary" className={classes.ButtonMod}>
                     Nuevo Cohorte
                 </Button>
@@ -158,17 +160,15 @@ export default function Cohorte() {
                     onClose={handleClose}
                     >
                     <MenuItem >
-                        <form className={classes.cohortButton} onSubmit={(e) => { e.preventDefault();
+                        <form  onSubmit={(e) => { e.preventDefault();
                         creatCohorte({variables: {name: name.value, startingDate: startingDate.value}})}} noValidate autoComplete="off">
                             <TextField ref={ value => name = value} id="name" label="Nombre Cohorte" />
+                            <br/>
                             <TextField ref={ value => startingDate = value}  id="startingDate" label="Inicio (dd/mm/aaaa)" />
-                            <Button type="submit" onClick={handleClose}>Crear Cohorte</Button>
+                            <Button type="submit" onClick={handleClose} color="secondary" className={classes.ButtonMod}>Crear Cohorte</Button>
                         </form>
                     </MenuItem>
                 </Menu>
-                {/* <Button onClick={getCohortes} variant="contained" color="secondary" className={classes.ButtonMod}>
-                    Ver Cohortes 
-                </Button> */}
             </div>  
             <Box className={classes.box}>
                 {cohortes && cohortes.map( (cohorte, i) => (
@@ -246,9 +246,11 @@ export default function Cohorte() {
                                 <Divider className={classes.dividerH} orientation="horizontal" />
                             </CardActions>
                             <CardActions>
-                                <Button variant="contained" color="secondary" className={classes.ButtonMod}>
-                                    Modificar
-                                </Button>
+                                <Link to="/root/addStudents">
+                                    <Button variant="contained" color="secondary" className={classes.ButtonMod}>
+                                        Agregar Alumnos
+                                    </Button>
+                                </Link>
                             </CardActions>
                         </Card>
                     </Grid>
