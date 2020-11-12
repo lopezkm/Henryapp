@@ -4,24 +4,19 @@ export default gql`
   extend type Query {
     profile(id: String!): User!
     users: [User!]
-    refreshToken: Auth!
-    login(email: String!, password: String!): Auth!
+    refreshToken: AuthUser!
+    login(email: String!, password: String!): AuthUser!
   }
 
   extend type Mutation {
-
     register(
-      name: String!,
-      lastname: String!,
-      email: String!,
+      name: String!
+      lastname: String!
+      email: String!
       password: String!
-      ): User!
+    ): AuthUser!
 
-    updateUser(
-      id: String!,
-      user: String!
-    ): Cohort!
-
+    updateUser(id: String!, user: String!): Cohort!
   }
 
   type User {
@@ -32,7 +27,7 @@ export default gql`
     inscriptionDate: String!
   }
 
-  type Auth {
+  type AuthUser {
     user: User
     token: String!
     refreshToken: String!

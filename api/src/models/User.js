@@ -49,6 +49,7 @@ const UserSchema = Schema({
     type: String,
     default: "",
   },
+  feedbacks: [{ type: Schema.Types.ObjectId, ref: "Feedback" }],
 });
 
 const User = model("User", UserSchema);
