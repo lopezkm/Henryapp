@@ -118,12 +118,12 @@ const NavBar = (theme)=>{
                   <ListItemText primary="Alumnos" />
                 </StyledMenuItem>
               </Link>
-              <Link to='/root/algomas'>
+              <Link to='/root/invite'>
                 <StyledMenuItem>
                   <ListItemIcon>
                     <HelpOutlineSharpIcon fontSize="medium" />
                   </ListItemIcon>
-                  <ListItemText primary="Algo Más a futuro" />
+                  <ListItemText primary="Invitar alumnos" />
                 </StyledMenuItem>
               </Link>
             </StyledMenu>

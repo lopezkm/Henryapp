@@ -1,14 +1,29 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client";
+import { setContext } from '@apollo/client/link/context';
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./css/landingPage.css";
 import "./css/home.css";
 
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('token');
+  return {
+    headers: {
+      ...headers,
+      Authorization: token ? `Bearer ${token}` : "",
+    }
+  }
+});
+
+const httpLink = createHttpLink({
+  uri: 'http://localhost:3001/graphql',
+});
+
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: "http://localhost:3001/graphql",
+  link: authLink.concat(httpLink),
 });
 
 ReactDOM.render(

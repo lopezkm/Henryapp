@@ -10,7 +10,6 @@ export default {
       return await User.find();
     },
     profile: async (root, args, { req }, info) => {
-      console.log(req.headers);
       let authUser = await User.findById(args.id);
       return authUser;
     },
