@@ -32,9 +32,9 @@ export default function Landing() {
             <div className='container-img-text'>
                 <div style={{display:"flex"}}>
                         <img className='image-landingPage' src={Image} />
-                    <div className='text-content'>
-                        <p>Bienvenidos a la henry app un lugar para administrar tus oficios</p>
-                    </div>
+                </div>
+                <div className='text-content'>
+                    <p>Bienvenidos a la henry app un lugar para administrar tus oficios</p>
                 </div>
                 <div className='button-container-landingPage'>
                     <Link to='/root/home'>
