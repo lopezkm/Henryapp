@@ -46,14 +46,14 @@ export default function AddStudents() {
     } else if(error) {
         console.log('ocurrió un error');
     } else {
-        console.log('ok', data);
+        console.log('ok');
         var response = data.users;
     }
 
     useEffect( () => {
         setStudents(response)
         setLoad(false)
-    }, [students])
+    })
 
     const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
@@ -105,7 +105,10 @@ export default function AddStudents() {
                     <br/>
                     <Grid item md={10}>
                         <Button
-                            type="submit"
+                            onSubmit={(e) => {
+                                e.preventDefault();
+                                
+                            }}
                             variant="contained"
                             color="primary"
                             size='large'
