@@ -2,7 +2,11 @@
 // import { registerValidate } from '../validators';
 import bcrypt from "bcrypt";
 import { User } from "../../models";
-import { getAuthUser, issueTokens } from "../../functions/auth";
+import {
+  getAuthUser,
+  issueTokens,
+  getRefreshTokenUser,
+} from "../../functions/auth";
 
 export default {
   Query: {
@@ -30,7 +34,14 @@ export default {
         ...tokens,
       };
     },
-    refreshToken: () => {},
+    refreshToken: async (root, args, { req }, info) => {
+      let authUser = getRefreshTokenUser(req, true);
+      let tokens = await issueTokens(authUser);
+      return {
+        user,
+        ...tokens,
+      };
+    },
     search: async (root, args, { req }, info) => {
       const response = await User.find({
         name: {
