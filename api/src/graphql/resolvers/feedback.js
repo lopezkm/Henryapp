@@ -1,4 +1,4 @@
-import { Feedback } from "../../models";
+import { Feedback, User } from "../../models";
 
 export default {
     Query: {
@@ -6,23 +6,31 @@ export default {
         return await Feedback.find();
       },
       feedback: async (_, args) => {
-        return await Feedback.findById(args.id);
+        const response = await Feedback.findById(args.id).populate("users");
+        return response;
       },
     },
     Mutation: {
       // Crear nuevo feedback
       createFeedback: async (root, args, { req }, info) => {
-        // verificar que el feedback no exista en la DB
-        const feedback = await Feedback.findOne({
-          id: args.id,
-        });
-  
-        if (feedback) {
-          throw new Error("El feedback ya se encuentra registrada.");
-        }
-        // El registro es valido
-        const newFeedback = await Feedback.create(args);
-        return newFeedback;
+
+        const {average, softSkill, tecnicalSkill, leader, userId} = args;
+
+        const newFeedback = await Feedback.create({average, softSkill, tecnicalSkill, leader});
+        console.log(newFeedback);
+        
+        const user = await User.findByIdAndUpdate(
+          userId,
+          {
+            $push: { feedbacks: newFeedback._id },
+          },
+          {
+            new: true,
+            useFindAndModify: true,
+          }
+        );
+        return user;
+
       },
       deleteFeedback: async (root, args, { req }, info) => {
         // verificar que el feedback exista en la DB
@@ -36,6 +44,6 @@ export default {
         }
         // Si no existe
         throw new Error("El feedback que deseas eliminar no se encuentra en la base de datos.");
-      }
+      },
     },
   };
