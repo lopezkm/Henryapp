@@ -2,15 +2,16 @@
 // import { registerValidate } from '../validators';
 import bcrypt from "bcrypt";
 import { User } from "../../models";
-import { issueTokens } from "../../functions/auth";
+import { getAuthUser, issueTokens } from "../../functions/auth";
 
 export default {
   Query: {
     users: async () => {
       return await User.find({});
     },
-    profile: async (_, args) => {
-      return await User.findById(args.id);
+    profile: async (root, args, { req }, info) => {
+      let authUser = await User.findById(args.id);
+      return authUser;
     },
     login: async (root, args, { req }, info) => {
       const user = await User.findOne({
@@ -25,7 +26,7 @@ export default {
       }
       let tokens = await issueTokens(user);
       return {
-        user: user,
+        user,
         ...tokens,
       };
     },

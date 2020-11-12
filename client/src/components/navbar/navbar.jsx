@@ -118,12 +118,12 @@ const NavBar = (theme)=>{
                   <ListItemText onClick={handleClose} primary="Alumnos" />
                 </StyledMenuItem>
               </Link>
-              <Link to='/root/algomas'>
+              <Link to='/root/invite'>
                 <StyledMenuItem>
                   <ListItemIcon>
                     <HelpOutlineSharpIcon fontSize="medium" />
                   </ListItemIcon>
-                  <ListItemText onClick={handleClose} primary="Algo Más a futuro" />
+                  <ListItemText onClick={handleClose} primary="Invitar alumnos" />
                 </StyledMenuItem>
               </Link>
             </StyledMenu>

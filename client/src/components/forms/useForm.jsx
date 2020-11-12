@@ -13,14 +13,15 @@ const useForm = (callback, validate) => {
     });
   };
 
+
   const handleSubmit = event => {
     event.preventDefault();
-    setErrors(validate(values));
-    setIsSubmitting(true);
-  };
+   const valid = setErrors(validate(values));
+   setIsSubmitting(true)
+ };
 
   useEffect(() => {
-    if (Object.keys(errors).length === 0 && isSubmitting) {
+    if (Object.keys(errors).length === 0 && isSubmitting ) {
       callback();
     }
   }, [errors]);

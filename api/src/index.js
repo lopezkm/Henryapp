@@ -7,6 +7,7 @@ import resolvers from "./graphql/resolvers";
 import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
 import { config } from "dotenv";
+import bodyParser from "body-parser";
 config();
 
 const { APP_PORT } = process.env;
@@ -15,11 +16,15 @@ const { APP_PORT } = process.env;
 const app = express();
 // remove header
 app.disable("x-powered-by");
+app.use(bodyParser.json());
 // Servidor ApolloServer
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   introspection: true,
+  context: ({ req }) => {
+    return { req };
+  },
 });
 
 // middlewares

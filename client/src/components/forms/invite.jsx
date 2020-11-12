@@ -7,24 +7,23 @@ import Paper from '@material-ui/core/Paper';
 import {Link} from 'react-router-dom';
 import '../../css/forms.css'
 import  useForm from './useForm'
-import validate from './validateLogin'
+import validate from './validateInvite'
 import useStyleslog from './stylesLogin' //import styles
 
 
 
-export default function Login() {
- const classes = useStyleslog();
- const {  values, handleChange, handleSubmit,  errors 
- }= useForm(submit, validate);
- 
- // const [createUser, {data}] = useMutation(ADD_USER)
- 
- 
- function submit(){
- const data = values
-  console.log('enviar al back', data)
- }
- 
+export default function Invite() {
+  const classes = useStyleslog();
+  const {  values, handleChange, handleSubmit,  errors 
+   }= useForm(submit, validate);
+   
+   // const [createUser] = useMutation(CREATE_USER)
+   
+   
+   function submit(){
+   const data = values
+   console.log(data)
+   }
 
   return (
     <React.Fragment>
@@ -33,7 +32,7 @@ export default function Login() {
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <Grid item xs={12} sm={8} className={classes.form}>
           <Typography variant="h4" gutterBottom >
-        Login
+          Invite  students
       </Typography>
       <br></br>
 
@@ -52,23 +51,7 @@ export default function Login() {
             </FormControl >
             
         </Grid>
-          <br></br>
-            <Grid item xs={12} sm={8} >
-            <FormControl >
-             <InputLabel htmlFor='pass'></InputLabel>
-             <Input id="pass" 
-             name='password'
-             type='password' 
-             aria-describedby='pass-helper'
-             onChange={(e) =>handleChange(e)}
-             value={values.password}/>
-            {errors.password && <p className='error'>{errors.password}</p>}
-             <FormHelperText id='pass-helper'>Password</FormHelperText>
-             </FormControl >
-
-            </Grid>
-      
-
+ 
       <Grid item md={10}>
       <Button
                   type="submit"
@@ -83,12 +66,7 @@ export default function Login() {
          <br></br>
 
          <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2"className={classes.button}>
-                  Forgot password?
-                </Link>
-              </Grid>
-              </Grid>
+         </Grid>
          </Grid>
          </Grid>
 

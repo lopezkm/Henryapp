@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -7,49 +7,90 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import PermIdentityIcon from '@material-ui/icons/PermIdentity';
+import { gql } from '@apollo/client';
+import { useQuery, useLazyQuery } from '@apollo/client';
 
+
+const GET_USER_PROFILE = gql `
+query Profile($id: String!) {
+  profile(id: $id)
+  {
+    name
+    email
+    lastname
+    inscriptionDate
+  }
+}`;
 
 export default function Student() {
+  const [id, setId] = useState("");
 
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-      marginTop:90,
-    },
-    paper: {
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      color: theme.palette.common.white,
-      backgroundColor: theme.palette.secondary.main,
-      fontSize: 30,
-      '&:hover': {
-        color: theme.palette.common.black,
-        backgroundColor: theme.palette.primary.main,
+  const {loading, error, data , fetchMore} = useQuery(GET_USER_PROFILE, {
+    variables: { id : id } 
+  });
+
+  if (loading) {
+    console.log("loading")
+  } if (error) {
+    console.log("error")
+  } if (data) {
+    console.log(data);
+  }
+
+      const useStyles = makeStyles((theme) => ({
+        root: {
+          flexGrow: 1,
+          marginTop:90,
+        },
+        paper: {
+          padding: theme.spacing(2),
+          textAlign: 'center',
+          color: theme.palette.common.white,
+          backgroundColor: theme.palette.secondary.main,
+          fontSize: 30,
+          '&:hover': {
+            color: theme.palette.common.black,
+            backgroundColor: theme.palette.primary.main,
+          }
+        },
+        rootS: {
+          padding: '2px 4px',
+          display: 'flex',
+          alignItems: 'center',
+          width: 400,
+          marginBottom: 30,
+        },
+        input: {
+          marginLeft: theme.spacing(1),
+          flex: 1,
+        },
+        iconButton: {
+          padding: 10,
+        },
+        divider: {
+          height: 28,
+          margin: 4,
+        },
+      }));    
+      
+      const classes = useStyles();
+
+  
+      const UserProfile= async (e)=> {
+        e.preventDefault();
+        setId(e.target.value);
+
+        const response = await fetchMore({
+          variables: {
+            id: id
+          }
+        });
+
+        console.log(response)
       }
-    },
-    rootS: {
-      padding: '2px 4px',
-      display: 'flex',
-      alignItems: 'center',
-      width: 400,
-      marginBottom: 30,
-    },
-    input: {
-      marginLeft: theme.spacing(1),
-      flex: 1,
-    },
-    iconButton: {
-      padding: 10,
-    },
-    divider: {
-      height: 28,
-      margin: 4,
-    },
-  }));    
+      
 
-  const classes = useStyles();
-
-  return (
+      return (
     <div className={classes.root}>
       <Paper component="form" className={classes.rootS}>
         <IconButton className={classes.iconButton} aria-label="menu">
@@ -58,10 +99,20 @@ export default function Student() {
         <Divider className={classes.divider} orientation="vertical" />
         <InputBase
           className={classes.input}
-          placeholder="Buscar alumno"
+          placeholder="Buscar alumno por ID"
           inputProps={{ 'aria-label': 'Buscar alumno' }}
-        />
-        <IconButton type="submit" className={classes.iconButton} aria-label="search">
+          onChange={event =>{
+            setId(event.target.value);
+          }}
+          value= {id}
+          />
+        <IconButton  
+        className={classes.iconButton} 
+        aria-label="search"
+        onClick= {(e)=>{
+          UserProfile(e); 
+        }}
+        >
           <SearchIcon />
         </IconButton>
       </Paper>
