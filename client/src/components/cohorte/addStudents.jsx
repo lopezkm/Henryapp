@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -11,6 +11,7 @@ import { Grid, Button } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import useStyleslog from '../forms/stylesLogin.jsx';
+import {gql, useQuery, useMutation} from '@apollo/client';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,12 +24,38 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function AddStudents() {
-  const classesE = useStyleslog();
-  const classes = useStyles();
-  const [checked, setChecked] = useState([]);
+const STUDENTS = gql`
+    {users {
+            name
+            lastname
+        }
+    }`;
 
-  const handleToggle = (value) => () => {
+export default function AddStudents() {
+    const classesE = useStyleslog();
+    const classes = useStyles();
+    const [checked, setChecked] = useState([]);
+    const [students, setStudents] = useState([]);
+    const [load, setLoad] = useState(true);
+    const {loading, error, data} = useQuery(STUDENTS);
+    console.log(checked);
+    console.log(checked[0]);
+
+    if(loading) {
+        console.log('cargando');
+    } else if(error) {
+        console.log('ocurrió un error');
+    } else {
+        console.log('ok', data);
+        var response = data.users;
+    }
+
+    useEffect( () => {
+        setStudents(response)
+        setLoad(false)
+    }, [students])
+
+    const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
 
@@ -52,22 +79,22 @@ export default function AddStudents() {
                     </Typography>
                     <br></br>
                     <List dense className={classes.root}>
-                        {[0, 1, 2, 3].map((value) => {
-                            const labelId = `checkbox-list-secondary-label-${value}`;
+                        {students && students.map((student, i) => {
+                            const labelId = `checkbox-list-secondary-label-${i}`;
                             return (
-                            <ListItem key={value} button>
+                            <ListItem key={i} button>
                                 <ListItemAvatar>
                                 <Avatar
-                                    alt={`Avatar n°${value + 1}`}
-                                    src={`/static/images/avatar/${value + 1}.jpg`}
+                                    alt={`Avatar n°${i + 1}`}
+                                    src={`/static/images/avatar/${i + 1}.jpg`}
                                 />
                                 </ListItemAvatar>
-                                <ListItemText id={labelId} primary={`Alumno ${value + 1}`} />
+                                <ListItemText id={labelId} primary={`Alumno: ${student.name}, ${student.lastname}`} />
                                 <ListItemSecondaryAction>
                                 <Checkbox
                                     edge="end"
-                                    onChange={handleToggle(value)}
-                                    checked={checked.indexOf(value) !== -1}
+                                    onChange={handleToggle(student)}
+                                    checked={checked.indexOf(student) !== -1}
                                     inputProps={{ 'aria-labelledby': labelId }}
                                 />
                                 </ListItemSecondaryAction>

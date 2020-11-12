@@ -19,7 +19,7 @@ $font: Averin Heavy;
   width: 28em;
   height: 15em;
   margin: auto;
-  margin-top: 3em;
+  margin-top: -3em;
 }
 
 .titulo-landingPage {
@@ -39,7 +39,8 @@ $font: Averin Heavy;
 
 .text-content {
   max-width: 100%;
-  text-align: justify;
+  text-align: center;
+  font-size: 2em;
 }
 
 .button-landingPage {

@@ -7,15 +7,13 @@
   background-color: black; }
 
 .container-img-text {
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
   width: 28em;
   height: 15em;
   margin: auto;
-  margin-top: 3em; }
+  margin-top: -3em; }
 
 .titulo-landingPage {
   font-size: 30px;
@@ -31,7 +29,8 @@
 
 .text-content {
   max-width: 100%;
-  text-align: justify; }
+  text-align: center;
+  font-size: 2em; }
 
 .button-landingPage {
   border: #ffff01 solid 2px;
