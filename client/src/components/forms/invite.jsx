@@ -21,9 +21,9 @@ import { gql, useQuery } from "@apollo/client";
 
 const SEND_EMAIL = gql` 
 sendEmail(
- $email: String!,
- $url: String!
- ){
+  email: String!
+  url: String!
+  ){
   sendEmail (email: $email,  url:"http://localhost:3000/register"){
     mailed
 }`;
