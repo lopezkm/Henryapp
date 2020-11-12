@@ -107,7 +107,7 @@ const NavBar = (theme)=>{
                   <ListItemIcon>
                     <FilterNoneSharpIcon fontSize="medium" />
                   </ListItemIcon>
-                  <ListItemText primary="Cohortes" />
+                  <ListItemText onClick={handleClose} primary="Cohortes" />
                 </StyledMenuItem>
               </Link>
               <Link to='/root/student'>
@@ -115,7 +115,7 @@ const NavBar = (theme)=>{
                   <ListItemIcon>
                     <AccountBoxSharpIcon fontSize="medium" />
                   </ListItemIcon>
-                  <ListItemText primary="Alumnos" />
+                  <ListItemText onClick={handleClose} primary="Alumnos" />
                 </StyledMenuItem>
               </Link>
               <Link to='/root/invite'>
@@ -123,7 +123,7 @@ const NavBar = (theme)=>{
                   <ListItemIcon>
                     <HelpOutlineSharpIcon fontSize="medium" />
                   </ListItemIcon>
-                  <ListItemText primary="Invitar alumnos" />
+                  <ListItemText onClick={handleClose} primary="Invitar alumnos" />
                 </StyledMenuItem>
               </Link>
             </StyledMenu>
