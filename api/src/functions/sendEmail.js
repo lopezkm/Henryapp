@@ -4,8 +4,8 @@ export const sendEmail = async (dest, redirUrl) => {
   let transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "henrycomicsarg@gmail.com",
-      pass: "ecommerceg8",
+      user: "soyhenryapp@gmail.com",
+      pass: "alumnos123",
     },
   });
 
@@ -13,7 +13,7 @@ export const sendEmail = async (dest, redirUrl) => {
     from: "henrycomicsarg@gmail.com",
     to: dest,
     subject: "HenryApp",
-    html: `<a href="${redirUrl}>Register<a/>"`,
+    html: `<a href="${redirUrl}">Register<a/>`,
   };
 
   transporter.sendMail(mailOptions, (err, data) => {

@@ -9,20 +9,36 @@ import '../../css/forms.css'
 import  useForm from './useForm'
 import validate from './validateInvite'
 import useStyleslog from './stylesLogin' //import styles
+import { gql, useQuery } from '@apollo/client';
 
-
-
+const SEND_MAIL = gql`
+query sendEmail(
+  $email: String!,
+  $url: String!
+){
+    sendEmail(email: $email, url: $url){  
+    mailed
+  }
+}`;
+//"http://localhost:3000/root/register"
 export default function Invite() {
   const classes = useStyleslog();
+  const { loading, error, data, fetchMore } = useQuery(SEND_MAIL,{
+    variables: { email:" " , url:"" }
+  })
   const {  values, handleChange, handleSubmit,  errors 
    }= useForm(submit, validate);
    
-   // const [createUser] = useMutation(CREATE_USER)
    
-   
-   function submit(){
-   const data = values
-   console.log(data)
+
+   async function submit(){
+    const data = values
+    console.log(data)
+    const resp  = await fetchMore( {variables: { 
+      email: values.email , 
+      url:"http://localhost:3000/root/register" }
+    })
+    console.log('mi respuesta',resp)
    }
 
   return (
