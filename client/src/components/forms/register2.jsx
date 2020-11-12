@@ -10,35 +10,50 @@ import  useForm from './useForm' //standard hooks for forms
 import validate from './validateLogin' //validations
 import useStyles from './stylesRegister' //import styles
 import { gql, useMutation } from '@apollo/client';
+import { useHistory } from 'react-router-dom';
 
 
- const CREATE_USER= gql ` mutation register(
-                                          $name: String,
-                                          $lastname: String,
-                                          $email: String,
-                                          $password: String
-                                          ){
-                                          register ( name: $name, lastname: $lastname, email: $email, password: $password){
-                                          _id
-                                          email
-                                         }
-                                         }
-                                         ` ;
+ const CREATE_USER= gql` 
+ mutation register(
+  $name: String!,
+  $lastname: String!,
+  $email: String!,
+  $password: String!
+  ){
+  register (name: $name, lastname: $lastname, email: $email, password: $password){
+    user {
+      _id
+      email
+    }
+    token
+    refreshToken
+  }
+ }`;
 
 
 export default function Register2() {
  const classes = useStyles();
  const {  values, handleChange, handleSubmit,  errors 
-}= useForm(submit, validate);
+  } = useForm(submit, validate);
 
-const [createUser] = useMutation(CREATE_USER)
+// const [createUser] = useMutation(CREATE_USER)
+const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
 
+const history = useHistory();
 
-function submit(){
-const {name, lastname, email, password} = values
-// console.log(typeof(data.name), data.lastname,data.email, data.password)
-createUser(name, lastname, email, password )
-}
+async function submit() {
+  console.log("Estoy en el submit")
+// const {name, lastname, email, password} = values
+
+const response = await createUser({
+  variables: {
+    ...values
+  }
+})
+
+history.push('/root/login');
+
+};
 
   return (
     <React.Fragment>
@@ -62,7 +77,7 @@ createUser(name, lastname, email, password )
                 value={values.name}/>
                 {errors.name && <p className='error'>{errors.name}</p>}
                 <FormHelperText id='fn-helper'>First name</FormHelperText>
-                </FormControl >
+                </FormControl>
             </Grid>
 
             <Grid item xs={12} sm={10}>
@@ -76,7 +91,7 @@ createUser(name, lastname, email, password )
                 value={values.lastname}/>
                 {errors.lastname && <p className='error'>{errors.lastname}</p>}
                 <FormHelperText id='ln-helper'>Last name</FormHelperText>
-                </FormControl >
+                </FormControl>
             </Grid>
       <Grid item xs={12} sm={8} >
         
