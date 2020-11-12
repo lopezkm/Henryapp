@@ -15,11 +15,16 @@ import useStyleslog from './stylesLogin' //import styles
 export default function Login() {
  const classes = useStyleslog();
  const {  values, handleChange, handleSubmit,  errors 
-}= useForm(submit, validate);
-
-function submit(){
-  console.log('submitted')
-}
+ }= useForm(submit, validate);
+ 
+ // const [createUser, {data}] = useMutation(ADD_USER)
+ 
+ 
+ function submit(){
+ const data = values
+  console.log('enviar al back', data)
+ }
+ 
 
   return (
     <React.Fragment>
