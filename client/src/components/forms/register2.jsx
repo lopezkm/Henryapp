@@ -10,7 +10,7 @@ import  useForm from './useForm' //standard hooks for forms
 import validate from './validateLogin' //validations
 import useStyles from './stylesRegister' //import styles
 import { gql, useMutation } from '@apollo/client';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
  const CREATE_USER= gql` 
