@@ -20,11 +20,11 @@ export const getAuthUser = async (request, requiresAuth =false) =>{
 
     const header = request.headers.authorization;
     if(header){
-        const token = jwt.verify(header, APP_SECRET)
+        const token = jwt.verify(header, APP_REFRESH_SECRET)
         let authUser = await User.findById(token.id)
         if(!authUser){
             throw new AuthenticationError(
-                "token invalido, autenticación fallida"
+                "Refresh token invalido, autenticación fallida"
             ) 
         }
         if(requiresAuth){
@@ -42,3 +42,25 @@ export const getAuthUser = async (request, requiresAuth =false) =>{
         }; 
     }
 }
+export const getRefreshTokenUser = async (request) => {
+  const header = request.headers.refreshToken;
+  if (header) {
+    const token = jwt.verify(header, APP_SECRET);
+    let authUser = await User.findById(token.id);
+    if (!authUser) {
+      throw new AuthenticationError("token invalido, autenticación fallida");
+    }
+    if (requiresAuth) {
+      return user;
+    }
+    return {
+      user: {
+        _id: "",
+        name: "",
+        lastname: "",
+        email: "",
+        insciptionDate: "",
+      },
+    };
+  }
+};
