@@ -14,7 +14,7 @@ export default gql`
       teoriaLink: String!
     ): Lecture!
     deleteLecture(name: String!): Lecture!
-    updateLecture(_id: String!
+    updateLecture(id: String!
       name: String
       embededLink: String
       description: String

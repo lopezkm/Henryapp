@@ -40,18 +40,18 @@ export default {
     //Modificar una lecture
     updateLecture: async (root, args, { req }, info) => {
       // verificar que la lecture exista
-      const updatedLecture = await Lecture.findByIdAndUpdate({id: args.id}, {$set: 
+      const updatedLecture = await Lecture.findByIdAndUpdate(args.id, {$set: 
         {name: args.name,
         embededLink: args.embededLink,
         description: args.description,
-        teoriaLink: args.teoriaLink}
-      });
+        teoriaLink: args.teoriaLink }
+      }, {new: true});
 
       if (updatedLecture) {
         return updatedLecture;
       }
       //si no existe
-      throw new Error ("Error al actualizar la lecture");
+      throw new Error ("No se pudo modificar la lecture");
     },
   },
 };
