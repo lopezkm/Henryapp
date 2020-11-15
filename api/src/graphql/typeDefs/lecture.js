@@ -13,6 +13,12 @@ export default gql`
       description: String!
       teoriaLink: String!
     ): Lecture!
+    deleteLecture(name: String!): Lecture!
+    updateLecture(_id: String!
+      name: String
+      embededLink: String
+      description: String
+      teoriaLink: String): Lecture!
   }
 
   type Lecture {
