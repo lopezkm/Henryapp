@@ -1,0 +1,1 @@
+export { CohortApollo as Cohort } from './apollo';
