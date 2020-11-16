@@ -43,7 +43,6 @@ export default function Cohorte() {
     const [load, setLoad] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
 
-    let name, startingDate;
 
     const[creatCohorte] = useMutation(CREATE_COHORTE);
 
@@ -63,7 +62,6 @@ export default function Cohorte() {
         console.log('ok', data);
         var response = data.cohorts;
     }
-
 
     useEffect( () => {
         setCohortes(response)
