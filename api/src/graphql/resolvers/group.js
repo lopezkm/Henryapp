@@ -84,7 +84,7 @@ export default {
     
         return updatedGroup;
       } else {
-        throw new Error(
+                  throw new Error(
             "Usuario no autenticado."
           )
       }

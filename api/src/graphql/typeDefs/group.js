@@ -7,7 +7,7 @@ export default gql`
   }
 
   extend type Mutation {
-    createGroup(name: String!, startingDate: String!): Group!
+    createGroup(name: String!, meetLink: String!): Group!
     addUserToGroup(groupId: String!, userId: String!): Group!
     removeUserFromGroup(groupId: String! , userId: String!): Group!
   }
