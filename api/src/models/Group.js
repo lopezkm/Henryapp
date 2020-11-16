@@ -6,15 +6,10 @@ const GroupSchema = Schema({
     required: true,
     unique: true,
   },
-
-  students: [{ type: Schema.Types.ObjectId, ref: "User" }],
-
-  pm: [{ type: Schema.Types.ObjectId, ref: "User" }],
-
   meetLink: {
-    type: String,   // Link para ir a reunión en meet
-  },
-  //sprint: [{ type: Schema.Types.ObjectId, ref: "Sprint" }],
+      type: String,   // Link para ir a reunión en meet
+    },
+  users: [{ type: Schema.Types.ObjectId, ref: "User" }],
 });
 
 const Group = model("Group", GroupSchema);
