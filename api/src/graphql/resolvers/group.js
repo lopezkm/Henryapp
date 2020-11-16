@@ -3,17 +3,28 @@ import { getAuthUser } from '../../functions/auth';
 
 export default {
   Query: {
-    group: async () => {
-      return await Group.find({});
+    group: async (root, args, { req }) => {
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate){
+        return await Group.find({});
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
     },
-    groups: async (_, args) => {
-      const response = await Group.findById(args.id).populate("users");
-      return response;
+    groups: async (_, args, { req }) => {
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate){
+        const response = await Group.findById(args.id).populate("users");
+        return response;
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
     },
   },
   Mutation: {
     // Crear nuevo grupo
     createGroup: async (root, args, { req }, info) => {
+      
       const isAuthenticate = await getAuthUser(req);
 
       if (isAuthenticate) {
