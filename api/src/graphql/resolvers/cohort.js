@@ -3,14 +3,12 @@ import { getAuthUser } from '../../functions/auth';
 
 export default {
   Query: {
-    cohorts: async (_, _, { req }) => {
+    cohorts: async (_, { req }) => {
       const isAuthenticate = await getAuthUser(req);
       if (isAuthenticate){
         return await Cohort.find({});
       } else {
-        throw new Error(
-          "Usuario no autenticado."
-        )
+        throw new Error("Usuario no autenticado.");
       }
     },
     cohort: async (_, args, { req }) => {
@@ -19,9 +17,7 @@ export default {
         const response = await Cohort.findById(args.id).populate("users");
         return response;
       } else {
-        throw new Error(
-          "Usuario no autenticado."
-        )
+        throw new Error("Usuario no autenticado.");
       }
     },
   },
@@ -44,7 +40,7 @@ export default {
         return newCohort;
       } else {
         // return 'Usuario no autorizado.';
-        throw new Error("Usuario no autenticado.")
+        throw new Error("Usuario no autenticado.");
       }
     },
 
