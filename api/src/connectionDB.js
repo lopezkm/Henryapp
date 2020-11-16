@@ -49,7 +49,7 @@ const connectDB = () => {
     });
 
     // Borrar datos de las colecciones.
-    cleanCollections();
+    // cleanCollections();
   });
 
   // Escuchar desconexion mongoose
