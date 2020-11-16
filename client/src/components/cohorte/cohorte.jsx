@@ -22,30 +22,51 @@ import MenuItem from '@material-ui/core/MenuItem';
 import {gql, useQuery, useMutation} from '@apollo/client';
 
 const COHORTES = gql`
-    {cohorts {
-            name
-            startingDate
+    query cohorts {cohorts {
+        name
+        startingDate
         }
     }`;
 
 const CREATE_COHORTE = gql`
-    mutation creatCohorte ($name: String!, $startingDate: String!) {
-        creatCohorte(name: $name, startingDate: $startingDate) {
+    mutation createCohort ($name: String!, $startingDate: String!) {
+        createCohort(name: $name, startingDate: $startingDate) {
             name
             startingDate
+            _id
         }
     }`;
 
 export default function Cohorte() {
     
-    const {loading, error, data} = useQuery(COHORTES);
+    const {loading, error, data, fetchMore} = useQuery(COHORTES);
     const [cohortes, setCohortes] = useState([]);
     const [load, setLoad] = useState(true);
     const [anchorEl, setAnchorEl] = useState(null);
+    const [newCohorte, setNewCohorte] = useState({
+        name:"",
+        startingDate:""
+    })
+
+<<<<<<< HEAD
+=======
+    const[ createCohort, res ] = useMutation(CREATE_COHORTE);
+>>>>>>> 4938144bc0b4d54dafbe0423aba386ba2d585d81
+
+    const handleChange = (e) => {
+        setNewCohorte({
+            ...newCohorte,
+            [e.target.name]: e.target.value
+        })
+    }
 
 
-    const[creatCohorte] = useMutation(CREATE_COHORTE);
-
+    async function submit(e) {
+        e.preventDefault();
+        const response1 = await createCohort({variables: 
+        {...newCohorte}});
+    }
+ 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -54,19 +75,22 @@ export default function Cohorte() {
         setAnchorEl(null);
     };
 
+    let response;
+
     if(loading) {
         console.log('cargando');
     } else if(error) {
         console.log('ocurrió un error');
     } else {
-        console.log('ok', data);
-        var response = data.cohorts;
+        console.log('ok');
+        response = data.cohorts;
     }
 
     useEffect( () => {
-        setCohortes(response)
-        setLoad(false)
-    }, [cohortes])
+        setCohortes(response);
+        setLoad(false);
+    })
+
     
     const useStyles = makeStyles((theme) => ({
         containerRoot: {
@@ -158,11 +182,10 @@ export default function Cohorte() {
                     onClose={handleClose}
                     >
                     <MenuItem >
-                        <form  onSubmit={(e) => { e.preventDefault();
-                        creatCohorte({variables: {name: name.value, startingDate: startingDate.value}})}} noValidate autoComplete="off">
-                            <TextField ref={ value => name = value} id="name" label="Nombre Cohorte" />
+                        <form  onSubmit={(e) => { submit(e)}} noValidate autoComplete="off">
+                            <TextField name="name" onChange={(e) => {handleChange(e)}} id="name" label="Nombre Cohorte" />
                             <br/>
-                            <TextField ref={ value => startingDate = value}  id="startingDate" label="Inicio (dd/mm/aaaa)" />
+                            <TextField type='date' name="startingDate" onChange={(e) => {handleChange(e)}}  id="startingDate" label="Inicio (dd/mm/aaaa)" InputLabelProps={{ shrink: true }}/>
                             <Button type="submit" onClick={handleClose} color="secondary" className={classes.ButtonMod}>Crear Cohorte</Button>
                         </form>
                     </MenuItem>
@@ -204,7 +227,7 @@ export default function Cohorte() {
                                     </IconButton> Alumnos: 175
                                 </Typography>
                             </CardContent>
-                            <CardContent>
+                            {/* <CardContent>
                             <Divider className={classes.dividerH} orientation="horizontal" />
                                 <Typography component="p" className={classes.footer}>
                                     SPRINTS 
@@ -242,7 +265,7 @@ export default function Cohorte() {
                                     PF - <LibraryBooksIcon />
                                 </IconButton>
                                 <Divider className={classes.dividerH} orientation="horizontal" />
-                            </CardActions>
+                            </CardActions> */}
                             <CardActions>
                                 <Link to="/root/addStudents">
                                     <Button variant="contained" color="secondary" className={classes.ButtonMod}>

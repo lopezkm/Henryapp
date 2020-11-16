@@ -2,12 +2,16 @@
 // import { registerValidate } from '../validators';
 import bcrypt from "bcrypt";
 import { User } from "../../models";
-import { getAuthUser, issueTokens } from "../../functions/auth";
+import {
+  getAuthUser,
+  issueTokens,
+  getRefreshTokenUser,
+} from "../../functions/auth";
 
 export default {
   Query: {
     users: async () => {
-      return await User.find({});
+      return await User.find();
     },
     profile: async (root, args, { req }, info) => {
       let authUser = await User.findById(args.id);
@@ -30,7 +34,22 @@ export default {
         ...tokens,
       };
     },
-    refreshToken: () => {},
+    refreshToken: async (root, args, { req }, info) => {
+      let authUser = getRefreshTokenUser(req, true);
+      let tokens = await issueTokens(authUser);
+      return {
+        user,
+        ...tokens,
+      };
+    },
+    search: async (root, args, { req }, info) => {
+      const response = await User.find({
+        name: {
+          $regex: new RegExp(args.query),
+        },
+      });
+      return response;
+    },
   },
   Mutation: {
     // Crear nuevo usuario
