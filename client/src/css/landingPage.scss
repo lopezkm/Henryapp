@@ -13,14 +13,13 @@ $font: Averin Heavy;
 }
 
 .container-img-text {
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
   width: 28em;
   height: 15em;
   margin: auto;
+  margin-top: -3em;
 }
 
 .titulo-landingPage {
@@ -33,22 +32,24 @@ $font: Averin Heavy;
 }
 
 .image-landingPage {
- width: 41%;
+ width: 100%;
  padding: 20px;
+ border-radius: 25%;
 }
 
 .text-content {
   max-width: 100%;
-  text-align: justify;
+  text-align: center;
+  font-size: 2em;
 }
 
 .button-landingPage {
   border:$yellow solid 2px;
   background-color:$yellow;
-  border-radius:3px;
-  padding: 5px;
-  width: 8em;
-  font-size:'1.4em';
+  border-radius:10px;
+  width: 20em;
+  height: 5em;
+  font-size: 1em;
   cursor: pointer;
 }
 

@@ -13,6 +13,8 @@ import alumno from './alumno.jpg';
 const useStyles = makeStyles((theme)=>({
     root: {
       maxWidth: 345,
+      marginTop:100,
+      marginLeft:20
     },
     media: {
       height: 140,

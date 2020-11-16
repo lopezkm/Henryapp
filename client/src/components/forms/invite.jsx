@@ -18,32 +18,52 @@ import useForm from "./useForm";
 import validate from "./validateInvite";
 import useStyleslog from "./stylesLogin"; //import styles
 import { gql, useQuery } from "@apollo/client";
+import Swal from "sweetalert2";
 
-const SEND_EMAIL = gql` 
-sendEmail(
-  email: String!
-  url: String!
-  ){
-  sendEmail (email: $email,  url:"http://localhost:3000/register"){
-    mailed
-}`;
+const Toast = Swal.mixin({
+  toast: true,
+  position: "start-end",
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener("mouseenter", Swal.stopTimer);
+    toast.addEventListener("mouseleave", Swal.resumeTimer);
+  },
+});
 
+const SEND_MAIL = gql`
+  query sendEmail($email: String!, $url: String!) {
+    sendEmail(email: $email, url: $url) {
+      mailed
+    }
+  }
+`;
+//"http://localhost:3000/root/register"
 export default function Invite() {
   const classes = useStyleslog();
+  const { loading, error, data, fetchMore } = useQuery(SEND_MAIL, {
+    variables: { email: " ", url: "" },
+  });
   const { values, handleChange, handleSubmit, errors } = useForm(
     submit,
     validate
   );
 
-  const [sendEmail, { data, loading, error }] = useQuery(SEND_EMAIL);
-
   async function submit() {
+    const data = values;
     console.log(data);
-
-    const response = await sendEmail({
+    const resp = await fetchMore({
       variables: {
         email: values.email,
+        url: "http://localhost:3000/root/register",
       },
+    });
+    console.log("mi respuesta", resp);
+
+    Toast.fire({
+      icon: "success",
+      title: "Se envio un mensaje al correo electronico.",
     });
   }
 

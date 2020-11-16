@@ -10,6 +10,20 @@ import useForm from './useForm'
 import validate from './validateLogin'
 import useStyleslog from './stylesLogin' //import styles
 import { gql, useQuery } from '@apollo/client';
+import { useHistory } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
+const Toast = Swal.mixin({
+  toast: true,
+  position: 'start-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer)
+    toast.addEventListener('mouseleave', Swal.resumeTimer)
+  }
+})
 
 const LOGIN_USER = gql` 
 query login(
@@ -32,7 +46,7 @@ export default function Login() {
   const { values, handleChange, handleSubmit, errors
   } = useForm(submit, validate);
 
-  // const [createUser, {data}] = useMutation(ADD_USER)
+  const history = useHistory();
 
   const { loading, error, data, fetchMore } = useQuery(LOGIN_USER, {
     variables: {
@@ -45,14 +59,25 @@ export default function Login() {
   async function submit() {
     const { email, password } = values
 
-    const response = await fetchMore({
+    const { data } = await fetchMore({
       variables: {
         email,
         password
       }
     });
 
-    console.log(response);
+    const token = data.login.token;
+    localStorage.setItem('token', token);
+
+    Toast.fire({
+      icon: 'success',
+      title: '¡Gracias por volver!'
+    })
+
+    history.push('/root/home');
+
+    // console.log(response);
+
   }
 
 

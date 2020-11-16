@@ -1,4 +1,5 @@
 import { Cohort, User } from "../../models";
+import { getAuthUser } from '../../functions/auth';
 
 export default {
   Query: {
@@ -13,17 +14,26 @@ export default {
   Mutation: {
     // Crear nuevo usuario
     createCohort: async (root, args, { req }, info) => {
-      // verificar que el user no exista en la DB
-      const cohort = await Cohort.findOne({
-        name: args.name,
-      });
+      const isAuthenticate = await getAuthUser(req);
 
-      if (cohort) {
-        throw new Error("Este Cohorte ya se encuentra registrado.");
+      if (isAuthenticate) {
+        // verificar que el user no exista en la DB
+        const cohort = await Cohort.findOne({
+          name: args.name,
+        });
+
+        if (cohort) {
+          throw new Error("Este Cohorte ya se encuentra registrado.");
+        }
+        // El registro es valido
+        const newCohort = await Cohort.create(args);
+        return newCohort;
+      } else {
+        // return 'Usuario no autorizado.';
+        throw new Error(
+          "Usuario no autenticado."
+        )
       }
-      // El registro es valido
-      const newCohort = await Cohort.create(args);
-      return newCohort;
     },
 
     addUserToCohort: async (root, { userId, cohortId }, { req }, info) => {

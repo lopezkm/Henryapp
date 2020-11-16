@@ -41,6 +41,7 @@ export default function Student() {
         root: {
           flexGrow: 1,
           marginTop:90,
+          marginBottom: 20,
         },
         paper: {
           padding: theme.spacing(2),
