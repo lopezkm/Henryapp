@@ -182,7 +182,7 @@ export default function Cohorte() {
                         <form  onSubmit={(e) => { submit(e)}} noValidate autoComplete="off">
                             <TextField name="name" onChange={(e) => {handleChange(e)}} id="name" label="Nombre Cohorte" />
                             <br/>
-                            <TextField name="startingDate" onChange={(e) => {handleChange(e)}}  id="startingDate" label="Inicio (dd/mm/aaaa)" />
+                            <TextField type='date' name="startingDate" onChange={(e) => {handleChange(e)}}  id="startingDate" label="Inicio (dd/mm/aaaa)" InputLabelProps={{ shrink: true }}/>
                             <Button type="submit" onClick={handleClose} color="secondary" className={classes.ButtonMod}>Crear Cohorte</Button>
                         </form>
                     </MenuItem>
@@ -224,7 +224,7 @@ export default function Cohorte() {
                                     </IconButton> Alumnos: 175
                                 </Typography>
                             </CardContent>
-                            <CardContent>
+                            {/* <CardContent>
                             <Divider className={classes.dividerH} orientation="horizontal" />
                                 <Typography component="p" className={classes.footer}>
                                     SPRINTS 
@@ -262,7 +262,7 @@ export default function Cohorte() {
                                     PF - <LibraryBooksIcon />
                                 </IconButton>
                                 <Divider className={classes.dividerH} orientation="horizontal" />
-                            </CardActions>
+                            </CardActions> */}
                             <CardActions>
                                 <Link to="/root/addStudents">
                                     <Button variant="contained" color="secondary" className={classes.ButtonMod}>
