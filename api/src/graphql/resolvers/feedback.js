@@ -26,22 +26,23 @@ export default {
       createFeedback: async (root, args, { req }, info) => {
 
         const {average, softSkill, tecnicalSkill, leader, userId} = args;
-
-        const newFeedback = await Feedback.create({average, softSkill, tecnicalSkill, leader});
-        console.log(newFeedback);
-        
-        const user = await User.findByIdAndUpdate(
-          userId,
-          {
-            $push: { feedbacks: newFeedback._id },
-          },
-          {
-            new: true,
-            useFindAndModify: true,
-          }
-        );
-        return user;
-
+        const isAuthenticate = await getAuthUser(req);
+        if (isAuthenticate){
+          const newFeedback = await Feedback.create({average, softSkill, tecnicalSkill, leader});
+          const user = await User.findByIdAndUpdate(
+            userId,
+            {
+              $push: { feedbacks: newFeedback._id },
+            },
+            {
+              new: true,
+              useFindAndModify: true,
+            }
+          );
+          return user;
+        } else {
+          throw new Error("Usuario no autenticado.");
+        }
       },
       deleteFeedback: async (root, args, { req }, info) => {
         // verificar que el feedback exista en la DB

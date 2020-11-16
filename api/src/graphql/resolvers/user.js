@@ -10,12 +10,22 @@ import {
 
 export default {
   Query: {
-    users: async () => {
-      return await User.find();
+    users: async (root, args, { req }) => {
+      /* const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate){ */
+        return await User.find();
+      /* } else {
+        throw new Error("Usuario no autenticado.");
+      } */
     },
     profile: async (root, args, { req }, info) => {
-      let authUser = await User.findById(args.id);
-      return authUser;
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate){
+        let authUser = await User.findById(args.id);
+        return authUser;
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
     },
     login: async (root, args, { req }, info) => {
       const user = await User.findOne({
@@ -43,12 +53,17 @@ export default {
       };
     },
     search: async (root, args, { req }, info) => {
-      const response = await User.find({
-        name: {
-          $regex: new RegExp(args.query),
-        },
-      });
-      return response;
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate){
+        const response = await User.find({
+          name: {
+            $regex: new RegExp(args.query),
+          },
+        });
+        return response;
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
     },
   },
   Mutation: {
@@ -74,17 +89,22 @@ export default {
     },
 
     updateUser: async (root, args, { req }, info) => {
-      // verificar que el user no exista en la DB
-      const userUpdated = await User.findByIdAndUpdate(args.id, {
-        // ...args.user
-        // TODO: terminar funcion
-      });
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate){ 
+        // verificar que el user no exista en la DB
+        const userUpdated = await User.findByIdAndUpdate(args.id, {$set: 
+          {name: args.name,
+          lastname: args.lastname,
+          email: args.email}
+        }, {new: true});
 
-      if (!user) {
-        throw new Error("Error al actualizar el usuario.");
-      }
-
-      return userUpdated;
+        if (!userUpdated) {
+          throw new Error("Error al actualizar el usuario.");
+        }
+        return userUpdated;
+      } else {
+        throw new Error("Usuario no autenticado.");
+      } 
     },
   },
 };

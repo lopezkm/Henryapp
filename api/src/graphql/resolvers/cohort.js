@@ -3,13 +3,13 @@ import { getAuthUser } from '../../functions/auth';
 
 export default {
   Query: {
-    cohorts: async (_, { req }) => {
+    cohorts: async (_, args, { req }) => {
       const isAuthenticate = await getAuthUser(req);
-      if (isAuthenticate){
+      if (isAuthenticate){ 
         return await Cohort.find({});
       } else {
         throw new Error("Usuario no autenticado.");
-      }
+      } 
     },
     cohort: async (_, args, { req }) => {
       const isAuthenticate = await getAuthUser(req);

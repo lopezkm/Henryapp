@@ -17,7 +17,10 @@ export default gql`
       password: String!
     ): AuthUser!
 
-    updateUser(id: String!, user: String!): Cohort!
+    updateUser(id: String!
+      name: String
+      lastname: String
+      email: String): User!
   }
 
   type User {
