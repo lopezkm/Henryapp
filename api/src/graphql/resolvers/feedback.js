@@ -24,7 +24,6 @@ export default {
     Mutation: {
       // Crear nuevo feedback
       createFeedback: async (root, args, { req }, info) => {
-
         const {average, softSkill, tecnicalSkill, leader, userId} = args;
         const isAuthenticate = await getAuthUser(req);
         if (isAuthenticate){
@@ -46,10 +45,14 @@ export default {
       },
       deleteFeedback: async (root, args, { req }, info) => {
         // verificar que el feedback exista en la DB
-        const feedback = await Feedback.findOne({
-          id: args.id,
-        });
-  
+        const isAuthenticate = await getAuthUser(req);
+        if (isAuthenticate){
+          const feedback = await Feedback.findOne({
+            id: args.id,
+          });
+        } else {
+          throw new Error("Usuario no autenticado.");
+        }
         if (feedback) {
             const deleteFeedback = await Feedback.delete(args);
             return deleteFeedback;
