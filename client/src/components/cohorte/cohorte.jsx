@@ -48,10 +48,7 @@ export default function Cohorte() {
         startingDate:""
     })
 
-<<<<<<< HEAD
-=======
     const[ createCohort, res ] = useMutation(CREATE_COHORTE);
->>>>>>> 4938144bc0b4d54dafbe0423aba386ba2d585d81
 
     const handleChange = (e) => {
         setNewCohorte({
