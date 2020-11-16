@@ -3,21 +3,35 @@ import { getAuthUser } from '../../functions/auth';
 
 export default {
   Query: {
-    cohorts: async () => {
-      return await Cohort.find({});
+    cohorts: async (_, _, { req }) => {
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate){
+        return await Cohort.find({});
+      } else {
+        throw new Error(
+          "Usuario no autenticado."
+        )
+      }
     },
-    cohort: async (_, args) => {
-      const response = await Cohort.findById(args.id).populate("users");
-      return response;
+    cohort: async (_, args, { req }) => {
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate){
+        const response = await Cohort.findById(args.id).populate("users");
+        return response;
+      } else {
+        throw new Error(
+          "Usuario no autenticado."
+        )
+      }
     },
   },
   Mutation: {
-    // Crear nuevo usuario
+    // Crear nuevo cohorte
     createCohort: async (root, args, { req }, info) => {
       const isAuthenticate = await getAuthUser(req);
 
       if (isAuthenticate) {
-        // verificar que el user no exista en la DB
+        // verificar que el cohorte no exista en la DB
         const cohort = await Cohort.findOne({
           name: args.name,
         });
@@ -30,47 +44,52 @@ export default {
         return newCohort;
       } else {
         // return 'Usuario no autorizado.';
-        throw new Error(
-          "Usuario no autenticado."
-        )
+        throw new Error("Usuario no autenticado.")
       }
     },
 
     addUserToCohort: async (root, { userId, cohortId }, { req }, info) => {
-      const newCohort = await Cohort.findByIdAndUpdate(
-        cohortId,
-        {
-          $push: { users: userId },
-        },
-        {
-          new: true,
-          useFindAndModify: true,
-        }
-      );
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate){
+        const newCohort = await Cohort.findByIdAndUpdate(
+          cohortId,
+          {
+            $push: { users: userId },
+          },
+          {
+            new: true,
+            useFindAndModify: true,
+          }
+        );
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
       if (!newCohort) {
         // throw new Error("Ups algo salió mal.");
         return false;
       }
-
       return newCohort;
     },
 
     removeUserFromCohort: async (root, { userId, cohortId }, { req }, info) => {
-      const updatedCohort = await Cohort.findByIdAndUpdate(
-        cohortId,
-        {
-          $pull: { users: userId },
-        },
-        {
-          new: true,
-          useFindAndModify: true,
-        }
-      );
-
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate){
+        const updatedCohort = await Cohort.findByIdAndUpdate(
+          cohortId,
+          {
+            $pull: { users: userId },
+          },
+          {
+            new: true,
+            useFindAndModify: true,
+          }
+        );
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
       if (!updatedCohort) {
         return false;
       }
-
       return updatedCohort;
     },
   },

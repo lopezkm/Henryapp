@@ -1,4 +1,5 @@
 import { Feedback, User } from "../../models";
+import { getAuthUser } from '../../functions/auth';
 
 export default {
     Query: {
@@ -47,3 +48,7 @@ export default {
       },
     },
   };
+
+  const isAuthenticate = await getAuthUser(req);
+
+      if (isAuthenticate)
