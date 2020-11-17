@@ -97,29 +97,23 @@ export default {
     },
 
     updateUser: async (root, args, { req }, info) => {
-      const isAuthenticate = await getAuthUser(req);
-      if (isAuthenticate) {
-        // verificar que el user no exista en la DB
-        const userUpdated = await User.findByIdAndUpdate(
-          args.id,
-          {
-            $set: {
-              name: args.name,
-              lastname: args.lastname,
-              email: args.email,
-              picture: args.picture,
-              title: args.title,
-              shortDescription: args.shortDescription,
-              description: args.description,
-              gitHubLink: args.gitHubLink,
-              link: args.link,
-            },
+      //  const isAuthenticate = await getAuthUser(req);
+      // if (isAuthenticate) {
+      // verificar que el user no exista en la DB
+      const userId = args.id;
+      delete args.id;
+      const userUpdated = await User.findByIdAndUpdate(
+        userId,
+        {
+          $set: {
+            ...args,
           },
-          { new: true }
-        );
-      } else {
-        throw new Error("Usuario no autenticado.");
-      }
+        },
+        { new: true }
+      );
+      //    } else {
+      //      throw new Error("Usuario no autenticado.");
+      //   }
       if (!userUpdated) {
         throw new Error("Error al actualizar el usuario.");
       }
