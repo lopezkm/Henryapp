@@ -31,17 +31,16 @@ export default {
         const cohort = await Cohort.findOne({
           name: args.name,
         });
-
-        if (cohort) {
-          throw new Error("Este Cohorte ya se encuentra registrado.");
-        }
-        // El registro es valido
-        const newCohort = await Cohort.create(args);
-        return newCohort;
       } else {
         // return 'Usuario no autorizado.';
         throw new Error("Usuario no autenticado.");
       }
+      if (cohort) {
+        throw new Error("Este Cohorte ya se encuentra registrado.");
+      }
+      // El registro es valido
+      const newCohort = await Cohort.create(args);
+      return newCohort;
     },
 
     addUserToCohort: async (root, { userId, cohortId }, { req }, info) => {

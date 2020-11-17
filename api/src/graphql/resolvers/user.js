@@ -12,7 +12,7 @@ export default {
   Query: {
     users: async (root, args, { req }) => {
       const isAuthenticate = await getAuthUser(req);
-      if (isAuthenticate){ */
+      if (isAuthenticate){
         return await User.find();
       } else {
         throw new Error("Usuario no autenticado.");
