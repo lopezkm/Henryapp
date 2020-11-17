@@ -7,6 +7,7 @@ export default gql`
     refreshToken: AuthUser!
     login(email: String!, password: String!): AuthUser!
     search(query: String!): [User!]
+    getUserByRol(rol: String!): [User!]
   }
 
   extend type Mutation {
@@ -17,10 +18,14 @@ export default gql`
       password: String!
     ): AuthUser!
 
-    updateUser(id: String!
+    updateUser(
+      id: String!
       name: String
       lastname: String
-      email: String): User!
+      email: String
+    ): User!
+
+    changeRol(id: String!, rol: String!): User!
   }
 
   type User {
@@ -29,6 +34,7 @@ export default gql`
     lastname: String!
     email: String!
     inscriptionDate: String!
+    rol: String!
   }
 
   type AuthUser {

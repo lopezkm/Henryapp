@@ -6,9 +6,9 @@ import { User } from "../models";
 import { AuthenticationError } from "apollo-server-express";
 
 //prettier-ignore
-export const issueTokens = async ({ username, email, name, _id }) => {
-  let token = await jwt.sign({ username, email, name, _id }, APP_SECRET, { expiresIn: 60 * 60 * 24 });
-  let refreshToken = await jwt.sign({ username, email, name, _id }, APP_REFRESH_SECRET, { expiresIn: 60 * 60 * 24 });
+export const issueTokens = async ({ username, email, name, _id, rol }) => {
+  let token = await jwt.sign({ username, email, name, _id, rol }, APP_SECRET, { expiresIn: 60 * 60 * 24 });
+  let refreshToken = await jwt.sign({ username, email, name, _id, rol }, APP_REFRESH_SECRET, { expiresIn: 60 * 60 * 24 });
   return {
     token,
     refreshToken,
@@ -29,11 +29,6 @@ export const getAuthUser = async (request, requiresAuth = false) => {
     if (!authUser) {
       return false;
     }
-
-    // if (requiresAuth) {
-    //   return user;
-    // }
-
     return true;
   } else {
     return false;
