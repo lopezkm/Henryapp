@@ -3,7 +3,7 @@ import { getAuthUser } from '../../functions/auth';
 
 export default {
     Query: {
-      feedbacks: async (_, { req }) => {
+      feedbacks: async (_, args, { req }) => {
         const isAuthenticate = await getAuthUser(req);
         if (isAuthenticate){
           return await Feedback.find();
