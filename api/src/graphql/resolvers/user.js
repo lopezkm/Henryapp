@@ -12,7 +12,7 @@ export default {
   Query: {
     users: async (root, args, { req }) => {
       const isAuthenticate = await getAuthUser(req);
-      if (isAuthenticate){
+      if (isAuthenticate) {
         return await User.find();
       } else {
         throw new Error("Usuario no autenticado.");
@@ -20,7 +20,7 @@ export default {
     },
     profile: async (root, args, { req }, info) => {
       const isAuthenticate = await getAuthUser(req);
-      if (isAuthenticate){
+      if (isAuthenticate) {
         let authUser = await User.findById(args.id);
         return authUser;
       } else {
@@ -58,7 +58,7 @@ export default {
     },
     search: async (root, args, { req }, info) => {
       const isAuthenticate = await getAuthUser(req);
-      if (isAuthenticate){
+      if (isAuthenticate) {
         const response = await User.find({
           name: {
             $regex: new RegExp(args.query),
@@ -98,16 +98,28 @@ export default {
 
     updateUser: async (root, args, { req }, info) => {
       const isAuthenticate = await getAuthUser(req);
-      if (isAuthenticate){ 
+      if (isAuthenticate) {
         // verificar que el user no exista en la DB
-        const userUpdated = await User.findByIdAndUpdate(args.id, {$set: 
-          {name: args.name,
-          lastname: args.lastname,
-          email: args.email}
-        }, {new: true});
+        const userUpdated = await User.findByIdAndUpdate(
+          args.id,
+          {
+            $set: {
+              name: args.name,
+              lastname: args.lastname,
+              email: args.email,
+              picture: args.picture,
+              title: args.title,
+              shortDescription: args.shortDescription,
+              description: args.description,
+              gitHubLink: args.gitHubLink,
+              link: args.link,
+            },
+          },
+          { new: true }
+        );
       } else {
         throw new Error("Usuario no autenticado.");
-      } 
+      }
       if (!userUpdated) {
         throw new Error("Error al actualizar el usuario.");
       }

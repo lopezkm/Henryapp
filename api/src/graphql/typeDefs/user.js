@@ -23,6 +23,12 @@ export default gql`
       name: String
       lastname: String
       email: String
+      picture: String
+      title: String
+      shortDescription: String
+      description: String
+      gitHubLink: String
+      link: String
     ): User!
 
     changeRol(id: String!, rol: String!): User!
@@ -35,6 +41,12 @@ export default gql`
     email: String!
     inscriptionDate: String!
     rol: String!
+    picture: String
+    title: String
+    shortDescription: String
+    description: String
+    gitHubLink: String
+    link: String
   }
 
   type AuthUser {
