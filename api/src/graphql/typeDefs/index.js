@@ -5,5 +5,6 @@ import cohort from "./cohort";
 import sprint from "./sprint";
 import feedback from "./feedback";
 import sendEmails from "./sendEmails";
+import group from "./group";
 
-export default [root, user, lecture, cohort, feedback, sprint, sendEmails];
+export default [root, user, lecture, cohort, feedback, sprint, sendEmails, group];

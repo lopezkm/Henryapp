@@ -23,6 +23,15 @@ const UserSchema = Schema({
     required: false,
     default: "",
   },
+  title: {
+    type: String,
+    default: "",
+  },
+  shortDescription: {
+    type: String,
+    required: false,
+    default: "",
+  },
   description: {
     type: String,
     required: false,
@@ -50,6 +59,12 @@ const UserSchema = Schema({
     default: "",
   },
   feedbacks: [{ type: Schema.Types.ObjectId, ref: "Feedback" }],
+
+  //implementación del Rol
+  rol: {
+    type: String,
+    default: "Estudiante",
+  },
 });
 
 const User = model("User", UserSchema);
