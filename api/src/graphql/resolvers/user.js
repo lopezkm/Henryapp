@@ -7,13 +7,19 @@ import {
   issueTokens,
   getRefreshTokenUser,
 } from "../../functions/auth";
+import { myRolIs } from "../../functions/myRolIs";
 
 export default {
   Query: {
     users: async (root, args, { req }) => {
       const isAuthenticate = await getAuthUser(req);
+      const isPM = await myRolIs(req);
       if (isAuthenticate) {
-        return await User.find();
+        if (isPM.first) {
+          return await User.find();
+        } else {
+          throw new Error("Usuario no es PM, ni Administrador.");
+        }  
       } else {
         throw new Error("Usuario no autenticado.");
       }
@@ -81,11 +87,9 @@ export default {
       const user = await User.findOne({
         email: args.email,
       });
-
       if (user) {
         throw new Error("El email ya se encuentra registrado.");
       }
-
       // El registro es valido
       args.password = await bcrypt.hash(args.password, 10);
       const newUser = await User.create(args);
@@ -95,7 +99,6 @@ export default {
         ...tokens,
       };
     },
-
     updateUser: async (root, args, { req }, info) => {
       //  const isAuthenticate = await getAuthUser(req);
       // if (isAuthenticate) {
@@ -121,20 +124,30 @@ export default {
     },
 
     changeRol: async (_, args, { req }, info) => {
-      const newUserRol = await User.findByIdAndUpdate(
-        args.id,
-        {
-          rol: args.rol,
-        },
-        {
-          new: true,
-          useFindAndModify: false,
+      const isAuthenticate = await getAuthUser(req);
+      const isAdmin = await myRolIs(req);
+      if (isAuthenticate) {
+        if (isAdmin.first && isAdmin.second) {
+          const newUserRol = await User.findByIdAndUpdate(
+            args.id,
+            {
+              rol: args.rol,
+            },
+            {
+              new: true,
+              useFindAndModify: false,
+            }
+          );
+          if (!newUserRol) {
+            throw new Error("Error el usuario no existe");
+          }
+          return newUserRol;
+        } else {
+          throw new Error("Usuario no es Administrador.");
         }
-      );
-      if (!newUserRol) {
-        throw new Error("Error el usuario no existe");
-      }
-      return newUserRol;
+    } else {
+      throw new Error("Usuario no autenticado.");
+    }
     },
   },
 };

@@ -19,7 +19,6 @@ export default {
     },
     cohort: async (_, args, { req }) => {
       const isAuthenticate = await getAuthUser(req);
-
       if (isAuthenticate) {
         const response = await Cohort.findById(args.id).populate("users");
         return response;
@@ -44,6 +43,7 @@ export default {
           if (cohort) {
             throw new Error("Este Cohorte ya se encuentra registrado.");
           }
+
           // El registro es valido
           const newCohort = await Cohort.create(args);
           return newCohort;
@@ -54,12 +54,7 @@ export default {
         // return 'Usuario no autorizado.';
         throw new Error("Usuario no autenticado.");
       }
-      if (cohort) {
-        throw new Error("Este Cohorte ya se encuentra registrado.");
-      }
-      // El registro es valido
-      const newCohort = await Cohort.create(args);
-      return newCohort;
+      
     },
 
     addUserToCohort: async (root, { userId, cohortId }, { req }, info) => {
@@ -77,17 +72,17 @@ export default {
               useFindAndModify: true,
             }
           );
+          if (!newCohort) {
+            // throw new Error("Ups algo salió mal.");
+            return false;
+          }
+          return newCohort;
         } else {
           throw new Error("Usuario no es Administrador.");
         }
       } else {
         throw new Error("Usuario no autenticado.");
       }
-      if (!newCohort) {
-        // throw new Error("Ups algo salió mal.");
-        return false;
-      }
-      return newCohort;
     },
 
     removeUserFromCohort: async (root, { userId, cohortId }, { req }, info) => {
@@ -105,16 +100,16 @@ export default {
               useFindAndModify: true,
             }
           );
+          if (!updatedCohort) {
+            return false;
+          }
+          return updatedCohort;
         } else {
           throw new Error("Usuario no es Administrador.");
         }
       } else {
         throw new Error("Usuario no autenticado.");
       }
-      if (!updatedCohort) {
-        return false;
-      }
-      return updatedCohort;
     },
   },
 };
