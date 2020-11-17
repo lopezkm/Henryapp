@@ -23,6 +23,15 @@ const UserSchema = Schema({
     required: false,
     default: "",
   },
+  title: {
+    type: String,
+    default: "",
+  },
+  shortDescription: {
+    type: String,
+    required: false,
+    default: "",
+  },
   description: {
     type: String,
     required: false,
