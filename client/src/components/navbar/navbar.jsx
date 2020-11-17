@@ -169,9 +169,13 @@ const NavBar = (theme) => {
             open={open}
             onClose={handleCloseLogin}
           >
-            <Link to="/root/profile" className={classes.tittle1}>
-              <MenuItem onClick={handleCloseLogin}>Profile</MenuItem>
-            </Link>
+            <MenuItem onClick={handleCloseLogin}>
+              {/*AGREGAR text-decoration: none;
+color: black;*/}
+              <Link to="/root/profile" className={classes.tittle1}>
+                Profile
+              </Link>
+            </MenuItem>
             <MenuItem onClick={handleCloseLogin}>My account</MenuItem>
           </Menu>
         </Toolbar>

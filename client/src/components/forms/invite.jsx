@@ -76,7 +76,16 @@ export default function Invite() {
         style={{ margin: "0px" }}
       >
         <Grid item xs={false} sm={4} md={7} className={classes.image} />
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={5}
+          component={Paper}
+          elevation={6}
+          square
+          className={classes.center}
+        >
           <Grid item xs={12} sm={8} className={classes.form}>
             <Typography variant="h4" gutterBottom>
               Invite students

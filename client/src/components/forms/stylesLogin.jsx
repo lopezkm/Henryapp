@@ -11,6 +11,7 @@ const useStyleslog = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
     height: "90vh",
     backgroundColor: theme.palette.secondary.main,
+    maxWidth: "100%",
   },
   button: {
     marginTop: theme.spacing(8),
@@ -31,6 +32,10 @@ const useStyleslog = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+  },
+  center: {
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   form: {
     width: "80%",
