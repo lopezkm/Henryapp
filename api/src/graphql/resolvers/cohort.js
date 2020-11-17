@@ -19,14 +19,10 @@ export default {
     },
     cohort: async (_, args, { req }) => {
       const isAuthenticate = await getAuthUser(req);
-      const isPM = await myRolIs(req);
+
       if (isAuthenticate) {
-        if (isPM.first) {
-          const response = await Cohort.findById(args.id).populate("users");
-          return response;
-        } else {
-          throw new Error("Usuario no es Administrador.");
-        }
+        const response = await Cohort.findById(args.id).populate("users");
+        return response;
       } else {
         throw new Error("Usuario no autenticado.");
       }
