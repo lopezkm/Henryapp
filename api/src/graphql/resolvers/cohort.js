@@ -6,17 +6,27 @@ export default {
   Query: {
     cohorts: async (_, args, { req }) => {
       const isAuthenticate = await getAuthUser(req);
+      const isAdmin = await myRolIs(req);
       if (isAuthenticate) {
-        return await Cohort.find({});
+        if (isAdmin.first && isAdmin.second) {
+          return await Cohort.find({});
+        } else {
+          throw new Error("Usuario no es Administrador.");
+        }
       } else {
         throw new Error("Usuario no autenticado.");
       }
     },
     cohort: async (_, args, { req }) => {
       const isAuthenticate = await getAuthUser(req);
+      const isPM = await myRolIs(req);
       if (isAuthenticate) {
-        const response = await Cohort.findById(args.id).populate("users");
-        return response;
+        if (isPM.first) {
+          const response = await Cohort.findById(args.id).populate("users");
+          return response;
+        } else {
+          throw new Error("Usuario no es Administrador.");
+        }
       } else {
         throw new Error("Usuario no autenticado.");
       }
@@ -58,17 +68,22 @@ export default {
 
     addUserToCohort: async (root, { userId, cohortId }, { req }, info) => {
       const isAuthenticate = await getAuthUser(req);
+      const isAdmin = await myRolIs(req);
       if (isAuthenticate) {
-        const newCohort = await Cohort.findByIdAndUpdate(
-          cohortId,
-          {
-            $push: { users: userId },
-          },
-          {
-            new: true,
-            useFindAndModify: true,
-          }
-        );
+        if (isAdmin.first && isAdmin.second) {
+          const newCohort = await Cohort.findByIdAndUpdate(
+            cohortId,
+            {
+              $push: { users: userId },
+            },
+            {
+              new: true,
+              useFindAndModify: true,
+            }
+          );
+        } else {
+          throw new Error("Usuario no es Administrador.");
+        }
       } else {
         throw new Error("Usuario no autenticado.");
       }
@@ -81,17 +96,22 @@ export default {
 
     removeUserFromCohort: async (root, { userId, cohortId }, { req }, info) => {
       const isAuthenticate = await getAuthUser(req);
+      const isAdmin = await myRolIs(req);
       if (isAuthenticate) {
-        const updatedCohort = await Cohort.findByIdAndUpdate(
-          cohortId,
-          {
-            $pull: { users: userId },
-          },
-          {
-            new: true,
-            useFindAndModify: true,
-          }
-        );
+        if (isAdmin.first && isAdmin.second) {
+          const updatedCohort = await Cohort.findByIdAndUpdate(
+            cohortId,
+            {
+              $pull: { users: userId },
+            },
+            {
+              new: true,
+              useFindAndModify: true,
+            }
+          );
+        } else {
+          throw new Error("Usuario no es Administrador.");
+        }
       } else {
         throw new Error("Usuario no autenticado.");
       }
