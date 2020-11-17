@@ -45,12 +45,16 @@ export default {
       };
     },
     refreshToken: async (root, args, { req }, info) => {
-      let authUser = getRefreshTokenUser(req, true);
-      let tokens = await issueTokens(authUser);
-      return {
-        user,
-        ...tokens,
-      };
+      let authUser = getAuthUser(req, true);
+      if (authUser) {
+        let tokens = await issueTokens(authUser);
+        return {
+          user,
+          ...tokens,
+        };
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
     },
     search: async (root, args, { req }, info) => {
       const isAuthenticate = await getAuthUser(req);
@@ -64,6 +68,10 @@ export default {
       } else {
         throw new Error("Usuario no autenticado.");
       }
+    },
+    getUserByRol: async (_, args, { req }, __) => {
+      const response = await User.find({ rol: args.rol });
+      return response;
     },
   },
   Mutation: {
@@ -104,6 +112,23 @@ export default {
         throw new Error("Error al actualizar el usuario.");
       }
       return userUpdated;
+    },
+
+    changeRol: async (_, args, { req }, info) => {
+      const newUserRol = await User.findByIdAndUpdate(
+        args.id,
+        {
+          rol: args.rol,
+        },
+        {
+          new: true,
+          useFindAndModify: false,
+        }
+      );
+      if (!newUserRol) {
+        throw new Error("Error el usuario no existe");
+      }
+      return newUserRol;
     },
   },
 };
