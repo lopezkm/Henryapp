@@ -13,6 +13,7 @@ import Student from "./components/students/students.jsx";
 import { Cohort } from "./components/containers/cohort";
 import Invite from "./components/forms/invite.jsx";
 import AddStudents from "./components/cohorte/addStudents.jsx";
+import UserProfile2 from "./components/container-profile/components/views";
 
 const theme = createMuiTheme({
   palette: {
@@ -28,7 +29,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <div className="ppal" style={{ minHeight: "calc(100vh - 130px)" }}>
+        <div
+          className="ppal"
+          style={{
+            minHeight: "calc(100vh - 130px)",
+          }}
+        >
           <Route exact path="/" render={() => <LandingPage />} />
           <Route path="/root" render={() => <NavBar />} />
           <Route
@@ -36,13 +42,20 @@ function App() {
             path="/root/userprofile"
             render={() => <UserProfile />}
           />
+          <Route exact path="/root/profile" render={() => <UserProfile2 />} />
+          <Route exact path="/root/profilee" render={() => <UserProfile />} />
+
           <Route exact path="/root/home" render={() => <Home />} />
           <Route exact path="/root/student" render={() => <Student />} />
           <Route exact path="/root/register" render={() => <Register2 />} />
           <Route exact path="/root/login" render={() => <Login />} />
           <Route exact path="/root/invite" render={() => <Invite />} />
           <Route exact path="/root/cohorte" render={() => <Cohort />} />
-          <Route exact path="/root/addStudents" render={() => <AddStudents />} />
+          <Route
+            exact
+            path="/root/addStudents"
+            render={() => <AddStudents />}
+          />
         </div>
         <Route path="/root" render={() => <Footer />} />
       </Router>

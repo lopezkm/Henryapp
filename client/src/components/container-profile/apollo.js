@@ -7,16 +7,17 @@ import Autorenew from "@material-ui/icons/Autorenew";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { useStyles } from "./components/styles";
 
-const GET_COHORTS = gql`
-  query cohorts {
-    cohorts {
+const GET_PROFILE = gql`
+  query profile {
+    profile {
       name
-      startingDate
+      lastname
+      email
     }
   }
 `;
 
-const CREATE_COHORT = gql`
+const MODIFY_PROFILE = gql`
   mutation createCohort($name: String!, $startingDate: String!) {
     createCohort(name: $name, startingDate: $startingDate) {
       name
@@ -26,11 +27,11 @@ const CREATE_COHORT = gql`
   }
 `;
 
-export const CohortApollo = () => {
+export const ProfileApollo = () => {
   const classes = useStyles();
-  const { loading, error, data } = useQuery(GET_COHORTS);
+  const { loading, error, data } = useQuery(GET_PROFILE);
 
-  const [createCohortMutation] = useMutation(CREATE_COHORT, {
+  const [createCohortMutation] = useMutation(MODIFY_PROFILE, {
     update: (cache, { data: { createCohort } }) => {
       cache.modify({
         fields: {

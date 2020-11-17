@@ -1,30 +1,37 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import { Button, IconButton, makeStyles, Toolbar, Menu, MenuItem } from '@material-ui/core'
-import {AppBar, ListItemIcon, ListItemText } from '@material-ui/core'
-import MenuIcon from '@material-ui/icons/Menu';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-import AccountBoxSharpIcon from '@material-ui/icons/AccountBoxSharp';
-import FilterNoneSharpIcon from '@material-ui/icons/FilterNoneSharp';
-import HelpOutlineSharpIcon from '@material-ui/icons/HelpOutlineSharp';
-import Logo from '../home/images/logoHenry.jpeg';
-import { withStyles } from '@material-ui/core/styles';
+import React from "react";
+import { Link } from "react-router-dom";
+import {
+  Button,
+  IconButton,
+  makeStyles,
+  Toolbar,
+  Menu,
+  MenuItem,
+} from "@material-ui/core";
+import { AppBar, ListItemIcon, ListItemText } from "@material-ui/core";
+import MenuIcon from "@material-ui/icons/Menu";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+import AccountBoxSharpIcon from "@material-ui/icons/AccountBoxSharp";
+import FilterNoneSharpIcon from "@material-ui/icons/FilterNoneSharp";
+import HelpOutlineSharpIcon from "@material-ui/icons/HelpOutlineSharp";
+import Logo from "../home/images/logoHenry.jpeg";
+import { withStyles } from "@material-ui/core/styles";
 
 const StyledMenu = withStyles({
   paper: {
-    border: '1px solid #d3d4d5',
+    border: "1px solid #d3d4d5",
   },
 })((props) => (
   <Menu
     elevation={0}
     getContentAnchorEl={null}
     anchorOrigin={{
-      vertical: 'bottom',
-      horizontal: 'center',
+      vertical: "bottom",
+      horizontal: "center",
     }}
     transformOrigin={{
-      vertical: 'top',
-      horizontal: 'center',
+      vertical: "top",
+      horizontal: "center",
     }}
     {...props}
   />
@@ -32,119 +39,149 @@ const StyledMenu = withStyles({
 
 const StyledMenuItem = withStyles((theme) => ({
   root: {
-    '&:focus': {
+    "&:focus": {
       backgroundColor: theme.palette.primary.main,
-      '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
+      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
         color: theme.palette.common.black,
       },
     },
   },
 }))(MenuItem);
 
-
 const useStyles = makeStyles((theme) => ({
-    tittle1: {
-      flexGrow: 1,
-    },
-    }));
+  tittle1: {
+    flexGrow: 1,
+  },
+}));
 
+const NavBar = (theme) => {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorElP, setAnchorElP] = React.useState(null);
+  const open = Boolean(anchorEl);
 
-const NavBar = (theme)=>{
-    const classes= useStyles()
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [anchorElP, setAnchorElP] = React.useState(null);
-    const open = Boolean(anchorEl);
+  const [abrir, setAbrir] = React.useState(false);
 
-    const [abrir, setAbrir] = React.useState(false);
+  const handleDrawerOpen = () => {
+    setAbrir(true);
+  };
 
-    const handleDrawerOpen = () => {
-      setAbrir(true);
-    };
-  
-    const handleDrawerClose = () => {
-      setAbrir(false);
-    };
-    const handleMenu = (event) => {
-        setAnchorEl(event.currentTarget);
-      };
+  const handleDrawerClose = () => {
+    setAbrir(false);
+  };
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-    const handleClick = (event) => {
-      setAnchorElP(event.currentTarget);
-    };
-  
-    const handleClose = () => {
-      setAnchorElP(null);
-    };
+  const handleClick = (event) => {
+    setAnchorElP(event.currentTarget);
+  };
 
-    return(
-      <div>              
-        <AppBar className='navbar'> 
-          <Toolbar>
-            <IconButton>
-              <MenuIcon/>
-            </IconButton>
-            <Link to= '/root/home'  className={classes.tittle1}>
-              <img src={Logo} alt='Logo-Henry'style={{ width: "60px", height: "60px", paddingTop:'5px'}}/>
+  const handleClose = () => {
+    setAnchorElP(null);
+  };
+
+  const handleCloseLogin = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <div>
+      <AppBar className="navbar">
+        <Toolbar>
+          <IconButton>
+            <MenuIcon />
+          </IconButton>
+          <Link to="/root/home" className={classes.tittle1}>
+            <img
+              src={Logo}
+              alt="Logo-Henry"
+              style={{ width: "60px", height: "60px", paddingTop: "5px" }}
+            />
+          </Link>
+          <Button
+            aria-controls="customized-menu"
+            aria-haspopup="true"
+            variant="contained"
+            color="secondary"
+            onClick={handleClick}
+          >
+            Panel Admin
+          </Button>
+          <StyledMenu
+            id="customized-menu"
+            anchorEl={anchorElP}
+            keepMounted
+            open={Boolean(anchorElP)}
+            onClose={handleClose}
+          >
+            <Link to="/root/cohorte">
+              <StyledMenuItem>
+                <ListItemIcon>
+                  <FilterNoneSharpIcon fontSize="medium" />
+                </ListItemIcon>
+                <ListItemText onClick={handleClose} primary="Cohortes" />
+              </StyledMenuItem>
             </Link>
-            <Button
-              aria-controls="customized-menu"
-              aria-haspopup="true"
-              variant="contained"
-              color="secondary"
-              onClick={handleClick}
-            >
-              Panel Admin
+            <Link to="/root/student">
+              <StyledMenuItem>
+                <ListItemIcon>
+                  <AccountBoxSharpIcon fontSize="medium" />
+                </ListItemIcon>
+                <ListItemText onClick={handleClose} primary="Alumnos" />
+              </StyledMenuItem>
+            </Link>
+            <Link to="/root/invite">
+              <StyledMenuItem>
+                <ListItemIcon>
+                  <HelpOutlineSharpIcon fontSize="medium" />
+                </ListItemIcon>
+                <ListItemText onClick={handleClose} primary="Invitar alumnos" />
+              </StyledMenuItem>
+            </Link>
+          </StyledMenu>
+          <Link to="/root/login">
+            <Button variant="text" color="secondary">
+              Login
             </Button>
-            <StyledMenu
-              id="customized-menu"
-              anchorEl={anchorElP}
-              keepMounted
-              open={Boolean(anchorElP)}
-              onClose={handleClose}
-            >
-              <Link to='/root/cohorte'>
-                <StyledMenuItem>
-                  <ListItemIcon>
-                    <FilterNoneSharpIcon fontSize="medium" />
-                  </ListItemIcon>
-                  <ListItemText onClick={handleClose} primary="Cohortes" />
-                </StyledMenuItem>
+          </Link>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleMenu}
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            open={open}
+            onClose={handleCloseLogin}
+          >
+            <MenuItem onClick={handleCloseLogin}>
+              {/*AGREGAR text-decoration: none;
+color: black;*/}
+              <Link to="/root/profile" className={classes.tittle1}>
+                Profile
               </Link>
-              <Link to='/root/student'>
-                <StyledMenuItem>
-                  <ListItemIcon>
-                    <AccountBoxSharpIcon fontSize="medium" />
-                  </ListItemIcon>
-                  <ListItemText onClick={handleClose} primary="Alumnos" />
-                </StyledMenuItem>
-              </Link>
-              <Link to='/root/invite'>
-                <StyledMenuItem>
-                  <ListItemIcon>
-                    <HelpOutlineSharpIcon fontSize="medium" />
-                  </ListItemIcon>
-                  <ListItemText onClick={handleClose} primary="Invitar alumnos" />
-                </StyledMenuItem>
-              </Link>
-            </StyledMenu>
-            <Link to= '/root/login' >
-              <Button variant='text' color='secondary' >
-                Login
-              </Button>
-            </Link>
-            <IconButton
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
-                  onClick={handleMenu}
-                  color="inherit"
-                >
-                <AccountCircle />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-      </div>
-    )
-}
+            </MenuItem>
+            <MenuItem onClick={handleCloseLogin}>My account</MenuItem>
+          </Menu>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
+};
 
-export default NavBar
+export default NavBar;
