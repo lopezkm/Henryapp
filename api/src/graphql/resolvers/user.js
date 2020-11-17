@@ -13,9 +13,9 @@ export default {
   Query: {
     users: async (root, args, { req }) => {
       const isAuthenticate = await getAuthUser(req);
-      const isAdmin = await myRolIs(req);
+      const isPM = await myRolIs(req);
       if (isAuthenticate) {
-        if (isAdmin.first) {
+        if (isPM.first) {
           return await User.find();
         } else {
           throw new Error("Usuario no es PM, ni Administrador.");
