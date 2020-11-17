@@ -1,22 +1,37 @@
 import { Lecture } from "../../models";
+import { getAuthUser } from '../../functions/auth';
 
 export default {
   Query: {
-    lectures: async () => {
-      return await Lecture.find();
+    lectures: async (root, args, { req }) => {
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate){
+        return await Lecture.find();
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
     },
-    lecture: async (_, args) => {
-      return await Lecture.findById(args.id);
+    lecture: async (_, args, { req }) => {
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate){
+        return await Lecture.findById(args.id);
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
     },
   },
   Mutation: {
     // Crear nueva lecture
     createLecture: async (root, args, { req }, info) => {
       // verificar que la lecture no exista en la DB
-      const lecture = await Lecture.findOne({
-        name: args.name,
-      });
-
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate){
+        const lecture = await Lecture.findOne({
+          name: args.name,
+        });
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
       if (lecture) {
         throw new Error("La lecture ya se encuentra registrada.");
       }
@@ -27,10 +42,14 @@ export default {
     // Elimina una lecture
     deleteLecture: async (root, args, { req }, info) => {
       // Verifica que la lecture a eliminar exista
-      const lecture = await Lecture.findOneAndRemove({
-        name: args.name,
-      });
-
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate){
+        const lecture = await Lecture.findOneAndRemove({
+          name: args.name,
+        });
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
       if(lecture) {
         return lecture;
       }
@@ -40,13 +59,17 @@ export default {
     //Modificar una lecture
     updateLecture: async (root, args, { req }, info) => {
       // verificar que la lecture exista
-      const updatedLecture = await Lecture.findByIdAndUpdate(args.id, {$set: 
-        {name: args.name,
-        embededLink: args.embededLink,
-        description: args.description,
-        teoriaLink: args.teoriaLink }
-      }, {new: true});
-
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate){
+        const updatedLecture = await Lecture.findByIdAndUpdate(args.id, {$set: 
+          {name: args.name,
+          embededLink: args.embededLink,
+          description: args.description,
+          teoriaLink: args.teoriaLink }
+        }, {new: true});
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
       if (updatedLecture) {
         return updatedLecture;
       }

@@ -11,12 +11,12 @@ import {
 export default {
   Query: {
     users: async (root, args, { req }) => {
-      /* const isAuthenticate = await getAuthUser(req);
-      if (isAuthenticate){ */
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate){
         return await User.find();
-      /* } else {
+      } else {
         throw new Error("Usuario no autenticado.");
-      } */
+      }
     },
     profile: async (root, args, { req }, info) => {
       const isAuthenticate = await getAuthUser(req);
@@ -105,14 +105,13 @@ export default {
           lastname: args.lastname,
           email: args.email}
         }, {new: true});
-
-        if (!userUpdated) {
-          throw new Error("Error al actualizar el usuario.");
-        }
-        return userUpdated;
       } else {
         throw new Error("Usuario no autenticado.");
       } 
+      if (!userUpdated) {
+        throw new Error("Error al actualizar el usuario.");
+      }
+      return userUpdated;
     },
 
     changeRol: async (_, args, { req }, info) => {
