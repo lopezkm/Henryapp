@@ -38,13 +38,18 @@ const GET_PROFILE = gql`
 `;
 
 
-
-export default function UserProfile2() {
+export default ({
+  user
+}) =>{
+// export default function UserProfile2(
+//   user
+// ) {
   const { loading, error, data } = useQuery(GET_PROFILE, {
-    variables: { id : "5fb465547f9e8d71ac9c84fa" }
+    variables: { id : "5fb4c0b685ffff28d378ca1e" }
   });
 
-
+  console.log('User en views',user)
+  console.log('data.profile', data.profile)
   const classes = useStyles();
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -59,7 +64,7 @@ export default function UserProfile2() {
           <Grid container spacing={5}>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>{data.profile.name}</Paper>
+              <Paper className={fixedHeightPaper}>{data.profile && data.profile.email}</Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>FOTO</Paper>
