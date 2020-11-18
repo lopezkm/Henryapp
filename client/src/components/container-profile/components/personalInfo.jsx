@@ -14,7 +14,8 @@ import { useStyles } from "../styles";
 import TextField from "@material-ui/core/TextField";
 import CheckIcon from "@material-ui/icons/Check";
 
-export default function PersonalInfo() {
+export default function PersonalInfo({data}) {
+  console.log('mi data',data)
   const classes = useStyles();
   const [values, setValues] = useState({
     name: "",
@@ -74,7 +75,8 @@ export default function PersonalInfo() {
                   placeholder={rows[0]}
                 />
               ) : (
-                rows[0]
+                data.name
+                //rows[0]
               )}
             </TableCell>
             <TableCell className={classes.font}>
@@ -99,7 +101,8 @@ export default function PersonalInfo() {
                   value={rows[1]}
                 />
               ) : (
-                rows[1]
+                data.lastname
+                //rows[1]
               )}
             </TableCell>
             <TableCell className={classes.font}>
@@ -124,7 +127,8 @@ export default function PersonalInfo() {
                   value={rows[2]}
                 />
               ) : (
-                rows[2]
+                data.email
+                //rows[2]
               )}
             </TableCell>
             <TableCell className={classes.font}>

@@ -51,7 +51,7 @@ export default ({
   });
 
   console.log('User en views',user)
-  console.log('data.profile', data.profile)
+  //console.log('data.profile', data.profile)
   const classes = useStyles();
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -66,7 +66,7 @@ export default ({
           <Grid container spacing={6}>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>{data.profile && data.profile.email}</Paper>
+              <Paper className={fixedHeightPaper}><PersonalInfo data={data.profile}/></Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
