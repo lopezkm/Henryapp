@@ -7,12 +7,21 @@ import Autorenew from "@material-ui/icons/Autorenew";
 import Skeleton from "@material-ui/lab/Skeleton";
 import { useStyles } from "./components/styles";
 
+
 const GET_PROFILE = gql`
-  query profile {
-    profile {
+  query profile ($id: String!){
+    profile(id: $id ){
+      inscriptionDate
       name
       lastname
       email
+      rol
+      picture
+      title
+      shortDescription
+      description
+      gitHubLink
+      link
     }
   }
 `;
@@ -27,9 +36,12 @@ const MODIFY_PROFILE = gql`
   }
 `;
 
+
 export const ProfileApollo = () => {
   const classes = useStyles();
-  const { loading, error, data } = useQuery(GET_PROFILE);
+  const { loading, error, data } = useQuery(GET_PROFILE, {
+    variables: { id : "5fb465547f9e8d71ac9c84fa" }
+  });
 
   const [createCohortMutation] = useMutation(MODIFY_PROFILE, {
     update: (cache, { data: { createCohort } }) => {

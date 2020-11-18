@@ -15,9 +15,36 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { useStyles } from "../styles";
 
+import { useQuery, useMutation, gql } from "@apollo/client";
+
 const drawerWidth = 240;
 
+const GET_PROFILE = gql`
+  query profile ($id: String!){
+    profile(id: $id ){
+      inscriptionDate
+      name
+      lastname
+      email
+      rol
+      picture
+      title
+      shortDescription
+      description
+      gitHubLink
+      link
+    }
+  }
+`;
+
+
+
 export default function UserProfile2() {
+  const { loading, error, data } = useQuery(GET_PROFILE, {
+    variables: { id : "5fb465547f9e8d71ac9c84fa" }
+  });
+
+
   const classes = useStyles();
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -32,7 +59,7 @@ export default function UserProfile2() {
           <Grid container spacing={5}>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>Datos personales</Paper>
+              <Paper className={fixedHeightPaper}>{data.profile.name}</Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>FOTO</Paper>
