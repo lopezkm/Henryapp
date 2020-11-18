@@ -23,7 +23,6 @@ export default gql`
       name: String
       lastname: String
       email: String
-      picture: String
       title: String
       shortDescription: String
       description: String
