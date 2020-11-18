@@ -15,7 +15,7 @@ import TextField from "@material-ui/core/TextField";
 import CheckIcon from "@material-ui/icons/Check";
 
 export default function PersonalInfo({data}) {
-  console.log('mi data',data)
+  console.log('Mi data en Personal Info',data)
   const classes = useStyles();
   const [values, setValues] = useState({
     name: "",

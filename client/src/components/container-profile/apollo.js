@@ -3,7 +3,7 @@ import { useQuery, useMutation, gql } from "@apollo/client";
 import UserContainer  from "./container";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { useStyles } from "./components/styles";
+import { useStyles } from "./styles";
 
 
 const GET_PROFILE = gql`
@@ -41,7 +41,6 @@ export const ProfileApollo = () => {
     variables: { id : "5fb4c0b685ffff28d378ca1e" }
   });
  
-  console.log('mi data en apollo 1 ',data.profile.name)
 
   const [createCohortMutation] = useMutation(MODIFY_PROFILE, {
     update: (cache, { data: { createCohort } }) => {
