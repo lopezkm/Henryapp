@@ -61,4 +61,10 @@ export const useStyles = makeStyles((theme) => ({
   fixedHeight: {
     height: 250,
   },
+  font: {
+    fontSize: 18,
+  },
+  rowStyle: {
+    backgroundColor: "rgba(48, 47, 47)",
+  },
 }));

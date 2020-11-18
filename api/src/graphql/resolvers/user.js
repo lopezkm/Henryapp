@@ -100,27 +100,28 @@ export default {
       };
     },
     updateUser: async (root, args, { req }, info) => {
-      //  const isAuthenticate = await getAuthUser(req);
-      // if (isAuthenticate) {
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate) {
       // verificar que el user no exista en la DB
-      const userId = args.id;
-      delete args.id;
-      const userUpdated = await User.findByIdAndUpdate(
-        userId,
-        {
-          $set: {
-            ...args,
+        let header = req.headers.authorization;
+        header = header.slice(7);
+          const token = jwt.verify(header, APP_SECRET);
+          const userUpdated = await User.findByIdAndUpdate(
+          token._id,
+          {
+            $set: {
+              ...args,
+            },
           },
-        },
-        { new: true }
-      );
-      //    } else {
-      //      throw new Error("Usuario no autenticado.");
-      //   }
-      if (!userUpdated) {
-        throw new Error("Error al actualizar el usuario.");
+          { new: true }
+          );
+          if (!userUpdated) {
+            throw new Error("Error al actualizar el usuario.");
+          }
+          return userUpdated;
+      } else {
+       throw new Error("Usuario no autenticado.");
       }
-      return userUpdated;
     },
 
     changeRol: async (_, args, { req }, info) => {
@@ -145,9 +146,28 @@ export default {
         } else {
           throw new Error("Usuario no es Administrador.");
         }
-    } else {
-      throw new Error("Usuario no autenticado.");
-    }
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
+    },
+    deleteUser: async (root, args, { req }, info) => {
+      // Verifica que la lecture a eliminar exista
+      const isAuthenticate = await getAuthUser(req);
+      const isAdmin = await myRolIs(req);
+      if (isAuthenticate){
+        if (isAdmin.first && isAdmin.second) {
+          const user = await User.findByIdAndRemove(args.id);
+          if(user) {
+            return user;
+          }
+          //si no existe
+          throw new Error ('El usuario que se intenta eliminar, no existe en la base de datos');
+        } else {
+          throw new Error("Usuario no es Administrador.");
+        }
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
     },
   },
 };

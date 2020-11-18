@@ -14,6 +14,8 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { useStyles } from "../styles";
+import PersonalInfo from "./personalInfo";
+import PictureProfile from "./pictureProfile";
 
 import { useQuery, useMutation, gql } from "@apollo/client";
 
@@ -61,15 +63,17 @@ export default ({
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={5}>
+          <Grid container spacing={6}>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>{data.profile && data.profile.email}</Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>FOTO</Paper>
+              <Paper className={fixedHeightPaper}>
+                <PictureProfile />
+              </Paper>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={11}>
               <Paper className={classes.paper}>Info academica</Paper>
             </Grid>
           </Grid>
