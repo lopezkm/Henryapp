@@ -12,17 +12,17 @@ import { myRolIs } from "../../functions/myRolIs";
 export default {
   Query: {
     users: async (root, args, { req }) => {
-      const isAuthenticate = await getAuthUser(req);
-      const isPM = await myRolIs(req);
+      /* const isAuthenticate = await getAuthUser(req);
+      const isPM = await myRolIs(req); 
       if (isAuthenticate) {
-        if (isPM.first) {
+        if (isPM.first) {*/
           return await User.find();
-        } else {
+       /*  } else {
           throw new Error("Usuario no es PM, ni Administrador.");
         }  
       } else {
         throw new Error("Usuario no autenticado.");
-      }
+      } */
     },
     profile: async (root, args, { req }, info) => {
       const isAuthenticate = await getAuthUser(req);
@@ -145,9 +145,28 @@ export default {
         } else {
           throw new Error("Usuario no es Administrador.");
         }
-    } else {
-      throw new Error("Usuario no autenticado.");
-    }
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
+    },
+    deleteUser: async (root, args, { req }, info) => {
+      // Verifica que la lecture a eliminar exista
+      const isAuthenticate = await getAuthUser(req);
+      const isAdmin = await myRolIs(req);
+      if (isAuthenticate){
+        if (isAdmin.first && isAdmin.second) {
+          const user = await User.findByIdAndRemove(args.id);
+          if(user) {
+            return user;
+          }
+          //si no existe
+          throw new Error ('El usuario que se intenta eliminar, no existe en la base de datos');
+        } else {
+          throw new Error("Usuario no es Administrador.");
+        }
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
     },
   },
 };
