@@ -1,0 +1,1 @@
+export { ProfileApollo as Profile} from './apollo'
