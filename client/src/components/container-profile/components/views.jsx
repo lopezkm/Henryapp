@@ -17,7 +17,7 @@ import { useStyles } from "../styles";
 import PersonalInfo from "./personalInfo";
 import PictureProfile from "./pictureProfile";
 
-import { useQuery, useMutation, gql } from "@apollo/client";
+//import { useQuery, useMutation, gql } from "@apollo/client";
 
 const drawerWidth = 240;
 
@@ -47,6 +47,7 @@ export default ({ user }) => {
     variables: { id: "5fb562eac3c83b23c123e552" },
   });
 
+
   console.log("User en views", user);
   //console.log('data.profile', data.profile)
   const classes = useStyles();
@@ -66,6 +67,7 @@ export default ({ user }) => {
               <Paper className={fixedHeightPaper}>
                 <PersonalInfo />
               </Paper>
+
             </Grid>
             <Grid item xs={12} md={3} lg={3}>
               <Paper className={fixedHeightPaper}>
