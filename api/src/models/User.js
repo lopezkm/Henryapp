@@ -60,6 +60,8 @@ const UserSchema = Schema({
     type: String,
     default: "Estudiante",
   },
+  //implementación de subirFotos
+  picture: { type: Schema.Types.ObjectId, ref: "Picture" },
 });
 
 const User = model("User", UserSchema);
