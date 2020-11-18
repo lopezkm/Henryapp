@@ -20,7 +20,7 @@ import PictureProfile from "./pictureProfile";
 //import { useQuery, useMutation, gql } from "@apollo/client";
 
 const drawerWidth = 240;
-
+/*
 const GET_PROFILE = gql`
   query profile($id: String!) {
     profile(id: $id) {
@@ -37,16 +37,16 @@ const GET_PROFILE = gql`
       link
     }
   }
-`;
+`;*/
 
 export default ({ user }) => {
   // export default function UserProfile2(
   //   user
   // ) {
-  const { loading, error, data } = useQuery(GET_PROFILE, {
+/*  const { loading, error, data } = useQuery(GET_PROFILE, {
     variables: { id: "5fb562eac3c83b23c123e552" },
   });
-
+*/
 
   console.log("User en views", user);
   //console.log('data.profile', data.profile)
