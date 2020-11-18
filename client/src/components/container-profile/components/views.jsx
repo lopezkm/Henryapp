@@ -14,10 +14,44 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { useStyles } from "../styles";
+import PersonalInfo from "./personalInfo";
+import PictureProfile from "./pictureProfile";
+
+import { useQuery, useMutation, gql } from "@apollo/client";
 
 const drawerWidth = 240;
 
-export default function UserProfile2() {
+const GET_PROFILE = gql`
+  query profile ($id: String!){
+    profile(id: $id ){
+      inscriptionDate
+      name
+      lastname
+      email
+      rol
+      picture
+      title
+      shortDescription
+      description
+      gitHubLink
+      link
+    }
+  }
+`;
+
+
+export default ({
+  user
+}) =>{
+// export default function UserProfile2(
+//   user
+// ) {
+  const { loading, error, data } = useQuery(GET_PROFILE, {
+    variables: { id : "5fb4c0b685ffff28d378ca1e" }
+  });
+
+  console.log('User en views',user)
+  //console.log('data.profile', data.profile)
   const classes = useStyles();
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -29,15 +63,17 @@ export default function UserProfile2() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={5}>
+          <Grid container spacing={6}>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>Datos personales</Paper>
+              <Paper className={fixedHeightPaper}><PersonalInfo data={data.profile}/></Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>FOTO</Paper>
+              <Paper className={fixedHeightPaper}>
+                <PictureProfile />
+              </Paper>
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={11}>
               <Paper className={classes.paper}>Info academica</Paper>
             </Grid>
           </Grid>

@@ -23,7 +23,6 @@ export default gql`
       name: String
       lastname: String
       email: String
-      picture: String
       title: String
       shortDescription: String
       description: String
@@ -32,6 +31,8 @@ export default gql`
     ): User!
 
     changeRol(id: String!, rol: String!): User!
+    
+    deleteUser(id: String!): User!
   }
 
   type User {
