@@ -9,11 +9,14 @@ import Footer from "./components/footer/footer";
 import Register2 from "./components/forms/register2.jsx";
 import Login from "./components/forms/login.jsx";
 import UserProfile from "./components/userProfile/index.jsx";
-import Student from "./components/students/students.jsx";
+//import Student from "./components/students/students.jsx";
 import { Cohort } from "./components/containers/cohort";
+import { Student } from './components/students';
 import Invite from "./components/forms/invite.jsx";
 import AddStudents from "./components/cohorte/addStudents.jsx";
-import UserProfile2 from "./components/container-profile/components/views";
+//import UserProfile2 from "./components/container-profile/components/views";
+import { Profile } from "./components/container-profile"
+
 
 const theme = createMuiTheme({
   palette: {
@@ -42,7 +45,7 @@ function App() {
             path="/root/userprofile"
             render={() => <UserProfile />}
           />
-          <Route exact path="/root/profile" render={() => <UserProfile2 />} />
+          <Route exact path="/root/profile" render={() => <Profile />} />
           <Route exact path="/root/profilee" render={() => <UserProfile />} />
 
           <Route exact path="/root/home" render={() => <Home />} />
