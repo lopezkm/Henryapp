@@ -100,27 +100,32 @@ export default {
       };
     },
     updateUser: async (root, args, { req }, info) => {
-      //  const isAuthenticate = await getAuthUser(req);
-      // if (isAuthenticate) {
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate) {
       // verificar que el user no exista en la DB
-      const userId = args.id;
-      delete args.id;
-      const userUpdated = await User.findByIdAndUpdate(
-        userId,
-        {
-          $set: {
-            ...args,
+        let header = req.headers.authorization;
+        header = header.slice(7);
+        if (header) {
+          const token = jwt.verify(header, APP_SECRET);
+          const userUpdated = await User.findByIdAndUpdate(
+          token._id,
+          {
+            $set: {
+              ...args,
+            },
           },
-        },
-        { new: true }
-      );
-      //    } else {
-      //      throw new Error("Usuario no autenticado.");
-      //   }
-      if (!userUpdated) {
-        throw new Error("Error al actualizar el usuario.");
+          { new: true }
+          );
+          if (!userUpdated) {
+            throw new Error("Error al actualizar el usuario.");
+          }
+          return userUpdated;
+        } else {
+          return false;
+        }
+      } else {
+       throw new Error("Usuario no autenticado.");
       }
-      return userUpdated;
     },
 
     changeRol: async (_, args, { req }, info) => {
