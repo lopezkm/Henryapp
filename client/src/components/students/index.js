@@ -1,0 +1,1 @@
+export { StudentsApollo as Student } from './apollo';

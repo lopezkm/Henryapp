@@ -32,6 +32,8 @@ export default gql`
     ): User!
 
     changeRol(id: String!, rol: String!): User!
+    
+    deleteUser(id: String!): User!
   }
 
   type User {

@@ -1,18 +1,25 @@
 import React from "react";
 import { useQuery, useMutation, gql } from "@apollo/client";
-import CohortContainer from "./container";
+import UserContainer  from "./container";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Autorenew from "@material-ui/icons/Autorenew";
-import Skeleton from "@material-ui/lab/Skeleton";
 import { useStyles } from "./components/styles";
 
+
 const GET_PROFILE = gql`
-  query profile {
-    profile {
+  query profile ($id: String!){
+    profile(id: $id ){
+      inscriptionDate
       name
       lastname
       email
+      rol
+      picture
+      title
+      shortDescription
+      description
+      gitHubLink
+      link
     }
   }
 `;
@@ -27,9 +34,14 @@ const MODIFY_PROFILE = gql`
   }
 `;
 
+
 export const ProfileApollo = () => {
   const classes = useStyles();
-  const { loading, error, data } = useQuery(GET_PROFILE);
+  const { loading, error, data } = useQuery(GET_PROFILE, {
+    variables: { id : "5fb4c0b685ffff28d378ca1e" }
+  });
+ 
+  console.log('mi data en apollo 1 ',data.profile.name)
 
   const [createCohortMutation] = useMutation(MODIFY_PROFILE, {
     update: (cache, { data: { createCohort } }) => {
@@ -85,8 +97,10 @@ export const ProfileApollo = () => {
       },
     });
   };
-
+  if(data){
+    console.log('Mi data en apollo',data.profile)
+  }
   return (
-    <CohortContainer cohorts={data.cohorts} createNewCohort={createNewCohort} />
+    <UserContainer user={data.profile} />
   );
 };
