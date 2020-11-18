@@ -18,11 +18,6 @@ const UserSchema = Schema({
     type: String,
     required: true,
   },
-  picture: {
-    type: String,
-    required: false,
-    default: "",
-  },
   title: {
     type: String,
     default: "",
