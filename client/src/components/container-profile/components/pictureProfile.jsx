@@ -13,9 +13,29 @@ import { useStyles } from "../styles";
 import Fab from "@material-ui/core/Fab";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
+import CheckIcon from "@material-ui/icons/Check";
 
 export default function PictureProfile() {
   const classes = useStyles();
+  const [values, setValues] = useState({
+    shortDescription: "",
+  });
+  const [state, setState] = useState({
+    editandoShort: false,
+  });
+
+  const startEditN = () => {
+    setState({
+      editandoShort: true,
+    });
+  };
+  const stopEditN = () => {
+    setState({
+      editandoShort: false,
+      pictureShow: false,
+    });
+  };
+  const handleChange = (event) => {};
 
   return (
     <React.Fragment>
@@ -23,15 +43,26 @@ export default function PictureProfile() {
         alt="Remy Sharp"
         src={Fotos}
         style={{
-          width: "170px",
-          height: "170px",
+          width: "160px",
+          height: "160px",
           border: "none",
           outline: "none",
           backgroundColor: "lightgray",
           position: "absolut",
         }}
       />
-      <Typography>Futura Desarrolladora</Typography>
+      <Typography>
+        {state.editandoShort ? (
+          <TextField
+            onChange={(e) => handleChange(e)}
+            name="name"
+            value=""
+            placeholder="Futura Desarrolladora"
+          />
+        ) : (
+          "Futura Desarrolladora"
+        )}
+      </Typography>
       <div className="mt-3 d-flex justify-content-end">
         <Fab size="small" color="primary" aria-label="edit">
           <AddAPhotoIcon />
@@ -39,9 +70,15 @@ export default function PictureProfile() {
         <Fab size="small" color="primary" aria-label="edit">
           <DeleteIcon />
         </Fab>
-        <Fab size="small" color="primary" aria-label="edit">
-          <EditIcon />
-        </Fab>
+        {state.editandoShort ? (
+          <Fab size="small" color="primary" aria-label="edit">
+            <CheckIcon onClick={() => stopEditN()} />
+          </Fab>
+        ) : (
+          <Fab size="small" color="primary" aria-label="edit">
+            <EditIcon onClick={() => startEditN()} />
+          </Fab>
+        )}
       </div>
     </React.Fragment>
   );
