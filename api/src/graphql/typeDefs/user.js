@@ -8,6 +8,7 @@ export default gql`
     login(email: String!, password: String!): AuthUser!
     search(query: String!): [User!]
     getUserByRol(rol: String!): [User!]
+    me: User!
   }
 
   extend type Mutation {

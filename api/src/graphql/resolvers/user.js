@@ -8,6 +8,7 @@ import {
   getRefreshTokenUser,
 } from "../../functions/auth";
 import { myRolIs } from "../../functions/myRolIs";
+import jwt from "jsonwebtoken";
 
 export default {
   Query: {
@@ -19,7 +20,7 @@ export default {
           return await User.find();
         } else {
           throw new Error("Usuario no es PM, ni Administrador.");
-        }  
+        }
       } else {
         throw new Error("Usuario no autenticado.");
       }
@@ -78,6 +79,18 @@ export default {
     getUserByRol: async (_, args, { req }, __) => {
       const response = await User.find({ rol: args.rol });
       return response;
+    },
+    me: async (_, args, { req }, __) => {
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate) {
+        const header = request.headers.authorization;
+        header = header.slice(7);
+        const token = jwt.verify(header, APP_SECRET);
+        let authUser = await User.findById(token._id);
+        return authUser;
+      } else {
+        throw new Error("no estás loggeado!");
+      }
     },
   },
   Mutation: {
@@ -145,9 +158,9 @@ export default {
         } else {
           throw new Error("Usuario no es Administrador.");
         }
-    } else {
-      throw new Error("Usuario no autenticado.");
-    }
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
     },
   },
 };
