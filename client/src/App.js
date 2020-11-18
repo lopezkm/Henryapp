@@ -14,7 +14,9 @@ import { Cohort } from "./components/containers/cohort";
 import { Student } from './components/students';
 import Invite from "./components/forms/invite.jsx";
 import AddStudents from "./components/cohorte/addStudents.jsx";
-import UserProfile2 from "./components/container-profile/components/views";
+//import UserProfile2 from "./components/container-profile/components/views";
+import { Profile } from "./components/container-profile"
+
 
 const theme = createMuiTheme({
   palette: {
@@ -43,7 +45,7 @@ function App() {
             path="/root/userprofile"
             render={() => <UserProfile />}
           />
-          <Route exact path="/root/profile" render={() => <UserProfile2 />} />
+          <Route exact path="/root/profile" render={() => <Profile />} />
           <Route exact path="/root/profilee" render={() => <UserProfile />} />
 
           <Route exact path="/root/home" render={() => <Home />} />

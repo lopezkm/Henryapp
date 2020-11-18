@@ -14,8 +14,10 @@ import { useStyles } from "../styles";
 import TextField from "@material-ui/core/TextField";
 import CheckIcon from "@material-ui/icons/Check";
 
-export default function PersonalInfo({data}) {
-  console.log('mi data',data)
+export default function PersonalInfo() {
+  // console.log("mi data", data);
+  // ``;
+
   const classes = useStyles();
   const [values, setValues] = useState({
     name: "",
@@ -25,18 +27,40 @@ export default function PersonalInfo({data}) {
     password2: "",
   });
   const [state, setState] = useState({
-    editando: false,
+    editandoName: false,
+    editandoLastName: false,
+    editandoEmail: false,
   });
 
-  const rows = ["Pedro", "gonzales", "email@email.com"];
-  const startEdit = () => {
+  const rows = ["Cinthia Daira", "Pardos", "cinthia@email.com"];
+  const startEditN = () => {
     setState({
-      editando: true,
+      editandoName: true,
     });
   };
-  const stopEdit = () => {
+  const stopEditN = () => {
     setState({
-      editando: false,
+      editandoName: false,
+    });
+  };
+  const startEditL = () => {
+    setState({
+      editandoLastName: true,
+    });
+  };
+  const stopEditL = () => {
+    setState({
+      editandoLastName: false,
+    });
+  };
+  const startEditE = () => {
+    setState({
+      editandoEmail: true,
+    });
+  };
+  const stopEditE = () => {
+    setState({
+      editandoEmail: false,
     });
   };
   const handleChange = (event) => {
@@ -68,25 +92,25 @@ export default function PersonalInfo({data}) {
           <TableRow>
             <TableCell className={classes.font}>Nombre:</TableCell>
             <TableCell className={classes.font} selectable={false}>
-              {state.editando ? (
+              {state.editandoName ? (
                 <TextField
                   name="name"
                   onChange={handleChange}
                   placeholder={rows[0]}
                 />
               ) : (
-                data.name
-                //rows[0]
+                // data.name
+                rows[0]
               )}
             </TableCell>
             <TableCell className={classes.font}>
-              {state.editando ? (
+              {state.editandoName ? (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEdit()} />
+                  <CheckIcon onClick={() => stopEditN()} />
                 </Fab>
               ) : (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEdit()} />
+                  <EditIcon onClick={() => startEditN()} />
                 </Fab>
               )}
             </TableCell>
@@ -94,25 +118,26 @@ export default function PersonalInfo({data}) {
           <TableRow>
             <TableCell className={classes.font}>Apellido:</TableCell>
             <TableCell className={classes.font} selectable={false}>
-              {state.editando ? (
+              {state.editandoLastName ? (
                 <TextField
                   onChange={(e) => handleChange(e)}
                   name="name"
                   value={rows[1]}
+                  placeholder={rows[1]}
                 />
               ) : (
-                data.lastname
-                //rows[1]
+                // data.lastname
+                rows[1]
               )}
             </TableCell>
             <TableCell className={classes.font}>
-              {state.editando ? (
+              {state.editandoLastName ? (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEdit()} />
+                  <CheckIcon onClick={() => stopEditL()} />
                 </Fab>
               ) : (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEdit()} />
+                  <EditIcon onClick={() => startEditL()} />
                 </Fab>
               )}
             </TableCell>
@@ -120,25 +145,26 @@ export default function PersonalInfo({data}) {
           <TableRow>
             <TableCell className={classes.font}>Email:</TableCell>
             <TableCell className={classes.font} selectable={false}>
-              {state.editando ? (
+              {state.editandoEmail ? (
                 <TextField
                   name="name"
                   onChange={handleChange}
                   value={rows[2]}
+                  placeholder={rows[2]}
                 />
               ) : (
-                data.email
-                //rows[2]
+                // data.email
+                rows[2]
               )}
             </TableCell>
             <TableCell className={classes.font}>
-              {state.editando ? (
+              {state.editandoEmail ? (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEdit()} />
+                  <CheckIcon onClick={() => stopEditE()} />
                 </Fab>
               ) : (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEdit()} />
+                  <EditIcon onClick={() => startEditE()} />
                 </Fab>
               )}
             </TableCell>

@@ -17,13 +17,13 @@ import { useStyles } from "../styles";
 import PersonalInfo from "./personalInfo";
 import PictureProfile from "./pictureProfile";
 
-import { useQuery, useMutation, gql } from "@apollo/client";
+//import { useQuery, useMutation, gql } from "@apollo/client";
 
 const drawerWidth = 240;
-
+/*
 const GET_PROFILE = gql`
-  query profile ($id: String!){
-    profile(id: $id ){
+  query profile($id: String!) {
+    profile(id: $id) {
       inscriptionDate
       name
       lastname
@@ -37,20 +37,18 @@ const GET_PROFILE = gql`
       link
     }
   }
-`;
+`;*/
 
-
-export default ({
-  user
-}) =>{
-// export default function UserProfile2(
-//   user
-// ) {
-  const { loading, error, data } = useQuery(GET_PROFILE, {
-    variables: { id : "5fb4c0b685ffff28d378ca1e" }
+export default ({ user }) => {
+  // export default function UserProfile2(
+  //   user
+  // ) {
+/*  const { loading, error, data } = useQuery(GET_PROFILE, {
+    variables: { id: "5fb562eac3c83b23c123e552" },
   });
+*/
 
-  console.log('User en views',user)
+  console.log("User en views", user);
   //console.log('data.profile', data.profile)
   const classes = useStyles();
 
@@ -66,14 +64,17 @@ export default ({
           <Grid container spacing={6}>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}><PersonalInfo data={data.profile}/></Paper>
+              <Paper className={fixedHeightPaper}>
+                <PersonalInfo />
+              </Paper>
+
             </Grid>
-            <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={12} md={3} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <PictureProfile />
               </Paper>
             </Grid>
-            <Grid item xs={11}>
+            <Grid item xs={12}>
               <Paper className={classes.paper}>Info academica</Paper>
             </Grid>
           </Grid>
@@ -82,4 +83,4 @@ export default ({
       </main>
     </div>
   );
-}
+};
