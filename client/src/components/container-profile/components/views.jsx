@@ -17,9 +17,41 @@ import { useStyles } from "../styles";
 import PersonalInfo from "./personalInfo";
 import PictureProfile from "./pictureProfile";
 
+import { useQuery, useMutation, gql } from "@apollo/client";
+
 const drawerWidth = 240;
 
-export default function UserProfile2() {
+const GET_PROFILE = gql`
+  query profile ($id: String!){
+    profile(id: $id ){
+      inscriptionDate
+      name
+      lastname
+      email
+      rol
+      picture
+      title
+      shortDescription
+      description
+      gitHubLink
+      link
+    }
+  }
+`;
+
+
+export default ({
+  user
+}) =>{
+// export default function UserProfile2(
+//   user
+// ) {
+  const { loading, error, data } = useQuery(GET_PROFILE, {
+    variables: { id : "5fb4c0b685ffff28d378ca1e" }
+  });
+
+  console.log('User en views',user)
+  //console.log('data.profile', data.profile)
   const classes = useStyles();
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -33,10 +65,8 @@ export default function UserProfile2() {
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={6}>
             {/* Chart */}
-            <Grid item xs={12} md={7} lg={8}>
-              <Paper className={fixedHeightPaper}>
-                <PersonalInfo />
-              </Paper>
+            <Grid item xs={12} md={8} lg={9}>
+              <Paper className={fixedHeightPaper}><PersonalInfo data={data.profile}/></Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>

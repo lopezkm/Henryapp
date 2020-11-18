@@ -12,26 +12,26 @@ import { myRolIs } from "../../functions/myRolIs";
 export default {
   Query: {
     users: async (root, args, { req }) => {
-      /* const isAuthenticate = await getAuthUser(req);
-      const isPM = await myRolIs(req); 
-      if (isAuthenticate) {
-        if (isPM.first) {*/
+      //const isAuthenticate = await getAuthUser(req);
+      //const isPM = await myRolIs(req);
+      //if (isAuthenticate) {
+        //if (isPM.first) {
           return await User.find();
-       /*  } else {
-          throw new Error("Usuario no es PM, ni Administrador.");
-        }  
-      } else {
-        throw new Error("Usuario no autenticado.");
-      } */
+        //} else {
+          //throw new Error("Usuario no es PM, ni Administrador.");
+        //}  
+      //} else {
+        //throw new Error("Usuario no autenticado.");
+      //}
     },
     profile: async (root, args, { req }, info) => {
-      const isAuthenticate = await getAuthUser(req);
-      if (isAuthenticate) {
+      //const isAuthenticate = await getAuthUser(req);
+      //if (isAuthenticate) {
         let authUser = await User.findById(args.id);
         return authUser;
-      } else {
-        throw new Error("Usuario no autenticado.");
-      }
+      //} else {
+        //throw new Error("Usuario no autenticado.");
+      //}
     },
     login: async (root, args, { req }, info) => {
       const user = await User.findOne({
