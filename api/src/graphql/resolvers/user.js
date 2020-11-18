@@ -105,7 +105,6 @@ export default {
       // verificar que el user no exista en la DB
         let header = req.headers.authorization;
         header = header.slice(7);
-        if (header) {
           const token = jwt.verify(header, APP_SECRET);
           const userUpdated = await User.findByIdAndUpdate(
           token._id,
@@ -120,9 +119,6 @@ export default {
             throw new Error("Error al actualizar el usuario.");
           }
           return userUpdated;
-        } else {
-          return false;
-        }
       } else {
        throw new Error("Usuario no autenticado.");
       }
