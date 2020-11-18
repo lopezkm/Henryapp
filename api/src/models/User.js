@@ -18,11 +18,6 @@ const UserSchema = Schema({
     type: String,
     required: true,
   },
-  picture: {
-    type: String,
-    required: false,
-    default: "",
-  },
   title: {
     type: String,
     default: "",
@@ -65,6 +60,8 @@ const UserSchema = Schema({
     type: String,
     default: "Estudiante",
   },
+  //implementación de subirFotos
+  picture: { type: Schema.Types.ObjectId, ref: "Picture" },
 });
 
 const User = model("User", UserSchema);

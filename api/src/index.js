@@ -8,6 +8,8 @@ import cors from "cors";
 import { ApolloServer } from "apollo-server-express";
 import { config } from "dotenv";
 import bodyParser from "body-parser";
+import options from "./utils/options";
+import Thumbs from "./functions/thumbs";
 config();
 
 const { APP_PORT } = process.env;
@@ -30,6 +32,11 @@ const server = new ApolloServer({
 // middlewares
 app.use(cors());
 app.use(morgan("dev"));
+//
+//archivos estáticos
+app.use(express.static("public", options));
+//thumbs
+app.use("/thumbs", Thumbs);
 // Conexion express y apollo
 server.applyMiddleware({ app, cors: false });
 
