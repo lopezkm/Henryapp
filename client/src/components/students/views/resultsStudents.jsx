@@ -11,9 +11,11 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import Paper from '@material-ui/core/Paper';
+import WarningIcon from '@material-ui/icons/Warning';
+
 
 const useRowStyles = makeStyles({
   root: {
@@ -30,7 +32,7 @@ function createData(lastname, name, email) {
     email,
     datos: [
       { date: '2020-01-05', customerId: '11', amount: 8 },
-     
+
     ],
   };
 }
@@ -53,7 +55,7 @@ function Row(name) {
         </TableCell>
         <TableCell align="right">{row.name}</TableCell>
         <TableCell align="right">{row.email}</TableCell>
-        
+
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -118,9 +120,33 @@ Row.propTypes = {
 //   createData('Gingerbread', 356, 16.0, 49, 3.9, 1.5),
 // ];
 
-export default ({results}) => {
-  
+const MessageErrorSearch = () => {
   return (
+    <div>
+      <Paper style={{
+        textAlign: 'center',
+        fontSize: '20px'
+      }}>
+        <WarningIcon
+          color='secondary'
+          style={{
+            marginRight: '10px',
+            marginTop: '3rem'
+          }} />
+        <p style={{
+          paddingBottom: '3rem',
+          marginTop: '0px',
+        }}>
+          No existen resultados para la búsqueda..
+        </p>
+      </Paper>
+    </div>
+  )
+}
+
+export default ({ results, loading }) => {
+
+  return results.length > 0 ? (
     <TableContainer component={Paper}>
       <Table aria-label="collapsible table">
         <TableHead>
@@ -131,15 +157,17 @@ export default ({results}) => {
             <TableCell align="right">Email</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
+        <TableBody id='t-body-students'>
           {results.map((user) => (
             <Row key={user.id} row={user} />
           ))}
-           {/* {name.name && name.name.filter(user=> user.name === name.name).map(namefiltered => (
+          {/* {name.name && name.name.filter(user=> user.name === name.name).map(namefiltered => (
             <Row key={namefiltered.id} row={namefiltered} />
           ))}   */}
         </TableBody>
       </Table>
     </TableContainer>
-  );
+  ) : (
+      <MessageErrorSearch />
+    )
 };

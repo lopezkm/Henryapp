@@ -28,16 +28,16 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     width: 400,
     // marginBottom: 30,
-    paddingTop: theme.spacing(5),
+    paddingTop: theme.spacing(0),
   },
   input: {
     marginLeft: theme.spacing(1),
     flex: 1,
-    paddingTop: theme.spacing(5),
+    paddingTop: theme.spacing(1),
   },
   iconButton: {
     padding: 10,
-    paddingTop: theme.spacing(5),
+    paddingTop: theme.spacing(2),
   },
   divider: {
     height: 28,
