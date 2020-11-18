@@ -32,7 +32,7 @@ export default gql`
     ): User!
 
     changeRol(id: String!, rol: String!): User!
-    
+
     deleteUser(id: String!): User!
   }
 
@@ -43,7 +43,7 @@ export default gql`
     email: String!
     inscriptionDate: String!
     rol: String!
-    picture: Picture!
+
     title: String
     shortDescription: String
     description: String
