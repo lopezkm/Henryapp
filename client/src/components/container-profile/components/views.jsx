@@ -22,46 +22,44 @@ import SocialInfo from "./socialInfo";
 
 const drawerWidth = 240;
 
-export default ({ user }) => {
-  console.log("User en views", user);
-  //console.log('data.profile', data.profile)
-  const classes = useStyles();
+console.log("User en views", { user });
+//console.log('data.profile', data.profile)
+const classes = useStyles();
 
-  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
+const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
+return (
+  <div className={classes.root}>
+    <CssBaseline />
 
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={6}>
-            {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={fixedHeightPaper}>
-                <PersonalInfo user={user} />
-              </Paper>
-            </Grid>
-            <Grid item xs={12} md={3} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <PictureProfile />
-              </Paper>
-            </Grid>
-            <Grid item xs={6}>
-              <Paper className={classes.paper}>
-                <MoreInfo />
-              </Paper>
-            </Grid>
-            <Grid item xs={6}>
-              <Paper className={classes.paper}>
-                <SocialInfo />
-              </Paper>
-            </Grid>
+    <main className={classes.content}>
+      <div className={classes.appBarSpacer} />
+      <Container maxWidth="lg" className={classes.container}>
+        <Grid container spacing={6}>
+          {/* Chart */}
+          <Grid item xs={12} md={8} lg={9}>
+            <Paper className={fixedHeightPaper}>
+              <PersonalInfo user={user} />
+            </Paper>
           </Grid>
-          <Box pt={4}></Box>
-        </Container>
-      </main>
-    </div>
-  );
-};
+          <Grid item xs={12} md={3} lg={3}>
+            <Paper className={fixedHeightPaper}>
+              <PictureProfile />
+            </Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper className={classes.paper}>
+              <MoreInfo user={user} />
+            </Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper className={classes.paper}>
+              <SocialInfo user={user} />
+            </Paper>
+          </Grid>
+        </Grid>
+        <Box pt={4}></Box>
+      </Container>
+    </main>
+  </div>
+);

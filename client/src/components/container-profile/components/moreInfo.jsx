@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "@material-ui/core/Link";
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,62 +16,32 @@ import CheckIcon from "@material-ui/icons/Check";
 import { Button } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 
-export default function MoreInfo() {
-  // console.log("mi data", data);
-  // ``;
+export default function MoreInfo({ user }) {
+  //console.log("mi user", user);
   const classes = useStyles();
-
-  const [values, setValues] = useState({
-    name: "",
-    lastname: "",
-    email: "",
-    password: "",
-    password2: "",
-  });
-
+  const [values, setValues] = useState({ description: "" });
   const [state, setState] = useState({
-    editandoName: false,
-    editandoLastName: false,
-    editandoEmail: false,
+    editandoDescription: false,
   });
 
-  const rows = ["Cinthia Daira", "Pardos", "cinthia@email.com"];
-  const startEditN = () => {
+  useEffect(() => {
+    setValues({ description: user.user.description });
+  }, [values]);
+
+  const startEditD = () => {
     setState({
-      editandoName: true,
+      editandoDescription: true,
     });
   };
-  const stopEditN = () => {
+  const stopEditD = () => {
     setState({
-      editandoName: false,
+      editandoDescription: false,
     });
   };
-  const startEditL = () => {
-    setState({
-      editandoLastName: true,
-    });
-  };
-  const stopEditL = () => {
-    setState({
-      editandoLastName: false,
-    });
-  };
-  const startEditE = () => {
-    setState({
-      editandoEmail: true,
-    });
-  };
-  const stopEditE = () => {
-    setState({
-      editandoEmail: false,
-    });
-  };
+
   const handleChange = (event) => {
-    const { name, value } = event.target;
-    setValues({
-      ...values,
-      [name]: value,
-    });
+    const { value } = event.target;
+    setValues(value);
   };
 
   return (
@@ -95,24 +65,24 @@ export default function MoreInfo() {
           <TableRow>
             <TableCell className={classes.font}>Descripción:</TableCell>
             <TableCell className={classes.font} selectable={false}>
-              {state.editandoLastName ? (
+              {state.editandoDescription ? (
                 <TextField
                   onChange={(e) => handleChange(e)}
-                  name="lastname"
-                  placeholder="Estudiante en henry"
+                  name="Description"
+                  placeholder={values.description}
                 />
               ) : (
-                "Estudiante Henry"
+                user.user.description
               )}
             </TableCell>
             <TableCell className={classes.font}>
-              {state.editandoLastName ? (
+              {state.editandoDescription ? (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEditL()} />
+                  <CheckIcon onClick={() => stopEditD()} />
                 </Fab>
               ) : (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEditL()} />
+                  <EditIcon onClick={() => startEditD()} />
                 </Fab>
               )}
             </TableCell>
@@ -120,16 +90,7 @@ export default function MoreInfo() {
           <TableRow>
             <TableCell className={classes.font}>Rol:</TableCell>
             <TableCell className={classes.font} selectable={false}>
-              {state.editandoName ? (
-                <TextField
-                  name="name"
-                  onChange={handleChange}
-                  placeholder={rows[0]}
-                />
-              ) : (
-                // data.name
-                "PM"
-              )}
+              {user.user.rol}
             </TableCell>
           </TableRow>
           <TableRow>

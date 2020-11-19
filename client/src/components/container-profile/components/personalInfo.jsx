@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "@material-ui/core/Link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -15,6 +15,9 @@ import TextField from "@material-ui/core/TextField";
 import CheckIcon from "@material-ui/icons/Check";
 
 export default function PersonalInfo({ user }) {
+  console.log("mi data en personal info", user.user.name);
+  // ``;
+
   const classes = useStyles();
   const [values, setValues] = useState({
     name: "",
@@ -23,13 +26,21 @@ export default function PersonalInfo({ user }) {
     password: "",
     password2: "",
   });
+
+  useEffect(() => {
+    setValues({
+      name: user.user.name,
+      lastname: user.user.lastname,
+      email: user.user.email,
+    });
+  }, [values]);
+
   const [state, setState] = useState({
     editandoName: false,
     editandoLastName: false,
     editandoEmail: false,
   });
 
-  const rows = ["Cinthia Daira", "Pardos", "cinthia@email.com"];
   const startEditN = () => {
     setState({
       editandoName: true,
@@ -93,11 +104,10 @@ export default function PersonalInfo({ user }) {
                 <TextField
                   name="name"
                   onChange={handleChange}
-                  placeholder={rows[0]}
+                  placeholder={values.name}
                 />
               ) : (
-                // data.name
-                rows[0]
+                user.user.name
               )}
             </TableCell>
             <TableCell className={classes.font}>
@@ -119,10 +129,10 @@ export default function PersonalInfo({ user }) {
                 <TextField
                   onChange={(e) => handleChange(e)}
                   name="lastname"
-                  placeholder={rows[1]}
+                  placeholder={values.lastname}
                 />
               ) : (
-                rows[1]
+                user.user.lastname
               )}
             </TableCell>
             <TableCell className={classes.font}>
@@ -144,11 +154,10 @@ export default function PersonalInfo({ user }) {
                 <TextField
                   name="email"
                   onChange={handleChange}
-                  placeholder={rows[2]}
+                  placeholder={values.email}
                 />
               ) : (
-                // data.email
-                rows[2]
+                user.user.email
               )}
             </TableCell>
             <TableCell className={classes.font}>
