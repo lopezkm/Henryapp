@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Link from "@material-ui/core/Link";
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
@@ -33,10 +33,6 @@ export default function MoreInfo({ user }) {
   const [state, setState] = useState({
     editandoDescription: false,
   });
-
-  useEffect(() => {
-    setValues({ description: user.user.description });
-  }, [values]);
 
   const startEditD = () => {
     setState({
@@ -86,7 +82,7 @@ export default function MoreInfo({ user }) {
                 <TextField
                   onChange={(e) => handleChange(e)}
                   name="Description"
-                  placeholder={values.description}
+                  placeholder="Ingresa una descripción"
                 />
               ) : (
                 user.user.description

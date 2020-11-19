@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "@material-ui/core/Link";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -27,14 +27,6 @@ export default function PersonalInfo({ user }) {
     password: "",
     password2: "",
   });
-
-  useEffect(() => {
-    setValues({
-      name: user.user.name,
-      lastname: user.user.lastname,
-      email: user.user.email,
-    });
-  }, []);
 
   const [state, setState] = useState({
     editandoName: false,
@@ -105,7 +97,7 @@ export default function PersonalInfo({ user }) {
                 <TextField
                   name="name"
                   onChange={handleChange}
-                  placeholder={values.name}
+                  placeholder="Ingresa tu nombre"
                 />
               ) : (
                 user.user.name
@@ -130,7 +122,7 @@ export default function PersonalInfo({ user }) {
                 <TextField
                   onChange={(e) => handleChange(e)}
                   name="lastname"
-                  placeholder={values.lastname}
+                  placeholder="Ingresa tu apellido"
                 />
               ) : (
                 user.user.lastname
@@ -155,7 +147,7 @@ export default function PersonalInfo({ user }) {
                 <TextField
                   name="email"
                   onChange={handleChange}
-                  placeholder={values.email}
+                  placeholder="Ingresa un email"
                 />
               ) : (
                 user.user.email

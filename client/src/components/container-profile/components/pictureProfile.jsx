@@ -15,9 +15,9 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import CheckIcon from "@material-ui/icons/Check";
 
-export default function PictureProfile() {
+export default function PictureProfile({user}) {
   const classes = useStyles();
-  const [values, setValues] = useState({ shortDescription: "bel blhe fd" });
+  const [values, setValues] = useState({ shortDescription:"" });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [state, setState] = useState({
@@ -26,8 +26,7 @@ export default function PictureProfile() {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setValues({
-      ...values,
-      [name]: value,
+      shortDescription: value,
     });
   };
 
@@ -78,10 +77,10 @@ export default function PictureProfile() {
           <TextField
             onChange={(e) => handleChange(e)}
             name="name"
-            placeholder="ShortDescription"
+            placeholder="Breve descripción"
           />
         ) : (
-          values.shortDescription
+          user.user.shortDescription
         )}
       </Typography>
       <div className={classes.profileCenter}>

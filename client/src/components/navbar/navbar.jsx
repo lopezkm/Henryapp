@@ -17,6 +17,24 @@ import HelpOutlineSharpIcon from "@material-ui/icons/HelpOutlineSharp";
 import Logo from "../home/images/logoHenry.jpeg";
 import { withStyles } from "@material-ui/core/styles";
 import DrawerNavbar from './drawer';
+import { useQuery, gql } from "@apollo/client";
+
+const GET_PROFILE = gql`
+  query me{
+    me{
+      inscriptionDate
+      name
+      lastname
+      email
+      rol 
+      title
+      shortDescription
+      description
+      gitHubLink
+      link
+    }
+  }
+`;
 
 const StyledMenu = withStyles({
   paper: {
@@ -59,9 +77,12 @@ const NavBar = (theme) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorElP, setAnchorElP] = React.useState(null);
+
   const open = Boolean(anchorEl);
 
   const [abrir, setAbrir] = React.useState(false);
+
+  const { loading, error, data } = useQuery(GET_PROFILE);
 
   const handleDrawerOpen = () => {
     setAbrir(true);
@@ -144,7 +165,7 @@ const NavBar = (theme) => {
           </StyledMenu>
           <Link to="/root/login" style={{ textDecoration: 'none', color: 'black' }}>
             <Button variant="text" color="secondary">
-              Login
+              {data ? data.me.name : "Login"}
             </Button>
           </Link>
           <IconButton
