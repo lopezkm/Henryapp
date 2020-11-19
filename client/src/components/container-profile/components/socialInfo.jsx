@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "@material-ui/core/Link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -24,14 +24,6 @@ export default function SocialInfo({ user }) {
     linkedin: "",
     personalPage: "",
   });
-
-  useEffect(() => {
-    setValues({
-      gitHub: user.user.gitHubLink,
-      linkedin: user.user.link,
-      personalPage: user.user.link,
-    });
-  }, [values]);
 
   const [state, setState] = useState({
     editandoGit: false,
@@ -102,10 +94,10 @@ export default function SocialInfo({ user }) {
                 <TextField
                   name="gitHub"
                   onChange={handleChange}
-                  placeholder={values.gitHub}
+                  placeholder="Ingresa link de Github"
                 />
               ) : (
-                user.user.gitHubLink
+                <a href={user.user.gitHubLink}>{user.user.gitHubLink}</a>
               )}
             </TableCell>
             <TableCell className={classes.font}>
@@ -131,10 +123,10 @@ export default function SocialInfo({ user }) {
                 <TextField
                   onChange={(e) => handleChange(e)}
                   name="linkedin"
-                  placeholder={values.linkedin}
+                  placeholder="Ingresa link de Linkedin"
                 />
               ) : (
-                user.user.link
+                <a href={user.user.link}>{user.user.link}</a>
               )}
             </TableCell>
             <TableCell className={classes.font}>
@@ -160,7 +152,7 @@ export default function SocialInfo({ user }) {
                 <TextField
                   name="personalPage"
                   onChange={handleChange}
-                  placeholder={values.personalPage}
+                  placeholder="Ingresa un link"
                 />
               ) : (
                 user.user.link

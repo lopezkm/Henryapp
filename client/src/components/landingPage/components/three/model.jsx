@@ -13,24 +13,24 @@ export default function Model(){
         <mesh
         castShadow
         scale={props.scale}
-        position={[-0.1,0.5,0.3]}
+        position={[-0.1,-0.12,0.3]}
         onPointerOver={()=> setHover(true)}
         onPointerOut={()=> setHover(false)}
         onClick={()=> setActive(!active)}
         >
                 <torusKnotBufferGeometry
-                    args={[10, 4, 500, 128]}
+                    args={[10, 4, 128, 64]}
                 />
                  <ambientLight intensity={3}
                  color={"white"} />
                  <rectAreaLight
-      width={10}
-      height={13}
+      width={20}
+      height={2.5}
       color={props.color}
-      intensity={30}
+      intensity={10}
       position={[65, 10, 15]}
       lookAt={[-0.1, 0.3, 0.3]}
-      penumbra={1}
+      penumbra={2}
       castShadow
     />
                  <meshStandardMaterial
@@ -38,10 +38,10 @@ export default function Model(){
                  meshDepthMaterial={1}
                  color={props.color}
                  flatShading={false}
-                 shininess={100}
-                 clearcoat={1}
-                 roughness={0.1}
-                 metalness={0.1}
+                 shininess={1}
+                 clearcoat={0.5}
+                 roughness={1}
+                 metalness={0.3}
                  />
             </mesh>
     )
