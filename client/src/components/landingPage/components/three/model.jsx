@@ -19,17 +19,17 @@ export default function Model(){
         onClick={()=> setActive(!active)}
         >
                 <torusKnotBufferGeometry
-                    args={[10, 4, 128, 64]}
+                    args={[15, 5, 256, 128]}
                 />
                  <ambientLight intensity={3}
                  color={"white"} />
                  <rectAreaLight
-      width={20}
-      height={2.5}
+      width={12}
+      height={2.7}
       color={props.color}
       intensity={10}
-      position={[65, 10, 15]}
-      lookAt={[-0.1, 0.3, 0.3]}
+      position={[65, 20, 15]}
+      lookAt={[0.5, 0.3, 0.3]}
       penumbra={2}
       castShadow
     />
