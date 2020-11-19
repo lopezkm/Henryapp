@@ -18,7 +18,7 @@ const useStyleslog = makeStyles((theme) => ({
     marginLeft: theme.spacing(7),
   },
   image: {
-    backgroundImage: "url(https://source.unsplash.com/random/?developer)",
+    backgroundImage: "url(https://source.unsplash.com/random/?code)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
