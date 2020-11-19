@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import LandingPage from "./components/home/landingPage.jsx";
+import LandingPage from "./components/landingPage/functions";
 import Home from "./components/home/home.jsx";
 import NavBar from "./components/navbar/navbar.jsx";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
@@ -11,12 +11,11 @@ import Login from "./components/forms/login.jsx";
 import UserProfile from "./components/userProfile/index.jsx";
 //import Student from "./components/students/students.jsx";
 import { Cohort } from "./components/containers/cohort";
-import { Student } from './components/students';
+import { Student } from "./components/students";
 import Invite from "./components/forms/invite.jsx";
 import AddStudents from "./components/cohorte/addStudents.jsx";
 //import UserProfile2 from "./components/container-profile/components/views";
-import { Profile } from "./components/container-profile"
-
+import { Profile } from "./components/container-profile";
 
 const theme = createMuiTheme({
   palette: {
