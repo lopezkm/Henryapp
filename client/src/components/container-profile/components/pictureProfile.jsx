@@ -17,12 +17,19 @@ import CheckIcon from "@material-ui/icons/Check";
 
 export default function PictureProfile() {
   const classes = useStyles();
-  const [values, setValues] = useState({
-    shortDescription: "",
-  });
+  const [values, setValues] = useState({ shortDescription: "bel blhe fd" });
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [state, setState] = useState({
     editandoShort: false,
   });
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
+  };
 
   const startEditN = () => {
     setState({
@@ -32,47 +39,71 @@ export default function PictureProfile() {
   const stopEditN = () => {
     setState({
       editandoShort: false,
-      pictureShow: false,
     });
   };
-  const handleChange = (event) => {};
+  function validate(values) {
+    let errors = {};
+    if (values.shortDescription.length > 15) {
+      errors.shortDescription =
+        "This field cannot have more than 15 characters";
+    }
+    return errors;
+  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const valid = setErrors(validate(values));
+    setIsSubmitting(true);
+  };
+  function submit() {
+    console.log(values.shortDescription);
+  }
 
   return (
     <React.Fragment>
       <Avatar
+        className={classes.profileCenter}
         alt="Remy Sharp"
         src={Fotos}
         style={{
-          width: "160px",
-          height: "160px",
+          width: "130px",
+          height: "130px",
           border: "none",
           outline: "none",
           backgroundColor: "lightgray",
           position: "absolut",
         }}
       />
-      <Typography>
+      <Typography className={classes.profileCenter}>
         {state.editandoShort ? (
           <TextField
             onChange={(e) => handleChange(e)}
             name="name"
-            value=""
-            placeholder="Futura Desarrolladora"
+            placeholder="ShortDescription"
           />
         ) : (
-          "Futura Desarrolladora"
+          values.shortDescription
         )}
       </Typography>
-      <div className="mt-3 d-flex justify-content-end">
-        <Fab size="small" color="primary" aria-label="edit">
+      <div className={classes.profileCenter}>
+        <Fab
+          size="small"
+          color="primary"
+          aria-label="edit"
+          className={classes.profileButton}
+        >
           <AddAPhotoIcon />
         </Fab>
-        <Fab size="small" color="primary" aria-label="edit">
+        <Fab
+          size="small"
+          color="primary"
+          aria-label="edit"
+          className={classes.profileButton}
+        >
           <DeleteIcon />
         </Fab>
         {state.editandoShort ? (
           <Fab size="small" color="primary" aria-label="edit">
-            <CheckIcon onClick={() => stopEditN()} />
+            <CheckIcon onClick={(e) => stopEditN()} />
           </Fab>
         ) : (
           <Fab size="small" color="primary" aria-label="edit">

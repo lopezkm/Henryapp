@@ -18,6 +18,8 @@ import PersonalInfo from "./personalInfo";
 import PictureProfile from "./pictureProfile";
 
 import { useQuery, useMutation, gql } from "@apollo/client";
+import MoreInfo from "./moreInfo";
+import SocialInfo from "./socialInfo";
 
 const drawerWidth = 240;
 
@@ -72,8 +74,15 @@ export default ({ user }) => {
                 <PictureProfile />
               </Paper>
             </Grid>
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>Info academica</Paper>
+            <Grid item xs={6}>
+              <Paper className={classes.paper}>
+                <MoreInfo />
+              </Paper>
+            </Grid>
+            <Grid item xs={6}>
+              <Paper className={classes.paper}>
+                <SocialInfo />
+              </Paper>
             </Grid>
           </Grid>
           <Box pt={4}></Box>
