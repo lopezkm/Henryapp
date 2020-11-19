@@ -37,8 +37,8 @@ function createData(lastname, name, email) {
   };
 }
 
-function Row(name) {
-  const { row } = name;
+function Row(results) {
+  const { row } = results;
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
@@ -73,14 +73,16 @@ function Row(name) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {/* {row.datos.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
+                  <TableCell >{row.inscriptionDate}</TableCell>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                  {/* {row.map((historyRow) => (
+                    <TableRow key={historyRow.inscriptionDate}>
                       <TableCell component="th" scope="row">
-                        {historyRow.date}
+                        {historyRow.inscriptionDate}
                       </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      
+                       <TableCell>{historyRow.customerId}</TableCell>
+                      <TableCell align="right">{historyRow.amount}</TableCell>   
                     </TableRow>
                   ))} */}
                 </TableBody>
