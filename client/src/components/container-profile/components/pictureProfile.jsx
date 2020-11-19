@@ -14,6 +14,7 @@ import Fab from "@material-ui/core/Fab";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import CheckIcon from "@material-ui/icons/Check";
+import Tooltip from "@material-ui/core/Tooltip";
 
 export default function PictureProfile() {
   const classes = useStyles();
@@ -91,7 +92,9 @@ export default function PictureProfile() {
           aria-label="edit"
           className={classes.profileButton}
         >
-          <AddAPhotoIcon />
+          <Tooltip title="Agregar foto">
+            <AddAPhotoIcon />
+          </Tooltip>
         </Fab>
         <Fab
           size="small"
@@ -99,15 +102,21 @@ export default function PictureProfile() {
           aria-label="edit"
           className={classes.profileButton}
         >
-          <DeleteIcon />
+          <Tooltip title="Eliminar foto">
+            <DeleteIcon />
+          </Tooltip>
         </Fab>
         {state.editandoShort ? (
           <Fab size="small" color="primary" aria-label="edit">
-            <CheckIcon onClick={(e) => stopEditN()} />
+            <Tooltip title="Enviar">
+              <CheckIcon onClick={(e) => stopEditN()} />
+            </Tooltip>
           </Fab>
         ) : (
           <Fab size="small" color="primary" aria-label="edit">
-            <EditIcon onClick={() => startEditN()} />
+            <Tooltip title="Editar subtítulo">
+              <EditIcon onClick={() => startEditN()} />
+            </Tooltip>
           </Fab>
         )}
       </div>

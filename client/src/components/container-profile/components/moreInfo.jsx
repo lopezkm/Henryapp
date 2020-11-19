@@ -15,6 +15,8 @@ import CheckIcon from "@material-ui/icons/Check";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
+import Tooltip from "@material-ui/core/Tooltip";
+
 import {
   FormControl,
   Grid,
@@ -95,11 +97,15 @@ export default function MoreInfo({ user }) {
             <TableCell className={classes.font}>
               {state.editandoDescription ? (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEditD()} />
+                  <Tooltip title="Enviar">
+                    <CheckIcon onClick={() => stopEditD()} />
+                  </Tooltip>
                 </Fab>
               ) : (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEditD()} />
+                  <Tooltip title="Editar campo">
+                    <EditIcon onClick={() => startEditD()} />
+                  </Tooltip>
                 </Fab>
               )}
             </TableCell>
