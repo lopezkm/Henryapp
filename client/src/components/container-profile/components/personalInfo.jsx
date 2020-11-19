@@ -1,6 +1,10 @@
 import React from "react";
 import Link from "@material-ui/core/Link";
+<<<<<<< HEAD
 import { useState } from "react";
+=======
+import { useState} from "react";
+>>>>>>> main
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -13,9 +17,10 @@ import Fab from "@material-ui/core/Fab";
 import { useStyles } from "../styles";
 import TextField from "@material-ui/core/TextField";
 import CheckIcon from "@material-ui/icons/Check";
+import Modal from "@material-ui/core/Modal";
 
-export default function PersonalInfo({user}) {
-   console.log("mi data en personal info", user.user.name);
+export default function PersonalInfo({ user }) {
+  console.log("mi data en personal info", user.user.name);
   // ``;
 
   const classes = useStyles();
@@ -26,7 +31,6 @@ export default function PersonalInfo({user}) {
     password: "",
     password2: "",
   });
-
 
   const [state, setState] = useState({
     editandoName: false,

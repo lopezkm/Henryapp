@@ -1,6 +1,10 @@
 import React from "react";
 import Link from "@material-ui/core/Link";
+<<<<<<< HEAD
 import { useState } from "react";
+=======
+import { useState} from "react";
+>>>>>>> main
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -23,7 +27,6 @@ export default function SocialInfo({user}) {
     linkedin: "",
     personalPage: ""
   });
-
 
   const [state, setState] = useState({
     editandoGit: false,
