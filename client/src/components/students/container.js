@@ -14,7 +14,6 @@ const StudentsContainer = ({
     setValues(value);
     findStudent(e.target.value);
   }
-
   return (
     <StudentsView
       handleChange={handleChange}

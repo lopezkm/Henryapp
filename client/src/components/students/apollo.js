@@ -11,6 +11,7 @@ query search($query: String!) {
     name
     lastname
     email
+    inscriptionDate
   }
 }`;
 
