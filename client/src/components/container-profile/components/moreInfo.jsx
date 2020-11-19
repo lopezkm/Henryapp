@@ -13,11 +13,11 @@ import Fab from "@material-ui/core/Fab";
 import { useStyles } from "../styles";
 import TextField from "@material-ui/core/TextField";
 import CheckIcon from "@material-ui/icons/Check";
+import { Button } from "@material-ui/core";
 
-export default function PersonalInfo({user}) {
-   console.log("mi data", user);
+export default function MoreInfo() {
+  // console.log("mi data", data);
   // ``;
-
   const classes = useStyles();
   const [values, setValues] = useState({
     name: "",
@@ -82,7 +82,7 @@ export default function PersonalInfo({user}) {
               color="primary"
               gutterBottom
             >
-              Perfil del Alumno
+              Información Adicional
             </Typography>
           </TableCell>
           <TableCell className={classes.rowStyle}></TableCell>
@@ -90,7 +90,7 @@ export default function PersonalInfo({user}) {
         </TableHead>
         <TableBody>
           <TableRow>
-            <TableCell className={classes.font}>Nombre:</TableCell>
+            <TableCell className={classes.font}>Rol:</TableCell>
             <TableCell className={classes.font} selectable={false}>
               {state.editandoName ? (
                 <TextField
@@ -99,8 +99,8 @@ export default function PersonalInfo({user}) {
                   placeholder={rows[0]}
                 />
               ) : (
-                user.name
-                //rows[0]
+                // data.name
+                "PM"
               )}
             </TableCell>
             <TableCell className={classes.font}>
@@ -116,7 +116,7 @@ export default function PersonalInfo({user}) {
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell className={classes.font}>Apellido:</TableCell>
+            <TableCell className={classes.font}>Descripción:</TableCell>
             <TableCell className={classes.font} selectable={false}>
               {state.editandoLastName ? (
                 <TextField
@@ -125,8 +125,8 @@ export default function PersonalInfo({user}) {
                   placeholder={rows[1]}
                 />
               ) : (
-                user.lastname
-                //rows[1]
+                // data.lastname
+                "dfkslfknsrglfdr;gdrgrdjg"
               )}
             </TableCell>
             <TableCell className={classes.font}>
@@ -142,30 +142,11 @@ export default function PersonalInfo({user}) {
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell className={classes.font}>Email:</TableCell>
-            <TableCell className={classes.font} selectable={false}>
-              {state.editandoEmail ? (
-                <TextField
-                  name="email"
-                  onChange={handleChange}
-                  placeholder={rows[2]}
-                />
-              ) : (
-                user.email
-                //rows[2]
-              )}
-            </TableCell>
+            <TableCell className={classes.font}>Cambiar contraseña</TableCell>
             <TableCell className={classes.font}>
-              {state.editandoEmail ? (
-                <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEditE()} />
-                </Fab>
-              ) : (
-                <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEditE()} />
-                </Fab>
-              )}
+              <Button>Ok </Button>
             </TableCell>
+            <TableCell className={classes.font}></TableCell>
           </TableRow>
         </TableBody>
       </Table>

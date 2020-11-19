@@ -67,4 +67,15 @@ export const useStyles = makeStyles((theme) => ({
   rowStyle: {
     backgroundColor: "rgba(48, 47, 47)",
   },
+  profileCenter: {
+    margin: "0px auto 5px auto",
+    button: { backgroundColor: "rgba(48, 47, 47)" },
+  },
+  profilePicture: {
+    width: "130px",
+    height: "130px",
+  },
+  profileButton: {
+    marginRight: "5px",
+  },
 }));

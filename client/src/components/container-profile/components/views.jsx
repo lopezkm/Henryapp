@@ -16,8 +16,9 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import { useStyles } from "../styles";
 import PersonalInfo from "./personalInfo";
 import PictureProfile from "./pictureProfile";
-
-//import { useQuery, useMutation, gql } from "@apollo/client";
+import { useQuery, useMutation, gql } from "@apollo/client";
+import MoreInfo from "./moreInfo";
+import SocialInfo from "./socialInfo";
 
 const drawerWidth = 240;
 /*
@@ -43,7 +44,7 @@ export default ({ user }) => {
   // export default function UserProfile2(
   //   user
   // ) {
-/*  const { loading, error, data } = useQuery(GET_PROFILE, {
+  /*  const { loading, error, data } = useQuery(GET_PROFILE, {
     variables: { id: "5fb562eac3c83b23c123e552" },
   });
 */
@@ -67,15 +68,21 @@ export default ({ user }) => {
               <Paper className={fixedHeightPaper}>
                 <PersonalInfo user={user}/>
               </Paper>
-
             </Grid>
             <Grid item xs={12} md={3} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <PictureProfile />
               </Paper>
             </Grid>
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>Info academica</Paper>
+            <Grid item xs={6}>
+              <Paper className={classes.paper}>
+                <MoreInfo />
+              </Paper>
+            </Grid>
+            <Grid item xs={6}>
+              <Paper className={classes.paper}>
+                <SocialInfo />
+              </Paper>
             </Grid>
           </Grid>
           <Box pt={4}></Box>

@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: theme.spacing(7),
   },
   image: {
-    backgroundImage: "url(https://source.unsplash.com/random)",
+    backgroundImage: "url(https://source.unsplash.com/random/?code)",
     backgroundRepeat: "no-repeat",
     backgroundColor:
       theme.palette.type === "light"
