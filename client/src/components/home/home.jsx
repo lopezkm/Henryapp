@@ -3,6 +3,7 @@ import image from './images/juan.png'
 import pedro from './images/prueba2.png'
 import huevo from './images/huevo.png'
 import {Link} from 'react-router-dom'
+import Footer from './footer'
 
 
 export default function Home() {
@@ -58,6 +59,9 @@ export default function Home() {
                         <button>Ingresar</button>
                     </div>
                 </div>
+            </div>
+            <div style={{position:'relative',top:'1292px'}}>
+                <Footer/>
             </div>
         </div>
     )

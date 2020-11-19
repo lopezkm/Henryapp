@@ -1,7 +1,7 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { useStyles } from './footerStyle'
-import Logo from '../home/images/logoHen.png'
+import Logo from './images/logoHen.png'
+import {useStyles} from '../footer/footerStyle'
 
 export default function Footer() {
   const classes = useStyles();
@@ -9,7 +9,6 @@ export default function Footer() {
   return (
     <div >
       <CssBaseline />
-      {window.location.href !== 'http://localhost:3000/root/home' ?
         <footer className={classes.footer}>
           <div className={classes.links} >
 
@@ -51,7 +50,7 @@ export default function Footer() {
             <div style={{ color: 'white', textAlign: 'center', position: 'relative', bottom: '6px' }}> <p>@todos los derechos reservados: 2020</p> </div>
           </div>
         </footer>
-        : null}
+        
     </div>
   );
 }

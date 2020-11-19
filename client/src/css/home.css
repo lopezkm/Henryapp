@@ -151,4 +151,6 @@
   .div-button-white button {
     width: 80%;
     font-size: 1.8em;
-    height: 30px; } }
+    height: 30px; }
+  .div-black, .div-white, .div-black-2 {
+    height: 30em; } }
