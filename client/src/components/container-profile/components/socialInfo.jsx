@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "@material-ui/core/Link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -14,52 +14,54 @@ import { useStyles } from "../styles";
 import TextField from "@material-ui/core/TextField";
 import CheckIcon from "@material-ui/icons/Check";
 
-export default function SocialInfo() {
+export default function SocialInfo({user}) {
   // console.log("mi data", data);
   // ``;
   const classes = useStyles();
   const [values, setValues] = useState({
-    name: "",
-    lastname: "",
-    email: "",
-    password: "",
-    password2: "",
-  });
-  const [state, setState] = useState({
-    editandoName: false,
-    editandoLastName: false,
-    editandoEmail: false,
+    gitHub: "",
+    linkedin: "",
+    personalPage: ""
   });
 
-  const rows = ["Cinthia Daira", "Pardos", "cinthia@email.com"];
-  const startEditN = () => {
+  useEffect(() => {
+    setValues({gitHub: user.user.gitHubLink, linkedin:user.user.link, personalPage:user.user.link})
+  }, [values])
+
+  const [state, setState] = useState({
+    editandoGit: false,
+    editandoLinkedin: false,
+    editandoPerPage: false,
+  });
+
+  const startEditG = () => {
     setState({
-      editandoName: true,
+      editandoGit: true,
     });
   };
-  const stopEditN = () => {
+  const stopEditG = () => {
     setState({
-      editandoName: false,
+      editandoGit: false,
     });
   };
   const startEditL = () => {
     setState({
-      editandoLastName: true,
+      editandoLinkedin: true,
     });
   };
   const stopEditL = () => {
     setState({
-      editandoLastName: false,
+      editandoLinkedin: false,
     });
   };
-  const startEditE = () => {
+  const startEditP = () => {
     setState({
-      editandoEmail: true,
+      editandoPerPage: true,
     });
   };
-  const stopEditE = () => {
+  const stopEditP = () => {
     setState({
-      editandoEmail: false,
+      editandoPerPage: false,
     });
   };
   const handleChange = (event) => {
@@ -91,25 +93,24 @@ export default function SocialInfo() {
           <TableRow>
             <TableCell className={classes.font}>Github:</TableCell>
             <TableCell className={classes.font} selectable={false}>
-              {state.editandoName ? (
+              {state.editandoGit ? (
                 <TextField
-                  name="name"
+                  name="gitHub"
                   onChange={handleChange}
-                  placeholder={rows[0]}
+                  placeholder={values.gitHub}
                 />
               ) : (
-                // data.name
-                "www.github.com"
+                user.user.gitHubLink
               )}
             </TableCell>
             <TableCell className={classes.font}>
-              {state.editandoName ? (
+              {state.editandoGit ? (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEditN()} />
+                  <CheckIcon onClick={() => stopEditG()} />
                 </Fab>
               ) : (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEditN()} />
+                  <EditIcon onClick={() => startEditG()} />
                 </Fab>
               )}
             </TableCell>
@@ -117,19 +118,18 @@ export default function SocialInfo() {
           <TableRow>
             <TableCell className={classes.font}>LinkedIn:</TableCell>
             <TableCell className={classes.font} selectable={false}>
-              {state.editandoLastName ? (
+              {state.editandoLinkedin ? (
                 <TextField
                   onChange={(e) => handleChange(e)}
-                  name="lastname"
-                  placeholder={rows[1]}
+                  name="linkedin"
+                  placeholder={values.linkedin}
                 />
               ) : (
-                // data.lastname
-                "linkedin account"
+                user.user.link
               )}
             </TableCell>
             <TableCell className={classes.font}>
-              {state.editandoLastName ? (
+              {state.editandoLinkedin ? (
                 <Fab size="small" color="primary" aria-label="edit">
                   <CheckIcon onClick={() => stopEditL()} />
                 </Fab>
@@ -143,25 +143,25 @@ export default function SocialInfo() {
           <TableRow>
             <TableCell className={classes.font}>Pagina personal:</TableCell>
             <TableCell className={classes.font} selectable={false}>
-              {state.editandoEmail ? (
+              {state.editandoPerPage ? (
                 <TextField
-                  name="email"
+                  name="personalPage"
                   onChange={handleChange}
-                  placeholder={rows[2]}
+                  placeholder={values.personalPage}
                 />
               ) : (
-                // data.email
-                ""
+                
+                user.user.link
               )}
             </TableCell>
             <TableCell className={classes.font}>
-              {state.editandoEmail ? (
+              {state.editandoPerPage ? (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEditE()} />
+                  <CheckIcon onClick={() => stopEditP()} />
                 </Fab>
               ) : (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEditE()} />
+                  <EditIcon onClick={() => startEditP()} />
                 </Fab>
               )}
             </TableCell>
