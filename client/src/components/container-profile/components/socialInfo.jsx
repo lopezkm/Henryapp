@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "@material-ui/core/Link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -13,20 +13,17 @@ import Fab from "@material-ui/core/Fab";
 import { useStyles } from "../styles";
 import TextField from "@material-ui/core/TextField";
 import CheckIcon from "@material-ui/icons/Check";
+import Tooltip from "@material-ui/core/Tooltip";
 
-export default function SocialInfo({user}) {
+export default function SocialInfo({ user }) {
   // console.log("mi data", data);
   // ``;
   const classes = useStyles();
   const [values, setValues] = useState({
     gitHub: "",
     linkedin: "",
-    personalPage: ""
+    personalPage: "",
   });
-
-  useEffect(() => {
-    setValues({gitHub: user.user.gitHubLink, linkedin:user.user.link, personalPage:user.user.link})
-  }, [values])
 
   const [state, setState] = useState({
     editandoGit: false,
@@ -97,20 +94,24 @@ export default function SocialInfo({user}) {
                 <TextField
                   name="gitHub"
                   onChange={handleChange}
-                  placeholder={values.gitHub}
+                  placeholder="Ingresa link de Github"
                 />
               ) : (
-                user.user.gitHubLink
+                <a href={user.user.gitHubLink}>{user.user.gitHubLink}</a>
               )}
             </TableCell>
             <TableCell className={classes.font}>
               {state.editandoGit ? (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEditG()} />
+                  <Tooltip title="Enviar">
+                    <CheckIcon onClick={() => stopEditG()} />
+                  </Tooltip>
                 </Fab>
               ) : (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEditG()} />
+                  <Tooltip title="Editar campo">
+                    <EditIcon onClick={() => startEditG()} />
+                  </Tooltip>
                 </Fab>
               )}
             </TableCell>
@@ -122,20 +123,24 @@ export default function SocialInfo({user}) {
                 <TextField
                   onChange={(e) => handleChange(e)}
                   name="linkedin"
-                  placeholder={values.linkedin}
+                  placeholder="Ingresa link de Linkedin"
                 />
               ) : (
-                user.user.link
+                <a href={user.user.link}>{user.user.link}</a>
               )}
             </TableCell>
             <TableCell className={classes.font}>
               {state.editandoLinkedin ? (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEditL()} />
+                  <Tooltip title="Enviar">
+                    <CheckIcon onClick={() => stopEditL()} />
+                  </Tooltip>
                 </Fab>
               ) : (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEditL()} />
+                  <Tooltip title="Editar campo">
+                    <EditIcon onClick={() => startEditL()} />
+                  </Tooltip>
                 </Fab>
               )}
             </TableCell>
@@ -147,21 +152,24 @@ export default function SocialInfo({user}) {
                 <TextField
                   name="personalPage"
                   onChange={handleChange}
-                  placeholder={values.personalPage}
+                  placeholder="Ingresa un link"
                 />
               ) : (
-                
                 user.user.link
               )}
             </TableCell>
             <TableCell className={classes.font}>
               {state.editandoPerPage ? (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEditP()} />
+                  <Tooltip title="Enviar">
+                    <CheckIcon onClick={() => stopEditP()} />
+                  </Tooltip>
                 </Fab>
               ) : (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEditP()} />
+                  <Tooltip title="Editar campo">
+                    <EditIcon onClick={() => startEditP()} />
+                  </Tooltip>
                 </Fab>
               )}
             </TableCell>

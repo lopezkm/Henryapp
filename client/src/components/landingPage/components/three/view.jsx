@@ -6,21 +6,17 @@ import * as THREE from "three"
 export default function Three(){
 
     return (
-
-
         <Canvas
         gl={{ antialias: true, alpha: true }}
-        camera={{ position: [0, 0, 5], near: 1, far: 30 }}
+        camera={{ position: [0, 0, 5.5], near: 1, far: 25 }}
         onCreated={({gl})=>{
             gl.shadowMap.enabled=true
             gl.shadowMap.type= THREE.PCFSoftShadowMap
         }}
             >
-            <fog  attach="fog" args={["yellow", 5,15]}/>
-            <Controller/>
-         
-            <Model/>
-         
+            <fog  attach="fog" args={["yellow", 2,20]}/>
+            <Controller/>         
+            <Model/>         
         </Canvas>
 
     )

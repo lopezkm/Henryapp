@@ -14,10 +14,11 @@ import Fab from "@material-ui/core/Fab";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import CheckIcon from "@material-ui/icons/Check";
+import Tooltip from "@material-ui/core/Tooltip";
 
-export default function PictureProfile() {
+export default function PictureProfile({user}) {
   const classes = useStyles();
-  const [values, setValues] = useState({ shortDescription: "bel blhe fd" });
+  const [values, setValues] = useState({ shortDescription:"" });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [state, setState] = useState({
@@ -26,8 +27,7 @@ export default function PictureProfile() {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setValues({
-      ...values,
-      [name]: value,
+      shortDescription: value,
     });
   };
 
@@ -78,10 +78,10 @@ export default function PictureProfile() {
           <TextField
             onChange={(e) => handleChange(e)}
             name="name"
-            placeholder="ShortDescription"
+            placeholder="Breve descripción"
           />
         ) : (
-          values.shortDescription
+          user.user.shortDescription
         )}
       </Typography>
       <div className={classes.profileCenter}>
@@ -91,7 +91,9 @@ export default function PictureProfile() {
           aria-label="edit"
           className={classes.profileButton}
         >
-          <AddAPhotoIcon />
+          <Tooltip title="Agregar foto">
+            <AddAPhotoIcon />
+          </Tooltip>
         </Fab>
         <Fab
           size="small"
@@ -99,15 +101,21 @@ export default function PictureProfile() {
           aria-label="edit"
           className={classes.profileButton}
         >
-          <DeleteIcon />
+          <Tooltip title="Eliminar foto">
+            <DeleteIcon />
+          </Tooltip>
         </Fab>
         {state.editandoShort ? (
           <Fab size="small" color="primary" aria-label="edit">
-            <CheckIcon onClick={(e) => stopEditN()} />
+            <Tooltip title="Enviar">
+              <CheckIcon onClick={(e) => stopEditN()} />
+            </Tooltip>
           </Fab>
         ) : (
           <Fab size="small" color="primary" aria-label="edit">
-            <EditIcon onClick={() => startEditN()} />
+            <Tooltip title="Editar subtítulo">
+              <EditIcon onClick={() => startEditN()} />
+            </Tooltip>
           </Fab>
         )}
       </div>
