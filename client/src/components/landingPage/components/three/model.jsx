@@ -1,5 +1,5 @@
 import React,{useState} from 'react'
-import { BufferGeometry } from 'three'
+
 
 
 export default function Model(){
