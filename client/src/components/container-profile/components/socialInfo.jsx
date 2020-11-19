@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "@material-ui/core/Link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -24,9 +24,6 @@ export default function SocialInfo({user}) {
     personalPage: ""
   });
 
-  useEffect(() => {
-    setValues({gitHub: user.user.gitHubLink, linkedin:user.user.link, personalPage:user.user.link})
-  }, [values])
 
   const [state, setState] = useState({
     editandoGit: false,
@@ -97,7 +94,7 @@ export default function SocialInfo({user}) {
                 <TextField
                   name="gitHub"
                   onChange={handleChange}
-                  placeholder={values.gitHub}
+                  placeholder=""
                 />
               ) : (
                 <a href={user.user.gitHubLink}>{user.user.gitHubLink}</a>
@@ -122,7 +119,7 @@ export default function SocialInfo({user}) {
                 <TextField
                   onChange={(e) => handleChange(e)}
                   name="linkedin"
-                  placeholder={values.linkedin}
+                  placeholder=""
                 />
               ) : (
                 <a href={user.user.link}>{user.user.link}</a>
@@ -147,7 +144,7 @@ export default function SocialInfo({user}) {
                 <TextField
                   name="personalPage"
                   onChange={handleChange}
-                  placeholder={values.personalPage}
+                  placeholder=""
                 />
               ) : (
                 
