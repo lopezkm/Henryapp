@@ -100,7 +100,7 @@ export default function SocialInfo({user}) {
                   placeholder={values.gitHub}
                 />
               ) : (
-                user.user.gitHubLink
+                <a href={user.user.gitHubLink}>{user.user.gitHubLink}</a>
               )}
             </TableCell>
             <TableCell className={classes.font}>
@@ -125,7 +125,7 @@ export default function SocialInfo({user}) {
                   placeholder={values.linkedin}
                 />
               ) : (
-                user.user.link
+                <a href={user.user.link}>{user.user.link}</a>
               )}
             </TableCell>
             <TableCell className={classes.font}>

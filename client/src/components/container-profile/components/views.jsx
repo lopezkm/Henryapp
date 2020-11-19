@@ -69,7 +69,7 @@ export default function UserProfile2(user) {
             </Grid>
             <Grid item xs={12} md={3} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <PictureProfile />
+                <PictureProfile user={user}/>
               </Paper>
             </Grid>
             <Grid item xs={6}>
