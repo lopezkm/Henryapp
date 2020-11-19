@@ -13,7 +13,7 @@ export default function Model(){
         <mesh
         castShadow
         scale={props.scale}
-        position={[-0.1,0.5,0.3]}
+        position={[-0.1,-0.12,0.3]}
         onPointerOver={()=> setHover(true)}
         onPointerOut={()=> setHover(false)}
         onClick={()=> setActive(!active)}
