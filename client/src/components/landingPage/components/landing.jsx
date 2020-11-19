@@ -17,7 +17,7 @@ export default function Landing({message}) {
         />
         
         </div>
-        <Three/>
+        <Three style={{width:"100vw"}}/>
     </div>
    
     )

@@ -5,7 +5,9 @@ const useStyles = makeStyles((theme) => ({
     "& > *": {
       padding: theme.spacing(1),
       width: "350px",
-      marginLeft: "30px",
+      marginLeft: "7.5vw",
+      position: "absolute",
+      zIndex: 100,
     },
   },
   bk: {
