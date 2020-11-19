@@ -64,7 +64,7 @@ export default function MoreInfo({user}) {
                 <TextField
                   onChange={(e) => handleChange(e)}
                   name="Description"
-                  placeholder={values.description}
+                  placeholder="Ingresa una descripción"
                 />
               ) : (
                 user.user.description

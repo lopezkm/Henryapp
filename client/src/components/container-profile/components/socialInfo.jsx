@@ -94,7 +94,7 @@ export default function SocialInfo({user}) {
                 <TextField
                   name="gitHub"
                   onChange={handleChange}
-                  placeholder=""
+                  placeholder="Ingresa link de Github"
                 />
               ) : (
                 <a href={user.user.gitHubLink}>{user.user.gitHubLink}</a>
@@ -119,7 +119,7 @@ export default function SocialInfo({user}) {
                 <TextField
                   onChange={(e) => handleChange(e)}
                   name="linkedin"
-                  placeholder=""
+                  placeholder="Ingresa link de Linkedin"
                 />
               ) : (
                 <a href={user.user.link}>{user.user.link}</a>
@@ -144,7 +144,7 @@ export default function SocialInfo({user}) {
                 <TextField
                   name="personalPage"
                   onChange={handleChange}
-                  placeholder=""
+                  placeholder="Ingresa un link"
                 />
               ) : (
                 

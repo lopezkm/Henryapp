@@ -26,8 +26,7 @@ export default function PictureProfile({user}) {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setValues({
-      ...values,
-      [name]: value,
+      shortDescription: value,
     });
   };
 
@@ -78,7 +77,7 @@ export default function PictureProfile({user}) {
           <TextField
             onChange={(e) => handleChange(e)}
             name="name"
-            placeholder="ShortDescription"
+            placeholder="Breve descripción"
           />
         ) : (
           user.user.shortDescription

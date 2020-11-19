@@ -97,7 +97,7 @@ export default function PersonalInfo({user}) {
                 <TextField
                   name="name"
                   onChange={handleChange}
-                  placeholder=""
+                  placeholder="Ingresa tu nombre"
                 />
               ) : (
                 user.user.name
@@ -122,7 +122,7 @@ export default function PersonalInfo({user}) {
                 <TextField
                   onChange={(e) => handleChange(e)}
                   name="lastname"
-                  placeholder=""
+                  placeholder="Ingresa tu apellido"
                 />
               ) : (
                 user.user.lastname
@@ -147,7 +147,7 @@ export default function PersonalInfo({user}) {
                 <TextField
                   name="email"
                   onChange={handleChange}
-                  placeholder=""
+                  placeholder="Ingresa un email"
                 />
               ) : (
                 user.user.email
