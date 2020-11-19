@@ -1,20 +1,18 @@
 import React from "react";
 import { useQuery, useMutation, gql } from "@apollo/client";
-import UserContainer  from "./container";
+import UserContainer from "./container";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useStyles } from "./styles";
 
-
 const GET_PROFILE = gql`
-  query profile ($id: String!){
-    profile(id: $id ){
+  query profile($id: String!) {
+    profile(id: $id) {
       inscriptionDate
       name
       lastname
       email
       rol
-      picture
       title
       shortDescription
       description
@@ -34,13 +32,11 @@ const MODIFY_PROFILE = gql`
   }
 `;
 
-
 export const ProfileApollo = () => {
   const classes = useStyles();
   const { loading, error, data } = useQuery(GET_PROFILE, {
-    variables: { id : "5fb4c0b685ffff28d378ca1e" }
+    variables: { id: "5fb4c0b685ffff28d378ca1e" },
   });
- 
 
   const [createCohortMutation] = useMutation(MODIFY_PROFILE, {
     update: (cache, { data: { createCohort } }) => {
@@ -96,10 +92,8 @@ export const ProfileApollo = () => {
       },
     });
   };
-  if(data){
-    console.log('Mi data en apollo',data.profile)
+  if (data) {
+    console.log("Mi data en apollo", data.profile);
   }
-  return (
-    <UserContainer user={data.profile} />
-  );
+  return <UserContainer user={data.profile} />;
 };
