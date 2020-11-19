@@ -82,7 +82,7 @@ export default function MoreInfo() {
               color="primary"
               gutterBottom
             >
-              Información Adicional
+              Info Adicional
             </Typography>
           </TableCell>
           <TableCell className={classes.rowStyle}></TableCell>
@@ -90,43 +90,16 @@ export default function MoreInfo() {
         </TableHead>
         <TableBody>
           <TableRow>
-            <TableCell className={classes.font}>Rol:</TableCell>
-            <TableCell className={classes.font} selectable={false}>
-              {state.editandoName ? (
-                <TextField
-                  name="name"
-                  onChange={handleChange}
-                  placeholder={rows[0]}
-                />
-              ) : (
-                // data.name
-                "PM"
-              )}
-            </TableCell>
-            <TableCell className={classes.font}>
-              {state.editandoName ? (
-                <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEditN()} />
-                </Fab>
-              ) : (
-                <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEditN()} />
-                </Fab>
-              )}
-            </TableCell>
-          </TableRow>
-          <TableRow>
             <TableCell className={classes.font}>Descripción:</TableCell>
             <TableCell className={classes.font} selectable={false}>
               {state.editandoLastName ? (
                 <TextField
                   onChange={(e) => handleChange(e)}
                   name="lastname"
-                  placeholder={rows[1]}
+                  placeholder="Estudiante en henry"
                 />
               ) : (
-                // data.lastname
-                "dfkslfknsrglfdr;gdrgrdjg"
+                "Estudiante Henry"
               )}
             </TableCell>
             <TableCell className={classes.font}>
@@ -142,9 +115,26 @@ export default function MoreInfo() {
             </TableCell>
           </TableRow>
           <TableRow>
+            <TableCell className={classes.font}>Rol:</TableCell>
+            <TableCell className={classes.font} selectable={false}>
+              {state.editandoName ? (
+                <TextField
+                  name="name"
+                  onChange={handleChange}
+                  placeholder={rows[0]}
+                />
+              ) : (
+                // data.name
+                "PM"
+              )}
+            </TableCell>
+          </TableRow>
+          <TableRow>
             <TableCell className={classes.font}>Cambiar contraseña</TableCell>
             <TableCell className={classes.font}>
-              <Button>Ok </Button>
+              <Button color="primary" variant="contained">
+                Editar{" "}
+              </Button>
             </TableCell>
             <TableCell className={classes.font}></TableCell>
           </TableRow>

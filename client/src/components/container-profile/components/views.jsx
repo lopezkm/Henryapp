@@ -40,10 +40,8 @@ const GET_PROFILE = gql`
   }
 `;*/
 
-export default ({ user }) => {
-  // export default function UserProfile2(
-  //   user
-  // ) {
+// export default ({ user }) => {
+export default function UserProfile2(user) {
   /*  const { loading, error, data } = useQuery(GET_PROFILE, {
     variables: { id: "5fb562eac3c83b23c123e552" },
   });
@@ -90,4 +88,4 @@ export default ({ user }) => {
       </main>
     </div>
   );
-};
+}
