@@ -15,7 +15,7 @@ import Paper from "@material-ui/core/Paper";
 import { Link } from "react-router-dom";
 import "../../css/forms.css";
 import useForm from "./useForm"; //standard hooks for forms
-import validate from "./validateLogin"; //validations
+import validate from "./validateRegister"; //validations
 import useStyles from "./stylesRegister"; //import styles
 import { gql, useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
