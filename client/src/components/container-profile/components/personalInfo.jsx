@@ -17,6 +17,7 @@ import CheckIcon from "@material-ui/icons/Check";
 export default function PersonalInfo() {
   // console.log("mi data", data);
   // ``;
+
   const classes = useStyles();
   const [values, setValues] = useState({
     name: "",

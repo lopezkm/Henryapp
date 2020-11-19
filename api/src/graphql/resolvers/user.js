@@ -8,6 +8,10 @@ import {
   getRefreshTokenUser,
 } from "../../functions/auth";
 import { myRolIs } from "../../functions/myRolIs";
+import jwt from "jsonwebtoken";
+import { config } from "dotenv";
+config();
+const { APP_SECRET } = process.env;
 
 export default {
   Query: {
@@ -15,22 +19,22 @@ export default {
       //const isAuthenticate = await getAuthUser(req);
       //const isPM = await myRolIs(req);
       //if (isAuthenticate) {
-        //if (isPM.first) {
-          return await User.find();
-        //} else {
-          //throw new Error("Usuario no es PM, ni Administrador.");
-        //}  
+      //if (isPM.first) {
+      return await User.find();
       //} else {
-        //throw new Error("Usuario no autenticado.");
+      //throw new Error("Usuario no es PM, ni Administrador.");
+      //}
+      //} else {
+      //throw new Error("Usuario no autenticado.");
       //}
     },
     profile: async (root, args, { req }, info) => {
       //const isAuthenticate = await getAuthUser(req);
       //if (isAuthenticate) {
-        let authUser = await User.findById(args.id);
-        return authUser;
+      let authUser = await User.findById(args.id);
+      return authUser;
       //} else {
-        //throw new Error("Usuario no autenticado.");
+      //throw new Error("Usuario no autenticado.");
       //}
     },
     login: async (root, args, { req }, info) => {
@@ -79,6 +83,18 @@ export default {
       const response = await User.find({ rol: args.rol });
       return response;
     },
+    me: async (_, args, { req }, __) => {
+      const isAuthenticate = await getAuthUser(req);
+      if (isAuthenticate) {
+        let header = req.headers.authorization;
+        header = header.slice(7);
+        const token = jwt.verify(header, APP_SECRET);
+        let authUser = await User.findById(token._id);
+        return authUser;
+      } else {
+        throw new Error("no estás loggeado!");
+      }
+    },
   },
   Mutation: {
     // Crear nuevo usuario
@@ -102,11 +118,11 @@ export default {
     updateUser: async (root, args, { req }, info) => {
       const isAuthenticate = await getAuthUser(req);
       if (isAuthenticate) {
-      // verificar que el user no exista en la DB
+        // verificar que el user no exista en la DB
         let header = req.headers.authorization;
         header = header.slice(7);
-          const token = jwt.verify(header, APP_SECRET);
-          const userUpdated = await User.findByIdAndUpdate(
+        const token = jwt.verify(header, APP_SECRET);
+        const userUpdated = await User.findByIdAndUpdate(
           token._id,
           {
             $set: {
@@ -114,13 +130,13 @@ export default {
             },
           },
           { new: true }
-          );
-          if (!userUpdated) {
-            throw new Error("Error al actualizar el usuario.");
-          }
-          return userUpdated;
+        );
+        if (!userUpdated) {
+          throw new Error("Error al actualizar el usuario.");
+        }
+        return userUpdated;
       } else {
-       throw new Error("Usuario no autenticado.");
+        throw new Error("Usuario no autenticado.");
       }
     },
 
@@ -154,14 +170,16 @@ export default {
       // Verifica que la lecture a eliminar exista
       const isAuthenticate = await getAuthUser(req);
       const isAdmin = await myRolIs(req);
-      if (isAuthenticate){
+      if (isAuthenticate) {
         if (isAdmin.first && isAdmin.second) {
           const user = await User.findByIdAndRemove(args.id);
-          if(user) {
+          if (user) {
             return user;
           }
           //si no existe
-          throw new Error ('El usuario que se intenta eliminar, no existe en la base de datos');
+          throw new Error(
+            "El usuario que se intenta eliminar, no existe en la base de datos"
+          );
         } else {
           throw new Error("Usuario no es Administrador.");
         }

@@ -8,3 +8,4 @@ export { default as Lecture } from "./Lecture";
 export { default as Cohort } from "./Cohort";
 export { default as Sprint } from "./Sprint";
 export { default as Group } from "./Group";
+export { default as Picture } from "./Picture";
