@@ -3,7 +3,6 @@ import {Canvas} from "react-three-fiber"
 import Model from "./model"
 import Controller from "./controller"
 import * as THREE from "three"
-import Loading from "../../../shared/loading"
 export default function Three(){
 
     return (
@@ -17,10 +16,11 @@ export default function Three(){
             gl.shadowMap.type= THREE.PCFSoftShadowMap
         }}
             >
+            <fog  attach="fog" args={["yellow", 5,15]}/>
             <Controller/>
-            <Suspense fallback={<Loading/>}>
+         
             <Model/>
-            </Suspense>
+         
         </Canvas>
 
     )
