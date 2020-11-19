@@ -77,9 +77,12 @@ const NavBar = (theme) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [anchorElP, setAnchorElP] = React.useState(null);
+
   const open = Boolean(anchorEl);
-  console.log('navbar', user);
+
   const [abrir, setAbrir] = React.useState(false);
+
+  const { loading, error, data } = useQuery(GET_PROFILE);
 
   const handleDrawerOpen = () => {
     setAbrir(true);

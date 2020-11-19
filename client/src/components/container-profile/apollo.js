@@ -113,8 +113,6 @@ export const ProfileApollo = () => {
       },
     });
   };
-  if (data) {
-    console.log("Mi data en apollo", data.me);
-  }
+  
   return <UserContainer user={data.me} />;
 };
