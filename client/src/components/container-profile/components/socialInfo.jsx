@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "@material-ui/core/Link";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -23,10 +23,6 @@ export default function SocialInfo({user}) {
     linkedin: "",
     personalPage: ""
   });
-
-  useEffect(() => {
-    setValues({gitHub: user.user.gitHubLink, linkedin:user.user.link, personalPage:user.user.link})
-  }, [values])
 
   const [state, setState] = useState({
     editandoGit: false,
