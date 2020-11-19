@@ -5,14 +5,32 @@ import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useStyles } from "./styles";
 
+// const GET_PROFILE = gql`
+//   query profile($id: String!) {
+//     profile(id: $id) {
+//       inscriptionDate
+//       name
+//       lastname
+//       email
+//       rol
+      
+//       title
+//       shortDescription
+//       description
+//       gitHubLink
+//       link
+//     }
+//   }
+// `;
+
 const GET_PROFILE = gql`
-  query profile($id: String!) {
-    profile(id: $id) {
+  query me{
+    me{
       inscriptionDate
       name
       lastname
       email
-      rol
+      rol 
       title
       shortDescription
       description
@@ -21,6 +39,7 @@ const GET_PROFILE = gql`
     }
   }
 `;
+
 
 const MODIFY_PROFILE = gql`
   mutation createCohort($name: String!, $startingDate: String!) {
@@ -34,9 +53,11 @@ const MODIFY_PROFILE = gql`
 
 export const ProfileApollo = () => {
   const classes = useStyles();
-  const { loading, error, data } = useQuery(GET_PROFILE, {
-    variables: { id: "5fb4c0b685ffff28d378ca1e" },
-  });
+  // const { loading, error, data } = useQuery(GET_PROFILE, {
+  //   variables: { id: "5fb4c0b685ffff28d378ca1e" },
+  // });
+
+  const { loading, error, data } = useQuery(GET_PROFILE);
 
   const [createCohortMutation] = useMutation(MODIFY_PROFILE, {
     update: (cache, { data: { createCohort } }) => {
@@ -93,7 +114,7 @@ export const ProfileApollo = () => {
     });
   };
   if (data) {
-    console.log("Mi data en apollo", data.profile);
+    console.log("Mi data en apollo", data.me);
   }
-  return <UserContainer user={data.profile} />;
+  return <UserContainer user={data.me} />;
 };
