@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "@material-ui/core/Link";
-import { useState} from "react";
+import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -13,15 +13,16 @@ import Fab from "@material-ui/core/Fab";
 import { useStyles } from "../styles";
 import TextField from "@material-ui/core/TextField";
 import CheckIcon from "@material-ui/icons/Check";
+import Tooltip from "@material-ui/core/Tooltip";
 
-export default function SocialInfo({user}) {
+export default function SocialInfo({ user }) {
   // console.log("mi data", data);
   // ``;
   const classes = useStyles();
   const [values, setValues] = useState({
     gitHub: "",
     linkedin: "",
-    personalPage: ""
+    personalPage: "",
   });
 
   const [state, setState] = useState({
@@ -102,11 +103,15 @@ export default function SocialInfo({user}) {
             <TableCell className={classes.font}>
               {state.editandoGit ? (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEditG()} />
+                  <Tooltip title="Enviar">
+                    <CheckIcon onClick={() => stopEditG()} />
+                  </Tooltip>
                 </Fab>
               ) : (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEditG()} />
+                  <Tooltip title="Editar campo">
+                    <EditIcon onClick={() => startEditG()} />
+                  </Tooltip>
                 </Fab>
               )}
             </TableCell>
@@ -127,11 +132,15 @@ export default function SocialInfo({user}) {
             <TableCell className={classes.font}>
               {state.editandoLinkedin ? (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEditL()} />
+                  <Tooltip title="Enviar">
+                    <CheckIcon onClick={() => stopEditL()} />
+                  </Tooltip>
                 </Fab>
               ) : (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEditL()} />
+                  <Tooltip title="Editar campo">
+                    <EditIcon onClick={() => startEditL()} />
+                  </Tooltip>
                 </Fab>
               )}
             </TableCell>
@@ -146,18 +155,21 @@ export default function SocialInfo({user}) {
                   placeholder="Ingresa un link"
                 />
               ) : (
-                
                 user.user.link
               )}
             </TableCell>
             <TableCell className={classes.font}>
               {state.editandoPerPage ? (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEditP()} />
+                  <Tooltip title="Enviar">
+                    <CheckIcon onClick={() => stopEditP()} />
+                  </Tooltip>
                 </Fab>
               ) : (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEditP()} />
+                  <Tooltip title="Editar campo">
+                    <EditIcon onClick={() => startEditP()} />
+                  </Tooltip>
                 </Fab>
               )}
             </TableCell>

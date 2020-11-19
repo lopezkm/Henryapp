@@ -14,6 +14,7 @@ import { useStyles } from "../styles";
 import TextField from "@material-ui/core/TextField";
 import CheckIcon from "@material-ui/icons/Check";
 import Modal from "@material-ui/core/Modal";
+import Tooltip from "@material-ui/core/Tooltip";
 
 export default function PersonalInfo({ user }) {
   console.log("mi data en personal info", user.user.name);
@@ -106,11 +107,15 @@ export default function PersonalInfo({ user }) {
             <TableCell className={classes.font}>
               {state.editandoName ? (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEditN()} />
+                  <Tooltip title="Enviar">
+                    <CheckIcon onClick={() => stopEditN()} />
+                  </Tooltip>
                 </Fab>
               ) : (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEditN()} />
+                  <Tooltip title="Editar campo">
+                    <EditIcon onClick={() => startEditN()} />
+                  </Tooltip>
                 </Fab>
               )}
             </TableCell>
@@ -131,11 +136,15 @@ export default function PersonalInfo({ user }) {
             <TableCell className={classes.font}>
               {state.editandoLastName ? (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEditL()} />
+                  <Tooltip title="Enviar">
+                    <CheckIcon onClick={() => stopEditL()} />
+                  </Tooltip>
                 </Fab>
               ) : (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEditL()} />
+                  <Tooltip title="Editar campo">
+                    <EditIcon onClick={() => startEditL()} />
+                  </Tooltip>
                 </Fab>
               )}
             </TableCell>
@@ -156,11 +165,15 @@ export default function PersonalInfo({ user }) {
             <TableCell className={classes.font}>
               {state.editandoEmail ? (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <CheckIcon onClick={() => stopEditE()} />
+                  <Tooltip title="Enviar">
+                    <CheckIcon onClick={() => stopEditE()} />
+                  </Tooltip>
                 </Fab>
               ) : (
                 <Fab size="small" color="primary" aria-label="edit">
-                  <EditIcon onClick={() => startEditE()} />
+                  <Tooltip title="Editar campo">
+                    <EditIcon onClick={() => startEditE()} />
+                  </Tooltip>
                 </Fab>
               )}
             </TableCell>
