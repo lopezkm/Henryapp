@@ -88,7 +88,7 @@ export default function Invite() {
         >
           <Grid item xs={12} sm={8} className={classes.form}>
             <Typography variant="h4" gutterBottom>
-              Invite students
+              Invitar Alumnos
             </Typography>
             <br></br>
 
@@ -117,7 +117,7 @@ export default function Invite() {
                   size="large"
                   className={classes.button}
                 >
-                  Submit
+                  Enviar
                 </Button>
               </Grid>
             </form>
