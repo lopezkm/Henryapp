@@ -78,6 +78,11 @@ export const useStyles = makeStyles((theme) => ({
   profileButton: {
     marginRight: "5px",
   },
+  modalDisplay: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   paperModal: {
     position: "absolute",
     width: 400,

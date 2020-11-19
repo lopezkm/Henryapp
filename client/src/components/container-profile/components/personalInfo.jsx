@@ -13,6 +13,7 @@ import Fab from "@material-ui/core/Fab";
 import { useStyles } from "../styles";
 import TextField from "@material-ui/core/TextField";
 import CheckIcon from "@material-ui/icons/Check";
+import Modal from "@material-ui/core/Modal";
 
 export default function PersonalInfo({ user }) {
   console.log("mi data en personal info", user.user.name);
@@ -33,7 +34,7 @@ export default function PersonalInfo({ user }) {
       lastname: user.user.lastname,
       email: user.user.email,
     });
-  }, [values]);
+  }, []);
 
   const [state, setState] = useState({
     editandoName: false,
