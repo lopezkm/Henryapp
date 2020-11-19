@@ -47,7 +47,7 @@ export default function UserProfile2(user) {
   });
 */
 
-  console.log("User en views", user);
+  console.log("User en views", {user});
   //console.log('data.profile', data.profile)
   const classes = useStyles();
 
@@ -74,12 +74,12 @@ export default function UserProfile2(user) {
             </Grid>
             <Grid item xs={6}>
               <Paper className={classes.paper}>
-                <MoreInfo />
+                <MoreInfo user={user}/>
               </Paper>
             </Grid>
             <Grid item xs={6}>
               <Paper className={classes.paper}>
-                <SocialInfo />
+                <SocialInfo user={user}/>
               </Paper>
             </Grid>
           </Grid>
