@@ -16,26 +16,10 @@ import CheckIcon from "@material-ui/icons/Check";
 import { Button } from "@material-ui/core";
 import Modal from "@material-ui/core/Modal";
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
 export default function MoreInfo() {
   // console.log("mi data", data);
   // ``;
   const classes = useStyles();
-  const [modalStyle] = useState(getModalStyle);
 
   const [values, setValues] = useState({
     name: "",
@@ -44,7 +28,6 @@ export default function MoreInfo() {
     password: "",
     password2: "",
   });
-  const [open, setOpen] = useState(false);
 
   const [state, setState] = useState({
     editandoName: false,
@@ -90,23 +73,6 @@ export default function MoreInfo() {
       [name]: value,
     });
   };
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const body = (
-    <div className={classes.paperModal} style={modalStyle}>
-      <h2 id="simple-modal-title">Text in a modal</h2>
-      <p id="simple-modal-description">
-        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-      </p>
-    </div>
-  );
 
   return (
     <React.Fragment>
@@ -169,17 +135,8 @@ export default function MoreInfo() {
           <TableRow>
             <TableCell className={classes.font}>Cambiar contraseña</TableCell>
             <TableCell className={classes.font}>
-              <Button color="primary" variant="contained" onClick={handleOpen}>
+              <Button color="primary" variant="contained">
                 Editar
-                <Modal
-                  disableEscapeKeyDown={false}
-                  open={open}
-                  onClick={handleClose}
-                  aria-labelledby="simple-modal-title"
-                  aria-describedby="simple-modal-description"
-                >
-                  {body}
-                </Modal>
               </Button>
             </TableCell>
             <TableCell className={classes.font}></TableCell>
