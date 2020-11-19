@@ -45,7 +45,7 @@ function App() {
             path="/root/userprofile"
             render={() => <UserProfile />}
           />
-          <Route exact path="/root/profile" render={() => <UserProfile2 />} />
+          <Route exact path="/root/profile" render={() => <Profile />} />
           <Route exact path="/root/profilee" render={() => <UserProfile />} />
 
           <Route exact path="/root/home" render={() => <Home />} />
