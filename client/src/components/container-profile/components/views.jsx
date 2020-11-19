@@ -64,7 +64,7 @@ export default function UserProfile2(user) {
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={fixedHeightPaper}>
-                <PersonalInfo />
+                <PersonalInfo user={user}/>
               </Paper>
             </Grid>
             <Grid item xs={12} md={3} lg={3}>
