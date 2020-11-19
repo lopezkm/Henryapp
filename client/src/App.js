@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import LandingPage from "./components/home/landingPage.jsx";
 import Home from "./components/home/home.jsx";
-import NavBar from "./components/navbar/navbar.jsx";
+import Navbar from "./components/navbar/navbar.jsx";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { yellow, grey } from "@material-ui/core/colors";
 import Footer from "./components/footer/footer";
@@ -37,7 +37,7 @@ function App() {
           }}
         >
           <Route exact path="/" render={() => <LandingPage />} />
-          <Route path="/root" render={() => <NavBar />} />
+          <Route path="/root" render={() => <Navbar />} />
           <Route
             exact
             path="/root/userprofile"

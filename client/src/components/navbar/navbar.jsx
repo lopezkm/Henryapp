@@ -16,6 +16,7 @@ import FilterNoneSharpIcon from "@material-ui/icons/FilterNoneSharp";
 import HelpOutlineSharpIcon from "@material-ui/icons/HelpOutlineSharp";
 import Logo from "../home/images/logoHenry.jpeg";
 import { withStyles } from "@material-ui/core/styles";
+import DrawerNavbar from './drawer';
 
 const StyledMenu = withStyles({
   paper: {
@@ -89,9 +90,9 @@ const NavBar = (theme) => {
     <div>
       <AppBar className="navbar">
         <Toolbar>
-          <IconButton>
+          {/* <IconButton>
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Link to="/root/home" className={classes.tittle1}>
             <img
               src={Logo}
@@ -99,7 +100,8 @@ const NavBar = (theme) => {
               style={{ width: "60px", height: "60px", paddingTop: "5px" }}
             />
           </Link>
-          <Button
+          <DrawerNavbar />
+          {/* <Button
             aria-controls="customized-menu"
             aria-haspopup="true"
             variant="contained"
@@ -107,7 +109,7 @@ const NavBar = (theme) => {
             onClick={handleClick}
           >
             Panel Admin
-          </Button>
+          </Button> */}
           <StyledMenu
             id="customized-menu"
             anchorEl={anchorElP}
@@ -115,32 +117,32 @@ const NavBar = (theme) => {
             open={Boolean(anchorElP)}
             onClose={handleClose}
           >
-            <Link to="/root/cohorte">
+            {/* <Link to="/root/cohorte">
               <StyledMenuItem>
                 <ListItemIcon>
                   <FilterNoneSharpIcon fontSize="medium" />
                 </ListItemIcon>
                 <ListItemText onClick={handleClose} primary="Cohortes" />
               </StyledMenuItem>
-            </Link>
-            <Link to="/root/student">
+            </Link> */}
+            {/* <Link to="/root/student">
               <StyledMenuItem>
                 <ListItemIcon>
                   <AccountBoxSharpIcon fontSize="medium" />
                 </ListItemIcon>
                 <ListItemText onClick={handleClose} primary="Alumnos" />
               </StyledMenuItem>
-            </Link>
-            <Link to="/root/invite">
+            </Link> */}
+            {/* <Link to="/root/invite">
               <StyledMenuItem>
                 <ListItemIcon>
                   <HelpOutlineSharpIcon fontSize="medium" />
                 </ListItemIcon>
                 <ListItemText onClick={handleClose} primary="Invitar alumnos" />
               </StyledMenuItem>
-            </Link>
+            </Link> */}
           </StyledMenu>
-          <Link to="/root/login">
+          <Link to="/root/login" style={{ textDecoration: 'none', color: 'black' }}>
             <Button variant="text" color="secondary">
               Login
             </Button>
