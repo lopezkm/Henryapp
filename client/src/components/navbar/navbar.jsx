@@ -7,6 +7,7 @@ import {
   Toolbar,
   Menu,
   MenuItem,
+  Typography,
 } from "@material-ui/core";
 import { AppBar, ListItemIcon, ListItemText } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -16,17 +17,17 @@ import FilterNoneSharpIcon from "@material-ui/icons/FilterNoneSharp";
 import HelpOutlineSharpIcon from "@material-ui/icons/HelpOutlineSharp";
 import Logo from "../home/images/logoHenry.jpeg";
 import { withStyles } from "@material-ui/core/styles";
-import DrawerNavbar from './drawer';
+import DrawerNavbar from "./drawer";
 import { useQuery, gql } from "@apollo/client";
 
 const GET_PROFILE = gql`
-  query me{
-    me{
+  query me {
+    me {
       inscriptionDate
       name
       lastname
       email
-      rol 
+      rol
       title
       shortDescription
       description
@@ -163,11 +164,20 @@ const NavBar = (theme) => {
               </StyledMenuItem>
             </Link> */}
           </StyledMenu>
-          <Link to="/root/login" style={{ textDecoration: 'none', color: 'black' }}>
+          <Typography>
             <Button variant="text" color="secondary">
-              {data ? data.me.name : "Login"}
+              {data ? (
+                data.me.name
+              ) : (
+                <Link
+                  to="/root/login"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  "Login"{" "}
+                </Link>
+              )}
             </Button>
-          </Link>
+          </Typography>
           <IconButton
             aria-label="account of current user"
             aria-controls="menu-appbar"

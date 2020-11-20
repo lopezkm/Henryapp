@@ -10,7 +10,6 @@ import {
   FormHelperText,
   Container,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import { Link } from "react-router-dom";
 import "../../css/forms.css";
@@ -161,8 +160,13 @@ export default function Login() {
 
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2" className={classes.button}>
-                  Forgot password?
+                <Link
+                  href="#"
+                  variant="body2"
+                  className={classes.button}
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  ¿Olvidaste tu contraseña?
                 </Link>
               </Grid>
             </Grid>
