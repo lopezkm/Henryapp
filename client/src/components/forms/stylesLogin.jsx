@@ -9,7 +9,7 @@ const useStyleslog = makeStyles((theme) => ({
   },
   main: {
     marginTop: theme.spacing(3),
-    height: "90vh",
+    height: "86vh",
     backgroundColor: theme.palette.secondary.main,
     maxWidth: "100%",
   },
