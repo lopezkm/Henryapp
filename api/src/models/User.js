@@ -58,7 +58,7 @@ const UserSchema = Schema({
   //implementación del Rol
   rol: {
     type: String,
-    default: "Admin",
+    default: "Estudiante",
   },
   //implementación de subirFotos
   picture: { type: Schema.Types.ObjectId, ref: "Picture" },
