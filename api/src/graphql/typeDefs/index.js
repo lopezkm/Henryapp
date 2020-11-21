@@ -7,6 +7,7 @@ import feedback from "./feedback";
 import sendEmails from "./sendEmails";
 import group from "./group";
 import picture from "./picture";
+import resetPass from "./resetPass";
 
 export default [
   root,
@@ -16,6 +17,7 @@ export default [
   feedback,
   sprint,
   sendEmails,
+  resetPass,
   group,
   picture,
 ];

@@ -10,7 +10,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import { AppBar, ListItemIcon, ListItemText } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import AccountBoxSharpIcon from "@material-ui/icons/AccountBoxSharp";
 import FilterNoneSharpIcon from "@material-ui/icons/FilterNoneSharp";
@@ -112,9 +111,9 @@ const NavBar = (theme) => {
     <div>
       <AppBar className="navbar">
         <Toolbar>
-          {/* <IconButton>
-            <MenuIcon />
-          </IconButton> */}
+          <IconButton>
+            <DrawerNavbar />
+          </IconButton>
           <Link to="/root/home" className={classes.tittle1}>
             <img
               src={Logo}
@@ -122,7 +121,6 @@ const NavBar = (theme) => {
               style={{ width: "60px", height: "60px", paddingTop: "5px" }}
             />
           </Link>
-          <DrawerNavbar />
           {/* <Button
             aria-controls="customized-menu"
             aria-haspopup="true"
@@ -139,7 +137,9 @@ const NavBar = (theme) => {
             open={Boolean(anchorElP)}
             onClose={handleClose}
           >
-            {/* <Link to="/root/cohorte">
+            {" "}
+          </StyledMenu>
+          {/* <Link to="/root/cohorte">
               <StyledMenuItem>
                 <ListItemIcon>
                   <FilterNoneSharpIcon fontSize="medium" />
@@ -147,7 +147,7 @@ const NavBar = (theme) => {
                 <ListItemText onClick={handleClose} primary="Cohortes" />
               </StyledMenuItem>
             </Link> */}
-            {/* <Link to="/root/student">
+          {/* <Link to="/root/student">
               <StyledMenuItem>
                 <ListItemIcon>
                   <AccountBoxSharpIcon fontSize="medium" />
@@ -155,7 +155,7 @@ const NavBar = (theme) => {
                 <ListItemText onClick={handleClose} primary="Alumnos" />
               </StyledMenuItem>
             </Link> */}
-            {/* <Link to="/root/invite">
+          {/* <Link to="/root/invite">
               <StyledMenuItem>
                 <ListItemIcon>
                   <HelpOutlineSharpIcon fontSize="medium" />
@@ -163,7 +163,6 @@ const NavBar = (theme) => {
                 <ListItemText onClick={handleClose} primary="Invitar alumnos" />
               </StyledMenuItem>
             </Link> */}
-          </StyledMenu>
           <Typography>
             <Button variant="text" color="secondary">
               {data ? (
