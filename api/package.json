@@ -25,6 +25,7 @@
     "graphql": "^15.4.0",
     "graphql-tools": "^7.0.1",
     "image-size": "^0.9.3",
+    "image-to-base64": "^2.1.1",
     "joi": "^17.3.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.12",
