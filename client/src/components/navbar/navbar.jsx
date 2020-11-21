@@ -7,26 +7,26 @@ import {
   Toolbar,
   Menu,
   MenuItem,
+  Typography,
 } from "@material-ui/core";
 import { AppBar, ListItemIcon, ListItemText } from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import AccountBoxSharpIcon from "@material-ui/icons/AccountBoxSharp";
 import FilterNoneSharpIcon from "@material-ui/icons/FilterNoneSharp";
 import HelpOutlineSharpIcon from "@material-ui/icons/HelpOutlineSharp";
 import Logo from "../home/images/logoHenry.jpeg";
 import { withStyles } from "@material-ui/core/styles";
-import DrawerNavbar from './drawer';
+import DrawerNavbar from "./drawer";
 import { useQuery, gql } from "@apollo/client";
 
 const GET_PROFILE = gql`
-  query me{
-    me{
+  query me {
+    me {
       inscriptionDate
       name
       lastname
       email
-      rol 
+      rol
       title
       shortDescription
       description
@@ -111,9 +111,9 @@ const NavBar = (theme) => {
     <div>
       <AppBar className="navbar">
         <Toolbar>
-          {/* <IconButton>
-            <MenuIcon />
-          </IconButton> */}
+          <IconButton>
+            <DrawerNavbar />
+          </IconButton>
           <Link to="/root/home" className={classes.tittle1}>
             <img
               src={Logo}
@@ -121,7 +121,6 @@ const NavBar = (theme) => {
               style={{ width: "60px", height: "60px", paddingTop: "5px" }}
             />
           </Link>
-          <DrawerNavbar />
           {/* <Button
             aria-controls="customized-menu"
             aria-haspopup="true"
@@ -138,7 +137,9 @@ const NavBar = (theme) => {
             open={Boolean(anchorElP)}
             onClose={handleClose}
           >
-            {/* <Link to="/root/cohorte">
+            {" "}
+          </StyledMenu>
+          {/* <Link to="/root/cohorte">
               <StyledMenuItem>
                 <ListItemIcon>
                   <FilterNoneSharpIcon fontSize="medium" />
@@ -146,7 +147,7 @@ const NavBar = (theme) => {
                 <ListItemText onClick={handleClose} primary="Cohortes" />
               </StyledMenuItem>
             </Link> */}
-            {/* <Link to="/root/student">
+          {/* <Link to="/root/student">
               <StyledMenuItem>
                 <ListItemIcon>
                   <AccountBoxSharpIcon fontSize="medium" />
@@ -154,7 +155,7 @@ const NavBar = (theme) => {
                 <ListItemText onClick={handleClose} primary="Alumnos" />
               </StyledMenuItem>
             </Link> */}
-            {/* <Link to="/root/invite">
+          {/* <Link to="/root/invite">
               <StyledMenuItem>
                 <ListItemIcon>
                   <HelpOutlineSharpIcon fontSize="medium" />
@@ -162,12 +163,20 @@ const NavBar = (theme) => {
                 <ListItemText onClick={handleClose} primary="Invitar alumnos" />
               </StyledMenuItem>
             </Link> */}
-          </StyledMenu>
-          <Link to="/root/login" style={{ textDecoration: 'none', color: 'black' }}>
+          <Typography>
             <Button variant="text" color="secondary">
-              {data ? data.me.name : "Login"}
+              {data ? (
+                data.me.name
+              ) : (
+                <Link
+                  to="/root/login"
+                  style={{ textDecoration: "none", color: "black" }}
+                >
+                  "Login"{" "}
+                </Link>
+              )}
             </Button>
-          </Link>
+          </Typography>
           <IconButton
             aria-label="account of current user"
             aria-controls="menu-appbar"
