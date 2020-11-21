@@ -50,7 +50,7 @@ export default function ModalPass({ handleClose, open }) {
   async function submit() {
     const data = values;
 
-    console.log(values);
+    console.log(data);
     const resp = await fetchMore({
       variables: {
         email: values.email,
@@ -58,11 +58,11 @@ export default function ModalPass({ handleClose, open }) {
       },
     });
     console.log("mi respuesta", resp);
-
     Toast.fire({
       icon: "success",
       title: "Se envio enlace para resetear contraseña al correo electronico.",
     });
+    handleClose();
   }
 
   return (
@@ -81,9 +81,9 @@ export default function ModalPass({ handleClose, open }) {
       <Fade in={open}>
         <div className={classes.paperModal}>
           <Typography> Ingresa tu email</Typography>
-          <form>
+          <form onSubmit={(e) => handleSubmit(e)}>
             <Grid item xs={12} sm={8}>
-              <FormControl onSubmit={handleSubmit}>
+              <FormControl>
                 <InputLabel htmlFor="email"></InputLabel>
                 <Input
                   id="email"
