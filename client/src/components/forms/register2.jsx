@@ -65,7 +65,7 @@ export default function Register2() {
       },
     });
 
-    history.push("/root/login");
+    history.push("/");
   }
 
   return (
