@@ -45,7 +45,7 @@ function Row(results, clicked) {
   const [open, setOpen] = React.useState(false);
   const [openPerfil, setOpenPerfil] = React.useState(false);
   const classes = useRowStyles();
-  const [buttonClicked, setButtonClicked] = React.useState(false);
+  // const [buttonClicked, setButtonClicked] = React.useState(false);
 
   // const handleButtonClick = () => {
   //   setButtonClicked(true);
@@ -74,12 +74,12 @@ function Row(results, clicked) {
             color="grey"
             style={{ textDecoration: "none", color: "black" }}
           > */}
-          <IconButton >
-            <PersonPinIcon onClick={()=> setButtonClicked(!buttonClicked)}/>
+          {/* <IconButton > */}
+            {/* <PersonPinIcon onClick={()=> setButtonClicked(!buttonClicked)}/> */}
             {/* <PersonPinIcon aria-label="expand row" size="small" onClick={() => setOpenPerfil(!openPerfil)}>
           {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />} */}
-          {buttonClicked ? <UserProfile results={results} /> : (null)}
-          </IconButton>
+          {/* {buttonClicked ? <UserProfile results={results} /> : (null)} */}
+          {/* </IconButton> */}
           {/* </Link> */}
         </TableCell>
       </TableRow>
@@ -88,21 +88,22 @@ function Row(results, clicked) {
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={1}>
-              <Typography variant="h6" gutterBottom component="div">
+              {/* <Typography variant="h6" gutterBottom component="div">
                 Datos
-              </Typography>
+              </Typography> */}
               <Table size="small" aria-label="purchases">
-                <TableHead>
+                {/* <TableHead>
                   <TableRow>
                     <TableCell>Fecha inicio/fin</TableCell>
                     <TableCell>Cohorte</TableCell>
                     <TableCell align="right">Promedio</TableCell>
                   </TableRow>
-                </TableHead>
+                </TableHead> */}
                 <TableBody>
-                  <TableCell>{row.inscriptionDate}</TableCell>
+                <UserProfile results={results} />
+                  {/* <TableCell>{row.inscriptionDate}</TableCell>
                   <TableCell></TableCell>
-                  <TableCell></TableCell>
+                  <TableCell></TableCell> */}
                   {/* {row.map((historyRow) => (
                     <TableRow key={historyRow.inscriptionDate}>
                       <TableCell component="th" scope="row">
@@ -184,8 +185,8 @@ export default ({ results, loading }) => {
             <TableCell>Apellido</TableCell>
             <TableCell align="right">Nombre</TableCell>
             <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Info Academica</TableCell>
-            <TableCell align="right">Info de Perfil</TableCell>
+            <TableCell align="right">Mas info</TableCell>
+            {/* <TableCell align="right">Info de Perfil</TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody id="t-body-students">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery, useMutation, useLazyQuery, gql } from '@apollo/client';
+import { useQuery, useLazyQuery, gql } from '@apollo/client';
 import StudentsContainer from './container';
 // import Autorenew from '@material-ui/icons/Autorenew';
 // import Skeleton from '@material-ui/lab/Skeleton';
@@ -18,6 +18,16 @@ query search($query: String!) {
     description
     gitHubLink
     link
+    cohort{
+      name
+    }
+    group{
+      name
+    }
+    qualifications{
+      grade
+      average
+    }
   }
 }`;
 

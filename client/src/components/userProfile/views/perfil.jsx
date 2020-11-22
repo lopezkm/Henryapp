@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 //import alumno from './alumno.jpg';
 import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
+
 const useStyles = makeStyles((theme)=>({
     root: {
       maxWidth: 345,
@@ -19,6 +20,9 @@ const useStyles = makeStyles((theme)=>({
     media: {
       height: 140,
     },
+    marginAutoItem: {
+        margin: 'auto'
+      },
   }));
 
 export const theme = createMuiTheme({
@@ -63,7 +67,16 @@ const UserProfile= (results) => {
               {results.results.row.rol} 
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-            Descripcion: {results.results.row.description}
+            Fecha de inscripcion: {results.results.row.inscriptionDate}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+            Cohorte: {results.results.row.cohort.name}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+            Nota: {results.results.row.qualifications.grade}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+            Promedio:{results.results.row.qualifications.average}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               Github: {results.results.row.gitHubLink}
@@ -73,12 +86,9 @@ const UserProfile= (results) => {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions >
-          <Button size="small">
+        <CardActions m="auto">
+          <Button >
             Enviar mensaje
-          </Button>
-          <Button size="small" >
-            Informacion Academica
           </Button>
         </CardActions>
       </Card>
