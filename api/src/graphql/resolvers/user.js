@@ -81,7 +81,10 @@ export default {
               },
             },
           ],
-        });
+        })
+          .populate("cohort")
+          .populate("group")
+          .populate("feedbacks");
         return response;
       } else {
         throw new Error("Usuario no autenticado.");
