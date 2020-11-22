@@ -1,13 +1,13 @@
-import { Group, User } from "../../models";
-import { getAuthUser } from '../../functions/auth';
+import { Group, User, Cohort } from "../../models";
+import { getAuthUser } from "../../functions/auth";
 import { myRolIs } from "../../functions/myRolIs";
 
 export default {
   Query: {
     group: async (root, args, { req }) => {
       const isAuthenticate = await getAuthUser(req);
-      if (isAuthenticate){
-          return await Group.find({});
+      if (isAuthenticate) {
+        return await Group.find({});
       } else {
         throw new Error("Usuario no autenticado.");
       }
@@ -15,7 +15,7 @@ export default {
     groups: async (_, args, { req }) => {
       const isAuthenticate = await getAuthUser(req);
       const isAdmin = await myRolIs(req);
-      if (isAuthenticate){
+      if (isAuthenticate) {
         if (isAdmin.first && isAdmin.second) {
           const response = await Group.findById(args.id).populate("users");
           return response;
@@ -25,6 +25,11 @@ export default {
       } else {
         throw new Error("Usuario no autenticado.");
       }
+    },
+    getGroupUsers: async (_, { groupId }, { req }, __) => {
+      return await User.find({
+        group: groupId,
+      });
     },
   },
   Mutation: {
@@ -49,68 +54,92 @@ export default {
         }
       } else {
         // return 'Usuario no autorizado.';
-        throw new Error(
-          "Usuario no autenticado."
-        )
+        throw new Error("Usuario no autenticado.");
+      }
+    },
+
+    addGroupToCohort: async (root, { cohortId, groupId }, { req }, info) => {
+      const isAuthenticate = await getAuthUser(req);
+      const isAdmin = await myRolIs(req);
+      if (isAuthenticate) {
+        if (isAdmin.first && isAdmin.second) {
+          const cohortUpdated = await Cohort.findByIdAndUpdate(
+            cohortId,
+            {
+              $push: { groups: groupId },
+            },
+            {
+              new: true,
+              useFindAndModify: true,
+            }
+          );
+          if (!userUpdated) {
+            // throw new Error("Ups algo salió mal.");
+            return false;
+          }
+          return userUpdated;
+        } else {
+          throw new Error("Usuario no es Administrador.");
+        }
+      } else {
+        throw new Error("Usuario no autenticado.");
       }
     },
 
     addUserToGroup: async (root, { userId, groupId }, { req }, info) => {
       const isAuthenticate = await getAuthUser(req);
       const isAdmin = await myRolIs(req);
-      if(isAuthenticate){
+      if (isAuthenticate) {
         if (isAdmin.first && isAdmin.second) {
-          const newGroup = await Group.findByIdAndUpdate(
-          groupId,
-          {
-              $push: { users: userId },
-          },
-          {
+          const userUpdated = await User.findByIdAndUpdate(
+            userId,
+            {
+              $set: { group: groupId },
+            },
+            {
               new: true,
               useFindAndModify: true,
-          }
+            }
           );
-          if (!newGroup) {
-          // throw new Error("Ups algo salió mal.");
+          if (!userUpdated) {
+            // throw new Error("Ups algo salió mal.");
             return false;
           }
-          return newGroup;
+          return await User.find({ group: groupId });
         } else {
           throw new Error("Usuario no es Administrador.");
         }
-      } else { 
-        throw new Error(
-          "Usuario no autenticado."
-        )
+      } else {
+        throw new Error("Usuario no autenticado.");
       }
     },
 
     removeUserFromGroup: async (root, { userId, groupId }, { req }, info) => {
       const isAuthenticate = await getAuthUser(req);
       const isAdmin = await myRolIs(req);
-      if(isAuthenticate){
+      if (isAuthenticate) {
         if (isAdmin.first && isAdmin.second) {
-          const updatedGroup = await Group.findByIdAndUpdate(
-          groupId,
-          {
-              $pull: { users: userId },
-          },
-          {
+          const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            {
+              $unset: { group: groupId },
+            },
+            {
               new: true,
               useFindAndModify: true,
-          }
+            }
           );
-          if (!updatedGroup) {
-          return false;
+          if (!updatedUser) {
+            return false;
           }
-          return updatedGroup;
+          return await User.find({
+            group: groupId,
+          });
         } else {
           throw new Error("Usuario no es Administrador.");
         }
       } else {
-                  throw new Error(
-            "Usuario no autenticado."
-          )
+        throw new Error("Usuario no autenticado.");
       }
     },
   },

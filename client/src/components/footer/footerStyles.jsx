@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   //   marginBottom: theme.spacing(2),
   // },
   footer: {
-    backgroundColor: theme.palette.grey[900],
+    backgroundColor: "rgb(0, 0, 0)",
     height: "130px",
     width: "100%",
     display: "flex",

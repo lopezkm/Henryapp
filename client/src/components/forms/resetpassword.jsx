@@ -4,25 +4,17 @@ import Typography from "@material-ui/core/Typography";
 import {
   FormControl,
   Button,
-  TextField,
   Input,
   InputLabel,
   FormHelperText,
-  Container,
 } from "@material-ui/core";
 import Paper from "@material-ui/core/Paper";
-import { Link } from "react-router-dom";
 import "../../css/forms.css";
 import useForm from "./useForm";
-import validate from "./validateLogin";
+import validate from "./validateReset";
 import useStyleslog from "./stylesLogin"; //import styles
 import { gql, useQuery } from "@apollo/client";
-import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
-import Fade from "@material-ui/core/Fade";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import ModalPass from "./modalResetPass";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -49,52 +41,35 @@ const LOGIN_USER = gql`
   }
 `;
 
-export default function Login() {
+export default function ResetPassword() {
   const classes = useStyleslog();
   const [open, setOpen] = useState(false);
   const { values, handleChange, handleSubmit, errors } = useForm(
     submit,
     validate
   );
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const history = useHistory();
 
   const { loading, error, data, fetchMore } = useQuery(LOGIN_USER, {
     variables: {
-      email: "",
       password: "",
+      password2: "",
     },
   });
 
   async function submit() {
-    const { email, password } = values;
+    const { password } = values;
 
     console.log(values);
     const { data } = await fetchMore({
       variables: {
-        email,
         password,
       },
     });
 
-    const token = data.login.token;
-    localStorage.setItem("token", token);
-
     Toast.fire({
       icon: "success",
-      title: "¡Gracias por volver!",
+      title: "¡Contraseña cambiada exitosamente!",
     });
-
-    history.push("/root/home");
-
-    // console.log(response);
   }
 
   return (
@@ -118,27 +93,11 @@ export default function Login() {
         >
           <Grid item xs={12} sm={8} className={classes.form}>
             <Typography variant="h4" gutterBottom>
-              Login
+              Restablecer contraseña
             </Typography>
             <br></br>
 
             <form onSubmit={(e) => handleSubmit(e)}>
-              <Grid item xs={12} sm={8}>
-                <FormControl>
-                  <InputLabel htmlFor="email"></InputLabel>
-                  <Input
-                    id="email"
-                    name="email"
-                    type="text"
-                    aria-describedby="email-helper"
-                    onChange={(e) => handleChange(e)}
-                    value={values.email}
-                  />
-                  {errors.email && <p className="error">{errors.email}</p>}
-                  <FormHelperText id="email-helper">Email </FormHelperText>
-                </FormControl>
-              </Grid>
-              <br></br>
               <Grid item xs={12} sm={8}>
                 <FormControl>
                   <InputLabel htmlFor="pass"></InputLabel>
@@ -156,6 +115,28 @@ export default function Login() {
                   <FormHelperText id="pass-helper">Password</FormHelperText>
                 </FormControl>
               </Grid>
+              <br></br>
+              <Grid item xs={12} sm={8}>
+                <FormControl>
+                  {" "}
+                  <InputLabel htmlFor="pass2"> </InputLabel>
+                  <Input
+                    id="pass"
+                    name="password2"
+                    type="password"
+                    aria-describedby="pass-helper"
+                    onChange={(e) => handleChange(e)}
+                    value={values.password2}
+                  />
+                  {errors.password2 && (
+                    <p className="error">{errors.password2}</p>
+                  )}
+                  <FormHelperText id="pass-helper2">
+                    {" "}
+                    Re-enter password{" "}
+                  </FormHelperText>
+                </FormControl>
+              </Grid>
 
               <Grid item md={10}>
                 <Button
@@ -169,20 +150,6 @@ export default function Login() {
                 </Button>
               </Grid>
             </form>
-            <br></br>
-
-            <Grid container>
-              <Grid item xs>
-                <Typography
-                  onClick={handleOpen}
-                  className={classes.button}
-                  style={{ cursor: "pointer" }}
-                >
-                  ¿Olvidaste tu contraseña?
-                </Typography>
-                <ModalPass handleClose={handleClose} open={open} />
-              </Grid>
-            </Grid>
           </Grid>
         </Grid>
       </Grid>
