@@ -11,7 +11,6 @@ import ContactMailIcon from "@material-ui/icons/ContactMail";
 import ListItemText from "@material-ui/core/ListItemText";
 import FolderSharedIcon from "@material-ui/icons/FolderShared";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
-import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 

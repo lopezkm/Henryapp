@@ -26,30 +26,38 @@ export default function Footer() {
         </h1>
       </div>
       <div className={classes.marginF}>
-        <Fab
-          size="small"
-          color="primary"
-          aria-label="edit"
-          className={classes.marginB}
-        >
-          <LinkedIn />
-        </Fab>
-        <Fab
-          size="small"
-          color="primary"
-          aria-label="edit"
-          className={classes.marginB}
-        >
-          <Facebook />
-        </Fab>
-        <Fab
-          size="small"
-          color="primary"
-          aria-label="edit"
-          className={classes.marginB}
-        >
-          <Twitter />
-        </Fab>
+        <Link href="https://www.linkedin.com/school/soyhenry//">
+          <Fab
+            size="small"
+            color="primary"
+            aria-label="edit"
+            className={classes.marginB}
+          >
+            <LinkedIn />
+          </Fab>
+        </Link>
+
+        <Link href="https://www.facebook.com/HENRY-108437840594440/">
+          <Fab
+            size="small"
+            color="primary"
+            aria-label="edit"
+            className={classes.marginB}
+          >
+            <Facebook />
+          </Fab>
+        </Link>
+
+        <Link href="https://twitter.com/soyhenry_ok">
+          <Fab
+            size="small"
+            color="primary"
+            aria-label="edit"
+            className={classes.marginB}
+          >
+            <Twitter />
+          </Fab>
+        </Link>
       </div>
     </div>
   );

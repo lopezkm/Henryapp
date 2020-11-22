@@ -239,7 +239,7 @@ export const resetPass = async (dest, redirUrl) => {
                             <tbody>
                               <tr>
                                 <td style="padding: 10px;" valign="top" align="center">
-                                  <a href="http://example.com" style="text-decoration: none;"><img src="images/index-bmM.png" alt="" style="height: auto; max-width: 100%; border: 0; line-height: 100%; outline: 0; -ms-interpolation-mode: bicubic; color: #ffffff; font-size: 14px;" width="130" height=""></a>
+                                  <a href="http://example.com" style="text-decoration: none;"><img src=" " alt="" style="height: auto; max-width: 100%; border: 0; line-height: 100%; outline: 0; -ms-interpolation-mode: bicubic; color: #ffffff; font-size: 14px;" width="130" height=""></a>
                                 </td>
                               </tr>
                               <tr>
