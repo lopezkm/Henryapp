@@ -16,7 +16,7 @@ export default gql`
 
   type Group {
     _id: ID!
-    name: String!
-    meetLink: String!
+    name: String
+    meetLink: String
   }
 `;
