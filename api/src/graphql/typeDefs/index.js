@@ -8,6 +8,7 @@ import sendEmails from "./sendEmails";
 import group from "./group";
 import picture from "./picture";
 import qualification from "./qualification";
+import resetPass from "./resetPass";
 
 export default [
   root,
@@ -17,6 +18,7 @@ export default [
   feedback,
   sprint,
   sendEmails,
+  resetPass,
   group,
   picture,
   qualification,

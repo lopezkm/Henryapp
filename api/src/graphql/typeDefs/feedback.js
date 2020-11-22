@@ -2,7 +2,7 @@ import { gql } from "apollo-server-express";
 
 export default gql`
   extend type Query {
-    feedback(toId: String!, fromId: String!): Feedback!
+    feedback(id: String!): Feedback!
     feedbacks: [Feedback!]
   }
 
@@ -13,6 +13,7 @@ export default gql`
       tecnicalSkill: Float!
       leader: Boolean!
       userId: String!
+      from: String!
     ): Feedback!
     deleteFeedback(
       average: Float!

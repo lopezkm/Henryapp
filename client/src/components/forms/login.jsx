@@ -10,7 +10,6 @@ import {
   FormHelperText,
   Container,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import { Link } from "react-router-dom";
 import "../../css/forms.css";
@@ -20,6 +19,10 @@ import useStyleslog from "./stylesLogin"; //import styles
 import { gql, useQuery } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
+import Fade from "@material-ui/core/Fade";
+import Modal from "@material-ui/core/Modal";
+import Backdrop from "@material-ui/core/Backdrop";
+import ModalPass from "./modalResetPass";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -48,10 +51,18 @@ const LOGIN_USER = gql`
 
 export default function Login() {
   const classes = useStyleslog();
+  const [open, setOpen] = useState(false);
   const { values, handleChange, handleSubmit, errors } = useForm(
     submit,
     validate
   );
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const history = useHistory();
 
@@ -62,9 +73,21 @@ export default function Login() {
     },
   });
 
-  async function submit() {
-    const { email, password } = values;
+  // const {
+  //   loading: sendEmail,
+  //   error: Email,
+  //   data: send,
+  //   fetchMore: email,
+  // } = useQuery(SEND_EMAIL, {
+  //   variables: {
+  //     email: "",
+  //   },
+  // });
 
+  async function submit() {
+    const { email, password, emailF } = values;
+
+    console.log(values);
     const { data } = await fetchMore({
       variables: {
         email,
@@ -161,9 +184,14 @@ export default function Login() {
 
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2" className={classes.button}>
-                  Forgot password?
-                </Link>
+                <Typography
+                  onClick={handleOpen}
+                  className={classes.button}
+                  style={{ cursor: "pointer" }}
+                >
+                  ¿Olvidaste tu contraseña?
+                </Typography>
+                <ModalPass handleClose={handleClose} open={open} />
               </Grid>
             </Grid>
           </Grid>

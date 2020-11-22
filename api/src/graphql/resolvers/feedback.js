@@ -35,7 +35,7 @@ export default {
   Mutation: {
     // Crear nuevo feedback
     createFeedback: async (root, args, { req }, info) => {
-      const { average, softSkill, tecnicalSkill, leader, toId, from } = args;
+      const { average, softSkill, tecnicalSkill, leader, userId, from } = args;
       const isAuthenticate = await getAuthUser(req);
       if (isAuthenticate) {
         const newFeedback = await Feedback.create({
@@ -43,19 +43,26 @@ export default {
           softSkill,
           tecnicalSkill,
           leader,
-          from,
         });
-        const user = await User.findByIdAndUpdate(
-          toId,
+
+        await User.findByIdAndUpdate(
+          userId,
           {
             $push: { feedbacks: newFeedback._id },
           },
           {
             new: true,
-            useFindAndModify: true,
+            useFindAndModify: false,
           }
         );
-        return user;
+        return await Feedback.findByIdAndUpdate(
+          newFeedback._id,
+          { $set: { from: from } },
+          {
+            new: true,
+            useFindAndModify: false,
+          }
+        );
       } else {
         throw new Error("Usuario no autenticado.");
       }
