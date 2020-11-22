@@ -17,8 +17,6 @@ import Modal from "@material-ui/core/Modal";
 import Tooltip from "@material-ui/core/Tooltip";
 
 export default function PersonalInfo({ user }) {
-  console.log("mi data en personal info", user.user.name);
-  // ``;
 
   const classes = useStyles();
   const [values, setValues] = useState({
@@ -94,17 +92,16 @@ export default function PersonalInfo({ user }) {
           <TableRow>
             <TableCell className={classes.font}>Nombre:</TableCell>
             <TableCell className={classes.font} selectable={false}>
-              {state.editandoName ? (
+              {/* {state.editandoName ? (
                 <TextField
                   name="name"
                   onChange={handleChange}
                   placeholder="Ingresa tu nombre"
                 />
-              ) : (
-                user.user.name
-              )}
+              ) : ( */}
+                {user.user.name}
             </TableCell>
-            <TableCell className={classes.font}>
+            {/* <TableCell className={classes.font}>
               {state.editandoName ? (
                 <Fab size="small" color="primary" aria-label="edit">
                   <Tooltip title="Enviar">
@@ -118,22 +115,21 @@ export default function PersonalInfo({ user }) {
                   </Tooltip>
                 </Fab>
               )}
-            </TableCell>
+            </TableCell> */}
           </TableRow>
           <TableRow>
             <TableCell className={classes.font}>Apellido:</TableCell>
             <TableCell className={classes.font} selectable={false}>
-              {state.editandoLastName ? (
+              {/* {state.editandoLastName ? (
                 <TextField
                   onChange={(e) => handleChange(e)}
                   name="lastname"
                   placeholder="Ingresa tu apellido"
                 />
-              ) : (
-                user.user.lastname
-              )}
+              ) : ( */}
+                {user.user.lastname}
             </TableCell>
-            <TableCell className={classes.font}>
+            {/* <TableCell className={classes.font}>
               {state.editandoLastName ? (
                 <Fab size="small" color="primary" aria-label="edit">
                   <Tooltip title="Enviar">
@@ -147,22 +143,21 @@ export default function PersonalInfo({ user }) {
                   </Tooltip>
                 </Fab>
               )}
-            </TableCell>
+            </TableCell> */}
           </TableRow>
           <TableRow>
             <TableCell className={classes.font}>Email:</TableCell>
             <TableCell className={classes.font} selectable={false}>
-              {state.editandoEmail ? (
+              {/* {state.editandoEmail ? (
                 <TextField
                   name="email"
                   onChange={handleChange}
                   placeholder="Ingresa un email"
                 />
-              ) : (
-                user.user.email
-              )}
+              ) : ( */}
+                {user.user.email}
             </TableCell>
-            <TableCell className={classes.font}>
+            {/* <TableCell className={classes.font}>
               {state.editandoEmail ? (
                 <Fab size="small" color="primary" aria-label="edit">
                   <Tooltip title="Enviar">
@@ -176,7 +171,7 @@ export default function PersonalInfo({ user }) {
                   </Tooltip>
                 </Fab>
               )}
-            </TableCell>
+            </TableCell> */}
           </TableRow>
         </TableBody>
       </Table>
