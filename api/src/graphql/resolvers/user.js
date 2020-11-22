@@ -15,27 +15,21 @@ const { APP_SECRET } = process.env;
 
 export default {
   Query: {
-    users: async (root, args, { req }) => {
-      //const isAuthenticate = await getAuthUser(req);
-      //const isPM = await myRolIs(req);
-      //if (isAuthenticate) {
-      //if (isPM.first) {
-      return await User.find();
-      //} else {
-      //throw new Error("Usuario no es PM, ni Administrador.");
-      //}
-      //} else {
-      //throw new Error("Usuario no autenticado.");
-      //}
-    },
-    profile: async (root, args, { req }, info) => {
-      //const isAuthenticate = await getAuthUser(req);
-      //if (isAuthenticate) {
-      let authUser = await User.findById(args.id);
-      return authUser;
-      //} else {
-      //throw new Error("Usuario no autenticado.");
-      //}
+    users: async (root, args, { req }, _) => {
+      const isAuthenticate = await getAuthUser(req);
+      const isPM = await myRolIs(req);
+      if (isAuthenticate) {
+        if (isPM.first) {
+          return await User.find()
+            .populate("cohort")
+            .populate("group")
+            .populate("feedbacks");
+        } else {
+          throw new Error("Usuario no es PM, ni Administrador.");
+        }
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
     },
     login: async (root, args, { req }, info) => {
       const user = await User.findOne({
@@ -70,10 +64,27 @@ export default {
       const isAuthenticate = await getAuthUser(req);
       if (isAuthenticate) {
         const response = await User.find({
-          name: {
-            $regex: new RegExp(args.query),
-          },
-        });
+          $or: [
+            {
+              email: {
+                $regex: new RegExp(args.query),
+              },
+            },
+            {
+              name: {
+                $regex: new RegExp(args.query),
+              },
+            },
+            {
+              lastname: {
+                $regex: new RegExp(args.query),
+              },
+            },
+          ],
+        })
+          .populate("cohort")
+          .populate("group")
+          .populate("feedbacks");
         return response;
       } else {
         throw new Error("Usuario no autenticado.");

@@ -53,8 +53,6 @@ const UserSchema = Schema({
     type: String,
     default: "",
   },
-  feedbacks: [{ type: Schema.Types.ObjectId, ref: "Feedback" }],
-
   //implementación del Rol
   rol: {
     type: String,
@@ -62,8 +60,18 @@ const UserSchema = Schema({
   },
   //implementación de subirFotos
   picture: { type: Schema.Types.ObjectId, ref: "Picture" },
+  //relaciones con todo
+  cohort: { type: Schema.Types.ObjectId, ref: "Cohort" },
+  group: { type: Schema.Types.ObjectId, ref: "Group" },
+  pairProgramming: {
+    type: String,
+    required: false,
+  },
+  feedbacks: [{ type: Schema.Types.ObjectId, ref: "Feedback" }],
+  qualifications: [{ type: Schema.Types.ObjectId, ref: "Qualification" }],
 });
 
 const User = model("User", UserSchema);
 
 export default User;
+/**/

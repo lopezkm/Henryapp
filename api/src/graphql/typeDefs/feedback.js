@@ -7,8 +7,21 @@ export default gql`
   }
 
   extend type Mutation {
-    createFeedback(average: Float!, softSkill: Float!, tecnicalSkill: Float!, leader: Boolean!, userId: String! ): UserFeedback!
-    deleteFeedback(average: Float!, softSkill: Float!, tecnicalSkill: Float!, leader: Boolean!, userId: String! ): Feedback!
+    createFeedback(
+      average: Float!
+      softSkill: Float!
+      tecnicalSkill: Float!
+      leader: Boolean!
+      userId: String!
+      from: String!
+    ): Feedback!
+    deleteFeedback(
+      average: Float!
+      softSkill: Float!
+      tecnicalSkill: Float!
+      leader: Boolean!
+      userId: String!
+    ): Feedback!
   }
 
   type Feedback {
@@ -17,10 +30,5 @@ export default gql`
     softSkill: Float!
     tecnicalSkill: Float!
     leader: Boolean!
-  }
-  type UserFeedback {
-    _id: ID!
-    name: String!
-    feedbacks: [Feedback!]
   }
 `;

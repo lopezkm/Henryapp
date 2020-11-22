@@ -2,7 +2,6 @@ import { gql } from "apollo-server-express";
 
 export default gql`
   extend type Query {
-    profile(id: String!): User!
     users: [User!]
     refreshToken: AuthUser!
     login(email: String!, password: String!): AuthUser!
@@ -43,12 +42,16 @@ export default gql`
     email: String!
     inscriptionDate: String!
     rol: String!
-
     title: String
     shortDescription: String
     description: String
     gitHubLink: String
     link: String
+    cohort: Cohort
+    group: Group
+    pairProgramming: String
+    feedbacks: [Feedback]
+    qualifications: [Qualification]
   }
 
   type AuthUser {
@@ -57,3 +60,5 @@ export default gql`
     refreshToken: String!
   }
 `;
+/*feedbacks: [Feedback]
+    qualifications: [Qualification]*/

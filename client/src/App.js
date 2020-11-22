@@ -4,7 +4,7 @@ import LandingPage from "./components/landingPage/functions";
 import Home from "./components/home/home.jsx";
 import Navbar from "./components/navbar/navbar.jsx";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { yellow, grey } from "@material-ui/core/colors";
+import { grey } from "@material-ui/core/colors";
 import Footer from "./components/footer/footer";
 import Register2 from "./components/forms/register2.jsx";
 import Login from "./components/forms/login.jsx";
@@ -17,6 +17,7 @@ import AddStudents from "./components/cohorte/addStudents.jsx";
 
 //import UserProfile2 from "./components/container-profile/components/views";
 import { Profile } from "./components/container-profile";
+import ResetPassword from "./components/forms/resetpassword";
 
 const theme = createMuiTheme({
   palette: {
@@ -47,10 +48,10 @@ function App() {
           /> */}
           <Route exact path="/root/profile" render={() => <Profile />} />
           <Route exact path="/root/profilee" render={() => <UserProfile />} />
-
           <Route exact path="/root/home" render={() => <Home />} />
           <Route exact path="/root/student" render={() => <Student />} />
           <Route exact path="/root/register" render={() => <Register2 />} />
+          <Route exact path="/root/password" render={() => <ResetPassword />} />
           <Route exact path="/root/login" render={() => <Login />} />
           <Route exact path="/root/invite" render={() => <Invite />} />
           <Route exact path="/root/cohorte" render={() => <Cohort />} />

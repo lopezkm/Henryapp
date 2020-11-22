@@ -4,53 +4,61 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
-import "../../css/footer.css";
-import Logo from "../home/images/logonegro.png";
-
-const useStyles = makeStyles((theme) => ({
-  // root: {
-  //   display: 'flex',
-  //   flexDirection: 'column',
-  //   minHeight: '100vh',
-  // },
-  // main: {
-  //   marginTop: theme.spacing(0),
-  //   marginBottom: theme.spacing(2),
-  // },
-  footer: {
-    //  bottom: 0,
-    // padding: theme.spacing(3, 2),
-    // marginTop: 'auto',
-    backgroundColor: theme.palette.grey[900],
-    //  position: 'sticky',
-    height: "130px",
-  },
-  typography: {
-    allVariants: {
-      color: "white",
-    },
-  },
-}));
+import Logo from "../home/images/index.png";
+import { Facebook, Twitter, LinkedIn } from "@material-ui/icons";
+import Fab from "@material-ui/core/Fab";
+import useStyles from "./footerStyles";
 
 export default function Footer() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <footer className={classes.footer}>
-        {/* <Container maxWidth="sm"> */}
-        <img
-          src={Logo}
-          style={{ height: "50px", marginTop: "40px", marginLeft: "30px" }}
-        />
-        {/* <ul style={{color:'white'}}>
-          <li>Info sobre Henry AQUI</li>
-          <li>Contacto a redes</li>
-          <li >Contacto a redes</li>
-          </ul> 
-        {/* </Container> */}
-      </footer>
+    <div className={classes.footer} style={{ display: "inline-flex" }}>
+      <div className={classes.marginF}>
+        <Link href="/">
+          <img src={Logo} style={{ height: "50px" }} />
+        </Link>
+      </div>
+      <div className={classes.marginF}>
+        <h1 className={classes.marginB}>Hecho con 💛 por alumnos de Henry.</h1>
+        <h1 className={classes.marginB}>
+          Henry © 2020 | Todos los derechos reservados.
+        </h1>
+      </div>
+      <div className={classes.marginF}>
+        <Link href="https://www.linkedin.com/school/soyhenry//">
+          <Fab
+            size="small"
+            color="primary"
+            aria-label="edit"
+            className={classes.marginB}
+          >
+            <LinkedIn />
+          </Fab>
+        </Link>
+
+        <Link href="https://www.facebook.com/HENRY-108437840594440/">
+          <Fab
+            size="small"
+            color="primary"
+            aria-label="edit"
+            className={classes.marginB}
+          >
+            <Facebook />
+          </Fab>
+        </Link>
+
+        <Link href="https://twitter.com/soyhenry_ok">
+          <Fab
+            size="small"
+            color="primary"
+            aria-label="edit"
+            className={classes.marginB}
+          >
+            <Twitter />
+          </Fab>
+        </Link>
+      </div>
     </div>
   );
 }

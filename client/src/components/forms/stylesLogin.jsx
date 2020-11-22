@@ -9,7 +9,7 @@ const useStyleslog = makeStyles((theme) => ({
   },
   main: {
     marginTop: theme.spacing(3),
-    height: "90vh",
+    height: "86vh",
     backgroundColor: theme.palette.secondary.main,
     maxWidth: "100%",
   },
@@ -41,6 +41,19 @@ const useStyleslog = makeStyles((theme) => ({
     width: "80%",
     marginTop: theme.spacing(12),
     marginLeft: theme.spacing(12),
+  },
+  modalDisplay: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  paperModal: {
+    position: "absolute",
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
   },
 }));
 
