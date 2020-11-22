@@ -12,6 +12,12 @@ query search($query: String!) {
     lastname
     email
     inscriptionDate
+    rol
+    title
+    shortDescription
+    description
+    gitHubLink
+    link
   }
 }`;
 
