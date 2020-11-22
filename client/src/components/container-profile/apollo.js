@@ -5,23 +5,33 @@ import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useStyles } from "./styles";
 
-// const GET_PROFILE = gql`
-//   query profile($id: String!) {
-//     profile(id: $id) {
-//       inscriptionDate
-//       name
-//       lastname
-//       email
-//       rol
-      
-//       title
-//       shortDescription
-//       description
-//       gitHubLink
-//       link
-//     }
-//   }
-// `;
+const UPDATE_PROFILE = gql`
+  mutation updateUser(
+    id: String!
+    name: String
+    lastname: String
+    email: String
+    title: String
+    shortDescription: String
+    description: String
+    gitHubLink: String
+    link: String
+    ) {
+    profile( {
+      _id
+      inscriptionDate
+      name
+      lastname
+      email
+      rol
+      title
+      shortDescription
+      description
+      gitHubLink
+      link
+    }
+  }
+`;
 
 const GET_PROFILE = gql`
   query me{
