@@ -7,6 +7,7 @@ import feedback from "./feedback";
 import sendEmails from "./sendEmails";
 import group from "./group";
 import picture from "./picture";
+import qualification from "./qualification";
 import resetPass from "./resetPass";
 
 export default [
@@ -20,4 +21,5 @@ export default [
   resetPass,
   group,
   picture,
+  qualification,
 ];

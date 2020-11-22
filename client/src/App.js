@@ -4,7 +4,7 @@ import LandingPage from "./components/landingPage/functions";
 import Home from "./components/home/home.jsx";
 import Navbar from "./components/navbar/navbar.jsx";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { yellow, grey } from "@material-ui/core/colors";
+import { grey } from "@material-ui/core/colors";
 import Footer from "./components/footer/footer";
 import Register2 from "./components/forms/register2.jsx";
 import Login from "./components/forms/login.jsx";

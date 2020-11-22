@@ -7,9 +7,9 @@ const GroupSchema = Schema({
     unique: true,
   },
   meetLink: {
-      type: String,   // Link para ir a reunión en meet
-    },
-  users: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    type: String, // Link para ir a reunión en meet
+  },
+  cohort: { type: Schema.Types.ObjectId, ref: "Cohort" },
 });
 
 const Group = model("Group", GroupSchema);
