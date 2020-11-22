@@ -8,6 +8,7 @@ export const myRolIs = (request) => {
   header = header.slice(7);
   let user = jwt.verify(header, APP_SECRET);
   let rol = user.rol;
+  console.log(rol);
   if (rol === "Estudiante") {
     return {
       first: false,

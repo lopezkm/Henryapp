@@ -7,6 +7,7 @@ import feedback from "./feedback";
 import sendEmails from "./sendEmails";
 import group from "./group";
 import picture from "./picture";
+import qualification from "./qualification";
 
 export default [
   root,
@@ -18,4 +19,5 @@ export default [
   sendEmails,
   group,
   picture,
+  qualification,
 ];
