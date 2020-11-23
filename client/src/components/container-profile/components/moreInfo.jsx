@@ -16,6 +16,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Tooltip from "@material-ui/core/Tooltip";
+import { useMutation, gql } from "@apollo/client";
 
 import {
   FormControl,
@@ -27,30 +28,61 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 
-export default function MoreInfo({ user, updateUser }) {
+const UPDATE_PROFILE = gql`
+  mutation updateUser(
+    $shortDescription: String
+    $description: String
+    $gitHubLink: String
+    $link: String
+    ) {
+      updateUser(shortDescription: $shortDescription
+        description: $description
+        gitHubLink: $gitHubLink
+        link: $link){
+      inscriptionDate
+      name
+      lastname
+      email
+      rol
+      shortDescription
+      description
+      gitHubLink
+      link
+    }
+  }
+`;
+
+export default function MoreInfo({ user}) {
   //console.log("mi user", user);
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [values, setValues] = useState({ description: "" });
+  const [values, setValues] = useState({ description: user.user.description });
   const [state, setState] = useState({
     editandoDescription: false,
   });
+
+  const [updateUser, {data}] = useMutation(UPDATE_PROFILE);
+  console.log('AAAAAAAAAAAA', data)
 
   const startEditD = () => {
     setState({
       editandoDescription: true,
     });
   };
-  const stopEditD = () => {
+  const stopEditD = (e) => {
+    return (e.preventDefault(),
     setState({
       editandoDescription: false,
-    });
+    }),
+    updateUser({variables: {description: values.description}}),
+    window.location.reload())
   };
 
   const handleChange = (event) => {
     const { value } = event.target;
-    setValues(value);
+    setValues({description: value.length !== 0 ? value : user.user.description});
   };
+  console.log('descripcion', values.description)
   const handleOpen = () => {
     setOpen(true);
   };
@@ -87,16 +119,15 @@ export default function MoreInfo({ user, updateUser }) {
                   placeholder="Ingresa una descripción"
                 />
               ) : (
-                user.user.description
+               user.user.description.length !== 0 ? user.user.description : data && data.updateUser.description 
               )}
             </TableCell>
             <TableCell className={classes.font}>
               {state.editandoDescription ? (
                 <Fab size="small" color="primary" aria-label="edit">
                   <Tooltip title="Enviar">
-                    <CheckIcon onClick={() => stopEditD()} onSubmit={(e) => 
-                      e.preventDefault(),
-                      updateUser({variables: {description: values.description}})} />
+                    <CheckIcon onClick={(e) => stopEditD(e)}  
+                      />
                   </Tooltip>
                 </Fab>
               ) : (
