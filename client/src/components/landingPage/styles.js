@@ -4,7 +4,7 @@ const useStyles = makeStyles((theme) => ({
   landingButton: {
     "& > *": {
       padding: theme.spacing(1),
-      width: "350px",
+      width: "150px",
       marginLeft: "7.5vw",
       position: "absolute",
       zIndex: 100,
