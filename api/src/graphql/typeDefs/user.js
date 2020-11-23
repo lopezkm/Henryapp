@@ -19,7 +19,6 @@ export default gql`
     ): AuthUser!
 
     updateUser(
-      id: String!
       name: String
       lastname: String
       email: String

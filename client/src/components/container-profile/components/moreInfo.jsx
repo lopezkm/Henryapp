@@ -27,7 +27,7 @@ import {
   FormHelperText,
 } from "@material-ui/core";
 
-export default function MoreInfo({ user }) {
+export default function MoreInfo({ user, updateUser }) {
   //console.log("mi user", user);
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -94,7 +94,9 @@ export default function MoreInfo({ user }) {
               {state.editandoDescription ? (
                 <Fab size="small" color="primary" aria-label="edit">
                   <Tooltip title="Enviar">
-                    <CheckIcon onClick={() => stopEditD()} />
+                    <CheckIcon onClick={() => stopEditD()} onSubmit={(e) => 
+                      e.preventDefault(),
+                      updateUser({variables: {description: values.description}})} />
                   </Tooltip>
                 </Fab>
               ) : (
