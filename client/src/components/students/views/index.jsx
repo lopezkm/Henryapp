@@ -5,6 +5,7 @@ import Container from '@material-ui/core/Container';
 import { useStyles } from './styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import WarningIcon from '@material-ui/icons/Warning';
+//import UserProfile from '../../userProfile/views/perfil';
 
 const StudentsView = ({
   handleChange,
@@ -12,6 +13,7 @@ const StudentsView = ({
   loading
 }) => {
   const classes = useStyles();
+  console.log(results);
 
   return (
     <section>
@@ -38,6 +40,7 @@ const StudentsView = ({
                 results={results}
               />
           }
+             {/* <UserProfile results={results} /> */}
         </section>
       </Container>
     </section>

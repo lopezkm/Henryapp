@@ -8,7 +8,7 @@ import { grey } from "@material-ui/core/colors";
 import Footer from "./components/footer/footer";
 import Register2 from "./components/forms/register2.jsx";
 import Login from "./components/forms/login.jsx";
-import UserProfile from "./components/userProfile/index.jsx";
+import UserProfile from "./components/userProfile/views/perfil";
 //import Student from "./components/students/students.jsx";
 import { Cohort } from "./components/containers/cohort";
 import { Student } from "./components/students";
@@ -41,11 +41,11 @@ function App() {
         >
           <Route exact path="/" render={() => <LandingPage />} />
           <Route path="/root" render={() => <Navbar />} />
-          <Route
+          {/* <Route
             exact
             path="/root/userprofile"
             render={() => <UserProfile />}
-          />
+          /> */}
           <Route exact path="/root/profile" render={() => <Profile />} />
           <Route exact path="/root/profilee" render={() => <UserProfile />} />
           <Route exact path="/root/home" render={() => <Home />} />
