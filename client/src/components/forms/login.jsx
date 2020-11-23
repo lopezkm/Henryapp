@@ -42,6 +42,7 @@ const LOGIN_USER = gql`
       user {
         _id
         email
+        name
       }
       token
       refreshToken
@@ -73,10 +74,11 @@ export default function Login() {
     },
   });
 
+    
+
   async function submit() {
     const { email, password } = values;
 
-    console.log(values);
     const { data } = await fetchMore({
       variables: {
         email,
@@ -89,12 +91,10 @@ export default function Login() {
 
     Toast.fire({
       icon: "success",
-      title: "¡Gracias por volver!",
+      title: "¡Bienvenido" + " " + data.login.user.name + "!",
     });
 
     history.push("/root/home");
-
-    // console.log(response);
   }
 
   return (

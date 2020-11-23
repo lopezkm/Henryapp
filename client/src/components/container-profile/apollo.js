@@ -4,24 +4,32 @@ import UserContainer from "./container";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useStyles } from "./styles";
+import { Input } from "@material-ui/core";
 
-// const GET_PROFILE = gql`
-//   query profile($id: String!) {
-//     profile(id: $id) {
-//       inscriptionDate
-//       name
-//       lastname
-//       email
-//       rol
-      
-//       title
-//       shortDescription
-//       description
-//       gitHubLink
-//       link
-//     }
-//   }
-// `;
+const UPDATE_PROFILE = gql`
+  mutation updateUser(
+    $shortDescription: String
+    $description: String
+    $gitHubLink: String
+    $link: String
+    ) {
+      updateUser(shortDescription: $shortDescription
+        description: $description
+        gitHubLink: $gitHubLink
+        link: $link){
+      inscriptionDate
+      name
+      lastname
+      email
+      rol
+      title
+      shortDescription
+      description
+      gitHubLink
+      link
+    }
+  }
+`;
 
 const GET_PROFILE = gql`
   query me{
@@ -53,9 +61,9 @@ const MODIFY_PROFILE = gql`
 
 export const ProfileApollo = () => {
   const classes = useStyles();
-  // const { loading, error, data } = useQuery(GET_PROFILE, {
-  //   variables: { id: "5fb4c0b685ffff28d378ca1e" },
-  // });
+
+  const [updateUser, {info}] = useMutation(UPDATE_PROFILE);
+  console.log('AAAAAAAAAAAA', info)
 
   const { loading, error, data } = useQuery(GET_PROFILE);
 
@@ -113,6 +121,8 @@ export const ProfileApollo = () => {
       },
     });
   };
+
   
-  return <UserContainer user={data.me} />;
+  
+  return <UserContainer user={data.me} updateUser={() => updateUser()} />;
 };

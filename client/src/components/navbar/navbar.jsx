@@ -107,6 +107,11 @@ const NavBar = (theme) => {
     setAnchorEl(null);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/";
+  }
+
   return (
     <div>
       <AppBar className="navbar">
@@ -164,7 +169,8 @@ const NavBar = (theme) => {
               </StyledMenuItem>
             </Link> */}
           <Typography>
-            <Button variant="text" color="secondary">
+          {data ? data.me.name : null}
+            {/* <Button variant="text" color="secondary">
               {data ? (
                 data.me.name
               ) : (
@@ -175,7 +181,7 @@ const NavBar = (theme) => {
                   "Login"{" "}
                 </Link>
               )}
-            </Button>
+            </Button> */}
           </Typography>
           <IconButton
             aria-label="account of current user"
@@ -208,7 +214,7 @@ color: black;*/}
                 Profile
               </Link>
             </MenuItem>
-            <MenuItem onClick={handleCloseLogin}>My account</MenuItem>
+            <MenuItem onClick={handleCloseLogin, handleLogout}>Logout</MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>

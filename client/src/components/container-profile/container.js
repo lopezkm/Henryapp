@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import UserViews from './components/views';
 
 export default ({
-  user,
+  user, updateUser
 }) => {
-  console.log('User en container', user)
   // const [anchorEl, setAnchorEl] = useState(null);
   // const [values, setValues] = useState({
   //   name: "",
@@ -36,6 +35,7 @@ export default ({
     <>
       <UserViews
         user={user}
+        updateUser={() => updateUser()} 
       />
     </>
   )
