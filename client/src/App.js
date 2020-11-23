@@ -14,6 +14,7 @@ import { Cohort } from "./components/containers/cohort";
 import { Student } from "./components/students";
 import Invite from "./components/forms/invite.jsx";
 import AddStudents from "./components/cohorte/addStudents.jsx";
+import { Groups } from "./components/groups";
 
 //import UserProfile2 from "./components/container-profile/components/views";
 import { Profile } from "./components/container-profile";
@@ -55,6 +56,7 @@ function App() {
           <Route exact path="/root/login" render={() => <Login />} />
           <Route exact path="/root/invite" render={() => <Invite />} />
           <Route exact path="/root/cohorte" render={() => <Cohort />} />
+          <Route exact path="/root/groups" render={() => <Groups />} />
           <Route
             exact
             path="/root/addStudents"
