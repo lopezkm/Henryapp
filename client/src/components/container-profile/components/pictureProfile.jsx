@@ -23,6 +23,7 @@ export default function PictureProfile({user}) {
   const [values, setValues] = useState({ shortDescription:"" });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [imgUrl, setImgUrl] = useState(null);
   const [state, setState] = useState({
     editandoShort: false,
   });
@@ -65,7 +66,7 @@ export default function PictureProfile({user}) {
       <Avatar
         className={classes.profileCenter}
         alt="Remy Sharp"
-        src={Fotos}
+        src={imgUrl? imgUrl.src:Fotos}
         style={{
           width: "130px",
           height: "130px",
@@ -122,7 +123,7 @@ export default function PictureProfile({user}) {
           </Fab>
         )}
       </div>
-      {open?<FileUpload setOpen={setOpen}/>:<></>}
+      {open?<FileUpload setImgUrl={setImgUrl} setOpen={setOpen}/>:<></>}
     </React.Fragment>
   );
 }

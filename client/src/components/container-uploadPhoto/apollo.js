@@ -3,15 +3,14 @@ import { useMutation, gql } from "@apollo/client";
 import FileUploadContainer from "./container";
 
 const UPLOAD_PHOTO = gql`
-  mutation photoUpload($file: Upload!) {
-    photoUpload(file: $file) {
+  mutation imageUploader($file: Upload!) {
+    imageUploader(file: $file) {
       src
-      thumbsrc
     }
   }
 `;
 
-export default function FileUpload({ setOpen }) {
+export default function FileUpload({ setOpen, setImgUrl }) {
   const [uploadFile, { data }] = useMutation(UPLOAD_PHOTO);
 
   return (
@@ -20,6 +19,7 @@ export default function FileUpload({ setOpen }) {
         abrir={setOpen}
         uploadFile={uploadFile}
         data={data}
+        setImgUrl={setImgUrl}
       />
     </div>
   );

@@ -3,28 +3,29 @@ const { dir } = require("./dirMiddleware");
 const fs = require("fs");
 var sizeOf = require("image-size");
 
-const saveFile = async (args) => {
-  const name = args.file.name;
-  const nL = name.length;
-  const extension = name.substring(nL - 4, nL);
-  const hashName = await bcrypt.hash(name, 6);
-  try {
-    // Use the mv() method to place the file somewhere on your server
-    args.file.mv(`public/${hashName}${extension}`, async function (err) {
-      if (err) throw new Error(err.message);
-      const dimensions = sizeOf(`${dir}/${hashName}${extension}`);
-      let imagen = {};
-      imagen.name = `/${hashName}${extension}`;
-      imagen.width = dimensions.width;
-      imagen.height = dimensions.height;
-      imagen.src = `http://localhost:3001/${hashName}${extension}`;
-      imagen.thumbsrc = `http://localhost:3001/thumbs/300/${hashName}${extension}`;
-      imagen.vertical = dimensions.width / dimensions.height < 1 ? true : false;
-      return imagen;
-    });
-  } catch (err) {
-    throw new Error(err.message);
-  }
+const saveFile = async (file) => {
+  const { createReadStream, filename } = await file;
+  console.log("file---------------------", file);
+  const randomize = Math.floor(Math.random() * 1000000);
+
+  const hashName = await bcrypt.hash("abcdeggfghijk", randomize);
+  console.log(hashName);
+
+  await new Promise((res) =>
+    createReadStream()
+      .pipe(createWriteStream(path.join(dir, "../images/", hashName)))
+      .on("close", res)
+  );
+  console.log(res);
+  const dimensions = sizeOf(res);
+  let imagen = {};
+  imagen.name = `/${hashName}.png`;
+  imagen.width = dimensions.width;
+  imagen.height = dimensions.height;
+  imagen.src = `http://localhost:3001/${hashName}.png`;
+  imagen.thumbsrc = `http://localhost:3001/thumbs/300/${hashName}.png`;
+  imagen.vertical = dimensions.width / dimensions.height < 1 ? true : false;
+  return imagen;
 };
 const deleteFile = async (name) => {
   try {

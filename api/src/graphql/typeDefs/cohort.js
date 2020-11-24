@@ -15,8 +15,8 @@ export default gql`
 
   type Cohort {
     _id: ID!
-    name: String!
-    startingDate: String!
+    name: String
+    startingDate: String
     users: [User!]
   }
 `;

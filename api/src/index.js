@@ -34,7 +34,7 @@ app.use(cors());
 app.use(morgan("dev"));
 //
 //archivos estáticos
-app.use(express.static("public", options));
+app.use(express.static("src/uploads", options));
 //thumbs
 app.use("/thumbs", Thumbs);
 // Conexion express y apollo
