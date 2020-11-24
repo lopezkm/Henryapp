@@ -322,7 +322,7 @@ export const resetPass = async (dest, redirUrl) => {
                                     <tbody>
                                       <tr>
                                         <td style="border-radius: 8px; padding: 13px 17px; background-color: #ffff01" valign="top" bgcolor="#ffff01" align="center">
-                                          <a href="http://localhost:3000/root/register" style="line-height: 24px; text-decoration: none; word-break: break-word; font-weight: 500; display: block; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 16px; color: #080707">Reestablecer contraseña</a>
+                                          <a href="http://localhost:3000/root/password" style="line-height: 24px; text-decoration: none; word-break: break-word; font-weight: 500; display: block; font-family: 'Fira Sans', Helvetica, Arial, sans-serif; font-size: 16px; color: #080707">Reestablecer contraseña</a>
                                         </td>
                                       </tr>
                                     </tbody>
