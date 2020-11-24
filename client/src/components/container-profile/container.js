@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import UserViews from './components/views';
 
 export default ({
-  user, updateUser
+  user
 }) => {
   // const [anchorEl, setAnchorEl] = useState(null);
   // const [values, setValues] = useState({
@@ -35,7 +35,6 @@ export default ({
     <>
       <UserViews
         user={user}
-        updateUser={() => updateUser()} 
       />
     </>
   )

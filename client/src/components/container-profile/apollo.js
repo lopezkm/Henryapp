@@ -6,31 +6,6 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import { useStyles } from "./styles";
 import { Input } from "@material-ui/core";
 
-const UPDATE_PROFILE = gql`
-  mutation updateUser(
-    $shortDescription: String
-    $description: String
-    $gitHubLink: String
-    $link: String
-    ) {
-      updateUser(shortDescription: $shortDescription
-        description: $description
-        gitHubLink: $gitHubLink
-        link: $link){
-      inscriptionDate
-      name
-      lastname
-      email
-      rol
-      title
-      shortDescription
-      description
-      gitHubLink
-      link
-    }
-  }
-`;
-
 const GET_PROFILE = gql`
   query me{
     me{
@@ -61,9 +36,6 @@ const MODIFY_PROFILE = gql`
 
 export const ProfileApollo = () => {
   const classes = useStyles();
-
-  const [updateUser, {info}] = useMutation(UPDATE_PROFILE);
-  console.log('AAAAAAAAAAAA', info)
 
   const { loading, error, data } = useQuery(GET_PROFILE);
 
@@ -124,5 +96,5 @@ export const ProfileApollo = () => {
 
   
   
-  return <UserContainer user={data.me} updateUser={() => updateUser()} />;
+  return <UserContainer user={data.me} />;
 };
