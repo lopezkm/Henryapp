@@ -22,7 +22,7 @@ import SocialInfo from "./socialInfo";
 
 const drawerWidth = 240;
 
-export default function UserProfile2(user, updateUser) {
+export default function UserProfile2(user) {
 
   const classes = useStyles();
 
@@ -44,17 +44,17 @@ export default function UserProfile2(user, updateUser) {
             </Grid>
             <Grid item xs={12} md={3} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <PictureProfile user={user} updateUser={() => updateUser()} />
+                <PictureProfile user={user} />
               </Paper>
             </Grid>
             <Grid item xs={6}>
               <Paper className={classes.paper}>
-                <MoreInfo user={user} updateUser={() => updateUser()} />
+                <MoreInfo user={user} />
               </Paper>
             </Grid>
             <Grid item xs={6}>
               <Paper className={classes.paper}>
-                <SocialInfo user={user} updateUser={() => updateUser()} />
+                <SocialInfo user={user} />
               </Paper>
             </Grid>
           </Grid>
