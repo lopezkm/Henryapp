@@ -29,25 +29,10 @@ import {
 } from "@material-ui/core";
 
 const UPDATE_PROFILE = gql`
-  mutation updateUser(
-    $shortDescription: String
-    $description: String
-    $gitHubLink: String
-    $link: String
-    ) {
-      updateUser(shortDescription: $shortDescription
-        description: $description
-        gitHubLink: $gitHubLink
-        link: $link){
-      inscriptionDate
-      name
-      lastname
-      email
-      rol
-      shortDescription
+  mutation updateUser($description: String) {
+      updateUser(
+      description: $description){
       description
-      gitHubLink
-      link
     }
   }
 `;
@@ -62,7 +47,6 @@ export default function MoreInfo({ user}) {
   });
 
   const [updateUser, {data}] = useMutation(UPDATE_PROFILE);
-  console.log('AAAAAAAAAAAA', data)
 
   const startEditD = () => {
     setState({
@@ -80,9 +64,9 @@ export default function MoreInfo({ user}) {
 
   const handleChange = (event) => {
     const { value } = event.target;
-    setValues({description: value.length !== 0 ? value : user.user.description});
+    setValues({description: value})
   };
-  console.log('descripcion', values.description)
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -126,8 +110,7 @@ export default function MoreInfo({ user}) {
               {state.editandoDescription ? (
                 <Fab size="small" color="primary" aria-label="edit">
                   <Tooltip title="Enviar">
-                    <CheckIcon onClick={(e) => stopEditD(e)}  
-                      />
+                    <CheckIcon onClick={(e) => stopEditD(e)} />
                   </Tooltip>
                 </Fab>
               ) : (
