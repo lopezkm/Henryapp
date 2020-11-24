@@ -15,8 +15,10 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import CheckIcon from "@material-ui/icons/Check";
 import Tooltip from "@material-ui/core/Tooltip";
+import FileUpload from "../../container-uploadPhoto/apollo";
 
 export default function PictureProfile({user}) {
+  const [open, setOpen]=useState(false);
   const classes = useStyles();
   const [values, setValues] = useState({ shortDescription:"" });
   const [errors, setErrors] = useState({});
@@ -91,7 +93,8 @@ export default function PictureProfile({user}) {
           aria-label="edit"
           className={classes.profileButton}
         >
-          <Tooltip title="Agregar foto">
+          <Tooltip title="Agregar foto" 
+          onClick={()=>setOpen(true)}>
             <AddAPhotoIcon />
           </Tooltip>
         </Fab>
@@ -119,6 +122,7 @@ export default function PictureProfile({user}) {
           </Fab>
         )}
       </div>
+      {open?<FileUpload setOpen={setOpen}/>:<></>}
     </React.Fragment>
   );
 }
