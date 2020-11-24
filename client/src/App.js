@@ -19,6 +19,7 @@ import { Groups } from "./components/groups";
 //import UserProfile2 from "./components/container-profile/components/views";
 import { Profile } from "./components/container-profile";
 import ResetPassword from "./components/forms/resetpassword";
+import FileUpload from "./components/container-uploads/apolloCSV";
 
 const theme = createMuiTheme({
   palette: {
@@ -64,6 +65,7 @@ function App() {
           />
         </div>
         <Route path="/root" render={() => <Footer />} />
+        <Route exact path="/root/upload" render={() => <FileUpload />} />
       </Router>
     </ThemeProvider>
   );

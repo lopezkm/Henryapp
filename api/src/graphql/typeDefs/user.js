@@ -51,6 +51,7 @@ export default gql`
     pairProgramming: String
     feedbacks: [Feedback]
     qualifications: [Qualification]
+    picture: String
   }
 
   type AuthUser {

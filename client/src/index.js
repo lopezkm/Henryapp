@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {
+  ApolloLink,
   ApolloClient,
   ApolloProvider,
   InMemoryCache,
@@ -10,7 +11,8 @@ import { setContext } from "@apollo/client/link/context";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./reset.css";
-
+import { createUploadLink } from "apollo-upload-client";
+import { SnackbarProvider } from "notistack";
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem("token");
   return {
@@ -24,16 +26,21 @@ const authLink = setContext((_, { headers }) => {
 const httpLink = createHttpLink({
   uri: "http://localhost:3001/graphql",
 });
+const uploadLink = createUploadLink({
+  uri: "http://localhost:3001/graphql",
+});
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  link: authLink.concat(httpLink),
+  link: ApolloLink.from([authLink, uploadLink, httpLink]),
 });
 
 ReactDOM.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
-      <App />
+      <SnackbarProvider maxSnack={3}>
+        <App />
+      </SnackbarProvider>
     </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")
