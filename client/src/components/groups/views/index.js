@@ -7,11 +7,14 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 //import WarningIcon from '@material-ui/icons/Warning';
 
 const GroupsView = ({
-  
+  response,
+  rows
 }) => {
   const classes = useStyles();
 
   return (
+      <div>
+
     <section>
       <Container className={classes.containerRoot}>
         <section>
@@ -21,7 +24,11 @@ const GroupsView = ({
         </section>
         <section>
         
-        <ListGroups />
+        <ListGroups 
+        response={response}
+        rows={rows}
+         
+         />
           {/* {
             loading ?
               <div style={{
@@ -41,6 +48,7 @@ const GroupsView = ({
         </section>
       </Container>
     </section>
+      </div>
   );
 
 }
