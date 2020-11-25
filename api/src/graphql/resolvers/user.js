@@ -32,6 +32,23 @@ export default {
       }
     },
     login: async (root, args, { req }, info) => {
+      if (!req.headers.authorization) {
+        const user = await User.findOne({
+          email: args.email,
+        });
+        if (!user) {
+          throw new Error("No estas registrado en Henry APP");
+        }
+        let isMatch = await bcrypt.compare(args.password, user.password);
+        if (!isMatch) {
+          throw new Error("La contraseña es incorrecta");
+        }
+        let tokens = await issueTokens(user);
+        return {
+          user,
+          ...tokens,
+        };
+      }
       const isAuthenticate = await getAuthUser(req);
       if (!isAuthenticate) {
         const user = await User.findOne({
