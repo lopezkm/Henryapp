@@ -11,6 +11,8 @@ import Login from "./components/forms/login.jsx";
 import UserProfile from "./components/userProfile/views/perfil";
 //import Student from "./components/students/students.jsx";
 import { Cohort } from "./components/containers/cohort";
+import  { Sprint }  from "./components/sprint/index.js";
+import { Lecture } from "./components/lectures/index.js"
 import { Student } from "./components/students";
 import Invite from "./components/forms/invite.jsx";
 import AddStudents from "./components/cohorte/addStudents.jsx";
@@ -18,6 +20,7 @@ import AddStudents from "./components/cohorte/addStudents.jsx";
 //import UserProfile2 from "./components/container-profile/components/views";
 import { Profile } from "./components/container-profile";
 import ResetPassword from "./components/forms/resetpassword";
+import { from } from "@apollo/client";
 
 const theme = createMuiTheme({
   palette: {
@@ -55,6 +58,8 @@ function App() {
           <Route exact path="/root/login" render={() => <Login />} />
           <Route exact path="/root/invite" render={() => <Invite />} />
           <Route exact path="/root/cohorte" render={() => <Cohort />} />
+          <Route exact path="/root/lectures" render={() => <Lecture />} />
+          <Route exact path="/root/sprints" render={() => <Sprint />} />
           <Route
             exact
             path="/root/addStudents"

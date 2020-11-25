@@ -7,7 +7,7 @@ export default gql`
     }
 
     extend type Mutation {
-        createSprint(name: String!, duration: Float!, description: String! ): Sprint!
+        createSprint(name: String!, duration: String!, description: String! ): Sprint!
         addLectureToSprint(
             sprintId: String!,
             lectureId: String!
@@ -21,7 +21,7 @@ export default gql`
     type Sprint{
         _id: ID!
         name: String!
-        duration: Float!
+        duration: String!
         description: String!
         lecture: [Lecture!]
     }

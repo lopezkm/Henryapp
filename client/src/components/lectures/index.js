@@ -1,0 +1,1 @@
+export { LectureApollo as Lecture } from './apollo';

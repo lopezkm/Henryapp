@@ -7,13 +7,13 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
-import useStylesCard from './stylesCardHome';
+import useStylesCard from './stylesCard';
 
-export default function HomeCard(props) {
+export default function SprintCard(props) {
   const classes = useStylesCard();
 
   return (
-    <Card className={classes.root}>
+    <Card className={`${classes.root}`} width={1}>
       <CardActionArea>
         <CardMedia
           className={classes.media}
