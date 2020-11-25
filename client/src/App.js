@@ -21,6 +21,8 @@ import { Profile } from "./components/container-profile";
 import ResetPassword from "./components/forms/resetpassword";
 import FileUpload from "./components/container-uploads/apolloCSV";
 
+import { Feedback } from './components/feedback-user/'
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -58,6 +60,7 @@ function App() {
           <Route exact path="/root/invite" render={() => <Invite />} />
           <Route exact path="/root/cohorte" render={() => <Cohort />} />
           <Route exact path="/root/groups" render={() => <Groups />} />
+          <Route exact path="/root/feedback" render={() => <Feedback />}/>
           <Route
             exact
             path="/root/addStudents"
