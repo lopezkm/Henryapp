@@ -1,0 +1,1 @@
+export { GroupsApollo as Groups } from './apollo';
