@@ -59,7 +59,10 @@ const UserSchema = Schema({
     default: "Estudiante",
   },
   //implementación de subirFotos
-  picture: { type: Schema.Types.ObjectId, ref: "Picture" },
+  picture: {
+    type: String,
+    required: false,
+  },
   //relaciones con todo
   cohort: { type: Schema.Types.ObjectId, ref: "Cohort" },
   group: { type: Schema.Types.ObjectId, ref: "Group" },
