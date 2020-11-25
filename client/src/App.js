@@ -16,11 +16,13 @@ import { Lecture } from "./components/lectures/index.js"
 import { Student } from "./components/students";
 import Invite from "./components/forms/invite.jsx";
 import AddStudents from "./components/cohorte/addStudents.jsx";
+import { Groups } from "./components/groups";
 
 //import UserProfile2 from "./components/container-profile/components/views";
 import { Profile } from "./components/container-profile";
 import ResetPassword from "./components/forms/resetpassword";
 import { from } from "@apollo/client";
+import FileUpload from "./components/container-uploads/apolloCSV";
 
 const theme = createMuiTheme({
   palette: {
@@ -60,6 +62,7 @@ function App() {
           <Route exact path="/root/cohorte" render={() => <Cohort />} />
           <Route exact path="/root/lectures" render={() => <Lecture />} />
           <Route exact path="/root/sprints" render={() => <Sprint />} />
+          <Route exact path="/root/groups" render={() => <Groups />} />
           <Route
             exact
             path="/root/addStudents"
@@ -67,6 +70,7 @@ function App() {
           />
         </div>
         <Route path="/root" render={() => <Footer />} />
+        <Route exact path="/root/upload" render={() => <FileUpload />} />
       </Router>
     </ThemeProvider>
   );
