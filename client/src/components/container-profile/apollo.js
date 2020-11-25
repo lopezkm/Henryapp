@@ -7,22 +7,22 @@ import { useStyles } from "./styles";
 import { Input } from "@material-ui/core";
 
 const GET_PROFILE = gql`
-  query me{
-    me{
+  query me {
+    me {
       inscriptionDate
       name
       lastname
       email
-      rol 
+      rol
       title
       shortDescription
       description
       gitHubLink
       link
+      picture
     }
   }
 `;
-
 
 const MODIFY_PROFILE = gql`
   mutation createCohort($name: String!, $startingDate: String!) {
@@ -94,7 +94,5 @@ export const ProfileApollo = () => {
     });
   };
 
-  
-  
   return <UserContainer user={data.me} />;
 };
