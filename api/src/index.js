@@ -1,4 +1,4 @@
-const cookieSession = require('cookie-session')
+/* const cookieSession = require('cookie-session') */
 const passport = require('passport');
 import express from "express";
 import morgan from "morgan";
@@ -43,27 +43,27 @@ app.use("/thumbs", Thumbs);
 // Conexion express y apollo
 server.applyMiddleware({ app, cors: false });
 
-app.use(cookieSession({
+/* app.use(cookieSession({
   name: 'henryApp3-session',
   keys: ['key1', 'key2']
-}))
+})) */
 
-app.use( ( request, response, next ) => {
+/* app.use( ( request, response, next ) => {
   response.header( 'Access-Control-Allow-Origin', 'http://localhost:3000' );
   next( );
-} );
+} ); */
 
 app.use(passport.initialize());
-app.use(passport.session());
+/* app.use(passport.session()); */
 
 app.get('/google',
   passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 app.get('/google/callback', 
-  passport.authenticate('google', { failureRedirect: 'http://localhost3000/root/login' }),
+  passport.authenticate('google', { failureRedirect: 'http://localhost:3000/root/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('http://localhost3000/root/home');
+    res.redirect('http://localhost:3000/root/home');
   });
 
 // connect to db
@@ -76,3 +76,5 @@ connectDB().then(() => {
     });
   });
 });
+
+module.exports = app;
