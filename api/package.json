@@ -18,6 +18,7 @@
     "apollo-server-express": "^2.19.0",
     "bcrypt": "^5.0.0",
     "consola": "^2.15.0",
+    "cookie-session": "^1.4.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "esm": "^3.2.25",
@@ -32,9 +33,9 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.4.16",
     "nodemon": "^2.0.6",
+    "papaparse": "^5.3.0",
     "passport": "^0.4.1",
     "passport-google-oauth20": "^2.0.0",
-    "papaparse": "^5.3.0",
     "rimraff": "0.0.1-security",
     "sharp": "^0.26.3"
   }
