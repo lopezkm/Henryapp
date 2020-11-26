@@ -115,8 +115,8 @@ const ListGroupsPM = ({ listgroups }) => {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-    // const emptyRows =
-    //   rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    const emptyRows =
+      rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
@@ -152,11 +152,11 @@ const ListGroupsPM = ({ listgroups }) => {
               </TableRow>
             ))}
 
-            {/* {emptyRows > 0 && (
+            {emptyRows > 0 && (
               <TableRow style={{ height: 53 * emptyRows }}>
                 <TableCell colSpan={6} />
               </TableRow>
-            )} */}
+            )}
           </TableBody>
           <TableFooter>
             <TableRow>

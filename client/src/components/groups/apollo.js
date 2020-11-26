@@ -47,24 +47,24 @@ mutation addGroupToCohort($cohortId:String!, $groupId:String!){
 
 export const GroupsApollo = () => {
     const {data: cohorts, error: cohortsQueryError, loading: cohortsQueryLoading}= useQuery(LIST_COHORTS);
-   // const {loading, error, data} = useQuery(LIST_COHORTS);
-    const {data: groups, error: groupsQueryError, loading: groupsQueryLoading}=useQuery(LIST_GROUPS);
-   // const {loading2, error2, data2} = useQuery(LIST_GROUPS);
+   
+    const {data: groups, error: groupsQueryError, loading: groupsQueryLoading, fetchMore}=useQuery(LIST_GROUPS);
+   
     const [createGroupMutation]= useMutation(CREATE_GROUP, {
-      update: (cache, { data: { createGroup } }) => {
+      update(cache, { data: { createGroupMutation } })  {
         cache.modify({
           fields: {
-            groups(existingGroups = []) {
+            groups(existingGroupRefs = [], { readField }) {
               const newGroupRef = cache.writeFragment({
-                data: createGroup,
+                data: createGroupMutation,
                 fragment: gql`
                   fragment NewGroup on Group {
-                    name,
+                    name
                     PM
                   }
                 `,
               });
-              return [...existingGroups, newGroupRef];
+              return [...existingGroupRefs, newGroupRef];
             },
           },
         });
