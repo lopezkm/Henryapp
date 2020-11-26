@@ -12,6 +12,11 @@ const CohortSchema = Schema({
   },
   groups: [{ type: Schema.Types.ObjectId, ref: "Group" }],
   sprints: [{ type: Schema.Types.ObjectId, ref: "Sprint" }],
+  instructor: {
+    type: String,
+    required: false,
+  },
+  students: [{ type: Schema.Types.ObjectId, ref: "User" }],
 });
 
 const Cohort = model("Cohort", CohortSchema);
