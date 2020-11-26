@@ -34,7 +34,7 @@ export default function PictureProfile({user}) {
     });
   };
   useEffect(() => {
-    if(user.user.picture.length>8){
+    if(user.user.picture && user.user.picture.length>8){
 
       setImgUrl({src:user.user.picture})
     };
