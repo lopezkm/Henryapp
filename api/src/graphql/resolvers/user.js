@@ -82,6 +82,18 @@ export default {
         throw new Error("Usuario no autenticado.");
       }
     },
+    refreshToken: async (root, args, { req }, info) => {
+      let authUser = getAuthUser(req, true);
+      if (authUser) {
+        let tokens = await issueTokens(authUser);
+        return {
+          user,
+          ...tokens,
+        };
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
+    },
     search: async (root, args, { req }, info) => {
       const isAuthenticate = await getAuthUser(req);
       if (isAuthenticate) {
