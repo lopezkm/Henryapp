@@ -112,8 +112,8 @@ export default function SocialInfo({ user }) {
                   placeholder="Ingresa link de Github"
                 />
               ) : (
-                user.user.gitHubLink.length !== 0 ? <a href={user.user.gitHubLink}>{user.user.gitHubLink}</a> :
-                data && <a href={data.updateUser.gitHubLink}>{data.updateUser.gitHubLink}</a>
+                user.user.gitHubLink.length !== 0 ? <a style= {{textDecoration:"none", color:"black"}} href={user.user.gitHubLink}>{user.user.gitHubLink}</a> :
+                data && <a style= {{textDecoration:"none", color:"black"}} href={data.updateUser.gitHubLink}>{data.updateUser.gitHubLink}</a>
               )}
             </TableCell>
             <TableCell className={classes.font}>
@@ -142,8 +142,8 @@ export default function SocialInfo({ user }) {
                   placeholder="Ingresa link de Linkedin"
                 />
               ) : (
-                user.user.link.length !== 0 ? <a href={user.user.link}>{user.user.link}</a> :
-                data && <a href={data.updateUser.link}>{data.updateUser.link}</a>
+                user.user.link.length !== 0 ? <a style= {{textDecoration:"none", color:"black"}} href={user.user.link}>{user.user.link}</a> :
+                data && <a style= {{textDecoration:"none", color:"black"}} href={data.updateUser.link}>{data.updateUser.link}</a>
               )}
             </TableCell>
             <TableCell className={classes.font}>

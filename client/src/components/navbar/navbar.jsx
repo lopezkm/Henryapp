@@ -210,7 +210,7 @@ const NavBar = (theme) => {
             <MenuItem onClick={handleCloseLogin}>
               {/*AGREGAR text-decoration: none;
 color: black;*/}
-              <Link to="/root/profile" className={classes.tittle1}>
+              <Link to="/root/profile" style= {{textDecoration:"none", color:"black"}} className={classes.tittle1}>
                 Profile
               </Link>
             </MenuItem>

@@ -14,8 +14,8 @@ import { makeStyles, createMuiTheme, ThemeProvider } from '@material-ui/core/sty
 const useStyles = makeStyles((theme)=>({
     root: {
       maxWidth: 345,
-      marginTop:100,
-      marginLeft:20
+      marginTop:30,
+      marginLeft:350
     },
     media: {
       height: 140,
@@ -56,7 +56,7 @@ const UserProfile= (results) => {
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            // image={}
+             image={results.results.row.picture}
             title="Alumno"
             />
           <CardContent>
@@ -70,7 +70,7 @@ const UserProfile= (results) => {
             Fecha de inscripcion: {results.results.row.inscriptionDate && results.results.row.inscriptionDate}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-            Cohorte: {results.results.row.cohort.name && results.results.row.cohort.name}
+            Cohorte: {results.results.row.cohort && results.results.row.cohort.name}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
             Nota: {results.results.row.qualifications.grade && results.results.row.qualifications.grade}
@@ -79,10 +79,10 @@ const UserProfile= (results) => {
             Promedio:{results.results.row.qualifications.average && results.results.row.qualifications.average}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Github: {results.results.row.gitHubLink && results.results.row.gitHubLink}
+              Github: {results.results.row.gitHubLink && <a style= {{textDecoration:"none", color:"black"}} href={results.results.row.gitHubLink}>{results.results.row.gitHubLink}</a>}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-            LinkedIn: 
+            LinkedIn: {results.results.row.link && <a style= {{textDecoration:"none", color:"black"}} href={results.results.row.link}>{results.results.row.link}</a>}
             </Typography>
           </CardContent>
         </CardActionArea>
