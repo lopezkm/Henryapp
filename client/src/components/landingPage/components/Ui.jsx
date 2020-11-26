@@ -6,7 +6,8 @@ import useStyles from "../styles"
 export default function Ui ({message}){
     const classes = useStyles();
     return(
-        <Link to='/root/home'
+        localStorage.token ? window.location.href = "/root/home":
+        <Link to='/root/login'
         className={classes.landingButton}>
         <Button 
          variant="contained"

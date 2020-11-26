@@ -21,34 +21,9 @@ import MoreInfo from "./moreInfo";
 import SocialInfo from "./socialInfo";
 
 const drawerWidth = 240;
-/*
-const GET_PROFILE = gql`
-  query profile($id: String!) {
-    profile(id: $id) {
-      inscriptionDate
-      name
-      lastname
-      email
-      rol
-      picture
-      title
-      shortDescription
-      description
-      gitHubLink
-      link
-    }
-  }
-`;*/
 
-// export default ({ user }) => {
 export default function UserProfile2(user) {
-  /*  const { loading, error, data } = useQuery(GET_PROFILE, {
-    variables: { id: "5fb562eac3c83b23c123e552" },
-  });
-*/
 
-  console.log("User en views", { user });
-  //console.log('data.profile', data.profile)
   const classes = useStyles();
 
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
@@ -69,7 +44,7 @@ export default function UserProfile2(user) {
             </Grid>
             <Grid item xs={12} md={3} lg={3}>
               <Paper className={fixedHeightPaper}>
-                <PictureProfile user={user}/>
+                <PictureProfile user={user} />
               </Paper>
             </Grid>
             <Grid item xs={6}>

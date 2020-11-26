@@ -14,21 +14,30 @@ import { useStyles } from "../styles";
 import TextField from "@material-ui/core/TextField";
 import CheckIcon from "@material-ui/icons/Check";
 import Tooltip from "@material-ui/core/Tooltip";
+import { useMutation, gql } from "@apollo/client";
+
+const UPDATE_PROFILE = gql`
+  mutation updateUser($gitHubLink: String $link: String) {
+    updateUser(gitHubLink: $gitHubLink link: $link){
+      gitHubLink
+      link
+    }
+  }
+`;
 
 export default function SocialInfo({ user }) {
-  // console.log("mi data", data);
-  // ``;
+  
+  const [updateUser, {data}] = useMutation(UPDATE_PROFILE);
+
   const classes = useStyles();
   const [values, setValues] = useState({
-    gitHub: "",
-    linkedin: "",
-    personalPage: "",
+    gitHub: user.user.gitHubLink,
+    linkedin: user.user.link,
   });
 
   const [state, setState] = useState({
     editandoGit: false,
     editandoLinkedin: false,
-    editandoPerPage: false,
   });
 
   const startEditG = () => {
@@ -36,22 +45,28 @@ export default function SocialInfo({ user }) {
       editandoGit: true,
     });
   };
-  const stopEditG = () => {
+  const stopEditG = (e) => {
+    return (e.preventDefault(),
     setState({
       editandoGit: false,
-    });
+    }),
+    updateUser({variables: {gitHubLink: values.gitHub, link: values.linkedin}}),
+    window.location.reload())
   };
   const startEditL = () => {
     setState({
       editandoLinkedin: true,
     });
   };
-  const stopEditL = () => {
+  const stopEditL = (e) => {
+    return (e.preventDefault(),
     setState({
       editandoLinkedin: false,
-    });
+    }),
+    updateUser({variables: {gitHubLink: values.gitHub, link: values.linkedin}}),
+    window.location.reload())
   };
-  const startEditP = () => {
+  /* const startEditP = () => {
     setState({
       editandoPerPage: true,
     });
@@ -60,7 +75,7 @@ export default function SocialInfo({ user }) {
     setState({
       editandoPerPage: false,
     });
-  };
+  }; */
   const handleChange = (event) => {
     const { name, value } = event.target;
     setValues({
@@ -97,14 +112,15 @@ export default function SocialInfo({ user }) {
                   placeholder="Ingresa link de Github"
                 />
               ) : (
-                <a href={user.user.gitHubLink}>{user.user.gitHubLink}</a>
+                user.user.gitHubLink.length !== 0 ? <a style= {{textDecoration:"none", color:"black"}} href={user.user.gitHubLink}>{user.user.gitHubLink}</a> :
+                data && <a style= {{textDecoration:"none", color:"black"}} href={data.updateUser.gitHubLink}>{data.updateUser.gitHubLink}</a>
               )}
             </TableCell>
             <TableCell className={classes.font}>
               {state.editandoGit ? (
                 <Fab size="small" color="primary" aria-label="edit">
                   <Tooltip title="Enviar">
-                    <CheckIcon onClick={() => stopEditG()} />
+                    <CheckIcon onClick={(e) => stopEditG(e)} />
                   </Tooltip>
                 </Fab>
               ) : (
@@ -126,14 +142,15 @@ export default function SocialInfo({ user }) {
                   placeholder="Ingresa link de Linkedin"
                 />
               ) : (
-                <a href={user.user.link}>{user.user.link}</a>
+                user.user.link.length !== 0 ? <a style= {{textDecoration:"none", color:"black"}} href={user.user.link}>{user.user.link}</a> :
+                data && <a style= {{textDecoration:"none", color:"black"}} href={data.updateUser.link}>{data.updateUser.link}</a>
               )}
             </TableCell>
             <TableCell className={classes.font}>
               {state.editandoLinkedin ? (
                 <Fab size="small" color="primary" aria-label="edit">
                   <Tooltip title="Enviar">
-                    <CheckIcon onClick={() => stopEditL()} />
+                    <CheckIcon onClick={(e) => stopEditL(e)} />
                   </Tooltip>
                 </Fab>
               ) : (
@@ -145,7 +162,7 @@ export default function SocialInfo({ user }) {
               )}
             </TableCell>
           </TableRow>
-          <TableRow>
+         {/*  <TableRow>
             <TableCell className={classes.font}>Pagina personal:</TableCell>
             <TableCell className={classes.font} selectable={false}>
               {state.editandoPerPage ? (
@@ -173,7 +190,7 @@ export default function SocialInfo({ user }) {
                 </Fab>
               )}
             </TableCell>
-          </TableRow>
+          </TableRow> */}
         </TableBody>
       </Table>
     </React.Fragment>

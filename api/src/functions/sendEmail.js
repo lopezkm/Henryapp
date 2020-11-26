@@ -389,12 +389,9 @@ export const sendEmail = async (dest, redirUrl) => {
     </html>`,
   };
 
-  transporter.sendMail(mailOptions, (err, data) => {
+  transporter.sendMail(mailOptions, (err, _) => {
     if (err) {
       console.log("error", err);
-    } else {
-      console.log("Enviado");
     }
   });
-  return true;
 };

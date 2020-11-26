@@ -13,6 +13,7 @@ import FolderSharedIcon from "@material-ui/icons/FolderShared";
 import AccountBoxIcon from "@material-ui/icons/AccountBox";
 import { Link } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
+import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined';
 
 const useStyles = makeStyles({
   list: {
@@ -106,6 +107,17 @@ export default function DrawerNavbar() {
               <ContactMailIcon />
             </ListItemIcon>
             <h4>Invitar alumnos</h4>
+          </ListItem>
+        </Link>
+        <Link
+          to="/root/groups"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <PeopleAltOutlinedIcon />
+            </ListItemIcon>
+            <h4>Administrar Grupos</h4>
           </ListItem>
         </Link>
       </List>

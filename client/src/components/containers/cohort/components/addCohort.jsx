@@ -1,18 +1,17 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
-import { useStyles } from './styles';
+import React from "react";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
+import { useStyles } from "./styles";
 
 export default ({
   anchorEl,
   handleChange,
   handleClick,
   onCreateCohort,
-  handleClose
+  handleClose,
 }) => {
-
   const classes = useStyles();
 
   return (
@@ -34,10 +33,10 @@ export default ({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem >
+        <MenuItem>
           <form onSubmit={onCreateCohort} noValidate autoComplete="off">
             <TextField
-              type='text'
+              type="text"
               name="name"
               onChange={handleChange}
               id="name"
@@ -53,6 +52,11 @@ export default ({
                 marginTop: '10px'
               }}
               type='date'
+              label="Nombre Cohorte"
+            />
+            <br />
+            <TextField
+              type="date"
               name="startingDate"
               color='secondary'
               onChange={handleChange}
@@ -67,6 +71,7 @@ export default ({
               onClick={handleClose}
               // color="secondary"
               className={classes.ButtonMod}>
+            >
               Crear Cohorte
             </Button>
           </form>

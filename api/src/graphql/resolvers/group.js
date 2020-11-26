@@ -7,7 +7,7 @@ export default {
     group: async (root, args, { req }) => {
       const isAuthenticate = await getAuthUser(req);
       if (isAuthenticate) {
-        return await Group.find({});
+        return await Group.find();
       } else {
         throw new Error("Usuario no autenticado.");
       }
@@ -141,6 +141,22 @@ export default {
       } else {
         throw new Error("Usuario no autenticado.");
       }
+    },
+    addUserToPP: async (_, { id, pairProgramming }, { req }, __) => {
+      const ppUser = await User.findByIdAndUpdate(
+        id,
+        {
+          $set: { pairProgramming },
+        },
+        {
+          new: true,
+          useFindAndModify: false,
+        }
+      );
+      console.log(ppUser);
+      return await User.find({
+        pairProgramming,
+      });
     },
   },
 };

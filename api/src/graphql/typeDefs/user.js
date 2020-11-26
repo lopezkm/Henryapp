@@ -19,7 +19,6 @@ export default gql`
     ): AuthUser!
 
     updateUser(
-      id: String!
       name: String
       lastname: String
       email: String
@@ -30,9 +29,10 @@ export default gql`
       link: String
     ): User!
 
-    changeRol(id: String!, rol: String!): User!
+    changeRol(email: String!, rol: String!): User!
 
     deleteUser(id: String!): User!
+    changePass(password: String!): Boolean!
   }
 
   type User {
@@ -52,6 +52,7 @@ export default gql`
     pairProgramming: String
     feedbacks: [Feedback]
     qualifications: [Qualification]
+    picture: String
   }
 
   type AuthUser {

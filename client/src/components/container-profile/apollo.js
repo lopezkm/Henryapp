@@ -4,42 +4,25 @@ import UserContainer from "./container";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { useStyles } from "./styles";
-
-// const GET_PROFILE = gql`
-//   query profile($id: String!) {
-//     profile(id: $id) {
-//       inscriptionDate
-//       name
-//       lastname
-//       email
-//       rol
-      
-//       title
-//       shortDescription
-//       description
-//       gitHubLink
-//       link
-//     }
-//   }
-// `;
+import { Input } from "@material-ui/core";
 
 const GET_PROFILE = gql`
-  query me{
-    me{
+  query me {
+    me {
       inscriptionDate
       name
       lastname
       email
-      rol 
+      rol
       title
       shortDescription
       description
       gitHubLink
       link
+      picture
     }
   }
 `;
-
 
 const MODIFY_PROFILE = gql`
   mutation createCohort($name: String!, $startingDate: String!) {
@@ -53,9 +36,6 @@ const MODIFY_PROFILE = gql`
 
 export const ProfileApollo = () => {
   const classes = useStyles();
-  // const { loading, error, data } = useQuery(GET_PROFILE, {
-  //   variables: { id: "5fb4c0b685ffff28d378ca1e" },
-  // });
 
   const { loading, error, data } = useQuery(GET_PROFILE);
 
@@ -113,6 +93,6 @@ export const ProfileApollo = () => {
       },
     });
   };
-  
+
   return <UserContainer user={data.me} />;
 };
