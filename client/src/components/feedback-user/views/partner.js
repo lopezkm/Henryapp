@@ -29,7 +29,6 @@ const labels = {
 export default function Partner( props ) {
   const {name, lastname, softSkill, techSkill, leader, description} = props.part
   const classes = useStyles();
-
   const [value, setValue] = useState({
     name: name,
     lastname: lastname,
@@ -37,7 +36,7 @@ export default function Partner( props ) {
     techSkill: techSkill,
     leader: leader,
     description: description    
-  });
+  },[]);
   const [hover, setHover] = useState();
   const [state, setState] = useState({
     editandoDescription: false,
@@ -59,7 +58,7 @@ export default function Partner( props ) {
       [e.target.name]: e.target.value
     })
   };
-
+  console.log('Mi Value ', value)
   return (
     <Box className={classes.box}>
       <Card
@@ -73,7 +72,8 @@ export default function Partner( props ) {
             component="h2"
             className={classes.pos}
           >
-            {value.name}
+          {value.name} {' '} {value.lastname}
+            
           </Typography>
           <div>
             <Typography variant="h7" color="textSecondary" component="p">
@@ -95,8 +95,8 @@ export default function Partner( props ) {
             <div selectable={false}>
               {state.editandoDescription ? (
                 <TextField
-                  onChange={(e) => handleChange(e)}
-                  name="Description"
+                  onChange={handleChange}
+                  name="description"
                   placeholder="Ingresa una descripción"
                   id="outlined-multiline-static"
                   multiline
@@ -107,7 +107,6 @@ export default function Partner( props ) {
               ) : (
                 <Typography variant="h7" color="textSecondary" component="p">
                  {value.description}
-                  "Me cae mal xq no deja el codigo comentado"
                 </Typography>
               )}
             </div>
@@ -118,12 +117,10 @@ export default function Partner( props ) {
             <Typography variant="body2" color="textSecondary" component="p">
               Soft skills:
               <Rating
-                name="hover-feedback"
+                name="softSkill"
                 value={value.softSkill}
                 precision={1}
-                onChange={(event, newValue) => {
-                  setValue(newValue);
-                }}
+                onChange={handleChange}
                 onChangeActive={(event, newHover) => {
                   setHover(newHover);
                 }}
@@ -138,12 +135,10 @@ export default function Partner( props ) {
             <Typography variant="body2" color="textSecondary" component="p">
               Technical skills:
               <Rating
-                name="hover-feedback1"
+                name="techSkill"
                 value={value.techSkill}
                 precision={1}
-                onChange={(event, newValue) => {
-                  setValue(newValue);
-                }}
+                onChange={(e)=>handleChange(e)}
                 onChangeActive={(event, newHover) => {
                   setHover(newHover);
                 }}
@@ -158,12 +153,10 @@ export default function Partner( props ) {
             <Typography variant="body2" color="textSecondary" component="p">
               Leader:{" "}
               <Rating
-                name="hover-feedback2"
+                name="leader"
                 value={value.leader}
                 precision={1}
-                onChange={(event, newValue) => {
-                  setValue(newValue);
-                }}
+                onChange={handleChange}
                 onChangeActive={(event, newHover) => {
                   setHover(newHover);
                 }}

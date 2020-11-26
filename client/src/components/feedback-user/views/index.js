@@ -4,12 +4,12 @@ import Partner from './partner'
 import { useStyles } from './styles';
 
 const pp = [
-    {name:'Marcos',lastname:'Cardozo', softSkill:0, techSkill:0, leader:false, description:''},
-    {name:'Josefina',lastname:'Mendez', softSkill:0, techSkill:0, leader:false, description:''},
-    {name:'Abad',lastname:'Salim', softSkill:0, techSkill:0, leader:false, description:''},
-    {name:'Eslefer',lastname:'Bortua', softSkill:0, techSkill:0, leader:false, description:''},
-    {name:'Aquiles',lastname:'Brinco', softSkill:0, techSkill:0, leader:false, description:''},
-    {name:'Liliana',lastname:'Velez', softSkill:0, techSkill:0, leader:false, description:''},
+    {name:'Marcos',lastname:'Cardozo', softSkill:0, techSkill:0, leader:0, description:'"Me cae mal xq no deja el codigo comentado"'},
+    {name:'Josefina',lastname:'Mendez', softSkill:0, techSkill:0, leader:0, description:'"Me cae mal xq no deja el codigo comentado"'},
+    {name:'Abad',lastname:'Salim', softSkill:0, techSkill:0, leader:0, description:'"Me cae mal xq no deja el codigo comentado"'},
+    {name:'Eslefer',lastname:'Bortua', softSkill:0, techSkill:0, leader:0, description:'"Me cae mal xq no deja el codigo comentado"'},
+    {name:'Aquiles',lastname:'Brinco', softSkill:0, techSkill:0, leader:0, description:'"Me cae mal xq no deja el codigo comentado"'},
+    {name:'Liliana',lastname:'Velez', softSkill:0, techSkill:0, leader:0, description:'"Me cae mal xq no deja el codigo comentado"'},
   ]
 
 const FeedbackView = ({
