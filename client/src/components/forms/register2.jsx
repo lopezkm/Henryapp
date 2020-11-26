@@ -88,6 +88,7 @@ export default function Register2() {
             <Typography variant="h4" gutterBottom>
               Register
               <Button
+                  disabled
                   onClick={googleAuth}
                   variant="contained"
                   color="secondary"
