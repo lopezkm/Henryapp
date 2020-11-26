@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Rating from "@material-ui/lab/Rating";
 import Box from "@material-ui/core/Box";
-import { TextField, Input } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
 import EditIcon from "@material-ui/icons/Edit";
 import { useState } from "react";
@@ -18,7 +18,21 @@ const useStyles = makeStyles({
     maxWidth: 345,
   },
 });
-const labels = {
+const labelsoftSkill = {
+  1: "Useless",
+  2: "Poor",
+  3: "Ok",
+  4: "Good",
+  5: "Excellent",
+};
+const labelstechSkill = {
+  1: "Useless",
+  2: "Poor",
+  3: "Ok",
+  4: "Good",
+  5: "Excellent",
+};
+const labelsleader = {
   1: "Useless",
   2: "Poor",
   3: "Ok",
@@ -29,15 +43,19 @@ const labels = {
 export default function Partner( props ) {
   const {name, lastname, softSkill, techSkill, leader, description} = props.part
   const classes = useStyles();
+  console.log('props', props)
+  //console.log('Mi props',name, lastname, softSkill, techSkill, leader, description)
   const [value, setValue] = useState({
     name: name,
     lastname: lastname,
     softSkill: softSkill,
     techSkill: techSkill,
     leader: leader,
-    description: description    
-  },[]);
+    description: description
+  });
   const [hover, setHover] = useState();
+  console.log('Mi Hover !!!', hover)
+
   const [state, setState] = useState({
     editandoDescription: false,
   });
@@ -55,6 +73,10 @@ export default function Partner( props ) {
   const handleChange = (e) => {
     setValue({
       ...value,
+      [e.target.name]: e.target.value
+    })
+    setHover({
+      ...hover,
       [e.target.name]: e.target.value
     })
   };
@@ -101,7 +123,7 @@ export default function Partner( props ) {
                   id="outlined-multiline-static"
                   multiline
                   rows={3}
-                  defaultValue="campo opcional, agregar info relevante sobre compañero"
+                  //defaultValue="campo opcional, agregar info relevante sobre compañero"
                   variant="outlined"
                 />
               ) : (
@@ -121,12 +143,10 @@ export default function Partner( props ) {
                 value={value.softSkill}
                 precision={1}
                 onChange={handleChange}
-                onChangeActive={(event, newHover) => {
-                  setHover(newHover);
-                }}
+                
               />
               {value !== null && (
-                <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>
+                <Box ml={2}>{labelsoftSkill[hover !== -1 ? hover : value]}</Box>
               )}
             </Typography>
           </div>
@@ -138,13 +158,11 @@ export default function Partner( props ) {
                 name="techSkill"
                 value={value.techSkill}
                 precision={1}
-                onChange={(e)=>handleChange(e)}
-                onChangeActive={(event, newHover) => {
-                  setHover(newHover);
-                }}
+                onChange={handleChange}
+                
               />
               {value !== null && (
-                <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>
+                <Box ml={2}>{labelstechSkill[hover !== -1 ? hover : value]}</Box>
               )}
             </Typography>
           </div>
@@ -157,12 +175,10 @@ export default function Partner( props ) {
                 value={value.leader}
                 precision={1}
                 onChange={handleChange}
-                onChangeActive={(event, newHover) => {
-                  setHover(newHover);
-                }}
+                
               />
               {value !== null && (
-                <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>
+                <Box ml={2}>{labelsleader[hover !== -1 ? hover : value]}</Box>
               )}
             </Typography>
           </div>

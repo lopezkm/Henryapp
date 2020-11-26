@@ -169,7 +169,7 @@ const NavBar = (theme) => {
               </StyledMenuItem>
             </Link> */}
           <Typography>
-          {data ? data.me.name : null}
+            {data ? data.me.name : null}
             {/* <Button variant="text" color="secondary">
               {data ? (
                 data.me.name
@@ -212,6 +212,11 @@ const NavBar = (theme) => {
 color: black;*/}
               <Link to="/root/profile" className={classes.tittle1}>
                 Profile
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link to="/root/feedback" className={classes.tittle1}>
+                Feedback
               </Link>
             </MenuItem>
             <MenuItem onClick={handleCloseLogin, handleLogout}>Logout</MenuItem>
