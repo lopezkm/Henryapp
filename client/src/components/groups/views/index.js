@@ -1,35 +1,48 @@
-import React from 'react';
-import ListGroups from './listGroups';
-// import  from "./resultsStudents";
-import Container from '@material-ui/core/Container';
-import { useStyles } from './styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import React from "react";
+import ListGroups from "./listGroups";
+import AddGroup from "./addGroups";
+import Container from "@material-ui/core/Container";
+import { useStyles } from "./styles";
+import ListGroupsPM from "./listGroupsPM";
+//import CircularProgress from "@material-ui/core/CircularProgress";
 //import WarningIcon from '@material-ui/icons/Warning';
 
 const GroupsView = ({
   response,
-  rows
+  rows,
+  anchorEl,
+  onCreateGroup,
+  handleChange,
+  handleClick,
+  handleClose,
+  listgroups,
 }) => {
   const classes = useStyles();
+  console.log(listgroups);
 
   return (
-      <div>
+    <div>
+      <section>
+        <Container className={classes.containerRoot}>
+          <section>
+            <AddGroup
+              anchorEl={anchorEl}
+              onCreateGroup={onCreateGroup}
+              handleChange={handleChange}
+              handleClick={handleClick}
+              handleClose={handleClose}
+            />
+          </section>
 
-    <section>
-      <Container className={classes.containerRoot}>
-        <section>
-          {/* <SearchStudents
-            handleChange={handleChange}
-          /> */}
-        </section>
-        <section>
-        
-        <ListGroups 
-        response={response}
-        rows={rows}
-         
-         />
-          {/* {
+          <section>
+            <ListGroupsPM
+            listgroups={listgroups}
+            />
+          </section>
+
+          <section>
+            <ListGroups response={response} rows={rows} />
+            {/* {
             loading ?
               <div style={{
                 display: 'flex',
@@ -45,11 +58,10 @@ const GroupsView = ({
                 results={results}
               />
           } */}
-        </section>
-      </Container>
-    </section>
-      </div>
+          </section>
+        </Container>
+      </section>
+    </div>
   );
-
-}
+};
 export default GroupsView;

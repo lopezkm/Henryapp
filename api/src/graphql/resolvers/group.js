@@ -4,15 +4,15 @@ import { myRolIs } from "../../functions/myRolIs";
 
 export default {
   Query: {
-    group: async (root, args, { req }) => {
+    groups: async (root, args, { req }) => {
       const isAuthenticate = await getAuthUser(req);
       if (isAuthenticate) {
-        return await Group.find({});
+        return await Group.find();
       } else {
         throw new Error("Usuario no autenticado.");
       }
     },
-    groups: async (_, args, { req }) => {
+    group: async (_, args, { req }) => {
       const isAuthenticate = await getAuthUser(req);
       const isAdmin = await myRolIs(req);
       if (isAuthenticate) {

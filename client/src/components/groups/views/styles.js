@@ -43,4 +43,12 @@ export const useStyles = makeStyles((theme) => ({
     height: 28,
     margin: 4,
   },
+  ButtonMod: {
+    marginLeft: 70,
+    marginTop: -10,
+    marginBottom: 10,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.common.black,
+    textDecoration: "none"
+  },
 }));
