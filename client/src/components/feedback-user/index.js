@@ -1,0 +1,1 @@
+export { FeedbackApollo as Feedback } from './apollo';

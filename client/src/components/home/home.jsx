@@ -26,25 +26,29 @@ export default function Home() {
                   className={classes.card}
                   title={'Descubre tu cohorte'} 
                   description={"podes ver tu cohorte, fecha de inicio y fecha de finalizacion, consultar profesor y compañeros"}
-                  image={image}/>
+                  image={image}
+                  link={"/root/cohorte"}/>
             </Grid>
             <Grid item xs={6} >
                   <HomeCard
                   className={classes.card}
-                  title={'Charla con tus compañeros'} 
-                  description={"consulta tus dudas en el chat grupal, o envia mensajes privado a tu profesor"}
-                  image={pedro}/>
+                  title={'Chequea las lectures'} 
+                  description={"podes ver todas las lectures e información al respecto"}
+                  image={pedro}
+                  link={"/root/lectures"}/>
             </Grid>
             <Grid item xs={6} >
                   <HomeCard
                   className={classes.card}
                   title={'Egg App'} 
                   description={"comprueba tu mesa de pair programming y consulta tus compañeros"}
-                  image={huevo}/>
+                  image={huevo}
+                  link={"https://beta.eggeducacion.com/login"}/>
             </Grid>
           </Grid>
         </div>
         </React.Fragment>
       );
 }
+
 

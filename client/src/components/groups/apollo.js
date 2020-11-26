@@ -18,7 +18,8 @@ const LIST_COHORTS = gql`
 export const GroupsApollo = () => {
     const {loading, error, data, fetchMore} = useQuery(LIST_COHORTS);
 
-    let response;
+    //let response;
+
 
     if(loading) {
         console.log('cargando');
