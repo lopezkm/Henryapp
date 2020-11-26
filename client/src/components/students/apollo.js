@@ -18,6 +18,7 @@ query search($query: String!) {
     description
     gitHubLink
     link
+    picture
     cohort{
       name
     }
