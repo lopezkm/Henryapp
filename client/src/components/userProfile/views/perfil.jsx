@@ -73,10 +73,11 @@ const UserProfile= (results) => {
             Cohorte: {results.results.row.cohort && results.results.row.cohort.name}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-            Nota: {results.results.row.qualifications.grade && results.results.row.qualifications.grade}
+            Nota: {results.results.row.qualifications && results.results.row.qualifications.grade}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-            Promedio:{results.results.row.qualifications.average && results.results.row.qualifications.average}
+            Promedio:{results.results.row.qualifications && results.results.row.qualifications.average}
+
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               Github: {results.results.row.gitHubLink && <a style= {{textDecoration:"none", color:"black"}} href={results.results.row.gitHubLink}>{results.results.row.gitHubLink}</a>}
