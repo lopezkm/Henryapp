@@ -70,13 +70,15 @@ const UserProfile= (results) => {
             Fecha de inscripcion: {results.results.row.inscriptionDate && results.results.row.inscriptionDate}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-            Cohorte: {results.results.row.cohort.name && results.results.row.cohort.name}
+
+            Cohorte: {results.results.row.cohort && results.results.row.cohort.name}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-            Nota: {results.results.row.qualifications.grade && results.results.row.qualifications.grade}
+            Nota: {results.results.row.qualifications && results.results.row.qualifications.grade}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-            Promedio:{results.results.row.qualifications.average && results.results.row.qualifications.average}
+            Promedio:{results.results.row.qualifications && results.results.row.qualifications.average}
+
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               Github: {results.results.row.gitHubLink && results.results.row.gitHubLink}
