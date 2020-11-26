@@ -18,9 +18,9 @@ import Tooltip from "@material-ui/core/Tooltip";
 import FileUpload from "../../container-uploadPhoto/apollo";
 
 const UPDATE_PROFILE = gql`
-  mutation updateUser($description: String) {
-    updateUser(description: $description) {
-      description
+  mutation updateUser($shortDescription: String) {
+    updateUser(shortDescription: $shortDescription) {
+      shortDescription
     }
   }
 `;
