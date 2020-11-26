@@ -32,6 +32,7 @@ export default gql`
     changeRol(id: String!, rol: String!): User!
 
     deleteUser(id: String!): User!
+    changePass(password: String!): Boolean!
   }
 
   type User {

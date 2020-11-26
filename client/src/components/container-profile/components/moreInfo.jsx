@@ -17,6 +17,7 @@ import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import Tooltip from "@material-ui/core/Tooltip";
 import { useMutation, gql } from "@apollo/client";
+import ModalPass from "./modalPass";
 
 import {
   FormControl,
@@ -30,14 +31,13 @@ import {
 
 const UPDATE_PROFILE = gql`
   mutation updateUser($description: String) {
-      updateUser(
-      description: $description){
+    updateUser(description: $description) {
       description
     }
   }
 `;
 
-export default function MoreInfo({ user}) {
+export default function MoreInfo({ user }) {
   //console.log("mi user", user);
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -46,7 +46,7 @@ export default function MoreInfo({ user}) {
     editandoDescription: false,
   });
 
-  const [updateUser, {data}] = useMutation(UPDATE_PROFILE);
+  const [updateUser, { data }] = useMutation(UPDATE_PROFILE);
 
   const startEditD = () => {
     setState({
@@ -54,17 +54,19 @@ export default function MoreInfo({ user}) {
     });
   };
   const stopEditD = (e) => {
-    return (e.preventDefault(),
-    setState({
-      editandoDescription: false,
-    }),
-    updateUser({variables: {description: values.description}}),
-    window.location.reload())
+    return (
+      e.preventDefault(),
+      setState({
+        editandoDescription: false,
+      }),
+      updateUser({ variables: { description: values.description } }),
+      window.location.reload()
+    );
   };
 
   const handleChange = (event) => {
     const { value } = event.target;
-    setValues({description: value})
+    setValues({ description: value });
   };
 
   const handleOpen = () => {
@@ -102,8 +104,10 @@ export default function MoreInfo({ user}) {
                   name="Description"
                   placeholder="Ingresa una descripción"
                 />
+              ) : user.user.description.length !== 0 ? (
+                user.user.description
               ) : (
-               user.user.description.length !== 0 ? user.user.description : data && data.updateUser.description 
+                data && data.updateUser.description
               )}
             </TableCell>
             <TableCell className={classes.font}>
@@ -134,84 +138,7 @@ export default function MoreInfo({ user}) {
               <Button color="primary" variant="contained" onClick={handleOpen}>
                 Editar
               </Button>
-              <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                className={classes.modalDisplay}
-                open={open}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                  timeout: 500,
-                }}
-              >
-                <Fade in={open}>
-                  <div className={classes.paperModal}>
-                    <Typography>Cambiar contraseña</Typography>
-                    <form>
-                      <Grid item xs={12} sm={8}>
-                        <FormControl>
-                          <InputLabel htmlFor="pass"></InputLabel>
-                          <Input
-                            id="pass"
-                            name="password"
-                            type="password"
-                            aria-describedby="pass-helper"
-                            value=""
-                          />
-                          <FormHelperText id="pass-helper">
-                            Contraseña actual
-                          </FormHelperText>
-                        </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={8}>
-                        <FormControl>
-                          <InputLabel htmlFor="pass"></InputLabel>
-                          <Input
-                            id="pass"
-                            name="password"
-                            type="password"
-                            aria-describedby="pass-helper"
-                            value=""
-                          />
-                          <FormHelperText id="pass-helper">
-                            Nueva contraseña
-                          </FormHelperText>
-                        </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={10}>
-                        <FormControl>
-                          <InputLabel htmlFor="pass2"> </InputLabel>
-                          <Input
-                            id="pass"
-                            name="password2"
-                            type="password"
-                            aria-describedby="pass-helper"
-                            value=""
-                          />
-                          <FormHelperText id="pass-helper2">
-                            {" "}
-                            Reingrese nueva contraseña{" "}
-                          </FormHelperText>
-                        </FormControl>
-                      </Grid>
-
-                      <Grid item md={10}>
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          color="primary"
-                          size="large"
-                          className={classes.button}
-                        >
-                          Submit
-                        </Button>
-                      </Grid>
-                    </form>
-                  </div>
-                </Fade>
-              </Modal>
+              <ModalPass handleClose={handleClose} open={open} />
             </TableCell>
             <TableCell className={classes.font}></TableCell>
           </TableRow>

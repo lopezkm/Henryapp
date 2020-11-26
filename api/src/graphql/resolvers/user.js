@@ -32,7 +32,7 @@ export default {
       }
     },
     login: async (root, args, { req }, info) => {
-      if(!req.headers.authorization) {
+      if (!req.headers.authorization) {
         const user = await User.findOne({
           email: args.email,
         });
@@ -231,6 +231,22 @@ export default {
       } else {
         throw new Error("Usuario no autenticado.");
       }
+    },
+    changePass: async (root, { password }, { req }, info) => {
+      let header = req.headers.authorization;
+      header = header.slice(7);
+      const token = jwt.verify(header, APP_SECRET);
+      password = await bcrypt.hash(password, 10);
+      const userUpdated = await User.findByIdAndUpdate(
+        token._id,
+        {
+          $set: {
+            password,
+          },
+        },
+        { new: true }
+      );
+      return true;
     },
   },
 };
