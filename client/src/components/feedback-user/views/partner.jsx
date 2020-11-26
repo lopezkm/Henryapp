@@ -3,17 +3,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Rating from "@material-ui/lab/Rating";
 import Box from "@material-ui/core/Box";
-import { TextField, Input } from "@material-ui/core";
+import { TextField } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
-import Fab from "@material-ui/core/Fab";
 import EditIcon from "@material-ui/icons/Edit";
 import { useState } from "react";
-import TableCell from "@material-ui/core/TableCell";
 import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles({
@@ -21,7 +18,21 @@ const useStyles = makeStyles({
     maxWidth: 345,
   },
 });
-const labels = {
+const labelsoftSkill = {
+  1: "Useless",
+  2: "Poor",
+  3: "Ok",
+  4: "Good",
+  5: "Excellent",
+};
+const labelstechSkill = {
+  1: "Useless",
+  2: "Poor",
+  3: "Ok",
+  4: "Good",
+  5: "Excellent",
+};
+const labelsleader = {
   1: "Useless",
   2: "Poor",
   3: "Ok",
@@ -29,14 +40,26 @@ const labels = {
   5: "Excellent",
 };
 
-export default function Partner() {
+export default function Partner( props ) {
+  const {name, lastname, softSkill, techSkill, leader, description} = props.part
   const classes = useStyles();
-  const [value, setValue] = useState();
+  console.log('props', props)
+  //console.log('Mi props',name, lastname, softSkill, techSkill, leader, description)
+  const [value, setValue] = useState({
+    name: name,
+    lastname: lastname,
+    softSkill: softSkill,
+    techSkill: techSkill,
+    leader: leader,
+    description: description
+  });
   const [hover, setHover] = useState();
-  const [values, setValues] = useState(); //({ description: user.user.description });
+  console.log('Mi Hover !!!', hover)
+
   const [state, setState] = useState({
     editandoDescription: false,
   });
+
   const startEditD = (e) => {
     setState({
       editandoDescription: true,
@@ -47,8 +70,17 @@ export default function Partner() {
       editandoDescription: false,
     });
   };
-  const handleChange = () => {};
-
+  const handleChange = (e) => {
+    setValue({
+      ...value,
+      [e.target.name]: e.target.value
+    })
+    setHover({
+      ...hover,
+      [e.target.name]: e.target.value
+    })
+  };
+  console.log('Mi Value ', value)
   return (
     <Box className={classes.box}>
       <Card
@@ -62,7 +94,8 @@ export default function Partner() {
             component="h2"
             className={classes.pos}
           >
-            Pedro Ramirez
+          {value.name} {' '} {value.lastname}
+            
           </Typography>
           <div>
             <Typography variant="h7" color="textSecondary" component="p">
@@ -84,18 +117,18 @@ export default function Partner() {
             <div selectable={false}>
               {state.editandoDescription ? (
                 <TextField
-                  onChange={(e) => handleChange(e)}
-                  name="Description"
+                  onChange={handleChange}
+                  name="description"
                   placeholder="Ingresa una descripción"
                   id="outlined-multiline-static"
                   multiline
                   rows={3}
-                  defaultValue="campo opcional, agregar info relevante sobre compañero"
+                  //defaultValue="campo opcional, agregar info relevante sobre compañero"
                   variant="outlined"
                 />
               ) : (
                 <Typography variant="h7" color="textSecondary" component="p">
-                  "Me cae mal xq no deja el codigo comentado"
+                 {value.description}
                 </Typography>
               )}
             </div>
@@ -106,61 +139,52 @@ export default function Partner() {
             <Typography variant="body2" color="textSecondary" component="p">
               Soft skills:
               <Rating
-                name="hover-feedback"
-                value={value}
+                name="softSkill"
+                value={value.softSkill}
                 precision={1}
-                onChange={(event, newValue) => {
-                  setValue(newValue);
-                }}
-                onChangeActive={(event, newHover) => {
-                  setHover(newHover);
-                }}
+                onChange={handleChange}
+                
               />
               {value !== null && (
-                <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>
+                <Box ml={2}>{labelsoftSkill[hover !== -1 ? hover : value]}</Box>
               )}
             </Typography>
           </div>
           <div>
+          <br></br>
             <Typography variant="body2" color="textSecondary" component="p">
               Technical skills:
               <Rating
-                name="hover-feedback1"
-                value={value}
+                name="techSkill"
+                value={value.techSkill}
                 precision={1}
-                onChange={(event, newValue) => {
-                  setValue(newValue);
-                }}
-                onChangeActive={(event, newHover) => {
-                  setHover(newHover);
-                }}
+                onChange={handleChange}
+                
               />
               {value !== null && (
-                <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>
+                <Box ml={2}>{labelstechSkill[hover !== -1 ? hover : value]}</Box>
               )}
             </Typography>
           </div>
           <div>
+          <br></br>
             <Typography variant="body2" color="textSecondary" component="p">
               Leader:{" "}
               <Rating
-                name="hover-feedback2"
-                value={value}
+                name="leader"
+                value={value.leader}
                 precision={1}
-                onChange={(event, newValue) => {
-                  setValue(newValue);
-                }}
-                onChangeActive={(event, newHover) => {
-                  setHover(newHover);
-                }}
+                onChange={handleChange}
+                
               />
               {value !== null && (
-                <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>
+                <Box ml={2}>{labelsleader[hover !== -1 ? hover : value]}</Box>
               )}
             </Typography>
           </div>
         </CardContent>
         <div>
+        <br></br>
           <CardActions>
             <Button
               size="small"
