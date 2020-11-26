@@ -61,25 +61,25 @@ const UserProfile= (results) => {
             />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              {results.results.row.name} {results.results.row.lastname}
+              {results.results.row.name && results.results.row.name} {results.results.row.lastname && results.results.row.lastname}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              {results.results.row.rol} 
+              {results.results.row.rol && results.results.row.rol} 
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-            Fecha de inscripcion: {results.results.row.inscriptionDate}
+            Fecha de inscripcion: {results.results.row.inscriptionDate && results.results.row.inscriptionDate}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-            Cohorte: {results.results.row.cohort.name}
+            Cohorte: {results.results.row.cohort.name && results.results.row.cohort.name}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-            Nota: {results.results.row.qualifications.grade}
+            Nota: {results.results.row.qualifications.grade && results.results.row.qualifications.grade}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-            Promedio:{results.results.row.qualifications.average}
+            Promedio:{results.results.row.qualifications.average && results.results.row.qualifications.average}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              Github: {results.results.row.gitHubLink}
+              Github: {results.results.row.gitHubLink && results.results.row.gitHubLink}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
             LinkedIn: 
