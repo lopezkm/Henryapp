@@ -59,11 +59,12 @@ app.use(passport.initialize());
 app.get('/google',
   passport.authenticate('google', { scope: ['profile', 'email'] }));
 
-app.get('/google/callback', 
-  passport.authenticate('google', { failureRedirect: 'http://localhost:3000/root/login' }),
-  function(req, res) {
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: 'http://localhost:3000/root/register' }),
+    function(req, res) {
+      console.log('ENTREEEEEEEEEE')
     // Successful authentication, redirect home.
-    res.redirect('http://localhost:3000/root/home');
+    res.redirect('http://localhost:3000/');
   });
 
 // connect to db
