@@ -28,6 +28,15 @@ const CREATE_SPRINT = gql`
   }
 `;
 
+// const ADD_LECTURE_TO_SPRINT = gql`
+// mutation addLectureToSprint($sprintId: String!, $lectureId: String!) {
+//   addLectureToSprint(sprintId: $sprintId, lectureId: $lectureId) {
+//     sprintId
+//     lectureId
+//   }
+// }
+// `;
+
 export const SprintApollo = () => {
   const classes = useStyles();
   const { loading, error, data } = useQuery(GET_SPRINTS);
@@ -54,6 +63,27 @@ export const SprintApollo = () => {
       });
     },
   });
+
+  // const [addLectureToSprintMutation] = useMutation(ADD_LECTURE_TO_SPRINT, {
+  //   update: (cache, { data: { addLectureToSprint } }) => {
+  //     cache.modify({
+  //       fields: {
+  //         sprints(existingLectures = []) {
+  //           const newLectRef = cache.writeFragment({
+  //             data: addLectureToSprint,
+  //             fragment: gql`
+  //               fragment Lecture on Sprint {
+  //                 sprintId
+  //                 lectureId
+  //               }
+  //             `,
+  //           });
+  //           return [...existingLectures, newLectRef];
+  //         },
+  //       },
+  //     });
+  //   },
+  // });
 
   if (loading)
     return (
@@ -89,6 +119,22 @@ export const SprintApollo = () => {
       },
     });
   };
+
+  // const addLectureToSprint = (sprintId, lectureId) => {   //asignar una lecture dentro de un sprint en particular
+  //   addLectureToSprintMutation({
+  //     variables: {
+  //       sprintId,
+  //       lectureId
+  //     },
+  //     optimisticResponse: {
+  //       addLectureToSprint: {
+  //         sprintId,
+  //         lectureId
+  //       },
+  //     }
+  //   })
+
+  // }
 
   return (
     <SprintContainer sprints={data.sprints} createNewSprint={createNewSprint} />

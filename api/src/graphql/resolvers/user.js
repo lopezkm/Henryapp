@@ -32,7 +32,7 @@ export default {
       }
     },
     login: async (root, args, { req }, info) => {
-      if (!req.headers.authorization) {
+      if(!req.headers.authorization) {
         const user = await User.findOne({
           email: args.email,
         });
@@ -68,6 +68,18 @@ export default {
         };
       } else {
         throw new Error("Ya estas logueado con una sesión iniciada");
+      }
+    },
+    refreshToken: async (root, args, { req }, info) => {
+      let authUser = getAuthUser(req, true);
+      if (authUser) {
+        let tokens = await issueTokens(authUser);
+        return {
+          user,
+          ...tokens,
+        };
+      } else {
+        throw new Error("Usuario no autenticado.");
       }
     },
     refreshToken: async (root, args, { req }, info) => {

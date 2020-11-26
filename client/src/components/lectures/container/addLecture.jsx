@@ -48,7 +48,7 @@ export default ({
               name="embededLink"
               onChange={handleChange}
               id="embededLink"
-              label="Link ..." />
+              label="Link integrado ..." />
             <TextField
               type='text'
               name="description"

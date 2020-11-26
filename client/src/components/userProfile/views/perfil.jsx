@@ -61,15 +61,16 @@ const UserProfile= (results) => {
             />
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              {results.results.row.name} {results.results.row.lastname}
+              {results.results.row.name && results.results.row.name} {results.results.row.lastname && results.results.row.lastname}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              {results.results.row.rol} 
+              {results.results.row.rol && results.results.row.rol} 
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-            Fecha de inscripcion: {results.results.row.inscriptionDate}
+            Fecha de inscripcion: {results.results.row.inscriptionDate && results.results.row.inscriptionDate}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
+
             Cohorte: {results.results.row.cohort && results.results.row.cohort.name}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
@@ -77,6 +78,7 @@ const UserProfile= (results) => {
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
             Promedio:{results.results.row.qualifications && results.results.row.qualifications.average}
+
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
               Github: {results.results.row.gitHubLink && results.results.row.gitHubLink}
