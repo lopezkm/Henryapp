@@ -178,8 +178,8 @@ export default {
       const isAdmin = await myRolIs(req);
       if (isAuthenticate) {
         if (isAdmin.first && isAdmin.second) {
-          const newUserRol = await User.findByIdAndUpdate(
-            args.id,
+          const newUserRol = await User.findOneAndUpdate(
+            { email: args.email },
             {
               rol: args.rol,
             },
