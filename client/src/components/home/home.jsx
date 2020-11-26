@@ -21,13 +21,21 @@ export default function Home() {
               INVERTIMOS EN TU FUTURO
               </Paper>
           </Grid>
-          <Grid item xs={12} >
+          <Grid item xs={6} >
                   <HomeCard
                   className={classes.card}
                   title={'Descubre tu cohorte'} 
                   description={"podes ver tu cohorte, fecha de inicio y fecha de finalizacion, consultar profesor y compañeros"}
                   image={image}
                   link={"/root/cohorte"}/>
+            </Grid>
+            <Grid item xs={6} >
+                  <HomeCard
+                  className={classes.card}
+                  title={'Sprints'} 
+                  description={"podes ver tu sprint actual, duración y temas a ver"}
+                  image={image}
+                  link={"/root/sprints"}/>
             </Grid>
             <Grid item xs={6} >
                   <HomeCard

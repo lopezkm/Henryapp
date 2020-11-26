@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import LectureView from './container/index';
 
-export default ({
+export const Contenedor = ({
   lectures,
   createNewLecture
 }) => {
@@ -9,8 +9,8 @@ export default ({
   const [anchorEl, setAnchorEl] = useState(null);
   const [values, setValues] = useState({
     name: "",
-    decription: "",
     embededLink: "",
+    description: "",
     teoriaLink: ""
   });
 
@@ -21,11 +21,11 @@ export default ({
 
   const onCreateLecture = (e) => {
     e.preventDefault();
-    createNewLecture(values.name, values.decription, values.embededLink, values.teoriaLink);
+    createNewLecture(values.name, values.embededLink, values.description, values.teoriaLink);
     setValues({
       name: '',
-      description: '',
       embededLink: '',
+      description: '',
       teoriaLink: ''
     });
   }
