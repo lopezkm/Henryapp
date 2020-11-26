@@ -16,26 +16,26 @@ const FeedbackView = ({
 
 }) => {
   const classes = useStyles();
-
+  console.log('pp 0 !!!!!!!!!!',pp[0])
   return (
       <Grid container direction='row' justify='center' alignItems='center' pading={10}>
         <Grid item lg={4} md={3} sm={6} xs={12}>
-          <Partner />
+          <Partner part={pp[0]}/>
         </Grid>
         <Grid item lg={4} md={3} sm={6} xs={12}>
-          <Partner />
+          <Partner part={pp[1]}/>
         </Grid>
         <Grid item lg={4} md={3} sm={6} xs={12}>
-          <Partner />
+          <Partner part={pp[2]}/>
         </Grid>
         <Grid item lg={4} md={3} sm={6} xs={12}>
-          <Partner />
+          <Partner part={pp[3]}/>
         </Grid>
         <Grid item lg={4} md={3} sm={6} xs={12}>
-          <Partner />
+          <Partner part={pp[4]}/>
         </Grid>
         <Grid item lg={4} md={3} sm={6} xs={12}>
-          <Partner />
+          <Partner part={pp[5]}/>
         </Grid>
       </Grid>
   );

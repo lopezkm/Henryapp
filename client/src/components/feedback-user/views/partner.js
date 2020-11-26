@@ -3,17 +3,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Rating from "@material-ui/lab/Rating";
 import Box from "@material-ui/core/Box";
 import { TextField, Input } from "@material-ui/core";
 import CheckIcon from "@material-ui/icons/Check";
-import Fab from "@material-ui/core/Fab";
 import EditIcon from "@material-ui/icons/Edit";
 import { useState } from "react";
-import TableCell from "@material-ui/core/TableCell";
 import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles({
@@ -29,14 +26,23 @@ const labels = {
   5: "Excellent",
 };
 
-export default function Partner() {
+export default function Partner( props ) {
+  const {name, lastname, softSkill, techSkill, leader, description} = props.part
   const classes = useStyles();
-  const [value, setValue] = useState();
+
+  const [value, setValue] = useState({
+    name: name,
+    lastname: lastname,
+    softSkill: softSkill,
+    techSkill: techSkill,
+    leader: leader,
+    description: description    
+  });
   const [hover, setHover] = useState();
-  const [values, setValues] = useState(); //({ description: user.user.description });
   const [state, setState] = useState({
     editandoDescription: false,
   });
+
   const startEditD = (e) => {
     setState({
       editandoDescription: true,
@@ -47,7 +53,12 @@ export default function Partner() {
       editandoDescription: false,
     });
   };
-  const handleChange = () => {};
+  const handleChange = (e) => {
+    setValue({
+      ...value,
+      [e.target.name]: e.target.value
+    })
+  };
 
   return (
     <Box className={classes.box}>
@@ -62,7 +73,7 @@ export default function Partner() {
             component="h2"
             className={classes.pos}
           >
-            Pedro Ramirez
+            {value.name}
           </Typography>
           <div>
             <Typography variant="h7" color="textSecondary" component="p">
@@ -95,6 +106,7 @@ export default function Partner() {
                 />
               ) : (
                 <Typography variant="h7" color="textSecondary" component="p">
+                 {value.description}
                   "Me cae mal xq no deja el codigo comentado"
                 </Typography>
               )}
@@ -107,7 +119,7 @@ export default function Partner() {
               Soft skills:
               <Rating
                 name="hover-feedback"
-                value={value}
+                value={value.softSkill}
                 precision={1}
                 onChange={(event, newValue) => {
                   setValue(newValue);
@@ -122,11 +134,12 @@ export default function Partner() {
             </Typography>
           </div>
           <div>
+          <br></br>
             <Typography variant="body2" color="textSecondary" component="p">
               Technical skills:
               <Rating
                 name="hover-feedback1"
-                value={value}
+                value={value.techSkill}
                 precision={1}
                 onChange={(event, newValue) => {
                   setValue(newValue);
@@ -141,11 +154,12 @@ export default function Partner() {
             </Typography>
           </div>
           <div>
+          <br></br>
             <Typography variant="body2" color="textSecondary" component="p">
               Leader:{" "}
               <Rating
                 name="hover-feedback2"
-                value={value}
+                value={value.leader}
                 precision={1}
                 onChange={(event, newValue) => {
                   setValue(newValue);
@@ -161,6 +175,7 @@ export default function Partner() {
           </div>
         </CardContent>
         <div>
+        <br></br>
           <CardActions>
             <Button
               size="small"
