@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery, useMutation, gql } from "@apollo/client";
-import LectureContainer from "./container.js";
+import {Contenedor} from "./container.js";
 import Backdrop from "@material-ui/core/Backdrop";
 import CircularProgress from "@material-ui/core/CircularProgress";
 // import Autorenew from "@material-ui/icons/Autorenew";
@@ -81,8 +81,8 @@ export const LectureApollo = () => {
     createLectureMutation({
       variables: {
         name,
-        description,
         embededLink,
+        description,
         teoriaLink
       },
       optimisticResponse: {
@@ -96,6 +96,6 @@ export const LectureApollo = () => {
   };
 
   return (
-    <LectureContainer lectures={data.lectures} createNewLecture={createNewLecture} />
+    <Contenedor lectures={data.lectures} createNewLecture={createNewLecture} />
   );
 };
