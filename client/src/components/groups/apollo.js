@@ -20,6 +20,7 @@ export const GroupsApollo = () => {
 
     //let response;
 
+
     if(loading) {
         console.log('cargando');
     } else if(error) {

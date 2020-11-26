@@ -32,7 +32,7 @@ export default {
       }
     },
     login: async (root, args, { req }, info) => {
-      if(!req.headers.authorization) {
+      if (!req.headers.authorization) {
         const user = await User.findOne({
           email: args.email,
         });

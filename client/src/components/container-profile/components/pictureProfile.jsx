@@ -1,11 +1,11 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Link from "@material-ui/core/Link";
 import { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
-import Fotos from "../../home/images/cin.jpg";
+
 import Avatar from "@material-ui/core/Avatar";
 import { Button } from "@material-ui/core";
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
@@ -33,7 +33,14 @@ export default function PictureProfile({user}) {
       shortDescription: value,
     });
   };
+  useEffect(() => {
+    if(user.user.picture.length>8){
 
+      setImgUrl({src:user.user.picture})
+    };
+  }, [user])
+  
+  const defaultPhoto = "https://i.stack.imgur.com/qZIr0.png";
   const startEditN = () => {
     setState({
       editandoShort: true,
@@ -66,7 +73,7 @@ export default function PictureProfile({user}) {
       <Avatar
         className={classes.profileCenter}
         alt="Remy Sharp"
-        src={imgUrl? imgUrl.src:Fotos}
+        src={imgUrl? imgUrl.src:defaultPhoto}
         style={{
           width: "130px",
           height: "130px",
