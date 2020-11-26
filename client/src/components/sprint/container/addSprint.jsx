@@ -36,25 +36,34 @@ export default ({
       >
         <MenuItem >
           <form onSubmit={onCreateSprint} noValidate autoComplete="off">
+            <div>
             <TextField
               type='text'
               name="name"
               onChange={handleChange}
               id="name"
-              label="Nombre Sprint" />
-            <br />
+              label="Nombre Sprint" 
+              />
+            </div>
+            <div>
             <TextField
               type='text'
               name="duration"
               onChange={handleChange}
               id="duration"
-              label="Duración ..." />
+              label="Duración ..." 
+              />
+            </div>
+            <div>
             <TextField
               type='text'
               name="description"
               onChange={handleChange}
               id="description"
-              label="Descripción ..." />
+              label="Descripción ..." 
+              />
+            </div>
+            
             <Button
               type="submit"
               onClick={handleClose}

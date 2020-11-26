@@ -2,13 +2,14 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStylesCard = makeStyles((theme) => ({
   root: {
-    maxWidth: "100%",
+    minHeight: 350,
     // color: "white",
     // backgroundColor: "black"
   },
   media: {
     height: 180,
-    width: 360
+    width: "100%",
+    justifyItems: "center"
   },
   leftMargin: {
     marginLeft: theme.spacing(12),

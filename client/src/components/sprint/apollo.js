@@ -28,14 +28,14 @@ const CREATE_SPRINT = gql`
   }
 `;
 
-// const ADD_LECTURE_TO_SPRINT = gql`
-// mutation addLectureToSprint($sprintId: String!, $lectureId: String!) {
-//   addLectureToSprint(sprintId: $sprintId, lectureId: $lectureId) {
-//     sprintId
-//     lectureId
-//   }
-// }
-// `;
+const ADD_LECTURE_TO_SPRINT = gql`
+  mutation addLectureToSprint($sprintId: String!, $lectureId: String!) {
+    addLectureToSprint(sprintId: $sprintId, lectureId: $lectureId) {
+      sprintId
+      lectureId
+    }
+  }
+`;
 
 export const SprintApollo = () => {
   const classes = useStyles();

@@ -86,6 +86,30 @@ export default function DrawerNavbar() {
             <h4>Alumnos</h4>
           </ListItem>
         </Link>
+        <Link
+          to="/root/lectures"
+          color="grey"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <FolderSharedIcon />
+            </ListItemIcon>
+            <h4>Lectures</h4>
+          </ListItem>
+        </Link>
+        <Link
+          to="/root/Sprints"
+          color="grey"
+          style={{ textDecoration: "none", color: "black" }}
+        >
+          <ListItem button>
+            <ListItemIcon>
+              <FolderSharedIcon />
+            </ListItemIcon>
+            <h4>Sprints</h4>
+          </ListItem>
+        </Link>
         {/* </div>
         </Router> */}
         {/* </Typography> */}
