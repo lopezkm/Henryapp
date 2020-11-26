@@ -6,8 +6,8 @@ const router = express();
 router.get("/:size/:name/", (req, res) => {
   let { name, size } = req.params;
   size = parseInt(size);
-  console.log(dir);
-  sharp(`${dir}/${name}`)
+
+  sharp(`${dir}src/uploads/${name}`)
     .resize(size)
     .toBuffer()
     .then((data) => {
