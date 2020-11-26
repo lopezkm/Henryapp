@@ -5,16 +5,13 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: 100,
   },
   root: {
+    minWidth: 340,
     maxWidth: 345,
     marginTop: 40,
     borderRadius: 15,
     marginBottom: 30,
     marginRight: 10,
-    marginLeft: 10,
-    backgroundColor: "black"
-  },
-  header: {
-    marginTop: theme.spacing(8),
+    marginLeft: 10
   },
   /*  media: {
        height: 0,
@@ -58,7 +55,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   ButtonMod: {
     marginLeft: 70,
-    marginTop: -10,
+    marginTop: 10,
     marginBottom: 10,
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.common.black,
@@ -82,12 +79,13 @@ export const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     color: '#fff',
   },
-  eslogan: {
-    fontSize: 25,
-    backgroundColor: "black",
-    color: "yellow",
-    height: 80,
-    paddingTop: 20,
-    textAlign:"center",
-},
+  media: {
+    minHeight: 120,
+    paddingTop: '56.25%', // 16:9,
+    marginTop:'30'
+  },
+  adjust: {
+    marginLeft: 10,
+    marginRight: 10
+  }
 }));

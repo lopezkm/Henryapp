@@ -48,17 +48,10 @@ export default ({
             />
             <br />
             <TextField
-              style={{
-                marginTop: '10px'
-              }}
-              type='date'
-              label="Nombre Cohorte"
-            />
-            <br />
-            <TextField
               type="date"
               name="startingDate"
               color='secondary'
+              style={{marginTop: 10}}
               onChange={handleChange}
               id="startingDate"
               label="Fecha de inicio"
@@ -71,7 +64,6 @@ export default ({
               onClick={handleClose}
               // color="secondary"
               className={classes.ButtonMod}>
-            >
               Crear Cohorte
             </Button>
           </form>

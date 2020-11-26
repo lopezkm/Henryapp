@@ -12,7 +12,7 @@ export const Component = (props) => (
       component={"img"}
       className={"MuiCardMedia-root"}
       src={
-        "https://images.unsplash.com/photo-1519810755548-39cd217da494?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"
+        "https://www.infobae.com/new-resizer/wNewuFFPsDff-YIQk-Y1poh_Ugg=/1200x0/filters:quality(100)/s3.amazonaws.com/arc-wordpress-client-uploads/infobae-wp/wp-content/uploads/2016/08/13164503/inteligencia-artificial.jpg"
       }
     />
     <CardContent className={"MuiCardContent-root"}>

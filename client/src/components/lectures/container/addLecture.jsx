@@ -36,31 +36,38 @@ export default ({
       >
         <MenuItem >
           <form onSubmit={onCreateLecture} noValidate autoComplete="off">
-            <TextField
+            <div>
+              <TextField
               type='text'
               name="name"
               onChange={handleChange}
               id="name"
               label="Nombre Lecture" />
-            <br />
+            </div>
+            <div>
             <TextField
               type='text'
               name="embededLink"
               onChange={handleChange}
               id="embededLink"
               label="Link integrado ..." />
+            </div>
+            <div>
             <TextField
               type='text'
               name="description"
               onChange={handleChange}
               id="description"
               label="Description ..." />
+            </div>
+            <div>
               <TextField
               type='text'
               name="teoriaLink"
               onChange={handleChange}
               id="teoriaLink"
               label="Link de la teoría..." />
+            </div>
             <Button
               type="submit"
               onClick={handleClose}
