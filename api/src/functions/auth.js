@@ -19,10 +19,9 @@ export const issueTokens = async ({ username, email, name, _id, rol }) => {
 export const getAuthUser = async (request, requiresAuth = false) => {
 
   let header = request.headers.authorization;
-  header = header.slice(7);
 
   if (header) {
-
+    header = header.slice(7);
     const token = jwt.verify(header, APP_SECRET);
     let authUser = await User.findById(token._id);
 

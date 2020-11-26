@@ -21,9 +21,9 @@ export default ({
         aria-haspopup="true"
         onClick={handleClick}
         variant="contained"
-        color="secondary"
-        className={classes.ButtonMod}
+        color="primary"
       >
+
         Nuevo Cohorte
       </Button>
       <Menu
@@ -40,21 +40,37 @@ export default ({
               name="name"
               onChange={handleChange}
               id="name"
+              color='secondary'
+              label="Nombre Cohorte"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
+            <br />
+            <TextField
+              style={{
+                marginTop: '10px'
+              }}
+              type='date'
               label="Nombre Cohorte"
             />
             <br />
             <TextField
               type="date"
               name="startingDate"
+              color='secondary'
               onChange={handleChange}
               id="startingDate"
-              label=""
+              label="Fecha de inicio"
+              InputLabelProps={{
+                shrink: true,
+              }}
             />
             <Button
               type="submit"
               onClick={handleClose}
-              color="secondary"
-              className={classes.ButtonMod}
+              // color="secondary"
+              className={classes.ButtonMod}>
             >
               Crear Cohorte
             </Button>
@@ -63,4 +79,5 @@ export default ({
       </Menu>
     </div>
   );
+
 };

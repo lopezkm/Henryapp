@@ -5,12 +5,11 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: 100,
   },
   root: {
-    maxWidth: 345,
-    marginTop: 40,
-    borderRadius: 15,
-    marginBottom: 30,
-    marginRight: 10,
-    marginLeft: 10
+    flexShrink: 0,
+    marginLeft: theme.spacing(2.5),
+  },
+  table: {
+    minWidth: 500,
   },
   /*  media: {
        height: 0,
@@ -74,8 +73,38 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.secondary.main,
     },
   },
+  iconsTableHeaderPosition: {
+    position: 'fixed',
+    marginLeft: '4px',
+    float: "inline-start"
+  },
+  sectionButtonCohort: {
+    marginBottom: '1rem'
+  },
+  tableMargin: {
+    marginBottom: '5rem'
+  },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
     color: '#fff',
-  }
+  },
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    margin: 'auto',
+    maxWidth: '400px',
+    paddingTop: '0px',
+    paddingBottom: '50px'
+  },
+  formFields: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  formControl: {
+    marginTop: theme.spacing(3),
+    minWidth: 120,
+  },
+  formControlLabel: {
+    marginTop: theme.spacing(1),
+  },
 }));
