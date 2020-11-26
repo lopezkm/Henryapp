@@ -54,6 +54,15 @@ export default ({
                 component="p"
                 className={classes.info}>
                 <IconButton aria-label="settings" className={classes.buttonI}>
+                  <LocalLibraryIcon />
+                </IconButton> Link integrado: {lecture.embededLink}
+                    </Typography>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                className={classes.info}>
+                <IconButton aria-label="settings" className={classes.buttonI}>
                   <PeopleIcon />
                 </IconButton> Description: {lecture.description}
                     </Typography>
