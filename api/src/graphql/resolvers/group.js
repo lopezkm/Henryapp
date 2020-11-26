@@ -7,7 +7,7 @@ export default {
     group: async (root, args, { req }) => {
       const isAuthenticate = await getAuthUser(req);
       if (isAuthenticate) {
-        return await Group.find({});
+        return await Group.find();
       } else {
         throw new Error("Usuario no autenticado.");
       }

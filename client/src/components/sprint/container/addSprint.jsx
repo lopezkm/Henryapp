@@ -1,17 +1,18 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import TextField from "@material-ui/core/TextField";
-import { useStyles } from "./styles";
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import TextField from '@material-ui/core/TextField';
+import { useStyles } from '../stylesSprint';
 
 export default ({
   anchorEl,
   handleChange,
   handleClick,
-  onCreateCohort,
-  handleClose,
+  onCreateSprint,
+  handleClose
 }) => {
+
   const classes = useStyles();
 
   return (
@@ -24,7 +25,7 @@ export default ({
         color="secondary"
         className={classes.ButtonMod}
       >
-        Nuevo Cohorte
+        Nueva Sprint
       </Button>
       <Menu
         id="simple-menu"
@@ -33,34 +34,38 @@ export default ({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem>
-          <form onSubmit={onCreateCohort} noValidate autoComplete="off">
+        <MenuItem >
+          <form onSubmit={onCreateSprint} noValidate autoComplete="off">
             <TextField
-              type="text"
+              type='text'
               name="name"
               onChange={handleChange}
               id="name"
-              label="Nombre Cohorte"
-            />
+              label="Nombre Sprint" />
             <br />
             <TextField
-              type="date"
-              name="startingDate"
+              type='text'
+              name="duration"
               onChange={handleChange}
-              id="startingDate"
-              label=""
-            />
+              id="duration"
+              label="Duración ..." />
+            <TextField
+              type='text'
+              name="description"
+              onChange={handleChange}
+              id="description"
+              label="Descripción ..." />
             <Button
               type="submit"
               onClick={handleClose}
               color="secondary"
-              className={classes.ButtonMod}
-            >
-              Crear Cohorte
+              className={classes.ButtonMod}>
+              Crear Sprint
             </Button>
           </form>
         </MenuItem>
       </Menu>
     </div>
   );
+  
 };
