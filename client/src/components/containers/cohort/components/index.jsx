@@ -10,7 +10,18 @@ export default ({
   handleChange,
   handleClick,
   onCreateCohort,
-  handleClose
+  handleClose,
+  handleChangePage,
+  handleChangeRowsPerPage,
+  page,
+  rowsPerPage,
+  handleCloseDialog,
+  handleOpenDialog,
+  open,
+  cohortSelected,
+  setCohort,
+  handleSubmitEditForm,
+  handleCohortDelete
 }) => {
 
   const classes = useStyles();
@@ -18,7 +29,7 @@ export default ({
   return (
     <section>
       <Container className={classes.containerRoot}>
-        <section>
+        <section className={classes.sectionButtonCohort}>
           <AddCohortButton
             anchorEl={anchorEl}
             onCreateCohort={onCreateCohort}
@@ -28,7 +39,20 @@ export default ({
           />
         </section>
         <section>
-          <ListCohorts cohorts={cohorts} />
+          <ListCohorts
+            cohorts={cohorts}
+            handleChangePage={handleChangePage}
+            handleChangeRowsPerPage={handleChangeRowsPerPage}
+            page={page}
+            rowsPerPage={rowsPerPage}
+            handleCloseDialog={handleCloseDialog}
+            handleOpenDialog={handleOpenDialog}
+            open={open}
+            cohortSelected={cohortSelected}
+            setCohort={setCohort}
+            handleSubmitEditForm={handleSubmitEditForm}
+            handleCohortDelete={handleCohortDelete}
+          />
         </section>
       </Container>
     </section>

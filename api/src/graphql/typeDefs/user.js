@@ -29,9 +29,10 @@ export default gql`
       link: String
     ): User!
 
-    changeRol(id: String!, rol: String!): User!
+    changeRol(email: String!, rol: String!): User!
 
     deleteUser(id: String!): User!
+    changePass(password: String!): Boolean!
   }
 
   type User {
