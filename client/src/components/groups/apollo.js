@@ -48,28 +48,54 @@ mutation addGroupToCohort($cohortId:String!, $groupId:String!){
 export const GroupsApollo = () => {
     const {data: cohorts, error: cohortsQueryError, loading: cohortsQueryLoading}= useQuery(LIST_COHORTS);
    
-    const {data: groups, error: groupsQueryError, loading: groupsQueryLoading, fetchMore}=useQuery(LIST_GROUPS);
-   
-    const [createGroupMutation]= useMutation(CREATE_GROUP, {
-      update(cache, { data: { createGroupMutation } })  {
-        cache.modify({
-          fields: {
-            groups(existingGroupRefs = [], { readField }) {
-              const newGroupRef = cache.writeFragment({
-                data: createGroupMutation,
-                fragment: gql`
-                  fragment NewGroup on Group {
-                    name
-                    PM
-                  }
-                `,
-              });
-              return [...existingGroupRefs, newGroupRef];
-            },
-          },
-        });
-      },
-    });
+    const {data: groups, error: groupsQueryError, loading: groupsQueryLoading}=useQuery(LIST_GROUPS);
+
+    const [createGroupMutation ]= useMutation(CREATE_GROUP, {
+      refetchQueries: [
+        {query: LIST_GROUPS}
+      ]
+    })
+
+    // const [createGroupMutation ]= useMutation(CREATE_GROUP, {
+    //   update(cache, {data: {createGroupMutation} }) {
+    //     const newGroupFromResponse= createGroupMutation
+    //     const existingGroups= cache.readQuery({query: LIST_GROUPS,
+    //     });
+    //     if (existingGroups && newGroupFromResponse){
+    //       cache.writeQuery({
+    //         query: LIST_GROUPS,
+    //         data: {
+    //           groups: [
+    //             ...existingGroups,
+    //             newGroupFromResponse,
+    //           ],
+    //         },
+    //       });
+    //     }
+    //   }
+    // }
+    // )
+    
+    // const [createGroupMutation]= useMutation(CREATE_GROUP, {
+    //   update(cache, { data: { createGroupMutation } })  {
+    //     cache.modify({
+    //       fields: {
+    //         groups(existingGroupRefs = [], { readField }) {
+    //           const newGroupRef = cache.writeFragment({
+    //             data: createGroupMutation,
+    //             fragment: gql`
+    //               fragment NewGroup on Group {
+    //                 name
+    //                 PM
+    //               }
+    //             `,
+    //           });
+    //           return [...existingGroupRefs, newGroupRef];
+    //         },
+    //       },
+    //     });
+    //   },
+    // });
 
     if(cohortsQueryLoading) {
         console.log('cargando');

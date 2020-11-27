@@ -274,7 +274,7 @@ const ListGroups = ({ response }) => {
 
     const isSelected = (name) => selected.indexOf(name) !== -1;
 
-    //const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
+    const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
     return (
       <div className={classes.root}>
@@ -333,11 +333,11 @@ const ListGroups = ({ response }) => {
                       </TableRow>
                     );
                   })}
-                {/* {emptyRows > 0 && (
+                {emptyRows > 0 && (
                 <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
                   <TableCell colSpan={6} />
                 </TableRow>
-              )} */}
+              )}
               </TableBody>
             </Table>
           </TableContainer>
