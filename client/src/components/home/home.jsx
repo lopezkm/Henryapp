@@ -26,37 +26,35 @@ export default function Home() {
               INVERTIMOS EN TU FUTURO
               </Paper>
           </Grid>
-          <Grid item xs={4} >
+          <Grid item xs={5} className={classes.card}>
                   <HomeCard
                   className={classes.card}
                   title={'Descubre tu cohorte'} 
-                  description={"podes ver tu cohorte, fecha de inicio y fecha de finalizacion, consultar profesor y compañeros"}
+                  description={"Conoce tu cohorte, profesor y compañeros"}
                   image={codex}
                   link={"/root/cohorte"}/>
             </Grid>
-            <Grid item xs={4} >
+            <Grid item xs={5} className={classes.card}>
                   <HomeCard
-                  className={classes.card}
+                  //className={classes.card}
                   title={'Sprints'} 
-                  description={"podes ver tu sprint actual, duración y temas a ver"}
-                  // image={react}
+                  description={"Consulta tu sprint actual, duración y contenido"}
                   image={sprint}
                   link={"/root/sprints"}/>
             </Grid>
-            <Grid item xs={4} >
+            <Grid item xs={5} className={classes.card}>
                   <HomeCard
-                  className={classes.card}
+                  //className={classes.card}
                   title={'Chequea las lectures'} 
-                  description={"podes ver todas las lectures e información al respecto"}
-                  // image={galaxy}
+                  description={"Accede a ver todas las lectures e información de clases"}
                   image={lecture}
                   link={"/root/lectures"}/>
             </Grid>
-            <Grid item xs={4} >
+            <Grid item xs={5} className={classes.card}>
                   <HomeCard
-                  className={classes.card}
+                  //className={classes.card}
                   title={'Egg App'} 
-                  description={"comprueba tu mesa de pair programming y consulta tus compañeros"}
+                  description={"Comprueba tu mesa de pair programming y consulta tus compañeros"}
                   image={egg}
                   link={"https://beta.eggeducacion.com/login"}/>
             </Grid>

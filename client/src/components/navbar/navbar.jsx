@@ -126,15 +126,6 @@ const NavBar = (theme) => {
               style={{ width: "60px", height: "60px", paddingTop: "5px" }}
             />
           </Link>
-          {/* <Button
-            aria-controls="customized-menu"
-            aria-haspopup="true"
-            variant="contained"
-            color="secondary"
-            onClick={handleClick}
-          >
-            Panel Admin
-          </Button> */}
           <StyledMenu
             id="customized-menu"
             anchorEl={anchorElP}
@@ -144,52 +135,15 @@ const NavBar = (theme) => {
           >
             {" "}
           </StyledMenu>
-          {/* <Link to="/root/cohorte">
-              <StyledMenuItem>
-                <ListItemIcon>
-                  <FilterNoneSharpIcon fontSize="medium" />
-                </ListItemIcon>
-                <ListItemText onClick={handleClose} primary="Cohortes" />
-              </StyledMenuItem>
-            </Link> */}
-          {/* <Link to="/root/student">
-              <StyledMenuItem>
-                <ListItemIcon>
-                  <AccountBoxSharpIcon fontSize="medium" />
-                </ListItemIcon>
-                <ListItemText onClick={handleClose} primary="Alumnos" />
-              </StyledMenuItem>
-            </Link> */}
-          {/* <Link to="/root/invite">
-              <StyledMenuItem>
-                <ListItemIcon>
-                  <HelpOutlineSharpIcon fontSize="medium" />
-                </ListItemIcon>
-                <ListItemText onClick={handleClose} primary="Invitar alumnos" />
-              </StyledMenuItem>
-            </Link> */}
           <Typography>
             {data ? data.me.name : null}
-            {/* <Button variant="text" color="secondary">
-              {data ? (
-                data.me.name
-              ) : (
-                <Link
-                  to="/root/login"
-                  style={{ textDecoration: "none", color: "black" }}
-                >
-                  "Login"{" "}
-                </Link>
-              )}
-            </Button> */}
           </Typography>
           <IconButton
             aria-label="account of current user"
             aria-controls="menu-appbar"
             aria-haspopup="true"
             onClick={handleMenu}
-            color="inherit"
-          >
+            color="inherit">
             <AccountCircle />
           </IconButton>
           <Menu
@@ -208,22 +162,12 @@ const NavBar = (theme) => {
             onClose={handleCloseLogin}
           >
             <MenuItem onClick={handleCloseLogin}>
-              {/*AGREGAR text-decoration: none;
-color: black;*/}
-              <Link
-                to="/root/profile"
-                style={{ textDecoration: "none", color: "black" }}
-                className={classes.tittle1}
-              >
+              <Link to="/root/profile" style= {{textDecoration:"none", color:"black"}} className={classes.tittle1}>
                 Profile
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link
-                to="/root/feedback"
-                className={classes.tittle1}
-                style={{ textDecoration: "none", color: "black" }}
-              >
+              <Link to="/root/feedback" style= {{textDecoration:"none", color:"black"}} className={classes.tittle1}>
                 Feedback
               </Link>
             </MenuItem>
