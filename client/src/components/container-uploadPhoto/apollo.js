@@ -24,3 +24,25 @@ export default function FileUpload({ setOpen, setImgUrl }) {
     </div>
   );
 }
+
+/*{
+    update: (cache, { data: { createCohort } }) => {
+      cache.modify({
+        fields: {
+          cohorts(existingCohorts = []) {
+            const newCohortRef = cache.writeFragment({
+              data: createCohort,
+              fragment: gql`
+                fragment NewCohort on Cohort {
+                  _id
+                  name
+                  startingDate
+                }
+              `,
+            });
+            return [...existingCohorts, newCohortRef];
+          },
+        },
+      });
+    },
+  });*/

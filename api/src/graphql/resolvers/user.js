@@ -32,6 +32,23 @@ export default {
       }
     },
     login: async (root, args, { req }, info) => {
+      if (!req.headers.authorization) {
+        const user = await User.findOne({
+          email: args.email,
+        });
+        if (!user) {
+          throw new Error("No estas registrado en Henry APP");
+        }
+        let isMatch = await bcrypt.compare(args.password, user.password);
+        if (!isMatch) {
+          throw new Error("La contraseña es incorrecta");
+        }
+        let tokens = await issueTokens(user);
+        return {
+          user,
+          ...tokens,
+        };
+      }
       const isAuthenticate = await getAuthUser(req);
       if (!isAuthenticate) {
         const user = await User.findOne({
@@ -51,6 +68,18 @@ export default {
         };
       } else {
         throw new Error("Ya estas logueado con una sesión iniciada");
+      }
+    },
+    refreshToken: async (root, args, { req }, info) => {
+      let authUser = getAuthUser(req, true);
+      if (authUser) {
+        let tokens = await issueTokens(authUser);
+        return {
+          user,
+          ...tokens,
+        };
+      } else {
+        throw new Error("Usuario no autenticado.");
       }
     },
     refreshToken: async (root, args, { req }, info) => {
@@ -161,8 +190,8 @@ export default {
       const isAdmin = await myRolIs(req);
       if (isAuthenticate) {
         if (isAdmin.first && isAdmin.second) {
-          const newUserRol = await User.findByIdAndUpdate(
-            args.id,
+          const newUserRol = await User.findOneAndUpdate(
+            { email: args.email },
             {
               rol: args.rol,
             },
@@ -202,6 +231,22 @@ export default {
       } else {
         throw new Error("Usuario no autenticado.");
       }
+    },
+    changePass: async (root, { password }, { req }, info) => {
+      let header = req.headers.authorization;
+      header = header.slice(7);
+      const token = jwt.verify(header, APP_SECRET);
+      password = await bcrypt.hash(password, 10);
+      const userUpdated = await User.findByIdAndUpdate(
+        token._id,
+        {
+          $set: {
+            password,
+          },
+        },
+        { new: true }
+      );
+      return true;
     },
   },
 };

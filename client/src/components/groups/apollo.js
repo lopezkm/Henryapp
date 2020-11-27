@@ -56,6 +56,7 @@ export const GroupsApollo = () => {
       ]
     })
 
+<<<<<<< HEAD
     // const [createGroupMutation ]= useMutation(CREATE_GROUP, {
     //   update(cache, {data: {createGroupMutation} }) {
     //     const newGroupFromResponse= createGroupMutation
@@ -98,6 +99,10 @@ export const GroupsApollo = () => {
     // });
 
     if(cohortsQueryLoading) {
+=======
+
+    if(loading) {
+>>>>>>> main
         console.log('cargando');
     } else if(cohortsQueryError) {
         console.log('ocurrió un error');

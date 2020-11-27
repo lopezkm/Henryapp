@@ -1,18 +1,17 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import TextField from '@material-ui/core/TextField';
-import { useStyles } from './styles';
+import React from "react";
+import Button from "@material-ui/core/Button";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
+import { useStyles } from "./styles";
 
 export default ({
   anchorEl,
   handleChange,
   handleClick,
   onCreateCohort,
-  handleClose
+  handleClose,
 }) => {
-
   const classes = useStyles();
 
   return (
@@ -22,9 +21,9 @@ export default ({
         aria-haspopup="true"
         onClick={handleClick}
         variant="contained"
-        color="secondary"
-        className={classes.ButtonMod}
+        color="primary"
       >
+
         Nuevo Cohorte
       </Button>
       <Menu
@@ -34,25 +33,36 @@ export default ({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem >
+        <MenuItem>
           <form onSubmit={onCreateCohort} noValidate autoComplete="off">
             <TextField
-              type='text'
+              type="text"
               name="name"
               onChange={handleChange}
               id="name"
-              label="Nombre Cohorte" />
+              color='secondary'
+              label="Nombre Cohorte"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
             <br />
             <TextField
-              type='date'
+              type="date"
               name="startingDate"
+              color='secondary'
+              style={{marginTop: 10}}
               onChange={handleChange}
               id="startingDate"
-              label="Inicio (dd/mm/aaaa)" />
+              label="Fecha de inicio"
+              InputLabelProps={{
+                shrink: true,
+              }}
+            />
             <Button
               type="submit"
               onClick={handleClose}
-              color="secondary"
+              // color="secondary"
               className={classes.ButtonMod}>
               Crear Cohorte
             </Button>
@@ -61,5 +71,5 @@ export default ({
       </Menu>
     </div>
   );
-  
+
 };

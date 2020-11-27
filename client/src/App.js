@@ -11,6 +11,8 @@ import Login from "./components/forms/login.jsx";
 import UserProfile from "./components/userProfile/views/perfil";
 //import Student from "./components/students/students.jsx";
 import { Cohort } from "./components/containers/cohort";
+import { Sprint } from "./components/sprint/index.js";
+import { Lecture } from "./components/lectures/index.js";
 import { Student } from "./components/students";
 import Invite from "./components/forms/invite.jsx";
 import AddStudents from "./components/cohorte/addStudents.jsx";
@@ -20,7 +22,10 @@ import GroupsToCohorts from "./components/groups/views";
 //import UserProfile2 from "./components/container-profile/components/views";
 import { Profile } from "./components/container-profile";
 import ResetPassword from "./components/forms/resetpassword";
+import { from } from "@apollo/client";
 import FileUpload from "./components/container-uploads/apolloCSV";
+
+import { Feedback } from "./components/feedback-user/";
 
 const theme = createMuiTheme({
   palette: {
@@ -31,6 +36,7 @@ const theme = createMuiTheme({
   },
   display: "flex",
 });
+const token = localStorage.getItem("token");
 
 function App() {
   return (
@@ -58,8 +64,14 @@ function App() {
           <Route exact path="/root/login" render={() => <Login />} />
           <Route exact path="/root/invite" render={() => <Invite />} />
           <Route exact path="/root/cohorte" render={() => <Cohort />} />
+          <Route exact path="/root/lectures" render={() => <Lecture />} />
+          <Route exact path="/root/sprints" render={() => <Sprint />} />
           <Route exact path="/root/groups" render={() => <Groups />} />
+<<<<<<< HEAD
           <Route exact path="/root/groups/toCohorts" render={() => <GroupsToCohorts />} />
+=======
+          <Route exact path="/root/feedback" render={() => <Feedback />} />
+>>>>>>> main
           <Route
             exact
             path="/root/addStudents"

@@ -1,7 +1,12 @@
 import React from 'react'
-import image from './images/juan.png'
-import pedro from './images/prueba2.png'
-import huevo from './images/huevo.png'
+import codex from './images/codex.jpg'
+import react from './images/react.png'
+import galaxy from './images/galaxy.jpg'
+import egg from './images/egg.jpg';
+import image from './images/cohorte.jpg'
+import lecture from './images/lectures2.jpg'
+import huevo from './images/egg.png'
+import sprint from './images/sprints.jpg'
 import {Link} from 'react-router-dom'
 import Grid from "@material-ui/core/Grid";
 import Paper from '@material-ui/core/Paper';
@@ -15,36 +20,50 @@ export default function Home() {
     return (
         <React.Fragment>
         <div className={classes.root}>
-          <Grid container spacing={4}>
+          <Grid container spacing={4} justify="center">
           <Grid item xs={12}>
               <Paper className={classes.eslogan}>
               INVERTIMOS EN TU FUTURO
               </Paper>
           </Grid>
-          <Grid item xs={12} >
+          <Grid item xs={4} >
                   <HomeCard
                   className={classes.card}
                   title={'Descubre tu cohorte'} 
                   description={"podes ver tu cohorte, fecha de inicio y fecha de finalizacion, consultar profesor y compañeros"}
-                  image={image}/>
+                  image={codex}
+                  link={"/root/cohorte"}/>
             </Grid>
-            <Grid item xs={6} >
+            <Grid item xs={4} >
                   <HomeCard
                   className={classes.card}
-                  title={'Charla con tus compañeros'} 
-                  description={"consulta tus dudas en el chat grupal, o envia mensajes privado a tu profesor"}
-                  image={pedro}/>
+                  title={'Sprints'} 
+                  description={"podes ver tu sprint actual, duración y temas a ver"}
+                  // image={react}
+                  image={sprint}
+                  link={"/root/sprints"}/>
             </Grid>
-            <Grid item xs={6} >
+            <Grid item xs={4} >
+                  <HomeCard
+                  className={classes.card}
+                  title={'Chequea las lectures'} 
+                  description={"podes ver todas las lectures e información al respecto"}
+                  // image={galaxy}
+                  image={lecture}
+                  link={"/root/lectures"}/>
+            </Grid>
+            <Grid item xs={4} >
                   <HomeCard
                   className={classes.card}
                   title={'Egg App'} 
                   description={"comprueba tu mesa de pair programming y consulta tus compañeros"}
-                  image={huevo}/>
+                  image={egg}
+                  link={"https://beta.eggeducacion.com/login"}/>
             </Grid>
           </Grid>
         </div>
         </React.Fragment>
       );
 }
+
 

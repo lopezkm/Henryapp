@@ -30,9 +30,9 @@ export default function HomeCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Link href="/root/login">
+        <Link href={props.link}>
             <Button size="large" color="secundary" className={classes.button}>
-            Ingresar
+            ¡Vamos!
             </Button>
         </Link>
       </CardActions>

@@ -16,13 +16,14 @@ import "../../css/forms.css";
 import useForm from "./useForm";
 import validate from "./validateLogin";
 import useStyleslog from "./stylesLogin"; //import styles
-import { gql, useQuery } from "@apollo/client";
+import { gql, useLazyQuery } from "@apollo/client";
 import { useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import Fade from "@material-ui/core/Fade";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import ModalPass from "./modalResetPass";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const Toast = Swal.mixin({
   toast: true,
@@ -67,36 +68,30 @@ export default function Login() {
 
   const history = useHistory();
 
-  const { loading, error, data, fetchMore } = useQuery(LOGIN_USER, {
-    variables: {
-      email: "",
-      password: "",
-    },
-  });
+  const [loadingUserQuery, { loading, error, data }] = useLazyQuery(LOGIN_USER);
 
-    
+  if (data) {
+    const token = data.login.token;
+    localStorage.setItem("token", token);
+    history.push("/root/home");
+    Toast.fire({
+      icon: "success",
+      title: "¡Bienvenido" + " " + data.login.user.name + "!",
+    });
+  }
 
   async function submit() {
     const { email, password } = values;
 
-    const { data } = await fetchMore({
+    await loadingUserQuery({
       variables: {
         email,
         password,
       },
     });
-
-    const token = data.login.token;
-    localStorage.setItem("token", token);
-
-    Toast.fire({
-      icon: "success",
-      title: "¡Bienvenido" + " " + data.login.user.name + "!",
-    });
-
-    history.push("/root/home");
   }
 
+  // if (error) return <div>"Error: Something went wrong!"</div>;
   return (
     <React.Fragment>
       <Grid
@@ -153,6 +148,9 @@ export default function Login() {
                   {errors.password && (
                     <p className="error">{errors.password}</p>
                   )}
+                  {error ? (
+                    <p className="error">Ha ingresado mal la contraseña</p>
+                  ) : null}
                   <FormHelperText id="pass-helper">Password</FormHelperText>
                 </FormControl>
               </Grid>

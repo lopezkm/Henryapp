@@ -1,87 +1,72 @@
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import Avatar from '@material-ui/core/Avatar';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Divider from '@material-ui/core/Divider';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
-import LocalLibraryIcon from '@material-ui/icons/LocalLibrary';
-import Box from '@material-ui/core/Box';
-import PeopleIcon from '@material-ui/icons/People';
-import PersonIcon from '@material-ui/icons/Person';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableFooter from '@material-ui/core/TableFooter';
+import TablePagination from '@material-ui/core/TablePagination';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 import { useStyles } from './styles';
+import TablePaginationActions from './actionsPagination';
+import TableHeader from './headerTable';
+import TableBodyContent from './bodyTable';
+import DialogActions from './actionsCohort';
 
 export default ({
-  cohorts
+  cohorts,
+  handleChangePage,
+  handleChangeRowsPerPage,
+  page,
+  rowsPerPage,
+  handleCloseDialog,
+  handleOpenDialog,
+  open,
+  cohortSelected,
+  setCohort,
+  handleSubmitEditForm,
+  handleCohortDelete
 }) => {
 
   const classes = useStyles();
 
   return (
-    <Box className={classes.box}>
-      {cohorts && cohorts.map((cohort, i) => (
-        <Grid key={i} item xs={3.5}>
-          <Card className={classes.root}>
-            <CardHeader
-              title={`Cohorte: ${cohort.name}`}
-              subheader={`Inicio: ${cohort.startingDate}`}
-              avatar={
-                <Avatar
-                  aria-label="recipe"
-                  className={classes.avatar}>
-                  C-{i}
-                </Avatar>
-              }
+    <TableContainer component={Paper} className={classes.tableMargin}>
+      <Table stickyHeader className={classes.table} size='small'>
+        <TableHeader />
+        <TableBody>
+          <TableBodyContent
+            page={page}
+            rowsPerPage={rowsPerPage}
+            rows={cohorts}
+            handleOpenDialog={handleOpenDialog}
+            setCohort={setCohort}
+            handleCohortDelete={handleCohortDelete}
+          />
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25, { label: 'Todos', value: -1 }]}
+              colSpan={5}
+              count={cohorts.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              labelRowsPerPage={'Cohortes por página:'}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+              ActionsComponent={TablePaginationActions}
             />
-            <CardContent>
-              <Divider className={classes.dividerH} orientation="horizontal" />
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                className={classes.info}>
-                <IconButton aria-label="settings" className={classes.buttonI}>
-                  <PersonIcon />
-                </IconButton> Instructor: Agustin Amani
-                    </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                className={classes.info}>
-                <IconButton aria-label="settings" className={classes.buttonI}>
-                  <PeopleIcon />
-                </IconButton> PMs: Ricardo Freire y Marcelo Quiroga
-                    </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                className={classes.info}>
-                <IconButton aria-label="settings" className={classes.buttonI}>
-                  <LocalLibraryIcon />
-                </IconButton> Alumnos: 175
-                    </Typography>
-            </CardContent>
-            <CardActions>
-              <Link to="/root/addStudents">
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  className={classes.ButtonMod}>
-                  Agregar Alumnos
-                </Button>
-              </Link>
-            </CardActions>
-          </Card>
-        </Grid>
-      ))}
-    </Box>
+          </TableRow>
+        </TableFooter>
+      </Table>
+      <DialogActions
+        handleCloseDialog={handleCloseDialog}
+        open={open}
+        cohortSelected={cohortSelected}
+        handleSubmitEditForm={handleSubmitEditForm}
+        setCohort={setCohort}
+      />
+    </TableContainer>
   );
-
-};
+}

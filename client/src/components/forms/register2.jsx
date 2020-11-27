@@ -19,6 +19,8 @@ import validate from "./validateRegister"; //validations
 import useStyles from "./stylesRegister"; //import styles
 import { gql, useMutation } from "@apollo/client";
 import { useHistory } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {  faGoogle } from '@fortawesome/free-brands-svg-icons';
 
 const CREATE_USER = gql`
   mutation register(
@@ -68,6 +70,10 @@ export default function Register2() {
     history.push("/");
   }
 
+  const googleAuth = () => {
+		window.location.href = "http://localhost:3001/google";
+	}
+
   return (
     <React.Fragment>
       <Grid
@@ -81,8 +87,17 @@ export default function Register2() {
           <Grid item xs={12} sm={8} className={classes.form}>
             <Typography variant="h4" gutterBottom>
               Register
+              <Button
+                  disabled
+                  onClick={googleAuth}
+                  variant="contained"
+                  color="secondary"
+                  size="large"
+                  className={classes.buttonG}
+                >
+                 <FontAwesomeIcon className={classes.iconG} icon={faGoogle} />oo<FontAwesomeIcon className={classes.iconG2} icon={faGoogle} />le
+            </Button>
             </Typography>
-
             <form onSubmit={(e) => handleSubmit(e)}>
               <Grid item xs={12} sm={10}>
                 <FormControl>
@@ -184,13 +199,13 @@ export default function Register2() {
             </form>
             <br></br>
 
-            <Grid container>
+            {/* <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2" className={classes.button}>
                   Forgot password?
                 </Link>
               </Grid>
-            </Grid>
+            </Grid> */}
           </Grid>
         </Grid>
       </Grid>

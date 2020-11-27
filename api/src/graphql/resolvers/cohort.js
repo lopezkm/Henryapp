@@ -9,7 +9,8 @@ export default {
       const isAdmin = await myRolIs(req);
       if (isAuthenticate) {
         if (isAdmin.first && isAdmin.second) {
-          return await Cohort.find({});
+          return await Cohort.find({})
+            .populate('students', '_id name lastname email');
         } else {
           throw new Error("Usuario no es Administrador.");
         }
@@ -61,12 +62,53 @@ export default {
       }
     },
 
+    // Actualizar nuevo cohorte
+    updateCohort: async (root, args, { req }, info) => {
+      const isAuthenticate = await getAuthUser(req);
+      //  const isAdmin = await myRolIs(req);
+      //verificar que Usuario esté loggeado
+      if (isAuthenticate) {
+        // El registro es valido
+        const id = args._id;
+        delete args._id;
+        const newCohort = await Cohort.findByIdAndUpdate(id, {
+          ...args
+        }, {
+          new: true,
+          useFindAndModify: true,
+        });
+        return newCohort;
+      } /* else {
+              throw new Error("Usuario no es Administrador.");
+            }
+          }*/ else {
+        // return 'Usuario no autorizado.';
+        throw new Error("Usuario no autenticado.");
+      }
+    },
+
+    deleteCohort: async (root, { id }, { req }, info) => {
+      const isAuthenticate = await getAuthUser(req);
+      //  const isAdmin = await myRolIs(req);
+      //verificar que Usuario esté loggeado
+      if (isAuthenticate) {
+
+        return await Cohort.findByIdAndDelete(id);
+      } /* else {
+              throw new Error("Usuario no es Administrador.");
+            }
+          }*/ else {
+        // return 'Usuario no autorizado.';
+        throw new Error("Usuario no autenticado.");
+      }
+    },
+
     addUserToCohort: async (root, { userId, cohortId }, { req }, info) => {
       const isAuthenticate = await getAuthUser(req);
       const isAdmin = await myRolIs(req);
       if (isAuthenticate) {
         if (isAdmin.first && isAdmin.second) {
-          const newUser = await User.findByIdAndUpdate(
+          const userUpdated = await User.findByIdAndUpdate(
             userId,
             {
               $set: { cohort: cohortId },
@@ -76,13 +118,75 @@ export default {
               useFindAndModify: false,
             }
           );
-          if (!newUser) {
-            // throw new Error("Ups algo salió mal.");
-            return false;
+          const cohortUpdated = await Cohort.findByIdAndUpdate(
+            cohortId,
+            {
+              $push: { students: userId },
+            },
+            {
+              new: true,
+              useFindAndModify: true,
+            }
+          );
+          if (!userUpdated || !cohortUpdated) {
+            throw new Error("Error en el servidor.");
           }
-          return await User.find({
-            cohort: cohortId,
-          });
+          return await Cohort.findById(cohortId)
+            .populate('students', '_id name lastname email');
+        } else {
+          throw new Error("Usuario no es Administrador.");
+        }
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
+    },
+
+    addInstructorToCohort: async (root, { instructorName, cohortId }, { req }, info) => {
+      const isAuthenticate = await getAuthUser(req);
+      const isAdmin = await myRolIs(req);
+      if (isAuthenticate) {
+        if (isAdmin.first && isAdmin.second) {
+          const cohortUpdated = await Cohort.findByIdAndUpdate(
+            cohortId,
+            {
+              instructor: instructorName,
+            },
+            {
+              new: true,
+              useFindAndModify: true,
+            }
+          );
+          if (!cohortUpdated) {
+            throw new Error("Error en el servidor.");
+          }
+          return await Cohort.findById(cohortId);
+        } else {
+          throw new Error("Usuario no es Administrador.");
+        }
+      } else {
+        throw new Error("Usuario no autenticado.");
+      }
+    },
+
+    removeInstructorToCohort: async (root, { cohortId }, { req }, info) => {
+      const isAuthenticate = await getAuthUser(req);
+      const isAdmin = await myRolIs(req);
+      if (isAuthenticate) {
+        if (isAdmin.first && isAdmin.second) {
+          const cohortUpdated = await Cohort.findByIdAndUpdate(
+            cohortId,
+            {
+              instructor: '',
+            },
+            {
+              new: true,
+              useFindAndModify: false,
+            }
+          );
+          if (!cohortUpdated) {
+            throw new Error("Error en el servidor.");
+          }
+          return await Cohort.findById(cohortId);
         } else {
           throw new Error("Usuario no es Administrador.");
         }
