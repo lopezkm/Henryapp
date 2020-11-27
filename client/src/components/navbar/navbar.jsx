@@ -110,7 +110,7 @@ const NavBar = (theme) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.href = "/";
-  }
+  };
 
   return (
     <div>
@@ -171,7 +171,9 @@ const NavBar = (theme) => {
                 Feedback
               </Link>
             </MenuItem>
-            <MenuItem onClick={handleCloseLogin, handleLogout}>Logout</MenuItem>
+            <MenuItem onClick={(handleCloseLogin, handleLogout)}>
+              Logout
+            </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
