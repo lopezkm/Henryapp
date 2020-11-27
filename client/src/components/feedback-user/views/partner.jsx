@@ -1,8 +1,10 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
+import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Rating from "@material-ui/lab/Rating";
@@ -40,10 +42,12 @@ const labelsleader = {
   5: "Excellent",
 };
 
-export default function Partner( props ) {
+export default function Partner( props) {
   const {name, lastname, softSkill, techSkill, leader, description} = props.part
+
+  console.log('mi imagen',props.perfil)
   const classes = useStyles();
-  console.log('props', props)
+  console.log('Mis props !!!', props)
   //console.log('Mi props',name, lastname, softSkill, techSkill, leader, description)
   const [value, setValue] = useState({
     name: name,
@@ -83,10 +87,17 @@ export default function Partner( props ) {
   console.log('Mi Value ', value)
   return (
     <Box className={classes.box}>
-      <Card
+      <CardActionArea
         className={classes.root}
         style={{ marginLeft: "auto", marginRight: "auto", marginTop: "100px" }}
       >
+        <CardMedia
+          component='img'
+          height='140'
+          className={classes.media}
+          image={props.perfil}
+          title="Imagen de alumno"
+        />
         <CardContent>
           <Typography
             gutterBottom
@@ -196,7 +207,7 @@ export default function Partner( props ) {
             </Button>
           </CardActions>
         </div>
-      </Card>
+      </CardActionArea>
     </Box>
   );
 }
