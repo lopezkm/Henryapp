@@ -110,7 +110,7 @@ const NavBar = (theme) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.href = "/";
-  }
+  };
 
   return (
     <div>
@@ -210,16 +210,26 @@ const NavBar = (theme) => {
             <MenuItem onClick={handleCloseLogin}>
               {/*AGREGAR text-decoration: none;
 color: black;*/}
-              <Link to="/root/profile" style= {{textDecoration:"none", color:"black"}} className={classes.tittle1}>
+              <Link
+                to="/root/profile"
+                style={{ textDecoration: "none", color: "black" }}
+                className={classes.tittle1}
+              >
                 Profile
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link to="/root/feedback" className={classes.tittle1}>
+              <Link
+                to="/root/feedback"
+                className={classes.tittle1}
+                style={{ textDecoration: "none", color: "black" }}
+              >
                 Feedback
               </Link>
             </MenuItem>
-            <MenuItem onClick={handleCloseLogin, handleLogout}>Logout</MenuItem>
+            <MenuItem onClick={(handleCloseLogin, handleLogout)}>
+              Logout
+            </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>
