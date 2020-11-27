@@ -13,14 +13,17 @@ const useStylesHome = makeStyles((theme) => ({
         color: theme.palette.text.secondary,
       },
       card: {
-          marginTop: theme.spacing(8)
+        marginTop: theme.spacing(2),
+        textAlign: 'center',
+        marginLeft: 15,
+        marginRight: 15,
       },
       eslogan: {
           fontSize: 25,
           backgroundColor: "black",
           color: "yellow",
-          height: 80,
-          paddingTop: 20,
+          height: 60,
+          paddingTop: 50,
           textAlign:"center",
       }
 }));
